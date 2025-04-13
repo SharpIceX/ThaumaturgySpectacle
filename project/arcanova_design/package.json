@@ -1,0 +1,13 @@
+{
+	"name": "@ts/arcanova_design",
+	"private": true,
+	"type": "module",
+	"license": "CC-BY-SA-4.0",
+	"description": "Arcanova 设计系统",
+	"scripts": {
+		"clean": "rimraf dist"
+	},
+	"devDependencies": {
+		"rimraf": "^6.0.1"
+	}
+}

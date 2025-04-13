@@ -1,0 +1,24 @@
+{
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+
+	"css.customData": [".vscode/tailwind.json"],
+
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit"
+	},
+	"material-icon-theme.folders.associations": {
+		// 项目分组文件夹
+		"@ts-nuxt": "project",
+		"@ts-config": "config",
+
+		// 子项目文件夹
+		"lumiray": "markdown",
+		"rgb-to-oklch": "theme",
+		"project_info": "project",
+		"arcanova_design": "theme",
+
+		// 其他
+		"hsqx": "home"
+	}
+}

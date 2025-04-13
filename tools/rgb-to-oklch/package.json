@@ -1,0 +1,17 @@
+{
+	"name": "@ts-tools/rgb-to-oklch",
+	"private": true,
+	"type": "module",
+	"license": "CC0-1.0",
+	"description": "将 RGB 转换为 OKLCH 的 REPL 工具",
+	"scripts": {
+		"start": "tsx  src/main.ts"
+	},
+	"dependencies": {
+		"culori": "^4.0.1"
+	},
+	"devDependencies": {
+		"@types/culori": "^2.1.1",
+		"tsx": "^4.19.3"
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"name": "@ts/lumiray",
+	"private": true,
+	"type": "module",
+	"license": "MPL-2.0",
+	"description": "雪芒 Markdown 渲染器"
+}

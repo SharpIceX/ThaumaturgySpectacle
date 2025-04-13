@@ -1,0 +1,22 @@
+{
+	"name": "@ts/website",
+	"private": true,
+	"type": "module",
+	"license": "MPL-2.0",
+	"scripts": {
+		"dev": "nuxt dev",
+		"build": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare"
+	},
+	"dependencies": {
+		"vue": "^3.5.13",
+		"vue-router": "^4.5.0"
+	},
+	"devDependencies": {
+		"@nuxt/webpack-builder": "^3.16.2",
+		"@ts-nuxt/head": "link:..\\..\\packages\\@ts-nuxt\\head",
+		"nuxt": "^3.16.2",
+		"typescript": "^5.8.3"
+	}
+}

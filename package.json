@@ -1,0 +1,63 @@
+{
+	"name": "thaumaturgy_spectacle",
+	"private": true,
+	"type": "module",
+	"version": "1.0.0",
+	"license": "ROOT-UNLICENSED",
+	"description": "幻术奇象——项目",
+	"homepage": "https://ts.sharpice.top",
+	"repository": "github:FurryRbl/ThaumaturgySpectacle",
+	"bugs": {
+		"email": "SharpIce@SharpIce.top",
+		"url": "https://github.com/FurryRbl/ThaumaturgySpectacle/issues"
+	},
+	"author": {
+		"name": "SharpIce",
+		"url": "https://SharpIce.top",
+		"email": "SharpIce@SharpIce.top"
+	},
+	"funding": [
+		{
+			"type": "ko-fi",
+			"url": "https://ko-fi.com/SharpIce"
+		},
+		"https://ifdian.net/@SharpIce"
+	],
+	"engines": {
+		"node": ">=20.11"
+	},
+	"devEngines": {
+		"runtime": {
+			"name": "node",
+			"onFail": "error"
+		},
+		"packageManager": {
+			"name": "pnpm",
+			"onFail": "error"
+		}
+	},
+	"scripts": {
+		"clean": "rimraf build",
+		"format": "prettier . --write",
+		"lint:js": "eslint . --no-fix",
+		"lint:css": "stylelint --allow-empty-input --no-fix"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.24.0",
+		"@ts-config/stylelint-conifg": "link:packages\\@ts-config\\stylelint-conifg",
+		"@types/node": "^22.14.0",
+		"eslint": "^9.24.0",
+		"eslint-config-prettier": "^10.1.2",
+		"eslint-plugin-prettier": "^5.2.6",
+		"eslint-plugin-vue": "^10.0.0",
+		"globals": "^16.0.0",
+		"prettier": "^3.5.3",
+		"rimraf": "^6.0.1",
+		"stylelint": "^16.18.0",
+		"typescript": "^5.8.3",
+		"typescript-eslint": "^8.29.1"
+	},
+	"dependencies": {
+		"@ts/project_info": "link:project\\project_info"
+	}
+}

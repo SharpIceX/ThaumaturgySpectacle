@@ -1,0 +1,10 @@
+{
+	"name": "@ts/project_info",
+	"private": true,
+	"type": "module",
+	"license": "MPL-2.0",
+	"description": "幻术奇相项目信息 CLI 工具",
+	"bin": {
+		"pi": "./src/index.ts"
+	}
+}
