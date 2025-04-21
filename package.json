@@ -37,7 +37,7 @@
 		}
 	},
 	"scripts": {
-		"clean": "rimraf build",
+		"clean": "rimraf build .hsqx",
 		"format": "prettier . --write",
 		"lint:js": "eslint . --no-fix",
 		"lint:css": "stylelint --allow-empty-input --no-fix"
@@ -45,7 +45,7 @@
 	"devDependencies": {
 		"@eslint/js": "^9.24.0",
 		"@ts-config/stylelint-conifg": "link:packages\\@ts-config\\stylelint-conifg",
-		"@types/node": "^22.14.0",
+		"@types/node": "^22.14.1",
 		"eslint": "^9.24.0",
 		"eslint-config-prettier": "^10.1.2",
 		"eslint-plugin-prettier": "^5.2.6",
@@ -56,8 +56,5 @@
 		"stylelint": "^16.18.0",
 		"typescript": "^5.8.3",
 		"typescript-eslint": "^8.29.1"
-	},
-	"dependencies": {
-		"@ts/project_info": "link:project\\project_info"
 	}
 }

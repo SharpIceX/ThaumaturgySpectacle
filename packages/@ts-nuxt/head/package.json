@@ -1,6 +1,0 @@
-{
-	"name": "@ts-nuxt/head",
-	"private": true,
-	"type": "module",
-	"main": "./src/main.ts"
-}

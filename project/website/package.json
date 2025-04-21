@@ -15,7 +15,6 @@
 	},
 	"devDependencies": {
 		"@nuxt/webpack-builder": "^3.16.2",
-		"@ts-nuxt/head": "link:..\\..\\packages\\@ts-nuxt\\head",
 		"nuxt": "^3.16.2",
 		"typescript": "^5.8.3"
 	}

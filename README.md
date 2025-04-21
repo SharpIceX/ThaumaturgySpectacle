@@ -2,7 +2,11 @@
 
 # **幻术奇相**架空世界观项目
 
-## 赞助信息
+<div align="center">
+🔒很抱歉我不接受PR，但欢迎提出建议！如果你有任何想法或改进建议，欢迎通过Discussions与我联系。🙏
+</div>
+
+## 投喂信息
 
 <div align="center">
 

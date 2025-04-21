@@ -2,8 +2,6 @@
 	"editor.formatOnSave": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 
-	"css.customData": [".vscode/tailwind.json"],
-
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": "explicit"
 	},
@@ -19,6 +17,7 @@
 		"arcanova_design": "theme",
 
 		// 其他
-		"hsqx": "home"
+		"hsqx": "home",
+		"symbiolux": "audio"
 	}
 }
