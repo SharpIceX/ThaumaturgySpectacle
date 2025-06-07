@@ -8,15 +8,42 @@ importers:
 
   .:
     devDependencies:
-      '@eslint/js':
-        specifier: ^9.28.0
-        version: 9.28.0
+      '@ts-config/eslint-conifg':
+        specifier: link:packages\@ts-config\eslint-config
+        version: link:packages/@ts-config/eslint-config
       '@ts-config/stylelint-conifg':
         specifier: link:packages\@ts-config\stylelint-conifg
         version: link:packages/@ts-config/stylelint-conifg
       '@types/node':
         specifier: ^22.15.30
         version: 22.15.30
+      eslint:
+        specifier: ^9.28.0
+        version: 9.28.0(jiti@2.4.2)
+      jiti:
+        specifier: ^2.4.2
+        version: 2.4.2
+      prettier:
+        specifier: ^3.5.3
+        version: 3.5.3
+      prettier-plugin-astro:
+        specifier: ^0.14.1
+        version: 0.14.1
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
+      stylelint:
+        specifier: ^16.20.0
+        version: 16.20.0(typescript@5.8.3)
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+
+  packages/@ts-config/eslint-config:
+    dependencies:
+      '@eslint/js':
+        specifier: ^9.28.0
+        version: 9.28.0
       '@typescript-eslint/parser':
         specifier: ^8.33.1
         version: 8.33.1(eslint@9.28.0(jiti@2.4.2))(typescript@5.8.3)
@@ -38,21 +65,9 @@ importers:
       globals:
         specifier: ^16.2.0
         version: 16.2.0
-      jiti:
-        specifier: ^2.4.2
-        version: 2.4.2
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
-      prettier-plugin-astro:
-        specifier: ^0.14.1
-        version: 0.14.1
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.0.1
-      stylelint:
-        specifier: ^16.20.0
-        version: 16.20.0(typescript@5.8.3)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3

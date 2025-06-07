@@ -43,22 +43,15 @@
 		"lint:css": "stylelint . --allow-empty-input --no-fix"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.28.0",
+		"@ts-config/eslint-conifg": "link:packages\\@ts-config\\eslint-config",
 		"@ts-config/stylelint-conifg": "link:packages\\@ts-config\\stylelint-conifg",
 		"@types/node": "^22.15.30",
-		"@typescript-eslint/parser": "^8.33.1",
-		"@unocss/eslint-config": "^66.1.4",
 		"eslint": "^9.28.0",
-		"eslint-config-prettier": "^10.1.5",
-		"eslint-plugin-astro": "^1.3.1",
-		"eslint-plugin-prettier": "^5.4.1",
-		"globals": "^16.2.0",
 		"jiti": "^2.4.2",
 		"prettier": "^3.5.3",
 		"prettier-plugin-astro": "^0.14.1",
 		"rimraf": "^6.0.1",
 		"stylelint": "^16.20.0",
-		"typescript": "^5.8.3",
-		"typescript-eslint": "^8.33.1"
+		"typescript": "^5.8.3"
 	}
 }
