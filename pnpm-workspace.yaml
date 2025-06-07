@@ -1,7 +1,8 @@
 packages:
-  - tools/**
-  - project/**
-  - packages/*/**
+    - tools/**
+    - project/**
+    - packages/*/**
 onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - esbuild
+    - '@parcel/watcher'
+    - esbuild
+    - sharp

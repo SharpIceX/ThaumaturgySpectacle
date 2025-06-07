@@ -1,0 +1,86 @@
+---
+import '$/styles/ui/swap.less';
+import MenuIcon from '@material-design-icons/svg/outlined/menu.svg';
+import HomeIcon from '@material-design-icons/svg/outlined/home.svg';
+import SettingsMenu from '@material-design-icons/svg/outlined/settings.svg';
+import DarkModeIcon from '@material-design-icons/svg/outlined/dark_mode.svg';
+import LightModeIcon from '@material-design-icons/svg/outlined/light_mode.svg';
+import MenuBookModeIcon from '@material-design-icons/svg/outlined/menu_book.svg';
+import DescriptionIcon from '@material-design-icons/svg/outlined/description.svg';
+import LocationOnModeIcon from '@material-design-icons/svg/outlined/location_on.svg';
+---
+
+<header role='banner' class='flex px-4 justify-between select-none bg-gray-100 bg-op-55 min-h-[auto]'>
+	<nav role='navigation' aria-label='主导航' class='relative max-sm:relative'>
+		<!-- 菜单按钮，手机可见 -->
+		<div tabindex='0' role='button' aria-label='打开菜单' class='hidden max-sm:block cursor-pointer'>
+			<MenuIcon />
+		</div>
+
+		<!-- 菜单内容 -->
+		<div
+			tabindex='0'
+			role='menu'
+			aria-label='导航菜单'
+			class='z-10 flex flex-row max-sm:flex-col max-sm:w-28 max-sm:rounded-md max-sm:bg-gray-200 max-sm:p-2 max-sm:shadow-md'>
+			<a
+				href='/'
+				class='flex items-center space-x-1 px-2 py-1 rounded hover:bg-gray-300'
+				role='menuitem'
+				aria-label='返回首页'>
+				<span aria-hidden='true'>
+					<HomeIcon />
+				</span>
+				<span>首页</span>
+			</a>
+			<a
+				href='/wiki'
+				class='flex items-center space-x-1 px-2 py-1 rounded hover:bg-gray-300'
+				role='menuitem'
+				aria-label='访问百科'>
+				<span aria-hidden='true'>
+					<DescriptionIcon />
+				</span>
+				<span>百科</span>
+			</a>
+			<a
+				href='/book'
+				class='flex items-center space-x-1 px-2 py-1 rounded hover:bg-gray-300'
+				role='menuitem'
+				aria-label='阅读小说'>
+				<span aria-hidden='true'>
+					<MenuBookModeIcon />
+				</span>
+				<span>小说</span>
+			</a>
+			<a
+				href='/map'
+				class='flex items-center space-x-1 px-2 py-1 rounded hover:bg-gray-300'
+				role='menuitem'
+				aria-label='查看地图'>
+				<span aria-hidden='true'>
+					<LocationOnModeIcon />
+				</span>
+				<span>地图</span>
+			</a>
+		</div>
+	</nav>
+
+	<!-- 右侧切换和设置 -->
+	<div class='relative flex items-center'>
+		<nav>
+			<ul>
+				<li class='flex space-x-2 items-center'>
+					<label class='swap'>
+						<input type='checkbox' id='theme-toggle' aria-label='切换主题' />
+						<LightModeIcon class='swap-on' />
+						<DarkModeIcon class='swap-off' />
+					</label>
+					<a href='/settings' title='设置' class='flex items-center' aria-label='进入设置页面'>
+						<SettingsMenu />
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>

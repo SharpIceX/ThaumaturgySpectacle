@@ -1,0 +1,35 @@
+.swap {
+	@apply inline-flex cursor-pointer;
+
+	input {
+		@apply sr-only; // 隐藏input元素，但保留其可访问性
+
+		// 当input被选中时，显示"swap-on"元素，隐藏"swap-off"元素
+		&:checked ~ .swap-on {
+			@apply block;
+			opacity: 1;
+			transition: opacity 0.3s ease-in-out;
+		}
+		&:checked ~ .swap-off {
+			@apply hidden;
+			opacity: 0;
+			transition: opacity 0.3s ease-in-out;
+
+			transition: display 0s 0.3s; // 延迟隐藏，确保动画完成
+		}
+
+		// 当input未被选中时，隐藏"swap-on"元素，显示"swap-off"元素
+		&:not(:checked) ~ .swap-on {
+			@apply hidden;
+			opacity: 0;
+			transition: opacity 0.3s ease-in-out;
+
+			transition: display 0s 0.3s;
+		}
+		&:not(:checked) ~ .swap-off {
+			@apply block;
+			opacity: 1;
+			transition: opacity 0.3s ease-in-out;
+		}
+	}
+}

@@ -15,6 +15,7 @@
 	"vueIndentScriptAndStyle": false,
 	"embeddedLanguageFormatting": "auto",
 	"htmlWhitespaceSensitivity": "strict",
+	"plugins": ["prettier-plugin-astro"],
 	"overrides": [
 		{
 			"files": ["*.yml", "*.yaml"],
@@ -27,6 +28,12 @@
 			"options": {
 				"tabWidth": 2,
 				"useTabs": false
+			}
+		},
+		{
+			"files": "*.astro",
+			"options": {
+				"htmlWhitespaceSensitivity": "ignore"
 			}
 		}
 	]

@@ -9,3 +9,6 @@
 
 # 幻术奇象——缓存&临时文件
 /.hsqx
+
+# project/website
+/project/website/.astro

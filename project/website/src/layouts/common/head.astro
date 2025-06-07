@@ -1,0 +1,120 @@
+---
+const {
+	title = '幻术奇象',
+	description = '欢迎来到由锐冰打造的幻术与奇象的世界！',
+	keywords = '幻术奇象, Thaumaturgy Spectacle, 架空世界观',
+} = Astro.props;
+
+const url = new URL(Astro.url, Astro.site).toString();
+const domain = new URL(Astro.site as URL).hostname;
+---
+
+<head>
+	<!-- 编码 -->
+	<meta charset='utf-8' />
+	<!-- <meta http-equiv='X-UA-Compatible' content='IE=edge' /> 完全没必要在兼容IE啦 -->
+	<!-- <meta http-equiv='Content-Type' content='text/html; charset=utf-8' /> 这个也没必要啦 -->
+	<!-- 编码 -->
+
+	<!-- 标题 -->
+	<title>{title}</title>
+	<meta name='title' content={title} />
+	<!-- 标题 -->
+
+	<!-- 描述 -->
+	<meta name='description' content={description} />
+	<!-- 描述 -->
+
+	<!-- 关键词 -->
+	<meta name='keywords' content={keywords} />
+
+	<!-- 图标 -->
+	<link rel='icon' type='image/x-icon' sizes='256x256' href='/favicon.ico' />
+	<link rel='icon' type='image/png' sizes='1024x1024' href='/favicon.png' />
+
+	<link rel='apple-touch-icon' type='image/png' sizes='180x180' href='/siteicon/180.png' />
+	<!-- 图标 -->
+
+	<!-- Windows 磁贴图标 -->
+	<meta name='msapplication-TileColor' content='#4CC3FF' />
+	<meta name='msapplication-TileImage' content='/siteicon/144.png' />
+	<!-- Windows 磁贴图标 -->
+
+	<!-- 网站主题 -->
+	<meta name='theme-color' content='#4CC3FF' />
+	<!-- 网站主题 -->
+
+	<!-- PWA -->
+	<link rel='manifest' href='/manifest.webmanifest' />
+	<!-- PWA -->
+
+	<!-- 屏幕适配 -->
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, viewport-fit=cover' />
+	<!-- 屏幕适配 -->
+
+	<!-- Open Graph -->
+	<meta property='og:locale' content='zh_CN' />
+	<meta property='og:type' content='website' />
+	<meta property='og:url' content={url} />
+	<meta property='og:site_name' content='科荧' />
+	<meta property='og:title' content={title} />
+	<meta property='og:description' content={description} />
+	<meta property='og:image' content={`${Astro.site}/og-banner.png`} />
+	<meta property='og:image:secure_url' content='/og-banner.png' />
+	<meta property='og:image:alt' content={description} />
+	<meta property='og:image:type' content='image/png' />
+	<meta property='og:image:width' content='1920' />
+	<meta property='og:image:height' content='1080' />
+	<!-- Open Graph -->
+
+	<!-- Twitter Card -->
+	<meta name='twitter:card' content='summary_large_image' />
+	<meta name='twitter:creator' content='锐冰' />
+	<meta property='twitter:url' content={url} />
+	<meta name='twitter:domain' content={domain} />
+	<meta name='twitter:title' content={title} />
+	<meta name='twitter:description' content={description} />
+	<meta name='twitter:image' content='/og-banner.png' />
+	<!-- Twitter Card -->
+
+	<!-- 版权 -->
+	<meta name='copyright' content='Copyright © 2024 By 锐冰 @ MPL-2.0, CC BY-NC-SA-4.0' />
+	<!-- 版权 -->
+
+	<!-- 作者 -->
+	<meta name='author' content='锐冰' />
+	<!-- 作者 -->
+
+	<!-- 站点地图 -->
+	<link rel='sitemap' href={`${Astro.site}/sitemap-index.xml`} />
+	<!-- 站点地图 -->
+
+	<!-- RSS、Atom、JSON Feed -->
+	<link rel='alternate' type='application/rss+xml' title='RSS Feed' href={`${Astro.site}/rss.xml`} />
+	<link rel='alternate' type='application/json' title='JSON Feed' href={`${Astro.site}/feed.json`} />
+	<link rel='alternate' type='application/atom+xml' title='Atom Feed' href={`${Astro.site}/atom.xml`} />
+	<!-- RSS、Atom、JSON Feed -->
+
+	<!-- 网站生成器 -->
+	<meta name='generator' content='astro' />
+	<!-- 网站生成器 -->
+
+	<!-- 基准网址 -->
+	<link rel='canonical' href={`${Astro.site}${Astro.url.pathname}`} />
+	<!-- 基准网址 -->
+
+	<!-- 许可证 -->
+	<link rel='license' href='https://spdx.org/licenses/MPL-2.0' />
+	<link rel='license' href='https://creativecommons.org/licenses/by-nc-sa/4.0/' />
+	<!-- 许可证 -->
+
+	<!-- 禁用浏览器扩展 Dark Reader -->
+	<meta name='darkreader' content='false' />
+	<!-- 禁用浏览器扩展 Dark Reader -->
+
+	<!-- 预加载 -->
+	<link rel='preload' href='/favicon.ico' as='image' />
+	<!-- 预加载 -->
+
+	<script type='module' src='/src/scripts/main.ts' is:inline></script>
+</head>

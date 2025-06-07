@@ -1,23 +1,33 @@
 {
+	// 禁用 VSCode 内置的 CSS 和 LESS 验证功能。
+	// 解决和 Stylelint 冲突。
+	"css.validate": false,
+	"less.validate": false,
+
+	// 保存时自动格式化代码
 	"editor.formatOnSave": true,
+
+	// 使用 Prettier 作为默认格式化工具
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 
-	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": "explicit"
-	},
-	"material-icon-theme.folders.associations": {
-		// 项目分组文件夹
-		"@ts-nuxt": "project",
-		"@ts-config": "config",
+	// 配置 Unocss 自动补全的匹配类型为模糊匹配模式。
+	"unocss.autocomplete.matchType": "fuzzy",
 
-		// 子项目文件夹
-		"lumiray": "markdown",
-		"rgb-to-oklch": "theme",
-		"project_info": "project",
-		"arcanova_design": "theme",
+	// 自定义 CSS 数据文件，用于增强 IntelliSense 支持
+	"css.customData": [".vscode/unocss.json"],
 
-		// 其他
-		"hsqx": "home",
-		"symbiolux": "audio"
+	// 配置 ESLint 验证的文件类型
+	"eslint.validate": ["astro", "javascript", "typescript"],
+
+	// 配置 UnoCSS 支持的语言类型
+	"unocss.languageIds": ["astro", "javascript", "typescript", "less"],
+
+	// 配置 Stylelint 验证的文件类型
+	"stylelint.validate": ["astro", "less"],
+
+	// SonarLint 项目信息
+	"sonarlint.connectedMode.project": {
+		"connectionId": "furryrbl",
+		"projectKey": "FurryRbl_ThaumaturgySpectacle"
 	}
 }

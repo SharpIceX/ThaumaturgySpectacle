@@ -1,0 +1,10 @@
+{
+	"name": "unocss-preset-nord",
+	"private": true,
+	"type": "module",
+	"license": "MIT",
+	"main": "./src/main.ts",
+	"dependencies": {
+		"unocss": "^66.1.3"
+	}
+}

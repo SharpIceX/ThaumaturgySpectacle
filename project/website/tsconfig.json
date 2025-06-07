@@ -1,0 +1,10 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"types": ["astro/client"],
+		"paths": {
+			"$/*": ["./src/*"],
+			"@/*": ["./node_modules/*"]
+		}
+	}
+}

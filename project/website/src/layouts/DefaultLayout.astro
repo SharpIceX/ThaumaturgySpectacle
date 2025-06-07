@@ -1,0 +1,38 @@
+---
+import Head from './common/head.astro';
+import Noscript from './common/noscript.astro';
+import Header from './common/components/header.astro';
+import Footer from './common/components/footer.astro';
+
+interface Props {
+	/**
+	 * 页面标题
+	 * @default '幻术奇象'
+	 */
+	title?: string;
+
+	/**
+	 * 页面描述
+	 * @default '欢迎来到由锐冰打造的幻术与奇象的世界！'
+	 */
+	description?: string;
+
+	/**
+	 * 页面关键词
+	 * @default '幻术奇象, Thaumaturgy Spectacle, 架空世界观'
+	 */
+	keywords?: string;
+}
+---
+
+<html lang='zh' data-overlayscrollbars-initialize>
+	<Head {...Astro.props} />
+	<body data-overlayscrollbars-initialize>
+		<Header />
+		<div class='flex-1 p-4'>
+			<slot />
+		</div>
+		<Footer />
+		<Noscript />
+	</body>
+</html>
