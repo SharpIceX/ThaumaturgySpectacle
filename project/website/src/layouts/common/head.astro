@@ -36,12 +36,12 @@ const domain = new URL(Astro.site as URL).hostname;
 	<!-- 图标 -->
 
 	<!-- Windows 磁贴图标 -->
-	<meta name='msapplication-TileColor' content='#4CC3FF' />
+	<meta name='msapplication-TileColor' content='#679DE3' />
 	<meta name='msapplication-TileImage' content='/siteicon/144.png' />
 	<!-- Windows 磁贴图标 -->
 
 	<!-- 网站主题 -->
-	<meta name='theme-color' content='#4CC3FF' />
+	<meta name='theme-color' content='#679DE3' />
 	<!-- 网站主题 -->
 
 	<!-- PWA -->
@@ -109,12 +109,40 @@ const domain = new URL(Astro.site as URL).hostname;
 	<!-- 许可证 -->
 
 	<!-- 禁用浏览器扩展 Dark Reader -->
-	<meta name='darkreader' content='false' />
+	<meta name='darkreader-lock' />
 	<!-- 禁用浏览器扩展 Dark Reader -->
+
+	<!-- 只提供深色模式  -->
+	<meta name='color-scheme' content='dark' />
+	<!-- 只提供深色模式  -->
 
 	<!-- 预加载 -->
 	<link rel='preload' href='/favicon.ico' as='image' />
 	<!-- 预加载 -->
 
+	<!-- 防止 FOUC闪烁 -->
+	<style data-fouc-fix is:inline>
+		html {
+			background-color: #2e3440; /** 来自 Nord 0 配色 */
+			color: #d8dee9; /** 来自 Nord 4 配色 */
+			color-scheme: dark;
+		}
+	</style>
+	<!-- 防止 FOUC闪烁 -->
+
+	<!-- 修复首屏显示问题 -->
+	<style data-pre-fix is:inline>
+		body {
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+		}
+	</style>
+	<!-- 修复首屏显示问题 -->
+
+	<!-- 其他资源 -->
+	<!-- TODO: 这一行使用`is:inline`似乎有问题或不合法，有待观察 -->
 	<script type='module' src='/src/scripts/main.ts' is:inline></script>
+	<!-- 其他资源 -->
 </head>

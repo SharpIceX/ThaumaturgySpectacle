@@ -45,7 +45,7 @@
 	"devDependencies": {
 		"@ts-config/eslint-conifg": "link:packages\\@ts-config\\eslint-config",
 		"@ts-config/stylelint-conifg": "link:packages\\@ts-config\\stylelint-conifg",
-		"@types/node": "^22.15.30",
+		"@types/node": "^24.0.0",
 		"eslint": "^9.28.0",
 		"jiti": "^2.4.2",
 		"prettier": "^3.5.3",

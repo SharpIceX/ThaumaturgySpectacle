@@ -1,7 +1,6 @@
 {
-	// 禁用 VSCode 内置的 CSS 和 LESS 验证功能。
+	// 禁用 VSCode 内置的 LESS 验证功能。
 	// 解决和 Stylelint 冲突。
-	"css.validate": false,
 	"less.validate": false,
 
 	// 保存时自动格式化代码
