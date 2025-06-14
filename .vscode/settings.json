@@ -12,17 +12,20 @@
 	// 配置 Unocss 自动补全的匹配类型为模糊匹配模式。
 	"unocss.autocomplete.matchType": "fuzzy",
 
+	// 禁用 CMakeLists.txt 文件的缺失警告
+	"cmake.ignoreCMakeListsMissing": true,
+
 	// 自定义 CSS 数据文件，用于增强 IntelliSense 支持
 	"css.customData": [".vscode/unocss.json"],
 
 	// 配置 ESLint 验证的文件类型
-	"eslint.validate": ["astro", "javascript", "typescript"],
+	"eslint.validate": ["astro", "javascript", "typescript", "typescriptreact"],
 
 	// 配置 UnoCSS 支持的语言类型
-	"unocss.languageIds": ["astro", "javascript", "typescript", "less"],
+	"unocss.languageIds": ["astro", "javascript", "typescript", "less", "typescriptreact"],
 
 	// 配置 Stylelint 验证的文件类型
-	"stylelint.validate": ["astro", "less"],
+	"stylelint.validate": ["astro", "less", "typescriptreact"],
 
 	// SonarLint 项目信息
 	"sonarlint.connectedMode.project": {

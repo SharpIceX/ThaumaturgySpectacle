@@ -6,6 +6,18 @@
 🔒很抱歉我不接受PR，但欢迎提出建议！如果你有任何想法或改进建议，欢迎通过Discussions与我联系。🙏
 </div>
 
+## 初始开发环境
+
+```bash
+# 拉取仓库
+git clone https://github.com/FurryRbl/ThaumaturgySpectacle.git
+
+cd ThaumaturgySpectacle
+
+# 安装依赖
+pnpm install --frozen-lockfile
+```
+
 ## 投喂信息
 
 <div align="center">
