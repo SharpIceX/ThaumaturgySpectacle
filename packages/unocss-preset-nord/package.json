@@ -1,5 +1,5 @@
 {
-	"name": "unocss-preset-nord",
+	"name": "@ts-packages/unocss-preset-nord",
 	"private": true,
 	"type": "module",
 	"license": "MIT",

@@ -13,11 +13,16 @@
 		"@fontsource/lxgw-wenkai": "^5.2.5",
 		"@fontsource/noto-color-emoji": "^5.2.7",
 		"@material-design-icons/svg": "^0.14.15",
+		"@ts-packages/ts-bulma": "link:..\\..\\packages\\ts-bulma",
+		"arcanova_design": "link:..\\arcanova_design",
 		"astro": "^5.9.2",
+		"nord": "^0.2.1",
 		"overlayscrollbars": "^2.11.4"
 	},
 	"devDependencies": {
+		"@astrojs/partytown": "^2.1.4",
 		"@astrojs/sitemap": "^3.4.1",
+		"@ts-packages/unocss-preset-nord": "link:..\\..\\packages\\unocss-preset-nord",
 		"@types/postcss-import": "^14.0.3",
 		"@unocss/reset": "^66.2.0",
 		"less": "^4.3.0",
@@ -26,7 +31,6 @@
 		"postcss-load-config": "^6.0.1",
 		"postcss-preset-env": "^10.2.3",
 		"postcss-remove-format-fonts": "^1.0.3",
-		"unocss": "^66.2.0",
-		"unocss-preset-nord": "link:..\\..\\packages\\unocss-preset-nord"
+		"unocss": "^66.2.0"
 	}
 }

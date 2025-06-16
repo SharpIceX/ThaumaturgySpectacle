@@ -5,9 +5,17 @@ import SettingsMenu from '@material-design-icons/svg/outlined/settings.svg';
 import MenuBookModeIcon from '@material-design-icons/svg/outlined/menu_book.svg';
 import DescriptionIcon from '@material-design-icons/svg/outlined/description.svg';
 import LocationOnModeIcon from '@material-design-icons/svg/outlined/location_on.svg';
+import FavoriteBorderIcon from '@material-design-icons/svg/outlined/favorite_border.svg';
 ---
 
-<header role='banner' class='flex px-4 justify-between select-none bg-gray-100 bg-op-55 min-h-[auto]'>
+<style>
+	.nav-item {
+		@apply hover:text-nord8
+		@apply flex items-center space-x-1;
+	}
+</style>
+
+<header role='banner' class='flex px-4 justify-between select-none pt-3'>
 	<nav role='navigation' aria-label='主导航' class='relative max-sm:relative'>
 		<!-- 菜单按钮，手机可见 -->
 		<div tabindex='0' role='button' aria-label='打开菜单' class='hidden max-sm:block cursor-pointer'>
@@ -15,50 +23,36 @@ import LocationOnModeIcon from '@material-design-icons/svg/outlined/location_on.
 		</div>
 
 		<!-- 菜单内容 -->
-		<div
-			tabindex='0'
-			role='menu'
-			aria-label='导航菜单'
-			class='z-10 flex flex-row max-sm:flex-col max-sm:w-28 max-sm:rounded-md max-sm:bg-gray-200 max-sm:p-2 max-sm:shadow-md'>
-			<a
-				href='/'
-				class='flex items-center space-x-1 px-2 py-1 rounded hover:bg-gray-300'
-				role='menuitem'
-				aria-label='返回首页'>
+		<div tabindex='0' role='menu' aria-label='导航菜单' class='flex flex-row space-x-4'>
+			<a href='/' class='nav-item' role='menuitem' aria-label='返回首页'>
 				<span aria-hidden='true'>
-					<HomeIcon />
+					<HomeIcon fill='currentColor' />
 				</span>
 				<span>首页</span>
 			</a>
-			<a
-				href='/wiki'
-				class='flex items-center space-x-1 px-2 py-1 rounded hover:bg-gray-300'
-				role='menuitem'
-				aria-label='访问百科'>
+			<a href='/wiki' class='nav-item' role='menuitem' aria-label='访问百科'>
 				<span aria-hidden='true'>
-					<DescriptionIcon />
+					<DescriptionIcon fill='currentColor' />
 				</span>
 				<span>百科</span>
 			</a>
-			<a
-				href='/book'
-				class='flex items-center space-x-1 px-2 py-1 rounded hover:bg-gray-300'
-				role='menuitem'
-				aria-label='阅读小说'>
+			<a href='/book' class='nav-item' role='menuitem' aria-label='阅读小说'>
 				<span aria-hidden='true'>
-					<MenuBookModeIcon />
+					<MenuBookModeIcon fill='currentColor' />
 				</span>
 				<span>小说</span>
 			</a>
-			<a
-				href='/map'
-				class='flex items-center space-x-1 px-2 py-1 rounded hover:bg-gray-300'
-				role='menuitem'
-				aria-label='查看地图'>
+			<a href='/map' class='nav-item' role='menuitem' aria-label='查看地图'>
 				<span aria-hidden='true'>
-					<LocationOnModeIcon />
+					<LocationOnModeIcon fill='currentColor' />
 				</span>
 				<span>地图</span>
+			</a>
+			<a href='/about' class='nav-item' role='menuitem' aria-label='查看关于站点页面'>
+				<span aria-hidden='true'>
+					<FavoriteBorderIcon fill='currentColor' />
+				</span>
+				<span>关于</span>
 			</a>
 		</div>
 	</nav>
@@ -68,8 +62,8 @@ import LocationOnModeIcon from '@material-design-icons/svg/outlined/location_on.
 		<nav>
 			<ul>
 				<li class='flex space-x-2 items-center'>
-					<a href='/settings' title='设置' class='flex items-center' aria-label='进入设置页面'>
-						<SettingsMenu />
+					<a href='/settings' title='设置' class='nav-item' aria-label='进入设置页面'>
+						<SettingsMenu fill='currentColor' />
 					</a>
 				</li>
 			</ul>

@@ -2,6 +2,7 @@ import path from 'node:path';
 import UnoCSS from 'unocss/astro';
 import type postcss from 'postcss';
 import sitemap from '@astrojs/sitemap';
+import partytown from '@astrojs/partytown';
 import type { AstroUserConfig } from 'astro';
 import postcssConfig from './postcss.config';
 
@@ -11,7 +12,7 @@ export default {
 	site: 'https://ts.sharpice.top',
 	build: {
 		assets: '_ts',
-		format: 'preserve',
+		format: 'file',
 	},
 	server: {
 		port: 8190,
@@ -24,12 +25,18 @@ export default {
 	},
 	integrations: [
 		sitemap(),
+		partytown({
+			config: {
+				debug: import.meta.env.DEV,
+			},
+		}),
 		UnoCSS({
-			injectReset: true,
+			injectReset: '@unocss/reset/tailwind.css',
 		}),
 	],
 	vite: {
 		css: {
+			devSourcemap: true,
 			postcss: postcssConfig as postcss.ProcessOptions,
 		},
 		resolve: {

@@ -3,5 +3,8 @@
 	"private": true,
 	"type": "module",
 	"license": "CC-BY-SA-4.0",
-	"description": "Arcanova 设计系统"
+	"description": "Arcanova 设计系统",
+	"dependencies": {
+		"unocss": "^66.2.0"
+	}
 }

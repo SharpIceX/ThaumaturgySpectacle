@@ -1,10 +1,17 @@
+@import url('./overlayscrollbars.less');
+
 html {
 	@apply bg-nord0 text-nord4;
 }
 
 body {
-	@apply font-medium;
 	@apply flex flex-col;
 	@apply h-screen w-screen;
-	font-family: 'LXGW WenKai', 'Ysabeau Variable', 'Noto Color Emoji', sans-serif;
+
+	// 针对字体的专门优化
+	@apply antialiased font-bold text-base;
+	line-height: 1.5;
+	letter-spacing: 0.02em;
+	font-family: 'Ysabeau Variable', 'Noto Color Emoji', 'LXGW WenKai', sans-serif;
+	text-rendering: optimizelegibility; /* 优化字形显示 */
 }

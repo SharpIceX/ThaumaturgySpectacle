@@ -1,6 +1,7 @@
 packages:
     - tools/**
     - project/**
+    - packages/@ts-config/**
 onlyBuiltDependencies:
     - '@parcel/watcher'
     - esbuild

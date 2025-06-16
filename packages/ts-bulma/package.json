@@ -1,0 +1,11 @@
+{
+	"name": "@ts-packages/ts-bulma",
+	"private": true,
+	"type": "module",
+	"license": "MIT",
+	"main": "./src/main.scss",
+	"dependencies": {
+		"bulma": "^1.0.4",
+		"nord": "^0.2.1"
+	}
+}

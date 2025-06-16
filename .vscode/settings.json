@@ -19,13 +19,13 @@
 	"css.customData": [".vscode/unocss.json"],
 
 	// 配置 ESLint 验证的文件类型
-	"eslint.validate": ["astro", "javascript", "typescript", "typescriptreact"],
+	"eslint.validate": ["astro", "javascript", "typescript"],
 
 	// 配置 UnoCSS 支持的语言类型
-	"unocss.languageIds": ["astro", "javascript", "typescript", "less", "typescriptreact"],
+	"unocss.languageIds": ["astro", "javascript", "typescript", "less"],
 
 	// 配置 Stylelint 验证的文件类型
-	"stylelint.validate": ["astro", "less", "typescriptreact"],
+	"stylelint.validate": ["astro", "less"],
 
 	// SonarLint 项目信息
 	"sonarlint.connectedMode.project": {

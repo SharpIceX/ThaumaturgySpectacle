@@ -1,8 +1,8 @@
-import { Preset } from 'unocss';
+import type { Preset } from 'unocss';
 
 export default (): Preset => {
 	return {
-		name: 'unocss-nord',
+		name: '@ts-packages/unocss-preset-nord',
 		theme: {
 			colors: {
 				/**
