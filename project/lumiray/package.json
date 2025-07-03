@@ -3,5 +3,5 @@
 	"private": true,
 	"type": "module",
 	"license": "MPL-2.0",
-	"description": "雪芒 Markdown 渲染器"
+	"description": "雪芒 『.lum』 文件解析器"
 }

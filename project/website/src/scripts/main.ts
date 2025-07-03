@@ -4,9 +4,7 @@ import '@ts-packages/ts-bulma';
 import 'overlayscrollbars/overlayscrollbars.css';
 
 // 字体
-import '@fontsource/lxgw-wenkai/700.css'; // 简体中文
 import '@fontsource/noto-color-emoji'; // 彩色 Emoji
-import '@fontsource-variable/ysabeau'; // 英文
 
 import { OverlayScrollbars } from 'overlayscrollbars';
 

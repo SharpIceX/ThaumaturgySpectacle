@@ -1,4 +1,6 @@
 {
+	"$schema": "https://raw.githubusercontent.com/microsoft/vscode-html-languageservice/refs/heads/main/docs/customData.schema.json",
+
 	"version": 1.1,
 	"atDirectives": [
 		{
@@ -8,36 +10,6 @@
 				{
 					"name": "UnoCSS Transformer Directives 文档",
 					"url": "https://unocss.dev/transformers/directives"
-				}
-			]
-		},
-		{
-			"name": "--at-apply",
-			"description": "UnoCSS 也支持使用 CSS 自定义属性的方式来应用原子类，例如 --at-apply，可用于框架环境下避免语法冲突。",
-			"references": [
-				{
-					"name": "UnoCSS Transformer Directives 文档",
-					"url": "https://unocss.dev/transformers/directives"
-				}
-			]
-		},
-		{
-			"name": "@screen",
-			"description": "使用 @screen 可以根据 uno.config.ts 中定义的断点创建媒体查询，支持 sm、md、lg 等，也支持 lt- 和 at- 前缀。",
-			"references": [
-				{
-					"name": "UnoCSS Transformer Directives 文档",
-					"url": "https://unocss.dev/transformers/directives#screen"
-				}
-			]
-		},
-		{
-			"name": "theme()",
-			"description": "theme() 是一个 CSS 函数，用于访问 uno.config.ts 中定义的主题变量，例如 theme('colors.blue.500')。",
-			"references": [
-				{
-					"name": "UnoCSS Transformer Directives 文档",
-					"url": "https://unocss.dev/transformers/directives#theme"
 				}
 			]
 		}

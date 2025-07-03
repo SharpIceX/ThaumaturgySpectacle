@@ -3,8 +3,8 @@
 	"compilerOptions": {
 		"types": ["astro/client"],
 		"paths": {
-			"$/*": ["./src/*"],
-			"@/*": ["./node_modules/*"]
+			"@/*": ["./src/*"],
+			"$/*": ["./node_modules/*"]
 		}
 	}
 }
