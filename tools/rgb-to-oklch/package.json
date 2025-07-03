@@ -8,7 +8,7 @@
 		"start": "tsx  src/main.ts"
 	},
 	"dependencies": {
-		"culori": "^4.0.1"
+		"culori": "^4.0.2"
 	},
 	"devDependencies": {
 		"@types/culori": "^4.0.0",

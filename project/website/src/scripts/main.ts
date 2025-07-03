@@ -1,6 +1,5 @@
 // 样式
 import '../styles/main.less';
-import '@ts-packages/ts-bulma';
 import 'overlayscrollbars/overlayscrollbars.css';
 
 // 字体
