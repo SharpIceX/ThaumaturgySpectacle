@@ -1,46 +1,44 @@
 {
 	"compilerOptions": {
 		/* 基础配置 */
+		"strict": true,
+		"checkJs": true,
 		"allowJs": true,
 		"target": "ES2022",
 		"module": "ESNext",
+		"outDir": "./build",
+		"sourceMap": true, // 生成 sourcemap
+		"declaration": true, // 生成 .d.ts 声明文件
+		"declarationMap": true, // 声明文件的 sourcemap
+		"esModuleInterop": true, // 兼容 CommonJS/ES 模块
+		"isolatedModules": true,
 		"resolveJsonModule": true,
 		"moduleResolution": "bundler",
 		"types": ["node"],
+		"typeRoots": ["./node_modules/@types", "./types"],
 
-		/* 严格模式 */
-		"strict": true,
+		/* 检查 */
+		"alwaysStrict": true, // 在输出中保留 "use strict"
 		"noImplicitAny": true, // 禁止隐式 any 类型
+		"noUnusedLocals": true, // 禁止未使用的局部变量
+		"noImplicitThis": true, // 禁止隐式 this 类型
 		"strictNullChecks": true, // 严格 null/undefined 检查
+		"noImplicitReturns": true, // 函数必须有明确返回
+		"noImplicitOverride": true, // 禁止隐式覆盖基类方法
+		"noUnusedParameters": true, // 禁止未使用的函数参数
 		"strictFunctionTypes": true, // 严格函数类型检查
 		"strictBindCallApply": true, // 严格 bind/call/apply 检查
-		"strictPropertyInitialization": true, // 类属性初始化检查
-		"noImplicitThis": true, // 禁止隐式 this 类型
-		"alwaysStrict": true, // 在输出中保留 "use strict"
-
-		/* 类型安全 */
-		"exactOptionalPropertyTypes": true, // 可选属性必须明确定义 undefined
 		"noUncheckedIndexedAccess": true, // 索引访问自动包含 undefined 类型
-		"noImplicitOverride": true, // 禁止隐式覆盖基类方法
-		"noPropertyAccessFromIndexSignature": true, // 强制索引签名使用方括号语法
-
-		/* 质量检查 */
-		"noUnusedLocals": true, // 禁止未使用的局部变量
-		"noUnusedParameters": true, // 禁止未使用的函数参数
+		"exactOptionalPropertyTypes": true, // 可选属性必须明确定义 undefined
 		"noFallthroughCasesInSwitch": true, // switch 语句的穿透检查
-		"noImplicitReturns": true, // 函数必须有明确返回
-
-		/* 输出 */
+		"strictPropertyInitialization": true, // 类属性初始化检查
+		"allowSyntheticDefaultImports": true, // 允许默认导入非默认导出的模块
 		"forceConsistentCasingInFileNames": true, // 强制文件名大小写一致
-		"skipLibCheck": true, // 跳过声明文件类型检查
-		"esModuleInterop": true, // 兼容 CommonJS/ES 模块
-		"allowSyntheticDefaultImports": true,
-
-		/* 输出配置 (根据构建工具调整) */
-		"sourceMap": true, // 生成 sourcemap
-		"declaration": true, // 生成 .d.ts 声明文件
-		"declarationMap": true // 声明文件的 sourcemap
+		"noPropertyAccessFromIndexSignature": true // 强制索引签名使用方括号语法
 	},
-	"include": ["**/*.ts", "**/*.astro"],
-	"exclude": ["node_modules", "**/*.js"]
+	"vueCompilerOptions": {
+		"vitePressExtensions": [".lum"]
+	},
+	"include": ["**/*.ts", "**/*.astro", "**/*.js", "**/*.lum"],
+	"exclude": ["**/node_modules", "build", ".hsqx", "project/website/.astro"]
 }

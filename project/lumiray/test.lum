@@ -1,0 +1,12 @@
+# 测试
+
+**你好**
+
+<script lang="ts">
+
+export default {
+	name: "TestPage",
+	title: '测试',
+	description: '这是一个测试页面',
+}
+</script>

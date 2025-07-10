@@ -18,17 +18,16 @@
 		"overlayscrollbars": "^2.11.4"
 	},
 	"devDependencies": {
-		"@astrojs/partytown": "^2.1.4",
 		"@astrojs/sitemap": "^3.4.1",
 		"@ts-packages/unocss-preset-nord": "link:..\\..\\packages\\unocss-preset-nord",
 		"@types/postcss-import": "^14.0.3",
-		"@unocss/reset": "^66.3.2",
+		"@unocss/reset": "^66.3.3",
 		"less": "^4.3.0",
 		"postcss": "^8.5.6",
 		"postcss-import": "^16.1.1",
 		"postcss-load-config": "^6.0.1",
 		"postcss-preset-env": "^10.2.4",
 		"postcss-remove-format-fonts": "^1.0.3",
-		"unocss": "^66.3.2"
+		"unocss": "^66.3.3"
 	}
 }

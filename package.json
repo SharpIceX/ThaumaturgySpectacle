@@ -37,15 +37,14 @@
 		}
 	},
 	"scripts": {
-		"clean": "rimraf build .hsqx",
+		"lint:js": "eslint .",
 		"format": "prettier . --write",
-		"lint:js": "eslint . --no-fix",
-		"lint:css": "stylelint . --allow-empty-input --no-fix"
+		"lint:css": "stylelint . --allow-empty-input",
+		"clean": "rimraf build .hsqx project/website/.astro"
 	},
 	"devDependencies": {
 		"@ts-config/eslint-conifg": "link:packages\\@ts-config\\eslint-config",
-		"@ts-config/stylelint-conifg": "link:packages\\@ts-config\\stylelint-conifg",
-		"@types/node": "^24.0.10",
+		"@types/node": "^24.0.12",
 		"eslint": "^9.30.1",
 		"jiti": "^2.4.2",
 		"prettier": "^3.6.2",

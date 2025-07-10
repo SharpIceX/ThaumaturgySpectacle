@@ -1,7 +1,6 @@
 {
-	"extends": "../../tsconfig.json",
+	"extends": ["../../tsconfig.json", "astro/tsconfigs/base"],
 	"compilerOptions": {
-		"types": ["astro/client"],
 		"paths": {
 			"@/*": ["./src/*"],
 			"$/*": ["./node_modules/*"]

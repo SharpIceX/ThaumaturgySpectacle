@@ -1,0 +1,21 @@
+{
+	"recommendations": [
+		// Vue
+		"vue.volar",
+
+		// UnoCSS
+		"antfu.unocss",
+
+		// Astro
+		"astro-build.astro-vscode",
+
+		// ESLint
+		"dbaeumer.vscode-eslint",
+
+		// Axe Accessibility Linter
+		"deque-systems.vscode-axe-linter",
+
+		// Markdown
+		"unifiedjs.vscode-remark" // Remark Linter
+	]
+}

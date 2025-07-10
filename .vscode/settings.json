@@ -1,8 +1,4 @@
 {
-	// 禁用 VSCode 内置的 LESS 验证功能。
-	// 解决和 Stylelint 冲突。
-	"less.validate": false,
-
 	// 保存时自动格式化代码
 	"editor.formatOnSave": true,
 
@@ -12,19 +8,24 @@
 	// 配置 Unocss 自动补全的匹配类型为模糊匹配模式。
 	"unocss.autocomplete.matchType": "fuzzy",
 
-	// 自定义 CSS 数据文件，用于增强 IntelliSense 支持
-	"css.customData": [".vscode/unocss.json"],
+	// 自定义 CSS 数据文件
+	"css.customData": [".vscode/css/unocss.json"],
 
 	// 配置 ESLint 验证的文件类型
-	"eslint.validate": ["astro", "javascript", "typescript"],
+	"eslint.validate": ["astro", "javascript", "typescript", "vue"],
 
 	// 配置 UnoCSS 支持的语言类型
-	"unocss.languageIds": ["astro", "javascript", "typescript", "less"],
+	"unocss.languageIds": ["astro", "javascript", "typescript", "less", "vue"],
 
 	// 配置 Stylelint 验证的文件类型
-	"stylelint.validate": ["astro", "less"],
+	"stylelint.validate": ["astro", "less", "vue"],
 
-	// SonarLint 项目信息
+	// 配置文件关联
+	"files.associations": {
+		"*.lum": "vue"
+	},
+
+	// SonarLint
 	"sonarlint.connectedMode.project": {
 		"connectionId": "furryrbl",
 		"projectKey": "FurryRbl_ThaumaturgySpectacle"

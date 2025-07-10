@@ -142,7 +142,6 @@ const domain = new URL(Astro.site as URL).hostname;
 	<!-- 修复首屏显示问题 -->
 
 	<!-- 其他资源 -->
-	<!-- TODO: 这一行使用`is:inline`似乎有问题或不合法，有待观察 -->
-	<script type='module' src='/src/scripts/main.ts' is:inline></script>
+	<script src='@/scripts/main.ts'></script>
 	<!-- 其他资源 -->
 </head>
