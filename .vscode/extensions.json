@@ -15,7 +15,8 @@
 		// Axe Accessibility Linter
 		"deque-systems.vscode-axe-linter",
 
-		// Markdown
-		"unifiedjs.vscode-remark" // Remark Linter
+		// 格式化工具
+		"csharpier.csharpier-vscode", // C#
+		"esbenp.prettier-vscode"
 	]
 }

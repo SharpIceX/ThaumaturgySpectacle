@@ -23,15 +23,14 @@ export default tseslint.config(
 		rules: {
 			eqeqeq: ['error', 'always'],
 			'unocss/order': 'off', // unocss 还没有插件支持格式化时排序
-			'vue/multi-word-component-names': 'off',
 		},
 	},
 	{
 		languageOptions: {
 			parserOptions: {
+				projectService: true,
 				sourceType: 'module',
 				ecmaVersion: 'latest',
-				projectService: true,
 				tsconfigRootDir: path.resolve(import.meta.dirname, '../../../../'),
 			},
 			globals: {
@@ -40,7 +39,7 @@ export default tseslint.config(
 		},
 	},
 	{
-		files: ['*.ts'],
+		files: ['**/*.ts'],
 		languageOptions: {
 			parser: tseslint.parser,
 			parserOptions: {
@@ -49,7 +48,7 @@ export default tseslint.config(
 		},
 	},
 	{
-		files: ['*.vue'],
+		files: ['**/*.vue'],
 		languageOptions: {
 			parser: vueParser,
 			parserOptions: {

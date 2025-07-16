@@ -13,7 +13,7 @@
 		"@lxgw/LxgwBright": "github:lxgw/LxgwBright#v5.526",
 		"@material-design-icons/svg": "^0.14.15",
 		"arcanova_design": "link:..\\arcanova_design",
-		"astro": "^5.11.0",
+		"astro": "^5.11.1",
 		"nord": "^0.2.1",
 		"overlayscrollbars": "^2.11.4"
 	},

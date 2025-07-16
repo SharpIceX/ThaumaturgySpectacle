@@ -15,7 +15,6 @@
 		"resolveJsonModule": true,
 		"moduleResolution": "bundler",
 		"types": ["node"],
-		"typeRoots": ["./node_modules/@types", "./types"],
 
 		/* 检查 */
 		"alwaysStrict": true, // 在输出中保留 "use strict"
@@ -37,8 +36,8 @@
 		"noPropertyAccessFromIndexSignature": true // 强制索引签名使用方括号语法
 	},
 	"vueCompilerOptions": {
-		"vitePressExtensions": [".lum"]
+		"vitePressExtensions": [".lum", ".md"]
 	},
-	"include": ["**/*.ts", "**/*.astro", "**/*.js", "**/*.lum"],
+	"include": ["**/*.ts", "**/*.js", "**/*.astro", "**/*.lum", "**/*.md"],
 	"exclude": ["**/node_modules", "build", ".hsqx", "project/website/.astro"]
 }

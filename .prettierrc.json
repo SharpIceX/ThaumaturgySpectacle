@@ -31,14 +31,6 @@
 			}
 		},
 		{
-			"files": "*.lum",
-			"options": {
-				"parser": "markdown",
-				"tabWidth": 2,
-				"useTabs": false
-			}
-		},
-		{
 			"files": "*.astro",
 			"options": {
 				"htmlWhitespaceSensitivity": "ignore"

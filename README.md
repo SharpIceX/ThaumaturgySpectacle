@@ -5,6 +5,7 @@
 > [!NOTE]
 > **构建提示**
 > 构建本项目请确保能够连接到 NPM 仓库 及 GitHub
+> 请务必配置好 OpenSSH 密钥 及 OpenSSH Agent
 
 <div align="center">
 🔒很抱歉我不接受PR，但欢迎提出建议！如果你有任何想法或改进建议，欢迎通过Discussions与我联系。🙏

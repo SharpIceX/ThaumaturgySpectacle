@@ -12,3 +12,7 @@ node_modules
 
 # 幻术奇象——缓存&临时文件
 /.hsqx
+
+# Visual Studio 文件
+.vs/
+*.user

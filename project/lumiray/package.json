@@ -3,5 +3,20 @@
 	"private": true,
 	"type": "module",
 	"license": "MPL-2.0",
-	"description": "雪芒 『.lum』 文件解析器"
+	"description": "雪芒 『.lum』 文件解析器",
+	"dependencies": {
+		"@ts-dotnet-packages/markdown-render": "link:..\\..\\dotnet-packages\\markdown-render",
+		"cheerio": "^1.1.0",
+		"markdown-it": "^14.1.0",
+		"markdown-it-cjk-friendly": "^1.2.0",
+		"markdown-it-footnote": "^4.0.0",
+		"markdown-it-front-matter": "^0.2.4",
+		"markdown-it-sub": "^2.0.0",
+		"markdown-it-sup": "^2.0.0",
+		"yaml": "^2.8.0"
+	},
+	"devDependencies": {
+		"@types/markdown-it": "^14.1.2",
+		"@types/markdown-it-footnote": "^3.0.4"
+	}
 }

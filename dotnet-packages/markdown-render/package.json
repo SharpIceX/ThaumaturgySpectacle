@@ -1,0 +1,17 @@
+{
+	"name": "@ts-dotnet-packages/markdown-render",
+	"private": true,
+	"type": "module",
+	"license": "MIT",
+	"main": "./bin/Release/net8.0/markdown-render.cjs",
+	"module": "./bin/Release/net8.0/markdown-render.mjs",
+	"types": "./bin/Release/net8.0/markdown-render.d.ts",
+	"scripts": {
+		"clean": "dotnet clean",
+		"build": "dotnet build -c Release",
+		"postinstall": "dotnet build -c Release"
+	},
+	"dependencies": {
+		"node-api-dotnet": "^0.9.12"
+	}
+}

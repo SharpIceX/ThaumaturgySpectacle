@@ -17,12 +17,32 @@
 	// 配置 UnoCSS 支持的语言类型
 	"unocss.languageIds": ["astro", "javascript", "typescript", "less", "vue"],
 
-	// 配置 Stylelint 验证的文件类型
-	"stylelint.validate": ["astro", "less", "vue"],
+	// 配咋 Vue 语言服务器语言支持
+	"vue.server.includeLanguages": ["vue", "markdown"],
 
 	// 配置文件关联
 	"files.associations": {
-		"*.lum": "vue"
+		"*.lum": "markdown",
+		".csharpierignore": "ignore"
+	},
+
+	// Markdown 配置
+	"[markdown]": {
+		"editor.quickSuggestions": {
+			"other": true,
+			"comments": false,
+			"strings": false
+		}
+	},
+
+	// XML 配置，使用 CSharpier 作为默认格式化工具
+	"[xml]": {
+		"editor.defaultFormatter": "csharpier.csharpier-vscode"
+	},
+
+	// C# 配置，使用 CSharpier 作为默认格式化工具
+	"[csharp]": {
+		"editor.defaultFormatter": "csharpier.csharpier-vscode"
 	},
 
 	// SonarLint
