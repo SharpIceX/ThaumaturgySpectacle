@@ -1,19 +1,10 @@
 # Node 模块
-/node_modules
+**/node_modules/*
 
-# pnpm
-/pnpm-lock.yaml
-
-# 构建输出
-/build
-
-# 幻术奇象——缓存&临时文件
-/.hsqx
-
-# 项目内文件
-/project/website/.astro
-/packages/markdig/dotnet/bin
+# C#
+**/bin/*
+**/obj/*
 
 # Visual Studio 文件
 .vs/
-*.user
+

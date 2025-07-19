@@ -3,15 +3,17 @@
 	"private": true,
 	"type": "module",
 	"license": "MIT",
-	"main": "./bin/Release/net8.0/markdown-render.cjs",
-	"module": "./bin/Release/net8.0/markdown-render.mjs",
-	"types": "./bin/Release/net8.0/markdown-render.d.ts",
+	"main": "./dist/MarkdownRender.js",
+	"types": "./types/MarkdownRender.d.ts",
 	"scripts": {
-		"clean": "dotnet clean",
+		"clean": "rimraf dist",
 		"build": "dotnet build -c Release",
 		"postinstall": "dotnet build -c Release"
 	},
 	"dependencies": {
 		"node-api-dotnet": "^0.9.12"
+	},
+	"devDependencies": {
+		"rimraf": "^6.0.1"
 	}
 }

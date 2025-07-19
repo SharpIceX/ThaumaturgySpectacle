@@ -45,13 +45,13 @@
 	},
 	"devDependencies": {
 		"@ts-config/eslint-conifg": "link:packages\\@ts-config\\eslint-config",
-		"@types/node": "^24.0.13",
+		"@types/node": "^24.0.15",
 		"eslint": "^9.31.0",
 		"jiti": "^2.4.2",
 		"prettier": "^3.6.2",
 		"prettier-plugin-astro": "^0.14.1",
 		"rimraf": "^6.0.1",
-		"stylelint": "^16.21.1",
+		"stylelint": "^16.22.0",
 		"typescript": "^5.8.3"
 	}
 }

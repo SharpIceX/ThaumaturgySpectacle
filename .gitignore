@@ -16,3 +16,7 @@ node_modules
 # Visual Studio 文件
 .vs/
 *.user
+
+# 其他
+*.tmp
+*.log

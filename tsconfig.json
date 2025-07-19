@@ -38,6 +38,6 @@
 	"vueCompilerOptions": {
 		"vitePressExtensions": [".lum", ".md"]
 	},
-	"include": ["**/*.ts", "**/*.js", "**/*.astro", "**/*.lum", "**/*.md"],
+	"include": ["**/*.ts", "**/*.js", "**/*.astro", "**/*.vue", "**/*.lum", "**/*.md"],
 	"exclude": ["**/node_modules", "build", ".hsqx", "project/website/.astro"]
 }

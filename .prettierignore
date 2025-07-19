@@ -12,8 +12,10 @@
 
 # 项目内文件
 /project/website/.astro
-/packages/markdig/dotnet/bin
 
 # Visual Studio 文件
 .vs/
-*.user
+
+# C#
+/dotnet-packages/*/bin
+/dotnet-packages/*/obj

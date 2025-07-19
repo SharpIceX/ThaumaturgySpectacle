@@ -13,7 +13,7 @@
 		"@lxgw/LxgwBright": "github:lxgw/LxgwBright#v5.526",
 		"@material-design-icons/svg": "^0.14.15",
 		"arcanova_design": "link:..\\arcanova_design",
-		"astro": "^5.11.1",
+		"astro": "^5.12.0",
 		"nord": "^0.2.1",
 		"overlayscrollbars": "^2.11.4"
 	},
@@ -22,7 +22,7 @@
 		"@ts-packages/unocss-preset-nord": "link:..\\..\\packages\\unocss-preset-nord",
 		"@types/postcss-import": "^14.0.3",
 		"@unocss/reset": "^66.3.3",
-		"less": "^4.3.0",
+		"less": "^4.4.0",
 		"postcss": "^8.5.6",
 		"postcss-import": "^16.1.1",
 		"postcss-load-config": "^6.0.1",

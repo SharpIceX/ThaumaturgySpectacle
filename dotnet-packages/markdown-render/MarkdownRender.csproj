@@ -1,19 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<TargetFramework>net8.0</TargetFramework>
-		<RootNamespace>markdown_render</RootNamespace>
-		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<RootNamespace>MarkdownRender</RootNamespace>
 		<NodeApiAssemblyJSModuleType>esm</NodeApiAssemblyJSModuleType>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
 	<ItemGroup>
-		<Compile Remove="node_modules\**" />
 		<EmbeddedResource Remove="node_modules\**" />
 		<None Remove="node_modules\**" />
-	</ItemGroup>
-	<ItemGroup>
-		<Content Remove="C:\Users\SharpIce\.nuget\packages\microsoft.javascript.nodeapi\0.9.12\contentFiles\any\net8.0\import.cjs" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Remove="LICENSE" />
@@ -21,7 +15,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Markdig" Version="0.41.3" />
-		<PackageReference Include="Microsoft.JavaScript.NodeApi" Version="0.9.12" />
 		<PackageReference Include="Microsoft.JavaScript.NodeApi.Generator" Version="0.9.12" />
 	</ItemGroup>
 </Project>

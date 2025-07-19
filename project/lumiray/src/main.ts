@@ -30,7 +30,6 @@ export const render = (markdown: string): LumirayType => {
 
 	// 检查渲染结果
 	if (!markdownRenderResult.html) throw new Error(`渲染 ${markdown} 时未生成 HTML！`);
-	if (!markdownRenderResult.metadata) throw new Error(`渲染 ${markdown} 时未生成 Front Matter 元数据！`);
 
 	// 写入 data
 	const { title, description, keywords } = markdownRenderResult.metadata;

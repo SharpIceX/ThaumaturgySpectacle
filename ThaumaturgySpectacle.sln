@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "markdown-render", "dotnet-packages\markdown-render\markdown-render.csproj", "{A041E5A0-D3BB-EA93-452F-BE595CD0BE5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkdownRender", "dotnet-packages\markdown-render\MarkdownRender.csproj", "{A041E5A0-D3BB-EA93-452F-BE595CD0BE5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "markdown-render-test", "dotnet-packages\markdown-render-test\markdown-render-test.csproj", "{D821BE81-0D3F-F7F6-03AD-56ED4101207D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkdownRender-Test", "dotnet-packages\markdown-render-test\MarkdownRender-Test.csproj", "{D821BE81-0D3F-F7F6-03AD-56ED4101207D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project Files", "Project Files", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		.csharpierignore = .csharpierignore
+		.csharpierrc.json = .csharpierrc.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

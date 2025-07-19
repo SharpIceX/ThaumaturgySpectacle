@@ -77,6 +77,13 @@ export default tseslint.config(
 		extends: [tseslint.configs.disableTypeChecked],
 	},
 	{
-		ignores: ['**/*.d.ts', '**/node_modules/**', 'build/**', '.hsqx/**', 'project/website/.astro/**'],
+		ignores: [
+			'**/*.d.ts',
+			'**/node_modules/**',
+			'**/dotnet-packages/**',
+			'build/**',
+			'.hsqx/**',
+			'project/website/.astro/**',
+		],
 	},
 );
