@@ -162,9 +162,9 @@ importers:
       postcss-preset-env:
         specifier: ^10.2.4
         version: 10.2.4(postcss@8.5.6)
-      postcss-remove-format-fonts:
-        specifier: ^1.0.3
-        version: 1.0.3
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.0.1
       unocss:
         specifier: ^66.3.3
         version: 66.3.3(postcss@8.5.6)(vite@6.3.5(@types/node@24.0.15)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(tsx@4.20.3)(yaml@2.8.0))(vue@3.5.16(typescript@5.8.3))
@@ -2854,9 +2854,6 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       postcss: ^8.4
-
-  postcss-remove-format-fonts@1.0.3:
-    resolution: {integrity: sha512-cPEYl/koVgl8lolg0ksk7s9TXgUcq3skNaB6DdX3/RrvmqETZeqKf+R7+nDU+8pQs3w6O/RR4MOawO+P5fxvyg==}
 
   postcss-replace-overflow-wrap@4.0.0:
     resolution: {integrity: sha512-KmF7SBPphT4gPPcKZc7aDkweHiKEEO8cla/GjcBK+ckKxiZslIu3C4GCRW3DNfL0o7yW7kMQu9xlZ1kXRXLXtw==}
@@ -6655,10 +6652,6 @@ snapshots:
     dependencies:
       postcss: 8.5.6
       postcss-selector-parser: 7.1.0
-
-  postcss-remove-format-fonts@1.0.3:
-    dependencies:
-      postcss: 8.5.6
 
   postcss-replace-overflow-wrap@4.0.0(postcss@8.5.6):
     dependencies:

@@ -9,7 +9,7 @@
 	"unocss.autocomplete.matchType": "fuzzy",
 
 	// 自定义 CSS 数据文件
-	"css.customData": [".vscode/css/unocss.json"],
+	"css.customData": [".vscode/customData/css/unocss.json"],
 
 	// 配置 ESLint 验证的文件类型
 	"eslint.validate": ["astro", "javascript", "typescript", "vue"],

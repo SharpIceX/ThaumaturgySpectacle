@@ -32,6 +32,11 @@ export default {
 		css: {
 			devSourcemap: true,
 			postcss: postcssConfig as postcss.ProcessOptions,
+			preprocessorOptions: {
+				less: {
+					javascriptEnabled: true,
+				},
+			},
 		},
 		resolve: {
 			preserveSymlinks: true,

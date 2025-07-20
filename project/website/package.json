@@ -6,7 +6,8 @@
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
-		"preview": "astro preview"
+		"preview": "astro preview",
+		"clean": "rimraf ../../build/dist"
 	},
 	"dependencies": {
 		"@fontsource/noto-color-emoji": "^5.2.8",
@@ -27,7 +28,7 @@
 		"postcss-import": "^16.1.1",
 		"postcss-load-config": "^6.0.1",
 		"postcss-preset-env": "^10.2.4",
-		"postcss-remove-format-fonts": "^1.0.3",
+		"rimraf": "^6.0.1",
 		"unocss": "^66.3.3"
 	}
 }
