@@ -6,9 +6,6 @@
 		// UnoCSS
 		"antfu.unocss",
 
-		// Astro
-		"astro-build.astro-vscode",
-
 		// ESLint
 		"dbaeumer.vscode-eslint",
 

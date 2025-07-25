@@ -5,9 +5,7 @@ import jsdoc from 'eslint-plugin-jsdoc';
 import tseslint from 'typescript-eslint';
 import pluginVue from 'eslint-plugin-vue';
 import vueParser from 'vue-eslint-parser';
-import AstroParser from 'astro-eslint-parser';
 import unocss from '@unocss/eslint-config/flat';
-import eslintPluginAstro from 'eslint-plugin-astro';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default tseslint.config(
@@ -15,9 +13,9 @@ export default tseslint.config(
 	tseslint.configs.strict,
 	tseslint.configs.stylistic,
 	jsdoc.configs['flat/recommended'],
-	...eslintPluginAstro.configs.recommended,
-	...pluginVue.configs['flat/vue2-recommended'],
+	...pluginVue.configs['flat/recommended'],
 	unocss,
+	...(await (await import('@ts/website/.nuxt/eslint.config.mjs')).default()), //  这个是 Nuxt 4 的 ESLint 配置，嗯？
 	eslintConfigPrettier,
 	{
 		rules: {
@@ -58,18 +56,6 @@ export default tseslint.config(
 		},
 	},
 	{
-		files: ['**/*.astro'],
-		languageOptions: {
-			parser: AstroParser,
-			parserOptions: {
-				project: true,
-				projectService: false,
-				parser: tseslint.parser,
-				extraFileExtensions: ['.astro'],
-			},
-		},
-	},
-	{
 		files: ['**/*.js'],
 		plugins: {
 			jsdoc,
@@ -77,13 +63,6 @@ export default tseslint.config(
 		extends: [tseslint.configs.disableTypeChecked],
 	},
 	{
-		ignores: [
-			'**/*.d.ts',
-			'**/node_modules/**',
-			'**/dotnet-packages/**',
-			'build/**',
-			'.hsqx/**',
-			'project/website/.astro/**',
-		],
+		ignores: ['**/*.d.ts', '**/node_modules/**', '**/dotnet-packages/**', 'build/**', '.hsqx/**'],
 	},
 );

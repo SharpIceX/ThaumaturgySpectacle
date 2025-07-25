@@ -18,6 +18,7 @@
 
 		/* 检查 */
 		"alwaysStrict": true, // 在输出中保留 "use strict"
+		"skipLibCheck": false, // 检查库文件
 		"noImplicitAny": true, // 禁止隐式 any 类型
 		"noUnusedLocals": true, // 禁止未使用的局部变量
 		"noImplicitThis": true, // 禁止隐式 this 类型
@@ -38,6 +39,6 @@
 	"vueCompilerOptions": {
 		"vitePressExtensions": [".lum", ".md"]
 	},
-	"include": ["**/*.ts", "**/*.js", "**/*.astro", "**/*.vue", "**/*.lum", "**/*.md"],
-	"exclude": ["**/node_modules", "build", ".hsqx", "project/website/.astro"]
+	"include": ["**/*.ts", "**/*.js", "**/*.vue", "**/*.lum", "**/*.md"],
+	"exclude": ["**/node_modules", "build", ".hsqx"]
 }

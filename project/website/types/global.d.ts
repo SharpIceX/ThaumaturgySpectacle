@@ -1,4 +1,3 @@
-// src/types/global.d.ts
 import type { OverlayScrollbars as OSInstance } from 'overlayscrollbars';
 
 declare global {

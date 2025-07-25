@@ -1,9 +1,11 @@
 packages:
-    - tools/**
-    - project/**
-    - dotnet-packages/**
-    - packages/@ts-config/**
+  - tools/**
+  - project/**
+  - dotnet-packages/**
+  - packages/@ts-config/**
+
 onlyBuiltDependencies:
-    - '@parcel/watcher'
-    - esbuild
-    - sharp
+  - '@parcel/watcher'
+  - esbuild
+  - sharp
+  - unrs-resolver

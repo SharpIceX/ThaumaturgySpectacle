@@ -9,16 +9,20 @@
 	"unocss.autocomplete.matchType": "fuzzy",
 
 	// 自定义 CSS 数据文件
-	"css.customData": [".vscode/customData/css/unocss.json"],
+	"css.customData": [".vscode/customData/css/unocss.json", ".vscode/customData/css/tailwindcss.json"],
 
 	// 配置 ESLint 验证的文件类型
-	"eslint.validate": ["astro", "javascript", "typescript", "vue"],
+	"eslint.validate": ["javascript", "typescript", "vue"],
 
 	// 配置 UnoCSS 支持的语言类型
-	"unocss.languageIds": ["astro", "javascript", "typescript", "less", "vue"],
+	"unocss.languageIds": ["javascript", "typescript", "less", "vue"],
 
-	// 配咋 Vue 语言服务器语言支持
+	// 配置 Vue 语言服务器语言支持
 	"vue.server.includeLanguages": ["vue", "markdown"],
+
+	// TypeScript
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"typescript.enablePromptUseWorkspaceTsdk": true,
 
 	// 配置文件关联
 	"files.associations": {

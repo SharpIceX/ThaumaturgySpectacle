@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-
-Sitemap: https://ts.sharpice.top/sitemap-index.xml

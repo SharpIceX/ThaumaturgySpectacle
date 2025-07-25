@@ -10,12 +10,8 @@
 # 幻术奇象——缓存&临时文件
 /.hsqx
 
-# 项目内文件
-/project/website/.astro
-
 # Visual Studio 文件
 .vs/
 
 # C#
-/dotnet-packages/*/bin
-/dotnet-packages/*/obj
+/dotnet-packages/*/dist
