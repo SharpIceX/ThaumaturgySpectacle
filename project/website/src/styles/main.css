@@ -1,13 +1,12 @@
-@import url('$/@unocss/reset/tailwind.css'); // 样式重置
+@import url('$/@unocss/reset/tailwind.css'); /* 样式重置 */
 
 @import './fonts.less';
 @import './overlayscrollbars.less';
 
-@import url('$/@fontsource/noto-color-emoji'); // 彩色 Emoji 字体
+@import url('$/@fontsource/noto-color-emoji'); /* 彩色 Emoji 字体 */
 @import url('$/overlayscrollbars/styles/overlayscrollbars.css');
 
-body,
-#ts_app {
+body {
 	@apply grid;
 	@apply 'h-screen w-screen';
 	@apply 'bg-nord0 text-nord4';

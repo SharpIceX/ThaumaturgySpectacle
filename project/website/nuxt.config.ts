@@ -24,8 +24,8 @@ export default defineNuxtConfig({
 	appId: 'thaumaturgy-spectacle',
 	compatibilityDate: '2025-07-23',
 	srcDir: path.resolve(import.meta.dirname, './src'),
-	modules: ['nuxt-svgo', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo'],
-	css: ['@/styles/main.less'],
+	modules: ['nuxt-svgo', '@nuxt/content', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo'],
+	css: ['@/styles/main.css'],
 	alias: {
 		'@': path.resolve(import.meta.dirname, './src'),
 		$: path.resolve(import.meta.dirname, './node_modules'),
@@ -78,6 +78,11 @@ export default defineNuxtConfig({
 		defaultImport: 'component',
 		svgoConfig: {
 			multipass: true,
+		},
+	},
+	content: {
+		build: {
+			transformers: ['./transformers/lum.ts'],
 		},
 	},
 });

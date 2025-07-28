@@ -1,12 +1,11 @@
 <template>
-	<div class="flex flex-col h-full">
+	<AppBackground />
+	<div class="h-screen w-screen flex flex-col h-full">
 		<AppHeader />
 		<main class="flex-1">
 			<NuxtPage />
 		</main>
 		<AppFooter />
-
-		<AppNoScript />
 	</div>
 </template>
 
@@ -14,7 +13,7 @@
 import './main.ts';
 import AppHeader from './app/header.vue';
 import AppFooter from './app/footer.vue';
-import AppNoScript from './app/noscript.vue';
+import AppBackground from './app/background.vue';
 
 defineOptions({ name: 'App' });
 </script>

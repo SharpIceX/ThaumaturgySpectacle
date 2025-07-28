@@ -9,7 +9,7 @@
 	"unocss.autocomplete.matchType": "fuzzy",
 
 	// 自定义 CSS 数据文件
-	"css.customData": [".vscode/customData/css/unocss.json", ".vscode/customData/css/tailwindcss.json"],
+	"css.customData": [".vscode/customData/css/unocss.json"],
 
 	// 配置 ESLint 验证的文件类型
 	"eslint.validate": ["javascript", "typescript", "vue"],
@@ -47,11 +47,5 @@
 	// C# 配置，使用 CSharpier 作为默认格式化工具
 	"[csharp]": {
 		"editor.defaultFormatter": "csharpier.csharpier-vscode"
-	},
-
-	// SonarLint
-	"sonarlint.connectedMode.project": {
-		"connectionId": "furryrbl",
-		"projectKey": "FurryRbl_ThaumaturgySpectacle"
 	}
 }

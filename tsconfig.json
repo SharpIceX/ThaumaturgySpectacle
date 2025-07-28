@@ -39,6 +39,6 @@
 	"vueCompilerOptions": {
 		"vitePressExtensions": [".lum", ".md"]
 	},
-	"include": ["**/*.ts", "**/*.js", "**/*.vue", "**/*.lum", "**/*.md"],
+	"include": ["**/*.ts", "**/*.js", "**/**.mjs", "**/*.vue", "**/*.lum", "**/*.md"],
 	"exclude": ["**/node_modules", "build", ".hsqx"]
 }

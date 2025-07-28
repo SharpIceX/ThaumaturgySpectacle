@@ -12,6 +12,16 @@
 					"url": "https://unocss.dev/transformers/directives"
 				}
 			]
+		},
+		{
+			"name": "@screen",
+			"description": "使用 @screen 指令可以为特定屏幕尺寸定义样式，适用于响应式设计。",
+			"references": [
+				{
+					"name": "UnoCSS Transformer Directives 文档",
+					"url": "https://unocss.dev/transformers/directives"
+				}
+			]
 		}
 	]
 }
