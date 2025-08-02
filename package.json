@@ -16,15 +16,8 @@
 		"url": "https://SharpIce.top",
 		"email": "SharpIce@SharpIce.top"
 	},
-	"funding": [
-		{
-			"type": "ko-fi",
-			"url": "https://ko-fi.com/SharpIce"
-		},
-		"https://ifdian.net/@SharpIce"
-	],
 	"engines": {
-		"node": ">=22"
+		"node": ">=22.17"
 	},
 	"devEngines": {
 		"runtime": {
@@ -37,10 +30,8 @@
 		}
 	},
 	"scripts": {
-		"lint:js": "eslint .",
-		"clean": "rimraf build .hsqx",
-		"format": "prettier . --write",
-		"format:cs": "dotnet tool run csharpier format ./dotnet-packages"
+		"lint": "eslint .",
+		"format": "prettier . --write"
 	},
 	"devDependencies": {
 		"@ts-config/eslint-conifg": "link:packages\\@ts-config\\eslint-config",
@@ -48,8 +39,7 @@
 		"eslint": "^9.32.0",
 		"jiti": "^2.5.1",
 		"prettier": "^3.6.2",
-		"rimraf": "^6.0.1",
 		"type-fest": "^4.41.0",
-		"typescript": "^5.8.3"
+		"typescript": "^5.9.2"
 	}
 }

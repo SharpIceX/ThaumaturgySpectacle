@@ -6,9 +6,3 @@
 
 # Node模块
 node_modules
-
-# 构建输出
-/build
-
-# 幻术奇象——缓存&临时文件
-/.hsqx

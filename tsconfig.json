@@ -6,7 +6,6 @@
 		"allowJs": true,
 		"target": "ES2022",
 		"module": "ESNext",
-		"outDir": "./build",
 		"sourceMap": true, // 生成 sourcemap
 		"declaration": true, // 生成 .d.ts 声明文件
 		"declarationMap": true, // 声明文件的 sourcemap
@@ -36,6 +35,6 @@
 		"forceConsistentCasingInFileNames": true, // 强制文件名大小写一致
 		"noPropertyAccessFromIndexSignature": true // 强制索引签名使用方括号语法
 	},
-	"include": ["**/*.ts", "**/*.js", "**/**.mjs", "**/*.vue"],
-	"exclude": ["**/node_modules", "build", ".hsqx"]
+	"include": ["**/*.ts", "**/*.js", "**/*.vue"],
+	"exclude": ["**/node_modules"]
 }

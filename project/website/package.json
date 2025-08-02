@@ -16,7 +16,7 @@
 		"@fontsource/noto-color-emoji": "^5.2.8",
 		"@lxgw/LxgwBright": "github:lxgw/LxgwBright#v5.526",
 		"@material-design-icons/svg": "^0.14.15",
-		"@unocss/reset": "^66.3.3",
+		"@unocss/reset": "^66.4.0",
 		"nord": "^0.2.1",
 		"nuxt": "^4.0.2",
 		"overlayscrollbars": "^2.11.4",
@@ -29,7 +29,7 @@
 		"@nuxtjs/seo": "^3.1.0",
 		"@ts-packages/unocss-preset-nord": "link:..\\..\\packages\\unocss-preset-nord",
 		"@ts/lumiray": "link:..\\lumiray",
-		"@unocss/nuxt": "^66.3.3",
+		"@unocss/nuxt": "^66.4.0",
 		"better-sqlite3": "^12.2.0",
 		"entities": "^2.2.0",
 		"isomorphic-git": "^1.32.2",
@@ -39,6 +39,6 @@
 		"postcss": "^8.5.6",
 		"postcss-preset-env": "^10.2.4",
 		"rimraf": "^6.0.1",
-		"unocss": "^66.3.3"
+		"unocss": "^66.4.0"
 	}
 }

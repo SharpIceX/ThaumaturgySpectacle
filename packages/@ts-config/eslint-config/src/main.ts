@@ -60,6 +60,6 @@ export default tseslint.config(
 		extends: [tseslint.configs.disableTypeChecked],
 	},
 	{
-		ignores: ['**/*.d.ts', '**/node_modules/**', '**/dotnet-packages/**', 'build/**', '.hsqx/**'],
+		ignores: ['**/*.d.ts', '**/node_modules/**'],
 	},
 );

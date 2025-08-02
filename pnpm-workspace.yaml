@@ -1,6 +1,5 @@
 packages:
     - project/**
-    - dotnet-packages/**
     - packages/@ts-config/**
 
 onlyBuiltDependencies:

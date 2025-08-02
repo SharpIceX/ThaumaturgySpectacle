@@ -3,12 +3,3 @@
 
 # pnpm
 /pnpm-lock.yaml
-
-# 构建输出
-/build
-
-# 幻术奇象——缓存&临时文件
-/.hsqx
-
-# dotnet 项目
-/dotnet-packages
