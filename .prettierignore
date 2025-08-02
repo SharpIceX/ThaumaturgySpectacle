@@ -10,11 +10,5 @@
 # 幻术奇象——缓存&临时文件
 /.hsqx
 
-# Visual Studio 文件
-.vs/
-
-# C#
-/dotnet-packages/*/dist
-
-# Website
-/project/website/.nuxt
+# dotnet 项目
+/dotnet-packages

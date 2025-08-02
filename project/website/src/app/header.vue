@@ -1,7 +1,7 @@
 <template>
 	<!-- 一包烟一杯茶，一个响应式导航栏搓一天 -->
 	<header class="border-b border-b-nord4 border-op-30 mb-2 bg-nord0 bg-op-80">
-		<nav class="py-4 px-2 flex flex-row justify-between">
+		<nav class="p-4 flex flex-row justify-between">
 			<div class="navbar">
 				<div tabindex="0" role="button" class="navbar-toggle">
 					<MenuIcon />

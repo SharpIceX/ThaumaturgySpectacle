@@ -25,7 +25,7 @@ export default defineNuxtConfig({
 	compatibilityDate: '2025-07-23',
 	srcDir: path.resolve(import.meta.dirname, './src'),
 	modules: ['nuxt-svgo', '@nuxt/content', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo'],
-	css: ['@/styles/main.css'],
+	css: ['@/styles/main.less'],
 	alias: {
 		'@': path.resolve(import.meta.dirname, './src'),
 		$: path.resolve(import.meta.dirname, './node_modules'),
@@ -54,6 +54,8 @@ export default defineNuxtConfig({
 	},
 	vite: {
 		resolve: {
+			// 让 Vite 解析时保留符号链接。
+			// 这个其实是因为在 package.json 使用了 Git 或 URL 依赖所导致的问题。
 			preserveSymlinks: true,
 		},
 	},
@@ -78,11 +80,6 @@ export default defineNuxtConfig({
 		defaultImport: 'component',
 		svgoConfig: {
 			multipass: true,
-		},
-	},
-	content: {
-		build: {
-			transformers: ['./transformers/lum.ts'],
 		},
 	},
 });

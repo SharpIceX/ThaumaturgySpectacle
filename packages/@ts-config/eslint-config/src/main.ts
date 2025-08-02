@@ -5,7 +5,6 @@ import jsdoc from 'eslint-plugin-jsdoc';
 import tseslint from 'typescript-eslint';
 import pluginVue from 'eslint-plugin-vue';
 import vueParser from 'vue-eslint-parser';
-import unocss from '@unocss/eslint-config/flat';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default tseslint.config(
@@ -14,13 +13,11 @@ export default tseslint.config(
 	tseslint.configs.stylistic,
 	jsdoc.configs['flat/recommended'],
 	...pluginVue.configs['flat/recommended'],
-	unocss,
 	...(await (await import('@ts/website/.nuxt/eslint.config.mjs')).default()), //  这个是 Nuxt 4 的 ESLint 配置，嗯？
 	eslintConfigPrettier,
 	{
 		rules: {
 			eqeqeq: ['error', 'always'],
-			'unocss/order': 'off', // unocss 还没有插件支持格式化时排序
 		},
 	},
 	{

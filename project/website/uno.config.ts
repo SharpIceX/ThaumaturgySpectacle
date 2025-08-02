@@ -1,5 +1,4 @@
 import presetNord from '@ts-packages/unocss-preset-nord';
-import arcanova_design from 'arcanova_design/src/unocss';
 import { defineConfig, presetWind3, transformerDirectives, transformerVariantGroup } from 'unocss';
 
 export default defineConfig({
@@ -8,6 +7,6 @@ export default defineConfig({
 			theme: '#679DE3',
 		},
 	},
-	presets: [presetWind3(), presetNord(), arcanova_design()],
+	presets: [presetWind3(), presetNord()],
 	transformers: [transformerDirectives(), transformerVariantGroup()],
 });

@@ -5,47 +5,34 @@
 	// 使用 Prettier 作为默认格式化工具
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 
-	// 配置 Unocss 自动补全的匹配类型为模糊匹配模式。
+	// Unocss 自动补全的匹配类型为模糊匹配模式。
 	"unocss.autocomplete.matchType": "fuzzy",
-
-	// 自定义 CSS 数据文件
-	"css.customData": [".vscode/customData/css/unocss.json"],
-
-	// 配置 ESLint 验证的文件类型
-	"eslint.validate": ["javascript", "typescript", "vue"],
-
-	// 配置 UnoCSS 支持的语言类型
-	"unocss.languageIds": ["javascript", "typescript", "less", "vue"],
-
-	// 配置 Vue 语言服务器语言支持
-	"vue.server.includeLanguages": ["vue", "markdown"],
 
 	// TypeScript
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"typescript.enablePromptUseWorkspaceTsdk": true,
 
-	// 配置文件关联
+	// CSS 数据文件
+	"css.customData": [".vscode/customData/css/unocss.json"],
+
+	// ESLint 验证的文件类型
+	"eslint.validate": ["javascript", "typescript", "vue"],
+
+	// UnoCSS 支持的语言类型
+	"unocss.languageIds": ["javascript", "typescript", "less"],
+
+	// 文件关联
 	"files.associations": {
-		"*.lum": "markdown",
 		".csharpierignore": "ignore"
 	},
 
-	// Markdown 配置
+	// Markdown 语言设置
 	"[markdown]": {
-		"editor.quickSuggestions": {
-			"other": true,
-			"comments": false,
-			"strings": false
-		}
+		"editor.formatOnSave": false
 	},
 
-	// XML 配置，使用 CSharpier 作为默认格式化工具
+	// XML 语言设置
 	"[xml]": {
-		"editor.defaultFormatter": "csharpier.csharpier-vscode"
-	},
-
-	// C# 配置，使用 CSharpier 作为默认格式化工具
-	"[csharp]": {
 		"editor.defaultFormatter": "csharpier.csharpier-vscode"
 	}
 }

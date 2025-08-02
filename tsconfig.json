@@ -36,9 +36,6 @@
 		"forceConsistentCasingInFileNames": true, // 强制文件名大小写一致
 		"noPropertyAccessFromIndexSignature": true // 强制索引签名使用方括号语法
 	},
-	"vueCompilerOptions": {
-		"vitePressExtensions": [".lum", ".md"]
-	},
-	"include": ["**/*.ts", "**/*.js", "**/**.mjs", "**/*.vue", "**/*.lum", "**/*.md"],
+	"include": ["**/*.ts", "**/*.js", "**/**.mjs", "**/*.vue"],
 	"exclude": ["**/node_modules", "build", ".hsqx"]
 }

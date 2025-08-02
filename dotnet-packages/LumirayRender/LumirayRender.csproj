@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>LumirayRender</RootNamespace>
+		<NodeApiAssemblyJSModuleType>esm</NodeApiAssemblyJSModuleType>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Remove="LICENSE" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AngleSharp" Version="1.3.0" />
+		<PackageReference Include="Markdig" Version="0.41.3" />
+	</ItemGroup>
+</Project>

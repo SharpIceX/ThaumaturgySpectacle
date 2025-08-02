@@ -23,9 +23,8 @@
 			}
 		},
 		{
-			"files": ["*.md", "*.lum"],
+			"files": ["*.md"],
 			"options": {
-				"parser": "markdown",
 				"tabWidth": 2,
 				"useTabs": false
 			}

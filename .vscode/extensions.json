@@ -13,7 +13,7 @@
 		"deque-systems.vscode-axe-linter",
 
 		// 格式化工具
-		"esbenp.prettier-vscode",
+		"esbenp.prettier-vscode", // Prettier
 		"csharpier.csharpier-vscode" // C#
 	]
 }

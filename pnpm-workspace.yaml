@@ -1,5 +1,4 @@
 packages:
-    - tools/**
     - project/**
     - dotnet-packages/**
     - packages/@ts-config/**
