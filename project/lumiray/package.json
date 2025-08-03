@@ -1,8 +1,0 @@
-{
-	"name": "@ts/lumiray",
-	"private": true,
-	"type": "module",
-	"license": "MPL-2.0",
-	"main": "./src/main.ts",
-	"description": "雪芒 『.lum』 文件解析器，这是一个为 Wiki 设计的 Markdown 扩展"
-}

@@ -14,6 +14,8 @@
 
 		// 格式化工具
 		"esbenp.prettier-vscode", // Prettier
-		"csharpier.csharpier-vscode" // C#
+
+		// Markdown
+		"davidanson.vscode-markdownlint" // Markdown Lint
 	]
 }

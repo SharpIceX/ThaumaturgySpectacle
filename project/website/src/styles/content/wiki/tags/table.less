@@ -1,0 +1,37 @@
+@import 'nord/src/lesscss/nord.less';
+
+table {
+	// 表格容器
+	display: table;
+	border-collapse: collapse;
+	margin-bottom: 1em;
+
+	// 表头
+	& > thead {
+		background-color: @nord3;
+	}
+
+	// 表格行
+	& > tbody > tr {
+		border-bottom: 1px solid @nord3;
+
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+
+	// 表格单元格
+	td,
+	th {
+		padding: 8px;
+		text-align: left;
+		border: 1px solid @nord3;
+	}
+
+	// 居中
+	// 匹配 [align=center;
+	td[align='center'],
+	th[align='center'] {
+		text-align: center;
+	}
+}

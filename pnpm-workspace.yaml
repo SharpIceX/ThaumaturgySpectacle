@@ -1,9 +1,10 @@
 packages:
-    - project/**
-    - packages/@ts-config/**
+  - project/**
+  - packages/**
+  - packages/@ts-config/**
 
 onlyBuiltDependencies:
-    - '@parcel/watcher'
-    - better-sqlite3
-    - esbuild
-    - unrs-resolver
+  - '@parcel/watcher'
+  - better-sqlite3
+  - esbuild
+  - unrs-resolver

@@ -24,15 +24,5 @@
 	// 文件关联
 	"files.associations": {
 		".csharpierignore": "ignore"
-	},
-
-	// Markdown 语言设置
-	"[markdown]": {
-		"editor.formatOnSave": false
-	},
-
-	// XML 语言设置
-	"[xml]": {
-		"editor.defaultFormatter": "csharpier.csharpier-vscode"
 	}
 }

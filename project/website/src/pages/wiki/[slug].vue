@@ -1,10 +1,7 @@
 <template>
-	<div class="w-[60%] m-a bg-nord1 h-full p-8">
-		<h1>你好</h1>
+	<div v-if="content" class="w-[60%] m-a bg-nord1 h-full p-8 rounded-lg">
+		<ContentRenderer :value="content" class="wiki-content" />
 	</div>
-	<!--
-	<ContentRenderer :value="post" />
-	-->
 </template>
 
 <script setup>
@@ -13,7 +10,27 @@ defineOptions({
 });
 
 const slug = useRoute().params['slug'];
-const { data: post } = await useAsyncData(`/${slug}`, () => {
+
+// 通用查询函数
+const query = () => {
 	return queryCollection('wiki').path(`/${slug}`).first();
+};
+
+// 获取内容
+const { data: content } = await useAsyncData(`/${slug}`, () => {
+	return query();
+});
+
+// 获取额外数据（实际获取了所有数据）
+const data = await query();
+
+useHead({
+	title: data?.title,
+	meta: [
+		{
+			name: 'description',
+			content: data?.description,
+		},
+	],
 });
 </script>

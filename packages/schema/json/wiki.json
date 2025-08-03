@@ -1,0 +1,99 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$ref": "#/definitions/Schema",
+	"definitions": {
+		"Schema": {
+			"type": "object",
+			"properties": {
+				"components": {
+					"type": "object",
+					"properties": {
+						"infobox": {
+							"anyOf": [
+								{
+									"type": "object",
+									"properties": {
+										"type": {
+											"type": "string",
+											"const": "custom"
+										},
+										"data": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"content": {
+														"type": "string"
+													},
+													"content_right": {
+														"type": "string"
+													}
+												},
+												"required": [
+													"content"
+												],
+												"additionalProperties": false
+											}
+										}
+									},
+									"required": [
+										"type",
+										"data"
+									],
+									"additionalProperties": false
+								},
+								{
+									"type": "object",
+									"properties": {
+										"type": {
+											"type": "string",
+											"const": "角色信息"
+										},
+										"data": {
+											"type": "object",
+											"properties": {
+												"名字": {
+													"type": "string"
+												},
+												"角色图片": {
+													"type": "string",
+													"description": "以 `./` 开头的路径表示相对路径，会自动使用当前文件夹内内容"
+												},
+												"种族": {
+													"type": "string"
+												},
+												"职业": {
+													"type": "string"
+												},
+												"生活地区": {
+													"type": "string"
+												},
+												"能力值": {
+													"type": "string"
+												}
+											},
+											"required": [
+												"名字"
+											],
+											"additionalProperties": false
+										}
+									},
+									"required": [
+										"type",
+										"data"
+									],
+									"additionalProperties": false
+								}
+							],
+							"description": "信息板"
+						}
+					},
+					"additionalProperties": false,
+					"description": "页面组件"
+				}
+			},
+			"additionalProperties": false,
+			"description": "幻术奇象 Wiki 数据 Schema"
+		}
+	}
+}

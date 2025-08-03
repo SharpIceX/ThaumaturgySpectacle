@@ -1,0 +1,9 @@
+// 当 p 标签里面有 img 标签时，对 p 标签应用样式
+p:has(img) {
+	width: 30%;
+	height: 30%;
+
+	& > img {
+		object-fit: cover;
+	}
+}
