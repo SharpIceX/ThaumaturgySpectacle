@@ -2,7 +2,6 @@
 	"compilerOptions": {
 		/* 基础配置 */
 		"strict": true,
-		"checkJs": true,
 		"allowJs": true,
 		"target": "ES2022",
 		"module": "ESNext",
@@ -35,6 +34,6 @@
 		"forceConsistentCasingInFileNames": true, // 强制文件名大小写一致
 		"noPropertyAccessFromIndexSignature": true // 强制索引签名使用方括号语法
 	},
-	"include": ["**/*.ts", "**/*.js", "**/*.vue"],
-	"exclude": ["**/node_modules"]
+	"include": ["**/*.ts", "**/*.vue"],
+	"exclude": ["**/node_modules", "**/dist"]
 }

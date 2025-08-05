@@ -16,6 +16,7 @@
 
 - Node.js 22.17+
 - pnpm 10.13+
+- .NET Core 8.0 SDK
 
 ```bash
 # 拉取仓库

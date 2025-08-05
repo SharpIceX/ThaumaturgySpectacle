@@ -17,6 +17,7 @@ export interface Schema {
 					type: '角色信息';
 					data: {
 						名字: string;
+						别名?: string;
 
 						/**
 						 * 以 `./` 开头的路径表示相对路径，会自动使用当前文件夹内内容

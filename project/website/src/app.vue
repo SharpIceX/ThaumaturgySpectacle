@@ -2,7 +2,9 @@
 	<div class="h-screen w-screen flex flex-col h-full">
 		<AppHeader />
 		<main class="flex-1">
-			<NuxtPage />
+			<NuxtLayout>
+				<NuxtPage />
+			</NuxtLayout>
 		</main>
 		<AppFooter />
 	</div>

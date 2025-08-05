@@ -24,8 +24,9 @@ export default defineNuxtConfig({
 	appId: 'thaumaturgy-spectacle',
 	compatibilityDate: '2025-07-23',
 	srcDir: path.resolve(import.meta.dirname, './src'),
-	modules: ['nuxt-svgo', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo', '@nuxt/content'],
+	modules: ['nuxt-svgo', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo'],
 	css: ['@/styles/main.less'],
+	extends: [path.resolve(import.meta.dirname, '../content_processor/dist')],
 	alias: {
 		'@': path.resolve(import.meta.dirname, './src'),
 		$: path.resolve(import.meta.dirname, './node_modules'),
@@ -38,6 +39,9 @@ export default defineNuxtConfig({
 	nitro: {
 		static: true,
 		preset: 'static',
+		prerender: {
+			crawlLinks: true,
+		},
 		publicAssets: [
 			{
 				baseURL: '/',
@@ -45,7 +49,7 @@ export default defineNuxtConfig({
 			},
 			{
 				baseURL: '/',
-				dir: path.resolve(import.meta.dirname, '../content/content'),
+				dir: path.resolve(import.meta.dirname, '../content_processor/dist/pages'),
 			},
 		],
 	},
@@ -57,12 +61,6 @@ export default defineNuxtConfig({
 			// 让 Vite 解析时保留符号链接。
 			// 这个其实是因为在 package.json 使用了 Git 或 URL 依赖所导致的问题。
 			preserveSymlinks: true,
-
-			alias: {
-				// 若是 JS/TS 项目，直接 require.resolve 最新实际路径
-				'entities/decode': require.resolve('entities/lib/decode.js'),
-				'entities/escape': require.resolve('entities/lib/escape.js'),
-			},
 		},
 	},
 	unocss: {
@@ -86,21 +84,6 @@ export default defineNuxtConfig({
 		defaultImport: 'component',
 		svgoConfig: {
 			multipass: true,
-		},
-	},
-	content: {
-		build: {
-			transformers: ['./transformers/markdown.ts'],
-			markdown: {
-				toc: {
-					depth: 5,
-					searchDepth: 5,
-				},
-			},
-		},
-		renderer: {
-			anchorLinks: true,
-			// TODO: 锚点需进行 URI 编码
 		},
 	},
 });

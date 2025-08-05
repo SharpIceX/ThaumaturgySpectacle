@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<DebugType>embedded</DebugType>
+		<TargetFramework>net8.0</TargetFramework>
+		<RootNamespace>MarkdownRender</RootNamespace>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<NodeApiAssemblyJSModuleType>commonjs</NodeApiAssemblyJSModuleType>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Remove="LICENSE" />
+		<None Remove="node_modules\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Markdig" Version="0.41.3" />
+		<PackageReference Include="Microsoft.JavaScript.NodeApi.Generator" Version="0.9.15" />
+	</ItemGroup>
+</Project>

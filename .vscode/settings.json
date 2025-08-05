@@ -19,10 +19,20 @@
 	"eslint.validate": ["javascript", "typescript", "vue"],
 
 	// UnoCSS 支持的语言类型
-	"unocss.languageIds": ["javascript", "typescript", "less"],
+	"unocss.languageIds": ["javascript", "typescript", "less", "vue"],
 
-	// 文件关联
 	"files.associations": {
 		".csharpierignore": "ignore"
+	},
+
+	"json.schemas": [
+		{
+			"fileMatch": ["/project/content/content/wiki/**/*.json"],
+			"url": "./packages/schema/json/wiki.json"
+		}
+	],
+
+	"[xml]": {
+		"editor.defaultFormatter": "csharpier.csharpier-vscode"
 	}
 }

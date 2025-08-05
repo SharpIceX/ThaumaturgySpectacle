@@ -1,0 +1,7 @@
+{
+	"compilerOptions": {
+		"types": ["hexo"]
+	},
+	"include": ["**/*.cjs"],
+	"exclude": ["node_modules", "dist"]
+}

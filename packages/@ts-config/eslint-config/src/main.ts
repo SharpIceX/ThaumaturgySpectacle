@@ -11,9 +11,9 @@ export default tseslint.config(
 	eslint.configs.recommended,
 	tseslint.configs.strict,
 	tseslint.configs.stylistic,
-	jsdoc.configs['flat/recommended'],
+	jsdoc.configs['flat/recommended-typescript'],
 	...pluginVue.configs['flat/recommended'],
-	...(await (await import('@ts/website/.nuxt/eslint.config.mjs')).default()), //  这个是 Nuxt 4 的 ESLint 配置，嗯？
+	...(await (await import('../../../../project/website/.nuxt/eslint.config.mjs')).default()), //  这个是 Nuxt 4 的 ESLint 配置，嗯？
 	eslintConfigPrettier,
 	{
 		rules: {
@@ -54,12 +54,9 @@ export default tseslint.config(
 	},
 	{
 		files: ['**/*.js'],
-		plugins: {
-			jsdoc,
-		},
 		extends: [tseslint.configs.disableTypeChecked],
 	},
 	{
-		ignores: ['**/*.d.ts', '**/node_modules/**'],
+		ignores: ['**/*.d.ts', '**/*.cjs', '**/node_modules/**'],
 	},
 );

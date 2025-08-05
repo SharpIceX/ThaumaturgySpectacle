@@ -6,3 +6,6 @@
 
 # Node模块
 node_modules
+
+# 缓存
+/.hsqx
