@@ -7,9 +7,7 @@ namespace MarkdownRender
 	{
 		internal static string Parse(MarkdownDocument markdownText)
 		{
-			var yamlBlock =
-				markdownText.Descendants<YamlFrontMatterBlock>().FirstOrDefault()
-				?? throw new InvalidDataException("未找到 Markdown Front Matter");
+			var yamlBlock = markdownText.Descendants<YamlFrontMatterBlock>().FirstOrDefault();
 
 			if (yamlBlock == null)
 			{

@@ -1,7 +1,7 @@
 ---
 title: 锐冰
 
-category: 角色
+category: ['角色', '主角角色']
 ---
 
 ## 你好 世界

@@ -1,0 +1,46 @@
+'use strict';
+
+const generatorID = require('./utils/generatorID.cjs');
+const { Renderer } = require('@ts-dotnet-packages/markdown-render');
+
+/**
+ * @typedef {Object} tocContentType
+ * @property {string} id - 生成的 ID
+ * @property {string} name - 标题文本
+ * @property {1|2|3|4|5} level - 标题级别，对应 h2 到 h6
+ */
+
+/**
+ * 生成目录
+ * @param {HTMLElement} body - JSDOM 的 body 元素
+ * @returns {string} 返回生成的目录 HTML 字符串
+ */
+function generatorToc(body) {
+	/** @type {tocContentType[]} */
+	const tocContent = Array.from(body.querySelectorAll('h2, h3, h4, h5, h6')).map(heading => {
+		const id = generatorID(heading.textContent);
+		heading.id = id;
+		return {
+			id,
+			name: heading.textContent.trim(),
+			level: {
+				h2: 1,
+				h3: 2,
+				h4: 3,
+				h5: 4,
+				h6: 5,
+			}[heading.tagName.toLowerCase()],
+		};
+	});
+
+	// 构建 Markdown 格式目录
+	const tocMarkdown = tocContent
+		.map(item => '  '.repeat((item.level - 1) * 2) + `- [${item.name}](#${item.id})`)
+		.join('\n');
+
+	// 渲染 Markdown 为 HTML
+	const render = Renderer.Render(tocMarkdown);
+	return render.html;
+}
+
+module.exports = generatorToc;
