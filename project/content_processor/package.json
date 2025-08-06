@@ -17,7 +17,7 @@
 		"acorn": "^8.15.0",
 		"escodegen": "^2.1.0",
 		"jsdom": "^26.1.0",
-		"yaml": "^2.8.0"
+		"yaml": "^2.8.1"
 	},
 	"devDependencies": {
 		"@types/escodegen": "^0.0.10",
