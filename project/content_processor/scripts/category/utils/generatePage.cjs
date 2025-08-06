@@ -16,7 +16,7 @@ const generateVue = require('../../utils/generateVue.cjs');
  * @param {string} text - 显示文本
  * @returns {string}
  */
-const createListItem = (href, text) => `  <li><a href="${href}">${text}</a></li>`;
+const createListItem = (href, text) => `  <li><NuxtLink to="${href}">${text}</NuxtLink></li>`;
 
 /**
  * 生成页面内容的函数
@@ -33,7 +33,7 @@ function generatePage(listData, name) {
 </div>
 <div class="content">
 <ul>
-${listData.map(item => createListItem(item.url.replace, item.title)).join('\n')}
+${listData.map(item => createListItem(item.url, item.title)).join('\n')}
 </ul>
 </div>
 </template>

@@ -41,6 +41,7 @@ export default defineNuxtConfig({
 		preset: 'static',
 		prerender: {
 			crawlLinks: true,
+			failOnError: false, // 跳过因中文 URL 导致的问题
 		},
 		publicAssets: [
 			{
