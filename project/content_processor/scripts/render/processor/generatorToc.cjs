@@ -11,6 +11,30 @@ const { Renderer } = require('@ts-dotnet-packages/markdown-render');
  */
 
 /**
+ * 构建 Markdown 格式目录
+ * @param {tocContentType[]} tocContent
+ * @returns {string} Markdown 格式目录
+ */
+function generateTocMarkdown(tocContent) {
+	const counters = []; // 存每层计数
+
+	return tocContent
+		.map(({ id, name, level }) => {
+			// 初始化并自增当前层计数
+			counters[level - 1] = (counters[level - 1] || 0) + 1;
+
+			// 重置更深层级计数器
+			counters.length = level;
+
+			const indent = '    '.repeat(level - 1); // 每层缩进 4 个空格
+			const number = counters[level - 1]; // 当前层编号
+
+			return `${indent}${number}. [${name}](#${id})`;
+		})
+		.join('\n');
+}
+
+/**
  * 生成目录
  * @param {HTMLElement} body - JSDOM 的 body 元素
  * @returns {string} 返回生成的目录 HTML 字符串
@@ -34,9 +58,7 @@ function generatorToc(body) {
 	});
 
 	// 构建 Markdown 格式目录
-	const tocMarkdown = tocContent
-		.map(item => '  '.repeat((item.level - 1) * 2) + `- [${item.name}](#${item.id})`)
-		.join('\n');
+	const tocMarkdown = generateTocMarkdown(tocContent);
 
 	// 渲染 Markdown 为 HTML
 	const render = Renderer.Render(tocMarkdown);

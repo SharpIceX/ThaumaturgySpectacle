@@ -40,7 +40,13 @@ hexo.extend.renderer.register(
 		// Template 部分
 		const template = `
 <template v-slot:content>
+<div class="title">
+<h1>${markdownFrontMatter.title}</h1>
+${markdownFrontMatter.description ? `<p class="description">${markdownFrontMatter.description}</p>` : ''}
+</div>
+<div class="content">
 ${body.innerHTML}
+</div>
 </template>
 <template v-slot:toc>
 ${tocHTML}

@@ -1,0 +1,34 @@
+.toc-content {
+	@apply "max-h-[25rem] overflow-y-auto";
+
+	ol {
+		li {
+			counter-increment: item; // 计数器递增
+			padding-left: 1em; // 缩进
+
+			&::before {
+				opacity: 0.4;
+				margin-right: 0.5em; // 右边距
+				content: counters(item, '.'); // 使用计数器
+			}
+
+			li ol {
+				counter-reset: item; // 重置计数器
+			}
+
+			// 选中直接包含 <a> 的 <li>，但排除直接包含 <ol> 的 <li>
+			li {
+				&:has(> a) {
+					// 只要 li 有直接子 a，就应用下面的样式
+					&:not(:has(> ol)) {
+						// 排除直接子元素包含 ol 的 li
+						&:hover {
+							// 鼠标悬停时生效
+							background-color: red; // 给 li 添加红色背景
+						}
+					}
+				}
+			}
+		}
+	}
+}

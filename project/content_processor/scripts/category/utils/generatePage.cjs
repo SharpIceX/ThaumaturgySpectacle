@@ -27,10 +27,16 @@ const createListItem = (href, text) => `  <li><a href="${href}">${text}</a></li>
 function generatePage(listData, name) {
 	// Template 部分
 	const template = `
+<template v-slot:content>
+<div class="title">
 <h1>${name}</h1>
+</div>
+<div class="content">
 <ul>
-${listData.map(item => createListItem(item.url, item.title)).join('\n')}
+${listData.map(item => createListItem(item.url.replace, item.title)).join('\n')}
 </ul>
+</div>
+</template>
 `;
 
 	// Script 部分
@@ -46,7 +52,7 @@ ${listData.map(item => createListItem(item.url, item.title)).join('\n')}
 
 	return generateVue(template, escodegen.generate(scriptAST), {
 		setup: true,
-		NuxtLayout: 'category-content',
+		NuxtLayout: 'wiki-content',
 	});
 }
 
