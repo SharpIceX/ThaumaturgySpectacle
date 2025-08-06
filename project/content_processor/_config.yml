@@ -1,6 +1,6 @@
 root: /wiki/
 
-source_dir: ../content
+source_dir: ../content/content
 public_dir: dist/pages
 
 exclude:

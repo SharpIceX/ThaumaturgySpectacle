@@ -5,111 +5,93 @@ const generatePage = require('./utils/generatePage.cjs');
 
 /**
  * @typedef PagesDataType
- * @property {string} path - 文件路径
- * @property {string} title - 页面标题
- * @property {string | string[]} category - 分类名称
+ * @property {string} path
+ * @property {string} title
+ * @property {string | string[]} category
  */
 
 /**
  * @typedef ResultType
- * @property {string} path - 生成的页面路径
- * @property {string} data - 页面内容
+ * @property {string} path
+ * @property {string} data
  */
+
+/**
+ * 提取页面所属分类为数组
+ * @param {PagesDataType} page
+ * @returns {string[]}
+ */
+function extractCategories(page) {
+	if (typeof page.category === 'string') return [page.category];
+	if (Array.isArray(page.category)) return page.category;
+	return [];
+}
+
+/**
+ * 构建页面列表数据项
+ * @param {PagesDataType} page
+ * @returns {import('./utils/generatePage.cjs').ListDataType}
+ */
+function toListItem(page) {
+	return {
+		url: path.join(page.path, '../'),
+		title: page.title,
+	};
+}
 
 hexo.extend.generator.register(function (locals) {
 	/** @type {PagesDataType[]} */
 	const pages = locals.pages.data;
+
+	/** 分类名称集合 */
+	const allCategories = new Set();
+
+	/** 无分类页面 */
+	const uncategorizedPages = [];
+
+	// 分类统计
+	pages.forEach(page => {
+		const categories = extractCategories(page);
+		if (categories.length === 0) {
+			uncategorizedPages.push(page);
+		} else {
+			categories.forEach(c => allCategories.add(c));
+		}
+	});
+
 	/** @type {ResultType[]} */
 	const result = [];
 
-	/** @type {Set<string>} */
-	const allCategories = new Set();
+	// 分类索引页
+	const categoryIndexList = Array.from(allCategories).map(category => ({
+		url: `/分类/${category}`,
+		title: category,
+	}));
 
-	/** @type {PagesDataType[]} */
-	const uncategorizedPages = [];
+	if (uncategorizedPages.length > 0) {
+		categoryIndexList.push({ url: '/分类/无分类', title: '无分类' });
+	}
 
-	// 分类整理
-	pages.forEach(page => {
-		const { category } = page;
-
-		if (typeof category === 'string') {
-			// 字符串
-			allCategories.add(category);
-		} else if (Array.isArray(category)) {
-			// 数组
-			category.forEach(c => allCategories.add(c));
-		} else {
-			// 其他情况放入无分类列表
-			uncategorizedPages.push(page);
-		}
+	result.push({
+		path: '分类/index.vue',
+		data: generatePage(categoryIndexList, '分类索引'),
 	});
 
-	// 生成分类索引页
-	{
-		const data = Array.from(allCategories).map(category => ({
-			url: `/分类/${category}`,
-			title: category,
-		}));
-
-		if (uncategorizedPages.length > 0) {
-			data.push({
-				url: '/分类/无分类',
-				title: '无分类',
-			});
-		}
+	// 各分类页面
+	for (const category of allCategories) {
+		const matchedPages = pages.filter(page => extractCategories(page).includes(category));
 
 		result.push({
-			path: '分类/index.vue',
-			data: generatePage(data, '分类索引'),
+			path: `分类/${category}/index.vue`,
+			data: generatePage(matchedPages.map(toListItem), `分类:${category}`),
 		});
 	}
 
-	// 生成各个分类页面
-	allCategories.forEach(category => {
-		/**
-		 * @type {import("./utils/generatePage.cjs").ListDataType}
-		 */
-		const ListItem = [];
-
-		// 遍历所有页面，筛选出属于当前分类的页面
-		pages.forEach(page => {
-			if (page.category) {
-				if (typeof page.category === 'string' && page.category === category) {
-					// 字符串
-					const filename = path.basename(page.path, path.extname(page.path));
-					ListItem.push({
-						url: path.join(page.path, '../'),
-						title: page.title,
-					});
-				} else if (Array.isArray(page.category) && page.category.includes(category)) {
-					// 数组
-					const filename = path.basename(page.path, path.extname(page.path));
-					ListItem.push({
-						url: path.join(page.path, '../'),
-						title: page.title,
-					});
-				}
-			}
-		});
-
-		// 生成分类页面
-		result.push({
-			path: `分类/${category}/index.vue`,
-			data: generatePage(ListItem, `分类:${category}`),
-		});
-	});
-
-	// 生成无分类页面
+	// 无分类页面
 	if (uncategorizedPages.length > 0) {
 		result.push({
 			path: '分类/无分类/index.vue',
-			data: generatePage(
-				Array.from(uncategorizedPages).map(page => ({
-					url: path.join(page.path, '../'),
-					title: page.title,
-				})),
-				'分类:无分类',
-			),
+			data: generatePage(uncategorizedPages.map(toListItem), '分类:无分类'),
 		});
 	}
 

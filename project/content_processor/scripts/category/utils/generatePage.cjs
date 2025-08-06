@@ -2,6 +2,7 @@
 
 const acorn = require('acorn');
 const escodegen = require('escodegen');
+const generateVue = require('../../utils/generateVue.cjs');
 
 /**
  * @typedef {object} ListDataType
@@ -24,36 +25,29 @@ const createListItem = (href, text) => `  <li><a href="${href}">${text}</a></li>
  * @returns {import("../main.cjs").ResultType} - 生成的页面内容
  */
 function generatePage(listData, name) {
-	const data = [];
-
 	// Template 部分
-	data.push('<template>');
-	data.push("<NuxtLayout name='category-content'>");
-	data.push(`<h1>${name}</h1>`);
-	data.push('<ul>');
-	listData.forEach(item => {
-		data.push(createListItem(item.url, item.title));
-	});
-	data.push('</ul>');
-	data.push('</NuxtLayout>');
-	data.push('</template>');
+	const template = `
+<h1>${name}</h1>
+<ul>
+${listData.map(item => createListItem(item.url, item.title)).join('\n')}
+</ul>
+`;
 
 	// Script 部分
+
+	// definePageMeta 函数内数据
 	const PageMeta = {
 		title: name,
 	};
-
-	// 生成 script
 	const scriptAST = acorn.parse(`definePageMeta(${JSON.stringify(PageMeta)})`, {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 	});
 
-	data.push('<script setup>');
-	data.push(escodegen.generate(scriptAST));
-	data.push('</script>');
-
-	return data.join('\n');
+	return generateVue(template, escodegen.generate(scriptAST), {
+		setup: true,
+		NuxtLayout: 'category-content',
+	});
 }
 
 module.exports = generatePage;
