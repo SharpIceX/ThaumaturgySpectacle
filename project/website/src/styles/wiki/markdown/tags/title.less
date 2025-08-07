@@ -1,3 +1,4 @@
+@import 'nord/src/lesscss/nord.less';
 h2 {
 	@apply "text-2xl font-bold mt-6 mb-2";
 }
@@ -12,4 +13,24 @@ h5 {
 }
 h6 {
 	@apply "text-sm font-light mt-2 mb-1";
+}
+
+// 提示性装饰
+h2,
+h3,
+h4,
+h5,
+h6 {
+	position: relative;
+
+	&::after {
+		top: 10%;
+		height: 80%;
+		content: '';
+		left: -0.8rem;
+		width: 0.25rem;
+		position: absolute;
+		background-color: @nord8;
+		border-radius: 0.2rem;
+	}
 }
