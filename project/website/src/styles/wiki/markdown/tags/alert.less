@@ -1,13 +1,47 @@
-// 通用
-.markdown-alert {
-	display: flex;
-	text-align: center;
+@import 'nord/src/lesscss/nord.less';
 
-	@apply "rounded-xl";
-	@apply "px-4 py-2";
+.markdown-alert {
+	gap: 0.5rem;
+	display: flex;
+	min-height: 3em;
+	align-items: center;
+	text-align: center;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+
+	@apply "rounded-xl px-4 py-2 font-semibold";
+
+	// 重置来自 text.less 的 p 样式
+	p {
+		margin: 0;
+	}
 }
 
 // 笔记
 .markdown-alert-note {
-	@apply "bg-nord10";
+	background-color: fade(@nord3, 90%);
+	color: @nord0;
+}
+
+// 提示
+.markdown-alert-tip {
+	background-color: fade(@nord4, 90%);
+	color: @nord0;
+}
+
+// 警告
+.markdown-alert-warning {
+	background-color: fade(@nord12, 80%);
+	color: @nord0;
+}
+
+// 危险
+.markdown-alert-danger {
+	background-color: fade(@nord11, 85%);
+	color: @nord0;
+}
+
+// 重要
+.markdown-alert-important {
+	background-color: fade(@nord15, 85%);
+	color: @nord0;
 }

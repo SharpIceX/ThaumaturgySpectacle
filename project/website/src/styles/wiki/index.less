@@ -1,12 +1,13 @@
 .wiki-content {
+	// 内容
 	@import url('./markdown/index.less');
 
 	// 标题
 	.title {
-		@apply "border-b-1 border-b-nord4 border-b-op-20 pb-8 mb-2";
+		@apply "border-b-1 border-b-nord4 border-b-op-20 pb-2 mb-2";
 
 		h1 {
-			@apply "text-2xl font-bold mb-1";
+			@apply "text-3xl font-bold mb-1";
 		}
 
 		.description {
@@ -15,4 +16,5 @@
 	}
 }
 
+// 目录
 @import url('./toc/index.less');

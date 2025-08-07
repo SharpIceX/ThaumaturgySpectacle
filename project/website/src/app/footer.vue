@@ -1,5 +1,5 @@
 <template>
-	<footer role="contentinfo" class="py-3 text-center border-t border-t-nord4 border-t-op-30">
+	<footer role="contentinfo" class="mt-4 py-3 text-center border-t border-t-nord4 border-t-op-30">
 		<p>
 			Copyright © 2023-2025
 			<a

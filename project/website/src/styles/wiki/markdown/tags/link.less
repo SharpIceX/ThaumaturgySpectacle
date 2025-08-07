@@ -1,9 +1,12 @@
-p:has(a) {
-	// 正常状态
-	@apply "text-nord8 transition-colors duration-200";
+@import 'nord/src/lesscss/nord.less';
 
-	// 鼠标悬停状态
+p a {
+	color: @nord8;
+	text-decoration: none;
+	transition: color 0.2s ease;
+
 	&:hover {
-		@apply "text-nord10 underline";
+		color: @nord10;
+		text-decoration: underline;
 	}
 }

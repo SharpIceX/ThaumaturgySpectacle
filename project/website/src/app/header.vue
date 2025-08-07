@@ -1,6 +1,6 @@
 <template>
 	<!-- 一包烟一杯茶，一个响应式导航栏搓一天 -->
-	<header class="border-b border-b-nord4 border-op-30 mb-2 bg-nord0 bg-op-80">
+	<header class="border-b border-b-nord4 border-op-30 mb-4 bg-nord0 bg-op-80">
 		<nav class="p-4 flex flex-row justify-between">
 			<div class="navbar">
 				<div tabindex="0" role="button" class="navbar-toggle">
@@ -89,7 +89,7 @@ const menuItems = [
 	}
 
 	.navbar-content {
-		@apply rounded-arc;
+		@apply "rounded-lg";
 		@apply "py-2 px-4 gap-3";
 		@apply "bg-nord3 bg-op-70";
 

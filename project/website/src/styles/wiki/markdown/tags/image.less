@@ -1,9 +1,18 @@
-// 当 p 标签里面有 img 标签时，对 p 标签应用样式
 p:has(img) {
-	width: 30%;
-	height: 30%;
+	display: flex;
+	justify-content: center;
+	margin: 1.5rem 0;
+}
 
-	& > img {
-		object-fit: cover;
-	}
+p:has(img) > img {
+	width: auto;
+	height: auto;
+	max-width: 25rem;
+	max-height: 25rem;
+	object-fit: contain; // 防止裁切内容
+	border-radius: 0.5rem;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+
+	// 小屏幕
+	@apply max-md:max-w-[20rem] max-md:max-h-[20rem];
 }
