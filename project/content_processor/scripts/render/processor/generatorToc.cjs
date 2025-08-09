@@ -4,7 +4,7 @@ const generatorID = require('./utils/generatorID.cjs');
 const { Renderer } = require('@ts-dotnet-packages/markdown-render');
 
 /**
- * @typedef {Object} tocContentType
+ * @typedef {object} tocContentType
  * @property {string} id - 生成的 ID
  * @property {string} name - 标题文本
  * @property {1|2|3|4|5} level - 标题级别，对应 h2 到 h6
@@ -12,7 +12,7 @@ const { Renderer } = require('@ts-dotnet-packages/markdown-render');
 
 /**
  * 构建 Markdown 格式目录
- * @param {tocContentType[]} tocContent
+ * @param {tocContentType[]} tocContent - 目录内容数组
  * @returns {string} Markdown 格式目录
  */
 function generateTocMarkdown(tocContent) {
@@ -37,7 +37,7 @@ function generateTocMarkdown(tocContent) {
 /**
  * 生成目录
  * @param {HTMLElement} body - JSDOM 的 body 元素
- * @returns {string} 返回生成的目录 HTML 字符串
+ * @returns {string | false} 返回生成的目录 HTML 字符串
  */
 function generatorToc(body) {
 	/** @type {tocContentType[]} */
@@ -59,6 +59,9 @@ function generatorToc(body) {
 
 	// 构建 Markdown 格式目录
 	const tocMarkdown = generateTocMarkdown(tocContent);
+
+	// 如果目录为空，返回空字符串
+	if (tocMarkdown.trim() === '') return false;
 
 	// 渲染 Markdown 为 HTML
 	const render = Renderer.Render(tocMarkdown);

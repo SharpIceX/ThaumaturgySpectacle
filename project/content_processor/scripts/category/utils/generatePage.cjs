@@ -14,7 +14,7 @@ const generateVue = require('../../utils/generateVue.cjs');
  * 构建一个列表项
  * @param {string} href - 链接地址
  * @param {string} text - 显示文本
- * @returns {string}
+ * @returns {string} - 列表项的 HTML 字符串
  */
 const createListItem = (href, text) => `  <li><NuxtLink to="${href}">${text}</NuxtLink></li>`;
 

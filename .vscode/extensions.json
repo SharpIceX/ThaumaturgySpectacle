@@ -16,6 +16,7 @@
 		"esbenp.prettier-vscode", // Prettier
 
 		// Markdown
-		"davidanson.vscode-markdownlint" // Markdown Lint
+		"davidanson.vscode-markdownlint", // Markdown Lint
+		"chrischinchilla.vale-vscode" // Vale Linter
 	]
 }

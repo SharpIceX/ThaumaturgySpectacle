@@ -5,21 +5,21 @@ const generatePage = require('./utils/generatePage.cjs');
 
 /**
  * @typedef PagesDataType
- * @property {string} path
- * @property {string} title
- * @property {string | string[]} category
+ * @property {string} path - 页面路径
+ * @property {string} title - 页面标题
+ * @property {string | string[]} category - 页面分类，可以是单个字符串或字符串数组
  */
 
 /**
  * @typedef ResultType
- * @property {string} path
- * @property {string} data
+ * @property {string} path - 生成的页面路径
+ * @property {string} data - 生成的页面数据
  */
 
 /**
  * 提取页面所属分类为数组
- * @param {PagesDataType} page
- * @returns {string[]}
+ * @param {PagesDataType} page - 页面数据
+ * @returns {string[]} - 返回分类数组
  */
 function extractCategories(page) {
 	if (typeof page.category === 'string') return [page.category];
@@ -29,8 +29,8 @@ function extractCategories(page) {
 
 /**
  * 构建页面列表数据项
- * @param {PagesDataType} page
- * @returns {import('./utils/generatePage.cjs').ListDataType}
+ * @param {PagesDataType} page - 页面数据
+ * @returns {import('./utils/generatePage.cjs').ListDataType} - 返回列表数据项
  */
 function toListItem(page) {
 	return {

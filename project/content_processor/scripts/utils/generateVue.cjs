@@ -1,14 +1,13 @@
 'use strict';
 
 /**
- * @typedef {Object} Options
+ * @typedef {object} Options
  * @property {boolean} [setup=true] - 是否启用 Vue 3 的 `<script setup>` 语法。
  * @property {string | undefined} [NuxtLayout=undefined] - Nuxt.js 布局名称，如果需要使用 Nuxt.js 布局，则提供此名称。
  */
 
 /**
  * 拼接 Vue 模板和脚本，生成完整的 Vue 单文件组件字符串。
- *
  * @param {string} template - Vue 模板内容（不包含 `<template>` 标签）。
  * @param {string | null} script - Vue 脚本内容（不包含 `<script>` 标签），可为 null。
  * @param {Options} [options] - 额外的配置选项。

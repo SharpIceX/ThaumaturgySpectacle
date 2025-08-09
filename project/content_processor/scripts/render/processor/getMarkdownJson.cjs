@@ -3,11 +3,18 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
+// NOTE: 此处添加 jsdoc 的原因是因为 Ajv 上的类型定义错误导致 IDE 无法正确识别。期望未来 Ajv 能够修复此问题把。
+/** @type {typeof import("ajv").default} */
+const Ajv = require('ajv');
+
+const ajv = new Ajv({ allErrors: true });
+const validate = ajv.compile(require('@ts-packages/schema/json/wiki.json'));
+
 /**
  * 获取 Markdown 文件同级目录下的 JSON 文件数据
  * @param {import("hexo")} hexo - Hexo 实例
  * @param {string} markdownFilePath - Markdown 文件的完整路径
- * @returns {Object} - JSON 文件数据
+ * @returns {object} - JSON 文件数据
  */
 function getMarkdownJson(hexo, markdownFilePath) {
 	const dirname = path.dirname(markdownFilePath);
@@ -28,7 +35,21 @@ function getMarkdownJson(hexo, markdownFilePath) {
 	}
 
 	try {
-		return JSON.parse(jsonContent);
+		const data = JSON.parse(jsonContent);
+
+		// 校验 JSON 数据格式
+		if (!validate(data)) {
+			const errors = (validate.errors || [])
+				.map(err => {
+					const path = err.instancePath || err.dataPath || '';
+					return `路径: ${path || '(根)'}\n错误: ${err.message}`;
+				})
+				.join('\n\n');
+			hexo.log.error(`JSON 文件 ${jsonFilePath} 格式不正确:\n${errors}`);
+			return {};
+		}
+
+		return data;
 	} catch (error) {
 		hexo.log.error(`解析 JSON 文件 ${jsonFilePath} 失败: ${error.message}`);
 		return {};

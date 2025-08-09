@@ -1,34 +1,35 @@
-/** 幻术奇象 Wiki 数据 Schema */
+// 自定义信息板
+interface InfoboxCustom {
+	type: 'custom';
+	data: {
+		/** 左列内容 */
+		content: string;
+		/** 右列内容 */
+		content_right?: string;
+	}[];
+}
+
+// 自定义信息板
+interface InfoboxCharacter {
+	type: '角色信息';
+	data: {
+		名字: string;
+		别名?: string;
+		英文名?: string;
+
+		/**
+		 * @example `./images/character.webp`
+		 */
+		角色图片?: string;
+
+		性别?: '男' | '女';
+		物种?: string;
+		生活地区?: string;
+	};
+}
+
 export interface Schema {
-	/** 页面组件 */
 	components?: {
-		/** 信息板 */
-		infobox?:
-			| {
-					type: 'custom';
-					data: {
-						/* 左列内容 */
-						content: string;
-						/* 右列内容 */
-						content_right?: string;
-					}[];
-			  }
-			| {
-					type: '角色信息';
-					data: {
-						名字: string;
-						别名?: string;
-
-						/**
-						 * 以 `./` 开头的路径表示相对路径，会自动使用当前文件夹内内容
-						 */
-						角色图片?: string;
-
-						种族?: string;
-						职业?: string;
-						生活地区?: string;
-						能力值?: string;
-					};
-			  };
+		InfoBox?: InfoboxCustom | InfoboxCharacter;
 	};
 }

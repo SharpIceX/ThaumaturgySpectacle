@@ -107,6 +107,9 @@ importers:
       acorn:
         specifier: ^8.15.0
         version: 8.15.0
+      ajv:
+        specifier: ^8.17.1
+        version: 8.17.1
       escodegen:
         specifier: ^2.1.0
         version: 2.1.0

@@ -1,3 +1,3 @@
-import config from '@ts-config/eslint-conifg';
+import config from '@ts/eslint-conifg';
 
 export default config;

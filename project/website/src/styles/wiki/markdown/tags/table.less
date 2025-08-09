@@ -1,17 +1,13 @@
 @import 'nord/src/lesscss/nord.less';
 
-@table-border: @nord3;
-@table-header-bg: @nord3;
-@table-row-alt: @nord1;
-
-table {
+table:not(.custom) {
 	border-collapse: collapse;
 	margin-bottom: 1em;
 	width: 100%;
 
 	// 表头
 	thead {
-		background-color: @table-header-bg;
+		background-color: @nord3;
 
 		th {
 			font-weight: 600;
@@ -21,10 +17,10 @@ table {
 
 	// 表格行
 	tbody > tr {
-		border-bottom: 1px solid @table-border;
+		border-bottom: 1px solid @nord3;
 
 		&:nth-child(even) {
-			background-color: @table-row-alt;
+			background-color: @nord1;
 		}
 
 		&:last-child {
@@ -37,7 +33,7 @@ table {
 	th {
 		padding: 8px 12px;
 		text-align: left;
-		border: 1px solid @table-border;
+		border: 1px solid @nord3;
 	}
 
 	td[align='center'],
