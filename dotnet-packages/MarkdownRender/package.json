@@ -2,7 +2,6 @@
 	"name": "@ts-dotnet-packages/markdown-render",
 	"private": true,
 	"type": "commonjs",
-	"license": "MIT",
 	"main": "./dist/MarkdownRender.js",
 	"types": "./types/MarkdownRender.d.ts",
 	"scripts": {
