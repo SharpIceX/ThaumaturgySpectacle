@@ -1,9 +1,8 @@
 {
-	"name": "@ts-packages/unocss-preset-nord",
+	"name": "@ts/unocss-preset-nord",
 	"private": true,
 	"type": "module",
-	"license": "MIT",
-	"main": "./src/main.ts",
+	"main": "./main.ts",
 	"dependencies": {
 		"unocss": "^66.4.2"
 	}

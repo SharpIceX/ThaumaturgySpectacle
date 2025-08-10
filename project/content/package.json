@@ -2,6 +2,5 @@
 	"name": "@ts/content",
 	"private": true,
 	"type": "module",
-	"description": "幻术奇象的内容，百科、小说等",
-	"license": "UNLICENSED, //TODO: 需求修改许可证"
+	"description": "幻术奇象的内容，百科、小说等"
 }

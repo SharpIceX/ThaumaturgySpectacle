@@ -3,6 +3,8 @@ import path from 'node:path';
 import TypeToJsonSchema from 'ts-json-schema-generator';
 
 const JSON_DIR = path.join(import.meta.dirname, './json');
+// SPDX-FileCopyrightText: 2025 锐冰 <SharpIce@SharpIce.top>
+// SPDX-License-Identifier: MIT
 
 // 获取所有待处理的类型文件
 const typeFiles = fs.readdirSync(path.join(import.meta.dirname, './types'));

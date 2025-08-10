@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2025 锐冰 <SharpIce@SharpIce.top>
+// SPDX-License-Identifier: MIT
+
 // 自定义信息板
 interface InfoboxCustom {
 	type: 'custom';

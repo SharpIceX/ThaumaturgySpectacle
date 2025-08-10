@@ -18,7 +18,7 @@ hexo.extend.renderer.register(
 		try {
 			/**
 			 * Markdown JSON 数据
-			 * @type {import("@ts-packages/schema/types/wiki").Schema}
+			 * @type {import("@ts/schema/types/wiki").Schema}
 			 */
 			const markdownJson = getMarkdownJson(hexo, data.path);
 

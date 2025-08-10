@@ -43,7 +43,7 @@ const customProcessor = (hexo, body, data) => {
  * 处理角色信息类型 InfoBox
  * @param {import("hexo")} hexo - Hexo 实例
  * @param {HTMLElement} body - JSDOM 的 body 元素
- * @param {Extract<import("@ts-packages/schema/types/wiki").Schema["components"]["InfoBox"], { type: "角色信息" }>["data"]} data - Markdown JSON 数据
+ * @param {Extract<import("@ts/schema/types/wiki").Schema["components"]["InfoBox"], { type: "角色信息" }>["data"]} data - Markdown JSON 数据
  */
 const characterInfoProcessor = (hexo, body, data) => {
 	if (!data) return;
@@ -89,7 +89,7 @@ const ProcessorMap = {
  * 处理 Markdown JSON 内的 components.InfoBox 数据
  * @param {import("hexo")} hexo - Hexo 实例
  * @param {HTMLElement} body - JSDOM 的 body 元素
- * @param {import("@ts-packages/schema/types/wiki").Schema["components"]["InfoBox"]} data - Markdown JSON 数据
+ * @param {import("@ts/schema/types/wiki").Schema["components"]["InfoBox"]} data - Markdown JSON 数据
  */
 function InfoBoxProcessor(hexo, body, data) {
 	const Processor = ProcessorMap[data.type];

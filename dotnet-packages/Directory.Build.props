@@ -4,7 +4,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<!-- 构建中间目录 -->
-		<BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\.hsqx\dotnet-packages\$(MSBuildProjectName)\obj\</BaseIntermediateOutputPath>
+		<BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\.cache\dotnet-packages\$(MSBuildProjectName)\obj\</BaseIntermediateOutputPath>
 		<!-- 构建输出目录 -->
 		<CustomBuildPath>$(MSBuildProjectDirectory)\dist\</CustomBuildPath>
 		<OutputPath>$(CustomBuildPath)</OutputPath>

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2025 锐冰 <SharpIce@SharpIce.top>
+// SPDX-License-Identifier: MIT
+
 import path from 'node:path';
 import globals from 'globals';
 import eslint from '@eslint/js';
@@ -15,7 +18,7 @@ const TypeScriptConfig: InfiniteDepthConfigWithExtends = {
 			projectService: true,
 			sourceType: 'module',
 			ecmaVersion: 'latest',
-			tsconfigRootDir: path.resolve(import.meta.dirname, '../../../'),
+			tsconfigRootDir: path.resolve(import.meta.dirname, '../../'),
 		},
 	},
 };
@@ -23,7 +26,7 @@ const TypeScriptConfig: InfiniteDepthConfigWithExtends = {
 export default tseslint.config(
 	eslint.configs.recommended,
 	...pluginVue.configs['flat/recommended'],
-	...(await (await import('../../../project/website/.nuxt/eslint.config.mjs')).default()), //  这个是 Nuxt 4 的 ESLint 配置，嗯？
+	...(await (await import('../../project/website/.nuxt/eslint.config.mjs')).default()), //  这个是 Nuxt 4 的 ESLint 配置
 	eslintConfigPrettier,
 	{
 		rules: {
@@ -69,6 +72,19 @@ export default tseslint.config(
 		},
 	},
 	{
-		ignores: ['**/*.d.ts', '**/dits/**', '**/node_modules/**'],
+		ignores: [
+			// TypeScript 类型
+			'**/*.d.ts',
+			// 构建输出
+			'**/dits/**',
+			// 构建/编译缓存
+			'**/.cache/**',
+			// C# 项目
+			'**/dotnet-packages/**',
+			// Nuxt 项目文件
+			'**/.nuxt/**',
+			// Node 模块
+			'**/node_modules/**',
+		],
 	},
 );

@@ -1,8 +1,7 @@
 {
-	"name": "@ts-packages/schema",
+	"name": "@ts/schema",
 	"private": true,
 	"type": "module",
-	"license": "MIT",
 	"scripts": {
 		"build": "tsx ./build.ts",
 		"postinstall": "tsx ./build.ts"
