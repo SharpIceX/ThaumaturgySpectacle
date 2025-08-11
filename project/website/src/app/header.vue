@@ -35,9 +35,7 @@
 import MenuIcon from '@material-design-icons/svg/outlined/menu.svg';
 import HomeIcon from '@material-design-icons/svg/outlined/home.svg';
 import SettingsMenu from '@material-design-icons/svg/outlined/settings.svg';
-import MenuBookModeIcon from '@material-design-icons/svg/outlined/menu_book.svg';
 import DescriptionIcon from '@material-design-icons/svg/outlined/description.svg';
-import LocationOnModeIcon from '@material-design-icons/svg/outlined/location_on.svg';
 import FavoriteBorderIcon from '@material-design-icons/svg/outlined/favorite_border.svg';
 
 defineOptions({ name: 'AppHeader' });
@@ -45,8 +43,6 @@ defineOptions({ name: 'AppHeader' });
 const menuItems = [
 	{ to: '/', label: '首页', icon: HomeIcon },
 	{ to: '/wiki', label: '百科', icon: DescriptionIcon },
-	{ to: '/book', label: '小说', icon: MenuBookModeIcon },
-	{ to: '/map', label: '地图', icon: LocationOnModeIcon },
 	{ to: '/about', label: '关于', icon: FavoriteBorderIcon },
 ];
 </script>
