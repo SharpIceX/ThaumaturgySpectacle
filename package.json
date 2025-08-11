@@ -5,10 +5,10 @@
 	"version": "1.0.0",
 	"description": "幻术奇象 Project",
 	"homepage": "https://ts.sharpice.top",
-	"repository": "github:FurryRbl/ThaumaturgySpectacle",
+	"repository": "github:SharpIceX/ThaumaturgySpectacle",
 	"bugs": {
 		"email": "SharpIce@SharpIce.top",
-		"url": "https://github.com/FurryRbl/ThaumaturgySpectacle/issues"
+		"url": "https://github.com/SharpIceX/ThaumaturgySpectacle/issues"
 	},
 	"author": {
 		"name": "SharpIce",

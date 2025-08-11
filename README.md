@@ -24,7 +24,7 @@
 
 ```bash
 # 拉取仓库
-git clone https://github.com/FurryRbl/ThaumaturgySpectacle.git
+git clone https://github.com/SharpIceX/ThaumaturgySpectacle.git
 
 cd ThaumaturgySpectacle
 
