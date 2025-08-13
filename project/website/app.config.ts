@@ -51,7 +51,10 @@ export default {
 			},
 
 			// 版权信息
-			// TODO: 待完善
+			{
+				name: 'copyright',
+				content: '© 2020-2025 锐冰 版权所有 All rights reserved.',
+			},
 
 			// 作者
 			{
@@ -66,7 +69,10 @@ export default {
 			},
 
 			// 许可证
-			//  TODO: 待完善
+			{
+				name: 'license',
+				content: 'https://github.com/SharpIceX/ThaumaturgySpectacle/blob/init/README.md',
+			},
 
 			// 禁用浏览器扩展 Dark Reader
 			{
