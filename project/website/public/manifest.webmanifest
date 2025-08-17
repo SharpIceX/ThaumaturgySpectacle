@@ -25,9 +25,9 @@
 		},
 		{
 			"purpose": "any",
-			"sizes": "140x140",
+			"sizes": "144x144",
 			"type": "image/png",
-			"src": "/siteicon/140.png"
+			"src": "/siteicon/144.png"
 		},
 		{
 			"purpose": "any",
@@ -42,18 +42,6 @@
 			"short_name": "百科",
 			"description": "世界观百科",
 			"url": "/wiki",
-			"icons": [
-				{
-					"sizes": "1024x1024",
-					"src": "/favicon.png"
-				}
-			]
-		},
-		{
-			"name": "小说",
-			"short_name": "小说",
-			"description": "世界观小说",
-			"url": "/book",
 			"icons": [
 				{
 					"sizes": "1024x1024",
