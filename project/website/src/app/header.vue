@@ -4,12 +4,42 @@
 			<div class="navbar-item">
 				<ul>
 					<li v-for="item in menuItems.left" :key="item.to">
-						<NuxtLink :to="item.to" :aria-label="item.label" class="flex items-center space-x-1">
+						<NuxtLink :to="item.to" :aria-label="item.label" class="navbar-content">
 							<span aria-hidden="true">
 								<component :is="item.icon" />
 							</span>
 							<span class="navbar-text">{{ item.label }}</span>
 						</NuxtLink>
+					</li>
+					<li>
+						<DropdownMenu>
+							<template #trigger>
+								<button aria-label="百科-下拉菜单" class="navbar-content">
+									<span aria-hidden="true">
+										<DescriptionIcon />
+									</span>
+									<span class="navbar-text">百科</span>
+								</button>
+							</template>
+							<template #content>
+								<li>
+									<NuxtLink :to="encodeURI('/特殊页面/所有页面')" class="navbar-content">
+										<span aria-hidden="true">
+											<SettingsMenu />
+										</span>
+										<span aria-label="所有页面" class="ml-2">所有页面</span>
+									</NuxtLink>
+								</li>
+								<li>
+									<NuxtLink :to="encodeURI('/分类')" class="navbar-content">
+										<span aria-hidden="true">
+											<FavoriteBorderIcon />
+										</span>
+										<span aria-label="分类" class="ml-2">分类</span>
+									</NuxtLink>
+								</li>
+							</template>
+						</DropdownMenu>
 					</li>
 				</ul>
 				<div class="mx-8">
@@ -31,6 +61,7 @@
 </template>
 
 <script setup>
+import DropdownMenu from '@/components/DropdownMenu.vue';
 import HomeIcon from '@material-design-icons/svg/outlined/home.svg';
 import SettingsMenu from '@material-design-icons/svg/outlined/settings.svg';
 import DescriptionIcon from '@material-design-icons/svg/outlined/description.svg';
@@ -39,10 +70,7 @@ import FavoriteBorderIcon from '@material-design-icons/svg/outlined/favorite_bor
 defineOptions({ name: 'AppHeader' });
 
 const menuItems = {
-	left: [
-		{ to: '/', label: '首页', icon: HomeIcon },
-		{ to: '/wiki', label: '百科', icon: DescriptionIcon },
-	],
+	left: [{ to: '/', label: '首页', icon: HomeIcon }],
 	right: [
 		{ to: '/about', label: '关于', icon: FavoriteBorderIcon },
 		{ to: '/settings', label: '设置', icon: SettingsMenu },
@@ -65,6 +93,10 @@ const menuItems = {
 			display: flex;
 			gap: 1rem;
 		}
+	}
+
+	.navbar-content {
+		@apply 'flex items-center space-x-1';
 	}
 }
 </style>
