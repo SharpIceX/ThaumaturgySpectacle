@@ -2,7 +2,7 @@
 
 const acorn = require('acorn');
 const escodegen = require('escodegen');
-const generateVue = require('../../utils/generateVue.cjs');
+const generateVue = require('./generateVue.cjs');
 
 /**
  * @typedef {object} ListDataType
@@ -22,9 +22,9 @@ const createListItem = (href, text) => `  <li><NuxtLink to="${encodeURI(href).to
  * 生成页面内容的函数
  * @param {ListDataType[]} listData - 列表数据
  * @param {string} name - 页面名称
- * @returns {import("../main.cjs").ResultType} - 生成的页面内容
+ * @returns {string} - 生成的页面内容
  */
-function generatePage(listData, name) {
+function generateListPage(listData, name) {
 	// Template 部分
 	const template = `
 <template v-slot:content>
@@ -56,4 +56,4 @@ ${listData.map(item => createListItem(item.url, item.title)).join('\n')}
 	});
 }
 
-module.exports = generatePage;
+module.exports = generateListPage;
