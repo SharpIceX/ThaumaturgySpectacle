@@ -9,6 +9,6 @@ hexo.extend.generator.register('all_page', function (locals) {
 
 	return {
 		path: '/特殊页面/所有页面.vue',
-		data: generateListPage(pages.map(toListItem), '所有页面'),
+		data: generateListPage(pages.map(toListItem), '特殊页面/所有页面'),
 	};
 });

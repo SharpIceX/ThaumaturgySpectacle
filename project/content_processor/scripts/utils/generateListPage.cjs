@@ -32,7 +32,7 @@ function generateListPage(listData, name) {
 <h1>${name}</h1>
 </div>
 <div class="content">
-<ul>
+<ul class="custom list-page">
 ${listData.map(item => createListItem(item.url, item.title)).join('\n')}
 </ul>
 </div>

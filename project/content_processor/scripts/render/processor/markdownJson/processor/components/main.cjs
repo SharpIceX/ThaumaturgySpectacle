@@ -1,6 +1,7 @@
 'use strict';
 
 const ProcessorMap = {
+	custom: require('./custom.cjs'),
 	InfoBox: require('./InfoBox.cjs'),
 };
 

@@ -1,0 +1,20 @@
+@import 'nord/src/lesscss/nord.less';
+
+.custom.list-page {
+	gap: 0.5rem 2rem;
+	display: grid;
+	justify-items: center;
+	grid-template-columns: repeat(4, 1fr); /* 每行 4 个等宽列 */
+
+	li {
+		list-style-type: disc;
+
+		a {
+			color: @nord8;
+
+			&:hover {
+				color: @nord10;
+			}
+		}
+	}
+}

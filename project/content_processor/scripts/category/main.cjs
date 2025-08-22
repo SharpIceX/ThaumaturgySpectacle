@@ -60,7 +60,7 @@ hexo.extend.generator.register('category', function (locals) {
 
 		result.push({
 			path: `/分类/${category}/index.vue`,
-			data: generateListPage(matchedPages.map(toListItem), `分类:${category}`),
+			data: generateListPage(matchedPages.map(toListItem), `分类/${category}`),
 		});
 	}
 
@@ -68,7 +68,7 @@ hexo.extend.generator.register('category', function (locals) {
 	if (uncategorizedPages.length > 0) {
 		result.push({
 			path: '/分类/无分类/index.vue',
-			data: generateListPage(uncategorizedPages.map(toListItem), '分类:无分类'),
+			data: generateListPage(uncategorizedPages.map(toListItem), '分类/无分类'),
 		});
 	}
 
