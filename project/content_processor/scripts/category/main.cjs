@@ -33,15 +33,17 @@ function extractCategories(page) {
  * @returns {import('./utils/generatePage.cjs').ListDataType} - 返回列表数据项
  */
 function toListItem(page) {
+	// TIP: 不保留后缀`.vue`
+
 	let pagePath = '';
 	const extname = path.extname(page.path);
 	const dirname = path.dirname(page.path);
 	const basename = path.basename(page.path, extname);
 
 	if (basename === 'index') {
-		pagePath = dirname;
+		pagePath = path.join('/', dirname);
 	} else {
-		pagePath = path.join(dirname, basename);
+		pagePath = path.join('/', dirname, basename);
 	}
 
 	return {
@@ -79,10 +81,12 @@ hexo.extend.generator.register('category', function (locals) {
 		title: category,
 	}));
 
+	// 如果存在无分类页面，则添加一个无分类项
 	if (uncategorizedPages.length > 0) {
 		categoryIndexList.push({ url: '/分类/无分类', title: '无分类' });
 	}
 
+	// 生成分类索引页面
 	result.push({
 		path: '分类/index.vue',
 		data: generatePage(categoryIndexList, '分类索引'),
@@ -93,7 +97,7 @@ hexo.extend.generator.register('category', function (locals) {
 		const matchedPages = pages.filter(page => extractCategories(page).includes(category));
 
 		result.push({
-			path: `分类/${category}/index.vue`,
+			path: `/分类/${category}/index.vue`,
 			data: generatePage(matchedPages.map(toListItem), `分类:${category}`),
 		});
 	}
@@ -101,7 +105,7 @@ hexo.extend.generator.register('category', function (locals) {
 	// 无分类页面
 	if (uncategorizedPages.length > 0) {
 		result.push({
-			path: '分类/无分类/index.vue',
+			path: '/分类/无分类/index.vue',
 			data: generatePage(uncategorizedPages.map(toListItem), '分类:无分类'),
 		});
 	}

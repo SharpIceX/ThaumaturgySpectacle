@@ -5,7 +5,7 @@ hexo.extend.filter.register(
 	function () {
 		//hexo.route.set('all_page.vue', '测试');
 		//console.log(hexo.route);
-		//console.log(hexo.locals.get('pages').data[2]);
+		console.log(hexo.locals.get('pages').data[2]);
 	},
 	1,
 );
