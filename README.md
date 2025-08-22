@@ -25,6 +25,7 @@
 - Node.js 22.17+
 - pnpm 10.13+
 - .NET Core 8.0 SDK
+- OpenSSH 密钥（用于 从 Github 拉取依赖）
 
 ```bash
 # 拉取仓库
