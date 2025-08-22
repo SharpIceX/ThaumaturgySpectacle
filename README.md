@@ -34,14 +34,14 @@ cd ThaumaturgySpectacle
 
 # 安装依赖
 pnpm install --frozen-lockfile
+
+# 构建文章（开发必须）
+pnpm --dir ./project/content_processor run build
 ```
 
 ### 构建项目
 
 ```bash
-# 生成内容页面
-pnpm --dir ./project/content_processor/ run build
-
 # 构建网站
 pnpm --dir ./project/website run generate
 ```

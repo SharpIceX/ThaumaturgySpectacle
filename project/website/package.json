@@ -19,17 +19,17 @@
 		"nord": "^0.2.1",
 		"nuxt": "^3.18.1",
 		"overlayscrollbars": "^2.11.5",
-		"vue": "^3.5.18",
+		"vue": "^3.5.19",
 		"vue-router": "^4.5.1"
 	},
 	"devDependencies": {
-		"@nuxt/eslint": "^1.8.0",
+		"@nuxt/eslint": "^1.9.0",
 		"@nuxtjs/seo": "^3.1.0",
-		"@ts/schema": "link:..\\..\\packages\\schema",
-		"@ts/unocss-preset-nord": "link:..\\..\\packages\\unocss-preset-nord",
+		"@ts/schema": "link:../../packages/schema",
+		"@ts/unocss-preset-nord": "link:../../packages/unocss-preset-nord",
 		"@unocss/nuxt": "^66.4.2",
 		"isomorphic-git": "^1.33.0",
-		"less": "^4.4.0",
+		"less": "^4.4.1",
 		"nuxt-svgo": "^4.2.6",
 		"rimraf": "^6.0.1",
 		"unocss": "^66.4.2"

@@ -33,13 +33,24 @@ function extractCategories(page) {
  * @returns {import('./utils/generatePage.cjs').ListDataType} - 返回列表数据项
  */
 function toListItem(page) {
+	let pagePath = '';
+	const extname = path.extname(page.path);
+	const dirname = path.dirname(page.path);
+	const basename = path.basename(page.path, extname);
+
+	if (basename === 'index') {
+		pagePath = dirname;
+	} else {
+		pagePath = path.join(dirname, basename);
+	}
+
 	return {
-		url: path.join(page.path, '../'),
+		url: pagePath,
 		title: page.title,
 	};
 }
 
-hexo.extend.generator.register(function (locals) {
+hexo.extend.generator.register('category', function (locals) {
 	/** @type {PagesDataType[]} */
 	const pages = locals.pages.data;
 

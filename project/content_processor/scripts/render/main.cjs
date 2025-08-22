@@ -5,6 +5,7 @@ const fs = require('node:fs');
 const acorn = require('acorn');
 const jsdom = require('jsdom');
 const escodegen = require('escodegen');
+const path = require('node:path/posix');
 const generateVue = require('../utils/generateVue.cjs');
 const generateToc = require('./processor/generatorToc.cjs');
 const getMarkdownJson = require('./processor/getMarkdownJson.cjs');
@@ -35,6 +36,29 @@ hexo.extend.renderer.register(
 			const dom = new jsdom.JSDOM(render.html);
 			const document = dom.window.document;
 			const body = document.body;
+
+			// 处理超链接
+			const links = body.querySelectorAll('a');
+			links.forEach(link => {
+				// 删除无 href 属性的链接
+				if (!link.getAttribute('href')) link.remove();
+				// 将 a 替换为 NuxtLink
+				const nuxtLink = document.createElement('NuxtLink');
+				// 设置 to 属性
+				nuxtLink.setAttribute('to', link.getAttribute('href'));
+				// 复制原有的子节点
+				while (link.firstChild) {
+					nuxtLink.appendChild(link.firstChild);
+				}
+				// 将末尾的`.md`替换为`.html`
+				if (nuxtLink.getAttribute('to').endsWith('.md')) {
+					const dirname = path.dirname(nuxtLink.getAttribute('to'));
+					const basename = path.basename(nuxtLink.getAttribute('to'), '.md');
+					nuxtLink.setAttribute('to', path.join(dirname, basename) + '.html');
+				}
+				// 用 NuxtLink 替换原有的 a 元素
+				link.replaceWith(nuxtLink);
+			});
 
 			// 生成目录
 			const tocHTML = generateToc(body);

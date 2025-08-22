@@ -41,7 +41,6 @@ export default defineNuxtConfig({
 		preset: 'static',
 		prerender: {
 			crawlLinks: true,
-			failOnError: false, // 跳过因中文 URL 导致的问题
 		},
 		publicAssets: [
 			{
@@ -53,6 +52,9 @@ export default defineNuxtConfig({
 				dir: path.resolve(import.meta.dirname, '../content_processor/dist/pages'),
 			},
 		],
+	},
+	experimental: {
+		payloadExtraction: false,
 	},
 	devServer: {
 		port: 8190,
