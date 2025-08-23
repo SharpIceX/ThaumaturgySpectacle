@@ -13,12 +13,26 @@
 					</li>
 					<li>
 						<DropdownMenu>
-							<template #trigger>
+							<template #trigger-on>
 								<button aria-label="百科-下拉菜单" class="navbar-content">
 									<span aria-hidden="true">
 										<DescriptionIcon />
 									</span>
 									<span class="navbar-text">百科</span>
+									<span aria-hidden="true">
+										<ArrowDropDownIcon />
+									</span>
+								</button>
+							</template>
+							<template #trigger-off>
+								<button aria-label="百科-下拉菜单" class="navbar-content">
+									<span aria-hidden="true">
+										<DescriptionIcon />
+									</span>
+									<span class="navbar-text">百科</span>
+									<span aria-hidden="true">
+										<ArrowRightIcon />
+									</span>
 								</button>
 							</template>
 							<template #content>
@@ -42,7 +56,7 @@
 						</DropdownMenu>
 					</li>
 				</ul>
-				<div class="mx-8">
+				<div aria-hidden="true" class="mx-8 select-none text-nord8">
 					<p>&lt; 幻术奇象 &gt;</p>
 				</div>
 				<ul>
@@ -64,7 +78,9 @@
 import DropdownMenu from '@/components/DropdownMenu.vue';
 import HomeIcon from '@material-design-icons/svg/outlined/home.svg';
 import SettingsMenu from '@material-design-icons/svg/outlined/settings.svg';
+import ArrowRightIcon from '@material-design-icons/svg/outlined/arrow_right.svg';
 import DescriptionIcon from '@material-design-icons/svg/outlined/description.svg';
+import ArrowDropDownIcon from '@material-design-icons/svg/outlined/arrow_drop_down.svg';
 import FavoriteBorderIcon from '@material-design-icons/svg/outlined/favorite_border.svg';
 
 defineOptions({ name: 'AppHeader' });

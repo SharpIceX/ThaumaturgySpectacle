@@ -27,7 +27,7 @@
 
 	"json.schemas": [
 		{
-			"fileMatch": ["/project/content/content/wiki/**/*.json"],
+			"fileMatch": ["/project/content/content/**/*.json"],
 			"url": "./packages/schema/json/wiki.json"
 		}
 	],

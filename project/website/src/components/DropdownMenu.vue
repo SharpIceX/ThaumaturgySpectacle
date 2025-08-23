@@ -1,7 +1,10 @@
 <template>
 	<div class="dropdown">
-		<div class="dropdown-trigger">
-			<slot name="trigger"></slot>
+		<div class="dropdown-trigger-off">
+			<slot name="trigger-off"></slot>
+		</div>
+		<div class="dropdown-trigger-on">
+			<slot name="trigger-on"></slot>
 		</div>
 		<div class="dropdown-menu" role="menu" @click="blurActiveElement" @mouseleave="blurActiveElement">
 			<ul>
@@ -27,6 +30,7 @@ function blurActiveElement() {
 .dropdown {
 	position: relative;
 
+	// 默认状态
 	.dropdown-menu {
 		padding: 0.5rem 1rem;
 		position: absolute;
@@ -49,7 +53,11 @@ function blurActiveElement() {
 			}
 		}
 	}
+	.dropdown-trigger-on {
+		display: none;
+	}
 
+	// 焦点或悬停状态
 	&:focus-within,
 	&:hover {
 		.dropdown-menu {
@@ -66,6 +74,12 @@ function blurActiveElement() {
 				}
 				animation: fadeIn 0.3s ease-in-out;
 			}
+		}
+		.dropdown-trigger-off {
+			display: none;
+		}
+		.dropdown-trigger-on {
+			display: block;
 		}
 	}
 }
