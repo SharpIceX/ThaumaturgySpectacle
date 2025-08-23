@@ -6,7 +6,7 @@ const path = require('node:path');
 const Ajv = require('ajv').default;
 
 const ajv = new Ajv({ allErrors: true });
-const validate = ajv.compile(require('@ts/schema/json/wiki.json'));
+const validate = ajv.compile(require('@ts/schema/dist/wiki.json'));
 
 /**
  * 获取 Markdown 文件同级目录下的 JSON 文件数据

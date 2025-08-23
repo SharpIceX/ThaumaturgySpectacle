@@ -1,2 +1,2 @@
-# 构建生成的 json schema 文件
-/json
+/dist
+
