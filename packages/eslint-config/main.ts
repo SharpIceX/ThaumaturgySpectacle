@@ -5,8 +5,12 @@ import path from 'node:path';
 import globals from 'globals';
 import eslint from '@eslint/js';
 import jsdoc from 'eslint-plugin-jsdoc';
+import nodePlugin from 'eslint-plugin-n';
 import pluginVue from 'eslint-plugin-vue';
 import vueParser from 'vue-eslint-parser';
+import regexpPlugin from 'eslint-plugin-regexp';
+import pluginPromise from 'eslint-plugin-promise';
+import projectPackageJson from '../../package.json';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 import tseslint, { type InfiniteDepthConfigWithExtends } from 'typescript-eslint';
@@ -33,12 +37,23 @@ const TypeScriptConfig: InfiniteDepthConfigWithExtends = {
 const config: InfiniteDepthConfigWithExtends = tseslint.config(
 	eslint.configs.recommended,
 	eslintPluginUnicorn.configs.recommended,
+	pluginPromise.configs['flat/recommended'],
+	regexpPlugin.configs['flat/recommended'],
+	nodePlugin.configs['flat/recommended-module'],
 	...pluginVue.configs['flat/recommended'],
 	eslintConfigPrettier,
 	// 通用配置
 	{
 		rules: {
-			eqeqeq: ['error', 'always'],
+			eqeqeq: ['error', 'always'], // 强制要求使用 === 和 !==
+			// 确保 Node.js 内置模块的使用符合指定的 Node.js 版本
+			'n/no-unsupported-features/node-builtins': [
+				'error',
+				{
+					version: projectPackageJson.engines.node,
+				},
+			],
+			'n/no-missing-import': 'off', // 关闭对导入模块的缺失检查，交给 TypeScript 处理
 		},
 		languageOptions: {
 			parserOptions: {
@@ -87,7 +102,11 @@ const config: InfiniteDepthConfigWithExtends = tseslint.config(
 	{
 		files: ['**/*.cjs'],
 		basePath: path.join(ProjectPath, '/project/content_processor'),
-		extends: [tseslint.configs.disableTypeChecked, jsdoc.configs['flat/recommended']],
+		extends: [
+			tseslint.configs.disableTypeChecked,
+			jsdoc.configs['flat/recommended'],
+			nodePlugin.configs['flat/recommended-script'],
+		],
 		languageOptions: {
 			parserOptions: {
 				sourceType: 'commonjs',

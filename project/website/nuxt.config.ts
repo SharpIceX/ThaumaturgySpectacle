@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import git from 'isomorphic-git';
 import appConfig from './app.config';
-import packageJson from '../package.json';
+import packageJson from './package.json';
 import { defineNuxtConfig } from 'nuxt/config';
 
 const GetBuildID = async (): Promise<string> => {
