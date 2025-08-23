@@ -6,6 +6,7 @@ const acorn = require('acorn');
 const jsdom = require('jsdom');
 const path = require('node:path');
 const escodegen = require('escodegen');
+const { encodeURI } = require('@ts/utils');
 const generateVue = require('../utils/generate-vue.cjs');
 const generateToc = require('./processor/generator-toc.cjs');
 const { Renderer } = require('@ts-dotnet-packages/markdown-render');
@@ -86,7 +87,7 @@ hexo.extend.renderer.register(
 					}
 
 					// 进行 URL 编码
-					to = encodeURI(url);
+					to = encodeURI(url, true);
 				}
 
 				// 写入 NuxtLink 的 to 属性

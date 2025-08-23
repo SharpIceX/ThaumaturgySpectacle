@@ -2,6 +2,7 @@
 
 const acorn = require('acorn');
 const escodegen = require('escodegen');
+const { encodeURI } = require('@ts/utils');
 const generateVue = require('./generate-vue.cjs');
 
 /**
@@ -16,7 +17,8 @@ const generateVue = require('./generate-vue.cjs');
  * @param {string} text - 显示文本
  * @returns {string} - 列表项的 HTML 字符串
  */
-const createListItem = (href, text) => `  <li><NuxtLink to="${encodeURI(decodeURI(href))}">${text}</NuxtLink></li>`;
+const createListItem = (href, text) =>
+	`  <li><NuxtLink to="${encodeURI(decodeURI(href), true)}">${text}</NuxtLink></li>`;
 
 /**
  * 生成页面内容的函数

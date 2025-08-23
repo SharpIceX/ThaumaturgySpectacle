@@ -15,6 +15,7 @@
 		"@fontsource/noto-color-emoji": "^5.2.8",
 		"@lxgw/LxgwBright": "github:lxgw/LxgwBright#v5.526",
 		"@material-design-icons/svg": "^0.14.15",
+		"@ts/utils": "link:../utils",
 		"@unocss/reset": "^66.4.2",
 		"@vueuse/integrations": "^13.7.0",
 		"nord": "^0.2.1",

@@ -13,6 +13,7 @@
 	"dependencies": {
 		"@ts-dotnet-packages/markdown-render": "link:../../dotnet-packages/MarkdownRender",
 		"@ts/schema": "link:../../packages/schema",
+		"@ts/utils": "link:../utils",
 		"acorn": "^8.15.0",
 		"ajv": "^8.17.1",
 		"escodegen": "^2.1.0",
