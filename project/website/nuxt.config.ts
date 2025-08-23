@@ -41,6 +41,7 @@ export default defineNuxtConfig({
 		preset: 'static',
 		prerender: {
 			crawlLinks: true,
+			autoSubfolderIndex: true,
 		},
 		publicAssets: [
 			{

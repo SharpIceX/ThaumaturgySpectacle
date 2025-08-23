@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import DropdownMenu from '@/components/DropdownMenu.vue';
+import DropdownMenu from '@/components/dropdown-menu.vue';
 import HomeIcon from '@material-design-icons/svg/outlined/home.svg';
 import SettingsMenu from '@material-design-icons/svg/outlined/settings.svg';
 import ArrowRightIcon from '@material-design-icons/svg/outlined/arrow_right.svg';

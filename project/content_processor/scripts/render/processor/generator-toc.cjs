@@ -1,6 +1,6 @@
 'use strict';
 
-const generatorID = require('./utils/generatorID.cjs');
+const generatorID = require('./utils/generator-id.cjs');
 const { Renderer } = require('@ts-dotnet-packages/markdown-render');
 
 /**
@@ -41,7 +41,7 @@ function generateTocMarkdown(tocContent) {
  */
 function generatorToc(body) {
 	/** @type {tocContentType[]} */
-	const tocContent = Array.from(body.querySelectorAll('h2, h3, h4, h5, h6')).map(heading => {
+	const tocContent = [...body.querySelectorAll('h2, h3, h4, h5, h6')].map(heading => {
 		const id = generatorID(heading.textContent);
 		heading.id = id;
 		return {

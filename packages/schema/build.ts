@@ -13,7 +13,7 @@ if (fs.existsSync(JSON_DIR)) fs.rmSync(JSON_DIR, { recursive: true }); // 删除
 fs.mkdirSync(JSON_DIR, { recursive: true }); // 创建新的目录
 
 // 处理每个类型文件
-typeFiles.forEach(file => {
+for (const file of typeFiles) {
 	const config: TypeToJsonSchema.Config = {
 		path: path.join(import.meta.dirname, `./types/${file}`),
 		tsconfig: path.join(import.meta.dirname, '../../tsconfig.json'),
@@ -25,7 +25,11 @@ typeFiles.forEach(file => {
 	// 生成 JSON Schema
 	const schema = generator.createSchema(config.type);
 
-	fs.writeFileSync(path.join(JSON_DIR, file.replace('.d.ts', '.json')), JSON.stringify(schema, null, '\t'), 'utf-8');
+	fs.writeFileSync(
+		path.join(JSON_DIR, file.replace('.d.ts', '.json')),
+		JSON.stringify(schema, undefined, '\t'),
+		'utf8',
+	);
 
 	console.info(`已生成 JSON Schema：${file.replace('.d.ts', '.json')}`);
-});
+}

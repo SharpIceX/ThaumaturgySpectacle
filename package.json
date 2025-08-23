@@ -16,7 +16,7 @@
 		"email": "SharpIce@SharpIce.top"
 	},
 	"engines": {
-		"node": ">=22.17",
+		"node": ">=22.18",
 		"pnpm": ">=10.14"
 	},
 	"devEngines": {
@@ -37,6 +37,7 @@
 	},
 	"devDependencies": {
 		"@ts/eslint-conifg": "link:packages/eslint-config",
+		"@ts/textlint-rules": "link:packages/textlint-rules",
 		"@types/node": "^24.3.0",
 		"eslint": "^9.34.0",
 		"jiti": "^2.5.1",

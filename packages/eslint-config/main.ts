@@ -7,35 +7,49 @@ import eslint from '@eslint/js';
 import jsdoc from 'eslint-plugin-jsdoc';
 import pluginVue from 'eslint-plugin-vue';
 import vueParser from 'vue-eslint-parser';
+import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 import tseslint, { type InfiniteDepthConfigWithExtends } from 'typescript-eslint';
 
+/**
+ * @description 项目根目录路径
+ */
+const ProjectPath = path.resolve(import.meta.dirname, '../../');
+
+/**
+ * @description 通用 TypeScript 配置
+ */
 const TypeScriptConfig: InfiniteDepthConfigWithExtends = {
 	extends: [tseslint.configs.strict, tseslint.configs.stylistic, jsdoc.configs['flat/recommended-typescript']],
 	languageOptions: {
 		parser: tseslint.parser,
 		parserOptions: {
-			projectService: true,
 			sourceType: 'module',
-			ecmaVersion: 'latest',
-			tsconfigRootDir: path.resolve(import.meta.dirname, '../../'),
+			tsconfigRootDir: ProjectPath,
 		},
 	},
 };
 
-export default tseslint.config(
+const config: InfiniteDepthConfigWithExtends = tseslint.config(
 	eslint.configs.recommended,
+	eslintPluginUnicorn.configs.recommended,
 	...pluginVue.configs['flat/recommended'],
-	...(await (await import('../../project/website/.nuxt/eslint.config.mjs')).default()), //  这个是 Nuxt 4 的 ESLint 配置
 	eslintConfigPrettier,
+	// 通用配置
 	{
 		rules: {
 			eqeqeq: ['error', 'always'],
 		},
+		languageOptions: {
+			parserOptions: {
+				projectService: true,
+				ecmaVersion: 'latest',
+			},
+		},
 	},
 	{
-		files: ['**/*.ts'],
 		...TypeScriptConfig,
+		files: ['**/*.ts'],
 		languageOptions: {
 			parserOptions: {
 				extraFileExtensions: ['.vue'],
@@ -47,6 +61,7 @@ export default tseslint.config(
 		},
 	},
 	{
+		...TypeScriptConfig,
 		files: ['**/*.vue'],
 		languageOptions: {
 			parser: vueParser,
@@ -56,18 +71,46 @@ export default tseslint.config(
 			},
 		},
 	},
+	// Nuxt 项目
+	{
+		basePath: path.join(ProjectPath, '/project/website'),
+		extends: [
+			...(await (async () => {
+				const nuxtConfigModule = await import(
+					path.join(ProjectPath, '/project/website/.nuxt/eslint.config.mjs')
+				);
+				return nuxtConfigModule.default();
+			})()), //  这个是 Nuxt 的 ESLint 配置
+		],
+	},
+	// Content Processor 项目
 	{
 		files: ['**/*.cjs'],
+		basePath: path.join(ProjectPath, '/project/content_processor'),
 		extends: [tseslint.configs.disableTypeChecked, jsdoc.configs['flat/recommended']],
 		languageOptions: {
 			parserOptions: {
-				projectService: false,
-				sourceType: 'script',
+				sourceType: 'commonjs',
 			},
 			globals: {
 				hexo: true,
 				...globals.node,
+				...globals.browser,
 				...globals.commonjs,
+			},
+		},
+	},
+	// TextLint 规则项目
+	{
+		files: ['**/*.js'],
+		basePath: path.join(ProjectPath, '/packages/textlint-rules'),
+		extends: [tseslint.configs.disableTypeChecked, jsdoc.configs['flat/recommended']],
+		languageOptions: {
+			parserOptions: {
+				sourceType: 'module',
+			},
+			globals: {
+				...globals.node,
 			},
 		},
 	},
@@ -88,3 +131,5 @@ export default tseslint.config(
 		],
 	},
 );
+
+export default config;

@@ -1,14 +1,14 @@
 <template>
 	<div class="dropdown">
 		<div class="dropdown-trigger-off">
-			<slot name="trigger-off"></slot>
+			<slot name="trigger-off" />
 		</div>
 		<div class="dropdown-trigger-on">
-			<slot name="trigger-on"></slot>
+			<slot name="trigger-on" />
 		</div>
 		<div class="dropdown-menu" role="menu" @click="blurActiveElement" @mouseleave="blurActiveElement">
 			<ul>
-				<slot name="content"></slot>
+				<slot name="content" />
 			</ul>
 		</div>
 	</div>
@@ -16,10 +16,14 @@
 
 <script setup>
 // TODO: 鼠标点击trigger后，直接绕开content移动到外面不会触发mouseleave事件
+
+/**
+ * 使当前活动元素失去焦点（blur），如果可能的话。
+ */
 function blurActiveElement() {
-	const el = document.activeElement;
-	if (el && el !== document.body && typeof el.blur === 'function') {
-		el.blur();
+	const element = document.activeElement;
+	if (element && element !== document.body && typeof element.blur === 'function') {
+		element.blur();
 	}
 }
 </script>

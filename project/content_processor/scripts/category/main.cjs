@@ -1,7 +1,7 @@
 'use strict';
 
-const toListItem = require('../utils/toListItem.cjs');
-const generateListPage = require('../utils/generateListPage.cjs');
+const toListItem = require('../utils/to-list-item.cjs');
+const generateListPage = require('../utils/generate-list-page.cjs');
 
 /**
  * 提取页面所属分类为数组
@@ -25,20 +25,20 @@ hexo.extend.generator.register('category', function (locals) {
 	const uncategorizedPages = [];
 
 	// 分类统计
-	pages.forEach(page => {
+	for (const page of pages) {
 		const categories = extractCategories(page);
 		if (!categories || categories.length === 0) {
 			uncategorizedPages.push(page);
 		} else {
-			categories.forEach(c => allCategories.add(c));
+			for (const c of categories) allCategories.add(c);
 		}
-	});
+	}
 
-	/** @type {Array<import("../types/common.cjs").GeneratorResultType>} */
+	/** @type {ReturnType<Parameters<import("hexo/dist/extend/generator.d.ts")["register"]>[1]>} */
 	const result = [];
 
 	// 分类索引页
-	const categoryIndexList = Array.from(allCategories).map(category => ({
+	const categoryIndexList = [...allCategories].map(category => ({
 		url: `/分类/${category}`,
 		title: category,
 	}));
@@ -60,7 +60,10 @@ hexo.extend.generator.register('category', function (locals) {
 
 		result.push({
 			path: `/分类/${category}/index.vue`,
-			data: generateListPage(matchedPages.map(toListItem), `分类/${category}`),
+			data: generateListPage(
+				matchedPages.map(element => toListItem(element)),
+				`分类/${category}`,
+			),
 		});
 	}
 
@@ -68,7 +71,10 @@ hexo.extend.generator.register('category', function (locals) {
 	if (uncategorizedPages.length > 0) {
 		result.push({
 			path: '/分类/无分类/index.vue',
-			data: generateListPage(uncategorizedPages.map(toListItem), '分类/无分类'),
+			data: generateListPage(
+				uncategorizedPages.map(element => toListItem(element)),
+				'分类/无分类',
+			),
 		});
 	}
 

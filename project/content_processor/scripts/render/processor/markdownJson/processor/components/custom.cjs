@@ -17,25 +17,25 @@ const customProcessor = (hexo, body, data) => {
 
 	const tbody = document.createElement('tbody');
 
-	data.forEach(item => {
+	for (const item of data) {
 		const tr = document.createElement('tr');
 
 		// 左侧内容（th）
 		const th = document.createElement('th');
 		th.innerHTML = item.content;
-		tr.appendChild(th);
+		tr.append(th);
 
 		// 右侧内容（td）
 		if (item.content_right) {
 			const td = document.createElement('td');
 			td.innerHTML = item.content_right;
-			tr.appendChild(td);
+			tr.append(td);
 		}
 
-		tbody.appendChild(tr);
-	});
+		tbody.append(tr);
+	}
 
-	infoBox.appendChild(tbody);
+	infoBox.append(tbody);
 	body.insertBefore(infoBox, body.firstChild);
 };
 

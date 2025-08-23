@@ -4,7 +4,7 @@
 
 import type { Preset } from 'unocss';
 
-export default (): Preset => {
+const main = (): Preset => {
 	return {
 		name: '@ts/unocss-preset-nord',
 		theme: {
@@ -29,3 +29,5 @@ export default (): Preset => {
 		},
 	};
 };
+
+export default main;

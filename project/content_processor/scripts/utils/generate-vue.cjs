@@ -21,16 +21,11 @@ function generateVue(template, script, options = {}) {
 	if (options.NuxtLayout) result.push(`<NuxtLayout name="${options.NuxtLayout}">`);
 	result.push(template);
 	if (options.NuxtLayout) result.push('</NuxtLayout>');
-	result.push('</template>');
-
-	// 此部分为了美观
-	result.push('\n');
+	result.push('</template>', '\n');
 
 	// Script 部分
 	if (script) {
-		result.push(`<script ${options.setup ? 'setup' : ''}>`);
-		result.push(script);
-		result.push('</script>');
+		result.push(`<script ${options.setup ? 'setup' : ''}>`, script, '</script>');
 	}
 
 	return result.join('\n');

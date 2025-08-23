@@ -5,7 +5,7 @@ const path = require('node:path/posix');
 /**
  * 构建页面列表数据项
  * @param {import('../types/common.cjs').PagesDataType} page - 页面数据
- * @returns {import('./generateListPage.cjs').ListDataType} - 返回列表数据项
+ * @returns {import('./generate-list-page.cjs').ListDataType} - 返回列表数据项
  */
 function toListItem(page) {
 	// NOTE: 不保留后缀`.vue`
@@ -15,11 +15,10 @@ function toListItem(page) {
 	const dirname = path.dirname(page.path);
 	const basename = path.basename(page.path, extname);
 
-	if (basename === 'index') {
-		pagePath = path.join('/', dirname);
-	} else {
-		pagePath = path.join('/', dirname, basename);
-	}
+	// 处理首页路径
+	// 如果是 `index` 则表示为目录首页，路径为 `/dirname/`
+	// 否则表示为普通页面，路径为 `/dirname/basename`
+	pagePath = basename === 'index' ? path.join('/', dirname) : path.join('/', dirname, basename);
 
 	return {
 		url: pagePath,

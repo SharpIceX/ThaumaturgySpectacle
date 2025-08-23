@@ -2,7 +2,7 @@
 
 const ProcessorMap = {
 	custom: require('./custom.cjs'),
-	InfoBox: require('./InfoBox.cjs'),
+	InfoBox: require('./info-box.cjs'),
 };
 
 /**
@@ -12,13 +12,13 @@ const ProcessorMap = {
  * @param {import("@ts/schema/types/wiki").Schema["components"]} data - Markdown JSON 数据
  */
 function ComponentsProcessor(hexo, body, data) {
-	Object.keys(data).forEach(key => {
+	for (const key of Object.keys(data)) {
 		if (ProcessorMap[key]) {
 			if (data[key]) ProcessorMap[key](hexo, body, data[key]);
 		} else {
 			hexo.log.warn(`未知的 Components 处理器: ${key}`);
 		}
-	});
+	}
 }
 
 module.exports = ComponentsProcessor;

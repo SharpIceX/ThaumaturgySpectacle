@@ -4,8 +4,12 @@ export default {
 	buildAssetsDir: '/_ts/',
 	rootId: `ts_app`,
 	head: {
+		/*
 		// 编码
+		// NOTE: 停用`unicorn/text-encoding-identifier-case`备注：根据 MDN 文档，charset 必须是 `utf-8` 而不是 `utf8`
+		// eslint-disable-next-line unicorn/text-encoding-identifier-case
 		charset: 'utf-8',
+		*/
 
 		// 屏幕适配
 		viewport: 'width=device-width, initial-scale=1.0, viewport-fit=cover',

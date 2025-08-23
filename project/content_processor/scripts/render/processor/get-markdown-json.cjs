@@ -3,9 +3,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-// NOTE: 此处添加 jsdoc 的原因是因为 Ajv 上的类型定义错误导致 IDE 无法正确识别。期望未来 Ajv 能够修复此问题把。
-/** @type {typeof import("ajv").default} */
-const Ajv = require('ajv');
+const Ajv = require('ajv').default;
 
 const ajv = new Ajv({ allErrors: true });
 const validate = ajv.compile(require('@ts/schema/json/wiki.json'));
@@ -26,7 +24,7 @@ function getMarkdownJson(hexo, markdownFilePath) {
 	// 文件不存在直接返回空数据
 	if (!fs.existsSync(jsonFilePath)) return {};
 
-	const jsonContent = fs.readFileSync(jsonFilePath, 'utf-8');
+	const jsonContent = fs.readFileSync(jsonFilePath, 'utf8');
 
 	// 文件为空发出警告并返回空数据
 	if (!jsonContent.trim()) {
@@ -40,9 +38,9 @@ function getMarkdownJson(hexo, markdownFilePath) {
 		// 校验 JSON 数据格式
 		if (!validate(data)) {
 			const errors = (validate.errors || [])
-				.map(err => {
-					const path = err.instancePath || err.dataPath || '';
-					return `路径: ${path || '(根)'}\n错误: ${err.message}`;
+				.map(error => {
+					const path = error.instancePath || '未知';
+					return `路径: ${path || '(根)'}\n错误: ${error.message}`;
 				})
 				.join('\n\n');
 			hexo.log.error(`JSON 文件 ${jsonFilePath} 格式不正确:\n${errors}`);

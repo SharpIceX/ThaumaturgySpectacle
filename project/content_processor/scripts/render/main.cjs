@@ -6,10 +6,10 @@ const acorn = require('acorn');
 const jsdom = require('jsdom');
 const path = require('node:path');
 const escodegen = require('escodegen');
-const generateVue = require('../utils/generateVue.cjs');
-const generateToc = require('./processor/generatorToc.cjs');
-const getMarkdownJson = require('./processor/getMarkdownJson.cjs');
+const generateVue = require('../utils/generate-vue.cjs');
+const generateToc = require('./processor/generator-toc.cjs');
 const { Renderer } = require('@ts-dotnet-packages/markdown-render');
+const getMarkdownJson = require('./processor/get-markdown-json.cjs');
 const markdownJsonProcessor = require('./processor/markdownJson/main.cjs');
 
 hexo.extend.renderer.register(
@@ -24,7 +24,7 @@ hexo.extend.renderer.register(
 			const markdownJson = getMarkdownJson(hexo, data.path);
 
 			// Markdown 渲染结果
-			const render = Renderer.Render(fs.readFileSync(data.path, 'utf-8'));
+			const render = Renderer.Render(fs.readFileSync(data.path, 'utf8'));
 
 			// Markdown Front Matter 内容
 			const markdownFrontMatter = yaml.parse(render.frontMatter) || {};
@@ -39,7 +39,8 @@ hexo.extend.renderer.register(
 
 			// 处理超链接
 			const links = body.querySelectorAll('a');
-			links.forEach(link => {
+
+			for (const link of links) {
 				// 删除无 href 属性的链接
 				if (!link.getAttribute('href')) link.remove();
 
@@ -50,9 +51,7 @@ hexo.extend.renderer.register(
 				nuxtLink.setAttribute('to', link.getAttribute('href'));
 
 				// 复制原有的子节点
-				while (link.firstChild) {
-					nuxtLink.appendChild(link.firstChild);
-				}
+				nuxtLink.append(...link.childNodes);
 
 				let to = nuxtLink.getAttribute('to');
 
@@ -63,10 +62,17 @@ hexo.extend.renderer.register(
 
 				// 为开头为`.`的路径计算绝对路径
 				if (to.startsWith('.')) {
-					const contentDir = path.resolve(hexo.base_dir, hexo.config.source_dir);
-					const currentDir = path.dirname(data.path);
-					const absPath = path.resolve(currentDir, decodeURI(to));
-					let url = path.relative(contentDir, absPath);
+					// 获取内容目录的绝对路径
+					const contentDirectory = path.resolve(hexo.base_dir, hexo.config.source_dir);
+
+					// 获取当前 Markdown 文件的目录绝对路径
+					const currentDirectory = path.dirname(data.path);
+
+					// 计算目标文件的绝对路径
+					const absPath = path.resolve(currentDirectory, decodeURI(to));
+
+					// 计算相对于内容目录的路径
+					let url = path.relative(contentDirectory, absPath);
 
 					// 统一为正斜杠
 					url = url.split(path.sep).join('/');
@@ -79,10 +85,8 @@ hexo.extend.renderer.register(
 						url = url.replace(/\/+$/, '');
 					}
 
-					// 进行 URL 编码，并转换为小写
-					url = encodeURI(url).toLowerCase();
-
-					to = url;
+					// 进行 URL 编码
+					to = encodeURI(url);
 				}
 
 				// 写入 NuxtLink 的 to 属性
@@ -90,7 +94,7 @@ hexo.extend.renderer.register(
 
 				// 用 NuxtLink 替换原有的 a 元素
 				link.replaceWith(nuxtLink);
-			});
+			}
 
 			// 生成目录
 			const tocHTML = generateToc(body);
@@ -99,7 +103,9 @@ hexo.extend.renderer.register(
 			markdownJsonProcessor(hexo, body, markdownJson);
 
 			// 获取内容并规范 NuxtLink 标签大小写
-			const content = body.innerHTML.replace(/<nuxtlink/g, '<NuxtLink').replace(/<\/nuxtlink>/g, '</NuxtLink>');
+			const content = body.innerHTML
+				.replaceAll('<nuxtlink', '<NuxtLink') // Tag 开头
+				.replaceAll('</nuxtlink>', '</NuxtLink>'); // Tag 结尾
 
 			// 内容部分
 			const template = `
@@ -116,7 +122,7 @@ ${tocHTML ? `<template v-slot:toc>${tocHTML}</template>` : ''}
 `;
 
 			// 生成 Vue Script
-			let script = null;
+			let script;
 			{
 				// 生成 definePageMeta 函数内数据
 				const PageMeta = {

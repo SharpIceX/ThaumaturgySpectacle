@@ -10,12 +10,12 @@
 	</div>
 </template>
 
-<script setup>
-import './main.ts';
+<script lang="ts" setup>
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import AppHeader from './app/header.vue';
 import AppFooter from './app/footer.vue';
+import { OverlayScrollbars } from 'overlayscrollbars';
 import { useNProgress } from '@vueuse/integrations/useNProgress';
 
 defineOptions({ name: 'App' });
@@ -33,4 +33,16 @@ onMounted(() => {
 		done(); // 加载完成
 	});
 });
+
+// 滚动条
+if (import.meta.browser) {
+	OverlayScrollbars(document.body, {
+		scrollbars: {
+			autoHideDelay: 300,
+			autoHide: 'scroll',
+			autoHideSuspend: true,
+			theme: 'os-theme-nord',
+		},
+	});
+}
 </script>
