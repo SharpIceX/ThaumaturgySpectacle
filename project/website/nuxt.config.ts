@@ -43,16 +43,6 @@ export default defineNuxtConfig({
 			crawlLinks: true,
 			autoSubfolderIndex: true,
 		},
-		publicAssets: [
-			{
-				baseURL: '/',
-				dir: path.resolve(import.meta.dirname, './public'),
-			},
-			{
-				baseURL: '/',
-				dir: path.resolve(import.meta.dirname, '../content_processor/dist/pages'),
-			},
-		],
 	},
 	experimental: {
 		payloadExtraction: false,
