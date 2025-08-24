@@ -39,7 +39,6 @@ const config: InfiniteDepthConfigWithExtends = tseslint.config(
 	eslintPluginUnicorn.configs.recommended,
 	pluginPromise.configs['flat/recommended'],
 	regexpPlugin.configs['flat/recommended'],
-	nodePlugin.configs['flat/recommended-module'],
 	...pluginVue.configs['flat/recommended'],
 	eslintConfigPrettier,
 	// 通用配置

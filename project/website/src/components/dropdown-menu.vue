@@ -67,15 +67,6 @@ function blurActiveElement() {
 		.dropdown-menu {
 			ul {
 				display: flex;
-
-				@keyframes fadeIn {
-					from {
-						opacity: 0;
-					}
-					to {
-						opacity: 1;
-					}
-				}
 				animation: fadeIn 0.3s ease-in-out;
 			}
 		}
