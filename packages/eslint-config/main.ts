@@ -119,20 +119,6 @@ const config: InfiniteDepthConfigWithExtends = tseslint.config(
 			},
 		},
 	},
-	// TextLint 规则项目
-	{
-		files: ['**/*.js'],
-		basePath: path.join(ProjectPath, '/packages/textlint-rules'),
-		extends: [tseslint.configs.disableTypeChecked, jsdoc.configs['flat/recommended']],
-		languageOptions: {
-			parserOptions: {
-				sourceType: 'module',
-			},
-			globals: {
-				...globals.node,
-			},
-		},
-	},
 	{
 		ignores: [
 			// TypeScript 类型

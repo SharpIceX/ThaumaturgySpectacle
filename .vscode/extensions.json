@@ -16,9 +16,6 @@
 		"esbenp.prettier-vscode", // Prettier
 
 		// Markdown
-		"davidanson.vscode-markdownlint", // Markdown Lint
-
-		// 自然语言文本检查
-		"3w36zj6.textlint"
+		"davidanson.vscode-markdownlint" // Markdown Lint
 	]
 }
