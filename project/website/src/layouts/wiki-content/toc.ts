@@ -1,4 +1,10 @@
 /**
+ * 禁用 eslint 规则 unicorn/prefer-spread备注：
+ * 类型“NodeListOf<Element>”必须具有返回迭代器的 "[Symbol.iterator]()" 方法。
+ */
+/* eslint-disable unicorn/prefer-spread */
+
+/**
  * 获取离当前滚动位置最近的标题
  * @param contentCache 内容区域的 HTMLElement[]
  * @param scrollPosition 当前滚动位置
@@ -25,15 +31,19 @@ const getClosestHeadingId = (contentCache: HTMLElement[], scrollPosition: number
  */
 const handleScrollEvent = (callback: (scrollPosition: number) => void): void => {
 	let ticking = false;
+	let timer: ReturnType<typeof setTimeout> | undefined;
 
 	const handleScroll = () => {
 		if (!ticking) {
 			ticking = true;
-			requestAnimationFrame(() => {
+			if (timer) {
+				clearTimeout(timer);
+			}
+			timer = globalThis.setTimeout(() => {
 				const scrollPosition = window.scrollY || document.documentElement.scrollTop;
 				callback(scrollPosition);
 				ticking = false;
-			});
+			}, 300);
 		}
 	};
 
@@ -72,7 +82,7 @@ const updateTocHighlightOnScroll = (contentCache: HTMLElement[], tocLinksCache: 
 		const link = tocLinksCache.find(l => l.getAttribute('href') === `#${closestHeadingId}`);
 		if (link) {
 			link.classList.add('select-toc');
-			link.scrollIntoView({ behavior: 'smooth' });
+			link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
 		}
 	});
 };
@@ -83,8 +93,8 @@ const updateTocHighlightOnScroll = (contentCache: HTMLElement[], tocLinksCache: 
  * @param toc 目录区域的 HTMLElement
  */
 const toc = (content: HTMLElement, toc: HTMLElement): void => {
-	const contentCache = [...content.querySelectorAll('h2, h3, h4, h5, h6')] as HTMLElement[];
-	const tocLinksCache = [...toc.querySelectorAll('a[href^="#"]')] as HTMLAnchorElement[];
+	const contentCache = Array.from(content.querySelectorAll('h2, h3, h4, h5, h6')) as HTMLElement[];
+	const tocLinksCache = Array.from(toc.querySelectorAll('a[href^="#"]')) as HTMLAnchorElement[];
 
 	scrollToNearestHeading(contentCache);
 	updateTocHighlightOnScroll(contentCache, tocLinksCache);

@@ -59,8 +59,7 @@ const config: InfiniteDepthConfigWithExtends = tseslint.config(
 				extraFileExtensions: ['.vue'],
 			},
 			globals: {
-				...globals.node,
-				...globals.browser,
+				...globals['shared-node-browser'],
 			},
 		},
 	},

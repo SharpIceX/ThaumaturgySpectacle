@@ -1,4 +1,5 @@
 <template>
+	<!-- 主要内容 -->
 	<div class="h-full flex flex-row gap-10 justify-center max-md:flex-col-reverse max-md:items-center">
 		<div class="w-[60%] max-md:w-[90%] bg-nord1 p-8 rounded-lg">
 			<div ref="contentSlot" class="wiki-content">
@@ -6,13 +7,15 @@
 			</div>
 		</div>
 
-		<!-- TOC 部分只有在有内容时显示 -->
-		<!--TODO: fixed 是调试用，暂未适配 -->
-		<div v-if="$slots['toc']" class="w-84 max-md:w-[90%] fixed">
-			<div class="bg-nord1 rounded-lg p-6">
-				<h1 class="text-xl">目录</h1>
-				<div ref="tocSlot" class="toc-content">
-					<slot name="toc" />
+		<!-- 扩展内容 -->
+		<div v-if="$slots['toc']" class="extra-content">
+			<!-- TOC 部分只有在有内容时显示 -->
+			<div v-if="$slots['toc']" class="toc">
+				<div class="bg-nord1 rounded-lg p-6">
+					<h1 class="text-xl">目录</h1>
+					<div ref="tocSlot" class="toc-content">
+						<slot name="toc" />
+					</div>
 				</div>
 			</div>
 		</div>
