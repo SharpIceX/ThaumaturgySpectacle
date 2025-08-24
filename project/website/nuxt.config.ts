@@ -83,7 +83,7 @@ export default defineNuxtConfig({
 		checker: false,
 	},
 	svgo: {
-		svgo: true,
+		dts: true,
 		global: false,
 		defaultImport: 'component',
 	},

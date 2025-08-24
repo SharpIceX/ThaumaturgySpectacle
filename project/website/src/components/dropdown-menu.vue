@@ -14,16 +14,15 @@
 	</div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 // TODO: 鼠标点击trigger后，直接绕开content移动到外面不会触发mouseleave事件
 
 /**
  * 使当前活动元素失去焦点（blur），如果可能的话。
  */
 function blurActiveElement() {
-	const element = document.activeElement;
-	if (element && element !== document.body && typeof element.blur === 'function') {
-		element.blur();
+	if (import.meta.browser) {
+		(document.activeElement as HTMLElement).blur();
 	}
 }
 </script>
