@@ -4,9 +4,8 @@ const yaml = require('yaml');
 const fs = require('node:fs');
 const acorn = require('acorn');
 const jsdom = require('jsdom');
-const path = require('node:path');
 const escodegen = require('escodegen');
-const { encodeURI } = require('@ts/utils');
+const urlProcessor = require('./processor/url.cjs');
 const generateVue = require('../utils/generate-vue.cjs');
 const generateToc = require('./processor/generator-toc.cjs');
 const { Renderer } = require('@ts-dotnet-packages/markdown-render');
@@ -39,74 +38,13 @@ hexo.extend.renderer.register(
 			const body = document.body;
 
 			// 处理超链接
-			const links = body.querySelectorAll('a');
-
-			for (const link of links) {
-				// 删除无 href 属性的链接
-				if (!link.getAttribute('href')) link.remove();
-
-				// 创建 NuxtLink 元素
-				const nuxtLink = document.createElement('NuxtLink');
-
-				// 设置 to 属性
-				nuxtLink.setAttribute('to', link.getAttribute('href'));
-
-				// 复制原有的子节点
-				nuxtLink.append(...link.childNodes);
-
-				let to = nuxtLink.getAttribute('to');
-
-				// 将末尾的`index.md`删除，删除前确保开头含有`/`或`.`
-				if (to.endsWith('index.md') && (to.startsWith('/') || to.startsWith('.'))) {
-					to = to.slice(0, -'index.md'.length);
-				}
-
-				// 为开头为`.`的路径计算绝对路径
-				if (to.startsWith('.')) {
-					// 获取内容目录的绝对路径
-					const contentDirectory = path.resolve(hexo.base_dir, hexo.config.source_dir);
-
-					// 获取当前 Markdown 文件的目录绝对路径
-					const currentDirectory = path.dirname(data.path);
-
-					// 计算目标文件的绝对路径
-					const absPath = path.resolve(currentDirectory, decodeURI(to));
-
-					// 计算相对于内容目录的路径
-					let url = path.relative(contentDirectory, absPath);
-
-					// 统一为正斜杠
-					url = url.split(path.sep).join('/');
-
-					// 保证以 / 开头
-					url = '/' + url.replace(/^\/+/, '');
-
-					// 去除末尾的 "/"
-					if (url.endsWith('/')) {
-						url = url.replace(/\/+$/, '');
-					}
-
-					// 进行 URL 编码
-					to = encodeURI(url, true);
-				}
-
-				// 写入 NuxtLink 的 to 属性
-				nuxtLink.setAttribute('to', to);
-
-				// 用 NuxtLink 替换原有的 a 元素
-				link.replaceWith(nuxtLink);
-			}
+			urlProcessor(data, body);
 
 			// 生成目录
 			const tocHTML = generateToc(body);
 
 			// 处理 Markdown JSON
 			markdownJsonProcessor(hexo, body, markdownJson);
-
-			// 获取内容并规范 NuxtLink 标签大小写
-			const content = body.innerHTML
-				.replaceAll('<nuxtlink', '<NuxtLink') // Tag 开头
-				.replaceAll('</nuxtlink>', '</NuxtLink>'); // Tag 结尾
 
 			// 内容部分
 			const template = `
@@ -116,7 +54,7 @@ hexo.extend.renderer.register(
 ${markdownFrontMatter.description ? `<p class="description">${markdownFrontMatter.description}</p>` : ''}
 </div>
 <div class="content">
-${content}
+${body.innerHTML}
 </div>
 </template>
 ${tocHTML ? `<template v-slot:toc>${tocHTML}</template>` : ''}
