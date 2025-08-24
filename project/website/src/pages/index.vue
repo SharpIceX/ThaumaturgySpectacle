@@ -1,5 +1,5 @@
 <template>
-	<h1>你好我是首页</h1>
+	<h1>TODO:待编写</h1>
 </template>
 
 <script setup>
