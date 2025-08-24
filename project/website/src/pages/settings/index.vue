@@ -8,7 +8,7 @@
 				<client-only>
 					<div class="custom setting">
 						<div v-for="item in settingItems" :key="item.settingID" class="setting-item">
-							<settingSwitch :defaultState="item.defaultState" :settingID="item.settingID" />
+							<settingSwitch :default-state="item.defaultState" :setting-id="item.settingID" />
 							<p>{{ item.name }}</p>
 							<div v-if="item.description" :title="item.description">
 								<InfoIcon class="w-4 h-4" />
@@ -45,8 +45,9 @@ const settingItems: settingItemsType = [
 		defaultState: false,
 	},
 	{
-		name: '启用滑动页面自动修改URL锚点',
-		settingID: 'toc.scroll_change_url.enable',
+		name: '可视化目录',
+		description: '滚动页面时，自动高亮当前章节，并将 URL 更新为当前章节的锚点',
+		settingID: 'toc.scroll_toc_visible.enable',
 		defaultState: true,
 	},
 ];

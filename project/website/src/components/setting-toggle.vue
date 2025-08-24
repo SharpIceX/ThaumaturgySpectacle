@@ -1,4 +1,11 @@
 <!--
+	NOTE: 停用 eslint 的 vue/html-self-closing 规则备注：
+	会错误的导致 <input> 标签报错，提示需要自闭合。
+-->
+
+<!-- eslint-disable vue/html-self-closing -->
+
+<!--
 	TIP: 只能在客户端渲染
 
 	此组件是 Switch 组件的变体，用于在设置页面中显示和存储用户的设置选项。
@@ -19,19 +26,19 @@
 import { toast } from 'vue3-toastify';
 
 defineOptions({ name: 'TSSettingSwitch' });
-const props = defineProps({
+const properties = defineProps({
 	defaultState: {
 		type: Boolean,
 		required: false,
 	},
-	settingID: {
+	settingId: {
 		type: String,
 		required: true,
 	},
 });
 
-const checkedState = ref<boolean>(props.defaultState);
-const localStorageKey = `setting.${props.settingID}`;
+const checkedState = ref<boolean>(properties.defaultState);
+const localStorageKey = `setting.${properties.settingId}`;
 
 // 初始化
 onMounted(() => {
@@ -41,8 +48,8 @@ onMounted(() => {
 	}
 
 	// 监听状态变化并存储
-	watch(checkedState, val => {
-		localStorage.setItem(localStorageKey, String(val));
+	watch(checkedState, value => {
+		localStorage.setItem(localStorageKey, String(value));
 		toast('设置已保存', {
 			position: toast.POSITION.TOP_RIGHT,
 			type: 'success',
