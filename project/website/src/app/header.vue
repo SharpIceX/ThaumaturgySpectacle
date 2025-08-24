@@ -39,7 +39,7 @@
 								<li>
 									<NuxtLink :to="encodeURI('/特殊页面/所有页面', true)" class="navbar-content">
 										<span aria-hidden="true">
-											<SettingsMenu />
+											<AllInclusiveIcon />
 										</span>
 										<span aria-label="所有页面" class="ml-2">所有页面</span>
 									</NuxtLink>
@@ -78,9 +78,10 @@
 import { encodeURI } from '@ts/utils';
 import DropdownMenu from '@/components/dropdown-menu.vue';
 import HomeIcon from '@material-design-icons/svg/outlined/home.svg';
-import SettingsMenu from '@material-design-icons/svg/outlined/settings.svg';
+import SettingsMenuIcon from '@material-design-icons/svg/outlined/settings.svg';
 import ArrowRightIcon from '@material-design-icons/svg/outlined/arrow_right.svg';
 import DescriptionIcon from '@material-design-icons/svg/outlined/description.svg';
+import AllInclusiveIcon from '@material-design-icons/svg/outlined/all_inclusive.svg';
 import ArrowDropDownIcon from '@material-design-icons/svg/outlined/arrow_drop_down.svg';
 import FavoriteBorderIcon from '@material-design-icons/svg/outlined/favorite_border.svg';
 
@@ -90,7 +91,7 @@ const menuItems = {
 	left: [{ to: '/', label: '首页', icon: HomeIcon }],
 	right: [
 		{ to: '/about', label: '关于', icon: FavoriteBorderIcon },
-		{ to: '/settings', label: '设置', icon: SettingsMenu },
+		{ to: '/settings', label: '设置', icon: SettingsMenuIcon },
 	],
 };
 </script>

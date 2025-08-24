@@ -12,25 +12,14 @@
 -->
 
 <template>
-	<div class="setting-item">
-		<Switch v-model="checkedState">
-			<template #on>开</template>
-			<template #off>关</template>
-		</Switch>
-		<p>{{ props.name }}</p>
-	</div>
+	<input v-model="checkedState" type="checkbox" class="toggle toggle-default" />
 </template>
 
 <script lang="ts" setup>
-import Switch from '../switch.vue';
 import { toast } from 'vue3-toastify';
 
 defineOptions({ name: 'TSSettingSwitch' });
 const props = defineProps({
-	name: {
-		type: String,
-		required: true,
-	},
 	defaultState: {
 		type: Boolean,
 		required: false,
@@ -42,29 +31,24 @@ const props = defineProps({
 });
 
 const checkedState = ref<boolean>(props.defaultState);
+const localStorageKey = `setting.${props.settingID}`;
 
 // 初始化
 onMounted(() => {
-	const localConfig = localStorage.getItem(`setting.${props.settingID}`);
+	const localConfig = localStorage.getItem(localStorageKey);
 	if (localConfig !== null) {
 		checkedState.value = JSON.parse(localConfig);
 	}
 
 	// 监听状态变化并存储
 	watch(checkedState, val => {
-		localStorage.setItem(`setting.${props.settingID}`, String(val));
-		toast('设置已重置', {
+		localStorage.setItem(localStorageKey, String(val));
+		toast('设置已保存', {
 			position: toast.POSITION.TOP_RIGHT,
 			type: 'success',
-			autoClose: 800,
+			autoClose: 500,
 			transition: 'bounce',
 		});
 	});
 });
 </script>
-
-<style lang="less" scoped>
-.setting-item {
-	display: flex;
-}
-</style>

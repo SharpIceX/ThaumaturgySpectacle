@@ -1,0 +1,89 @@
+@import 'nord/src/lesscss/nord.less';
+
+input[type='checkbox'].toggle-default {
+	--toggle-size: 1.5em; /* 开关的大小 */
+	--toggle-color: rgba(@nord4, 0.1); /* 未选中时的颜色 */
+
+	/* 选中时的颜色 */
+	&:checked {
+		--toggle-color: rgba(@nord8, 0.8);
+	}
+
+	/* 悬浮时的颜色 */
+	&:hover:not(:disabled):not(:checked) {
+		--toggle-color: rgba(@nord10, 0.6);
+	}
+}
+
+input[type='checkbox'].toggle {
+	/* 重置样式 */
+	appearance: unset; /* 去除浏览器默认样式 */
+	margin: 0; /* 去除默认外边距 */
+	padding: 0; /* 去除默认内边距 */
+	border: unset; /* 去除边框 */
+	background: unset; /* 去除背景 */
+
+	/*
+	边框的圆角
+	算法：
+	圆角 = 开关的高度 / 2
+	 */
+	--toggle-border: calc(var(--toggle-size) * 2);
+
+	/*
+	内边距
+	算法：
+	内边距 = 开关的大小 * 0.1
+	 */
+	--toggle-padding: calc(var(--toggle-size) * 0.1); /* 内边距 */
+
+	position: relative;
+	background-color: @nord1;
+	border: 2px solid var(--toggle-color);
+	border-radius: var(--toggle-border);
+
+	/*
+	算法：
+	高度 = 开关大小 + 上下内边距 * 2
+	 */
+	height: calc(var(--toggle-size) + var(--toggle-padding) * 2);
+
+	/*
+	算法：
+	宽度 = 开关大小 * 2 + 左右内边距 * 2
+	 */
+	width: calc(var(--toggle-size) * 2 + var(--toggle-padding) * 2);
+
+	/* 中间的小球 */
+	&::after {
+		content: '';
+		position: absolute;
+		border-radius: 100%;
+		background-color: @nord4;
+		transition: left 0.3s ease;
+
+		// 高度垂直居中
+		top: 50%;
+		transform: translateY(-50%);
+
+		/*
+		算法：
+		小球的位置 = 内边距 + 内边距 / 2
+		 */
+		left: calc(var(--toggle-padding) + var(--toggle-padding) / 2);
+
+		/*
+		算法：
+		小球的大小 = 开关大小 - 内边距 * 2
+		 */
+		width: calc(var(--toggle-size) - var(--toggle-padding) * 2);
+		height: calc(var(--toggle-size) - var(--toggle-padding) * 2);
+	}
+
+	/* 选中时小球的位置变化 */
+	&:checked {
+		&::after {
+			left: calc(100% - var(--toggle-size) + var(--toggle-padding)); /* 移动到右边 */
+		}
+	}
+}

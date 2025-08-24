@@ -86,8 +86,5 @@ export default defineNuxtConfig({
 		svgo: true,
 		global: false,
 		defaultImport: 'component',
-		svgoConfig: {
-			multipass: true,
-		},
 	},
 });
