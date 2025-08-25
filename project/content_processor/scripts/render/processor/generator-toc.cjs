@@ -64,7 +64,7 @@ function generatorToc(body) {
 	if (tocMarkdown.trim() === '') return false;
 
 	// 渲染 Markdown 为 HTML
-	const render = Renderer.Render(tocMarkdown);
+	const render = Renderer.Render(tocMarkdown, false);
 	return render.html;
 }
 

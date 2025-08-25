@@ -16,16 +16,33 @@ namespace MarkdownRender
 			.Build();
 
 		[JSExport("Render")]
-		public static JSObject Render(string MarkdownText)
+		public static JSObject Render(string MarkdownText, bool UseProcessor)
 		{
 			// 判断是否为空
 			if (string.IsNullOrWhiteSpace(MarkdownText))
+			{
 				throw new Exception("输入的 Markdown 文本不能为空");
+			}
 
-			var document = Markdown.Parse(MarkdownText, pipeline); // 解析 Markdown
+			// 解析 Markdown 文本
+			var document = Markdown.Parse(MarkdownText, pipeline);
 
-			string FrontMatter = ExtractYamlFrontMatter.Parse(document); // 解析 Front Matter 得到 YAML
-			string HTML = document.ToHtml(pipeline); // 转换为 HTML
+			// 提取 Front Matter
+			var FrontMatter = ExtractYamlFrontMatter.Parse(document) ?? JSValue.Undefined;
+
+			// 转换为 HTML
+			var HTML = document.ToHtml(pipeline);
+
+			if (string.IsNullOrWhiteSpace(HTML))
+			{
+				throw new Exception("Markdown 渲染后的 HTML 结果为空");
+			}
+
+			if (UseProcessor)
+			{
+				// 使用自定义处理器进行二次处理
+				HTML = Process.Render(HTML);
+			}
 
 			return new JSObject { { "html", HTML }, { "frontMatter", FrontMatter } };
 		}

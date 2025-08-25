@@ -22,15 +22,16 @@ h4,
 h5,
 h6 {
 	position: relative;
+	padding-left: 1rem;
 
 	&::after {
-		top: 10%;
-		height: 80%;
+		left: 0;
+		top: 5%;
+		height: 90%;
 		content: '';
-		left: -0.8rem;
 		width: 0.25rem;
 		position: absolute;
-		background-color: @nord8;
+		background-color: saturate(@nord9, 40%);
 		border-radius: 0.2rem;
 	}
 }

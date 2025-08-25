@@ -97,7 +97,11 @@ const toc = (content: HTMLElement, toc: HTMLElement): void => {
 	const tocLinksCache = Array.from(toc.querySelectorAll('a[href^="#"]')) as HTMLAnchorElement[];
 
 	scrollToNearestHeading(contentCache);
-	updateTocHighlightOnScroll(contentCache, tocLinksCache);
+
+	// 仅在非移动设备上启用目录高亮功能
+	if (!globalThis.matchMedia('(max-width: 600px)').matches) {
+		updateTocHighlightOnScroll(contentCache, tocLinksCache);
+	}
 };
 
 export default toc;

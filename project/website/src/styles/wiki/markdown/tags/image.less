@@ -1,18 +1,32 @@
-p:has(img) {
+@import url('nord/src/lesscss/nord.less');
+
+div.image-group {
+	gap: 1rem;
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
-	margin: 1.5rem 0;
 }
 
-p:has(img) > img {
-	width: auto;
-	height: auto;
-	max-width: 25rem;
-	max-height: 25rem;
-	object-fit: contain; // 防止裁切内容
-	border-radius: 0.5rem;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+p.image {
+	width: 15rem;
+	display: flex;
+	padding: 1rem;
+	margin: 1.5rem 0;
+	margin-right: 1rem;
+	align-items: center;
+	//vertical-align: top;
+	//display: inline-flex;
+	flex-direction: column;
+	border: 1px solid rgba(@nord10, 70%);
 
-	// 小屏幕
-	@apply max-md:max-w-[20rem] max-md:max-h-[20rem];
+	img {
+		height: auto;
+		max-width: 100%;
+		object-fit: contain; // 防止裁切内容
+		border: 1px solid rgba(saturate(@nord10, 20%), 50%);
+	}
+
+	span {
+		margin: 1rem 0;
+	}
 }

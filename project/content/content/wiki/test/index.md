@@ -142,6 +142,22 @@ Hello, I am English
 
 ### 图片
 
+### 多张图片组
+
+![站点图标](/favicon.png '这是站点图标')
+![站点图标](/favicon.png '这是站点图标')
+![站点图标](/favicon.png '这是站点图标')
+![站点图标](/favicon.png '这是站点图标')
+![站点图标](/favicon.png '这是站点图标')
+![站点图标](/favicon.png '这是站点图标')
+![站点图标](/favicon.png '这是站点图标')
+![站点图标](/favicon.png '这是站点图标')
+![站点图标](/favicon.png '这是站点图标')
+
+### 单张孤立图片
+
+![站点图标](/favicon.png '这是站点图标')
+
 ![站点图标](/favicon.png '这是站点图标')
 
 ## 引用

@@ -5,13 +5,13 @@ namespace MarkdownRender
 {
 	internal static class ExtractYamlFrontMatter
 	{
-		internal static string Parse(MarkdownDocument markdownText)
+		internal static string? Parse(MarkdownDocument markdownText)
 		{
 			var yamlBlock = markdownText.Descendants<YamlFrontMatterBlock>().FirstOrDefault();
 
 			if (yamlBlock == null)
 			{
-				return string.Empty;
+				return null;
 			}
 
 			return yamlBlock.Lines.ToString().Trim();

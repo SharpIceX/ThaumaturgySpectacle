@@ -24,7 +24,7 @@ hexo.extend.renderer.register(
 			const markdownJson = getMarkdownJson(hexo, data.path);
 
 			// Markdown 渲染结果
-			const render = Renderer.Render(fs.readFileSync(data.path, 'utf8'));
+			const render = Renderer.Render(fs.readFileSync(data.path, 'utf8'), true);
 
 			// Markdown Front Matter 内容
 			const markdownFrontMatter = yaml.parse(render.frontMatter) || {};
@@ -38,7 +38,7 @@ hexo.extend.renderer.register(
 			const body = document.body;
 
 			// 处理超链接
-			urlProcessor(data, body);
+			urlProcessor(hexo, data, document, body);
 
 			// 生成目录
 			const tocHTML = generateToc(body);

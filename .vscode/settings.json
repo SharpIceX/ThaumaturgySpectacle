@@ -25,6 +25,11 @@
 		".csharpierignore": "ignore"
 	},
 
+	// Markdown Lint
+	"markdownlint.config": {
+		"MD033": false
+	},
+
 	"json.schemas": [
 		{
 			"fileMatch": ["/project/content/content/**/*.json"],

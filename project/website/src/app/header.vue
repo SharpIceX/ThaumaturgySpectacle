@@ -13,27 +13,19 @@
 					</li>
 					<li>
 						<DropdownMenu>
-							<template #trigger-on>
+							<template #trigger>
 								<button aria-label="百科-下拉菜单" class="navbar-content">
 									<span aria-hidden="true">
-										<DescriptionIcon />
+										<DescriptionIcon aria-hidden="true" />
 									</span>
 									<span class="navbar-text">百科</span>
-									<span aria-hidden="true">
-										<ArrowDropDownIcon />
-									</span>
 								</button>
 							</template>
+							<template #trigger-on>
+								<ArrowDropDownIcon />
+							</template>
 							<template #trigger-off>
-								<button aria-label="百科-下拉菜单" class="navbar-content">
-									<span aria-hidden="true">
-										<DescriptionIcon />
-									</span>
-									<span class="navbar-text">百科</span>
-									<span aria-hidden="true">
-										<ArrowRightIcon />
-									</span>
-								</button>
+								<ArrowRightIcon aria-hidden="true" />
 							</template>
 							<template #content>
 								<li>

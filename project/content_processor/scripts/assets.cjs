@@ -13,8 +13,6 @@ hexo.extend.filter.register('before_exit', function () {
 	// 获取所有文件
 	const files = globSync('**', { cwd: hexo.public_dir, nodir: true });
 
-	console.log(`找到 ${files.length} 个资源文件。`);
-
 	for (const file of files) {
 		// 跳过 .vue 文件
 		if (file.endsWith('.vue')) continue;
@@ -31,6 +29,6 @@ hexo.extend.filter.register('before_exit', function () {
 		// 移动文件
 		fs.moveSync(sourcePath, destinationPath, { overwrite: true });
 
-		console.log(`移动 ${sourcePath} -> ${destinationPath}`);
+		hexo.log.info(`移动 ${sourcePath} -> ${destinationPath}`);
 	}
 });

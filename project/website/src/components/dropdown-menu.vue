@@ -1,12 +1,15 @@
 <template>
-	<div class="dropdown">
+	<div tabindex="0" class="dropdown">
+		<div class="dropdown-trigger">
+			<slot name="trigger" />
+		</div>
 		<div class="dropdown-trigger-off">
 			<slot name="trigger-off" />
 		</div>
 		<div class="dropdown-trigger-on">
 			<slot name="trigger-on" />
 		</div>
-		<div class="dropdown-menu" role="menu" @click="blurActiveElement" @mouseleave="blurActiveElement">
+		<div class="dropdown-content" role="menu" @click="blurActiveElement" @mouseleave="blurActiveElement">
 			<ul>
 				<slot name="content" />
 			</ul>
@@ -29,16 +32,16 @@ function blurActiveElement() {
 @import url('nord/src/lesscss/nord.less');
 
 .dropdown {
+	display: flex;
 	position: relative;
 
-	// 默认状态
-	.dropdown-menu {
-		padding: 0.5rem 1rem;
+	.dropdown-content {
+		top: 100%;
 		position: absolute;
+		padding: 0.5rem 1rem;
 
 		ul {
 			width: 10rem;
-			display: none;
 			padding: 0.5rem;
 			border-radius: 0.5rem;
 			flex-direction: column;
@@ -54,14 +57,24 @@ function blurActiveElement() {
 			}
 		}
 	}
-	.dropdown-trigger-on {
-		display: none;
+
+	// 默认状态
+	&:not(:focus-within) {
+		.dropdown-content {
+			ul {
+				display: none;
+			}
+		}
+
+		.dropdown-trigger-on {
+			display: none;
+		}
 	}
 
 	// 焦点或悬停状态
 	&:focus-within,
 	&:hover {
-		.dropdown-menu {
+		.dropdown-content {
 			ul {
 				display: flex;
 				animation: fadeIn 0.3s ease-in-out;

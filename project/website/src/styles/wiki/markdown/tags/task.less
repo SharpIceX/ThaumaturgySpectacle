@@ -1,0 +1,15 @@
+@import url('nord/src/lesscss/nord.less');
+
+ul.contains-task-list {
+	li.task-list-item {
+		// 任务完成
+		.task-status-done {
+			color: saturate(@nord8, 40%);
+		}
+
+		// 任务未完成
+		.task-status-undone {
+			color: saturate(@nord11, 50%);
+		}
+	}
+}

@@ -1,24 +1,26 @@
 'use strict';
 
-const jsdom = require('jsdom');
 const path = require('node:path');
 const { encodeURI } = require('@ts/utils');
 
-const { document } = new jsdom.JSDOM(`...`).window;
-
 /**
  * 处理文档中的 URL 链接，将其转换为 NuxtLink 组件并处理相对路径。
+ * @param {import("hexo")} hexo - Hexo 实例
  * @param {import("hexo/dist/extend/renderer").StoreFunctionData} data - 渲染数据对象
+ * @param {Document} document - JSDOM 文档对象
  * @param {HTMLElement} body - JSDOM 文档的 body 元素
  * @returns {void}
  */
-function urlProcessor(data, body) {
+function urlProcessor(hexo, data, document, body) {
 	// 获取所有超链接
 	const links = body.querySelectorAll('a');
 
 	for (const link of links) {
 		// 删除无 href 属性的链接
-		if (!link.getAttribute('href')) link.remove();
+		if (!link.getAttribute('href')) {
+			link.remove();
+			continue;
+		}
 
 		// 创建 NuxtLink 元素
 		const nuxtLink = document.createElement('nuxt-link');
@@ -64,6 +66,12 @@ function urlProcessor(data, body) {
 			// 进行 URL 编码
 			to = encodeURI(url, true);
 		}
+
+		// 设置处理后的路径
+		nuxtLink.setAttribute('to', to);
+
+		// 替换原有链接
+		link.replaceWith(nuxtLink);
 	}
 }
 
