@@ -62,6 +62,9 @@ export default defineNuxtConfig({
 			// 这个其实是因为在 package.json 使用了 Git 或 URL 依赖所导致的问题。
 			preserveSymlinks: true,
 		},
+		optimizeDeps: {
+			include: ['vue3-toastify'],
+		},
 	},
 	unocss: {
 		nuxtLayers: true,
