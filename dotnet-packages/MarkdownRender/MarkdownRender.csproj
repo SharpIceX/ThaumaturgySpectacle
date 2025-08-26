@@ -3,8 +3,8 @@
 		<DebugType>embedded</DebugType>
 		<TargetFramework>net8.0</TargetFramework>
 		<RootNamespace>MarkdownRender</RootNamespace>
+		<NodeApiAssemblyJSModuleType>esm</NodeApiAssemblyJSModuleType>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-		<NodeApiAssemblyJSModuleType>commonjs</NodeApiAssemblyJSModuleType>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Remove="LICENSE" />
