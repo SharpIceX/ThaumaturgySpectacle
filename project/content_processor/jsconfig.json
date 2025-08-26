@@ -5,7 +5,7 @@
 		"module": "commonjs",
 		"resolveJsonModule": true,
 		"moduleResolution": "node",
-		"types": ["hexo"]
+		"types": ["hexo", "./types/global.d.ts"]
 	},
 	"include": ["**/*.cjs"],
 	"exclude": ["node_modules", "dist"]

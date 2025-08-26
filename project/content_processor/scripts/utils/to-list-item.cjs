@@ -4,7 +4,7 @@ const path = require('node:path/posix');
 
 /**
  * 构建页面列表数据项
- * @param {import('../types/common.cjs').PagesDataType} page - 页面数据
+ * @param {import("hexo/dist/types").PageSchema} page - 页面数据
  * @returns {import('./generate-list-page.cjs').ListDataType} - 返回列表数据项
  */
 function toListItem(page) {

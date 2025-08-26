@@ -5,7 +5,7 @@ const generateListPage = require('../utils/generate-list-page.cjs');
 
 /**
  * 提取页面所属分类为数组
- * @param {import("../types/common.cjs").PagesDataType} page - 页面数据
+ * @param {import("hexo/dist/types").PageSchemaExtra} page - 页面数据
  * @returns {string[]} - 返回分类数组
  */
 function extractCategories(page) {
@@ -15,7 +15,7 @@ function extractCategories(page) {
 }
 
 hexo.extend.generator.register('category', function (locals) {
-	/** @type {import("../types/common.cjs").PagesDataType[]} */
+	/** @type {import("hexo/dist/types").PageSchemaExtra[]} */
 	const pages = locals.pages.data;
 
 	/** 分类名称集合 */
