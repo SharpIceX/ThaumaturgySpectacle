@@ -1,4 +1,3 @@
-import { encodeURIComponent } from '@ts/utils';
 import { Renderer } from '@ts-dotnet-packages/markdown-render';
 
 interface TocContentType {
@@ -30,7 +29,7 @@ const main = (document: Document): string | false => {
 	const body = document.body;
 
 	const tocContent: TocContentType[] = [...body.querySelectorAll('h2, h3, h4, h5, h6')].map(heading => {
-		const id = encodeURIComponent(heading.textContent, true);
+		const id = encodeURIComponent(heading.textContent).toLowerCase();
 		heading.id = id;
 
 		const level = {

@@ -63,7 +63,7 @@ export default defineNuxtConfig({
 			preserveSymlinks: true,
 		},
 		optimizeDeps: {
-			include: ['vue3-toastify'],
+			include: ['vue3-toastify', 'pangu/browser'],
 		},
 	},
 	unocss: {

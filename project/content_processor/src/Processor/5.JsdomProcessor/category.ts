@@ -6,7 +6,7 @@ const main: subProcessorFunction = (document, data): string => {
 
 	// 创建分类元素
 	const categoryElement = document.createElement('div');
-	categoryElement.className = 'categorie';
+	categoryElement.className = 'category';
 	categoryElement.innerHTML = '<strong>分类：</strong>';
 
 	const categorys = [];
@@ -21,7 +21,7 @@ const main: subProcessorFunction = (document, data): string => {
 	// 生成分类链接
 	const categoryLinks = categorys.map(category => {
 		const a = document.createElement('nuxt-link');
-		a.setAttribute('to', encodeURI(`/分类/${category}`));
+		a.setAttribute('to', encodeURI(`/分类/${category}`, true));
 		a.textContent = category;
 		return a;
 	});

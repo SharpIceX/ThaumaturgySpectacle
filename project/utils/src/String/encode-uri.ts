@@ -59,13 +59,4 @@ function encode(inputString: string, extraUnescaped = '', toLowerCase = false): 
  */
 const encodeURI = (inputString: string, toLowerCase = false): string => encode(inputString, ';/?:@&=+$,#', toLowerCase);
 
-/**
- * 编码 URI 组件
- * @see https://tc39.es/ecma262/#sec-encodeuricomponent-uricomponent
- * @param uriComponent - 未编码 URI 组件的值。
- * @param toLowerCase - 是否将字符串转换为小写（默认 false，标准一般为大写）。
- * @returns 编码后的内容
- */
-const encodeURIComponent = (uriComponent: string, toLowerCase = false): string => encode(uriComponent, '', toLowerCase);
-
-export { encode, encodeURI, encodeURIComponent };
+export { encode, encodeURI };
