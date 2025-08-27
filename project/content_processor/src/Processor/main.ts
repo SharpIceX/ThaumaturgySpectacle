@@ -5,9 +5,10 @@ import initMarkdownData from './1.InitMarkdownData/main';
 import InitMarkdownJson from './2.InitMarkdownJson/main';
 import InitMarkdownTime from './3.InitMarkdownTime/main';
 import RenderMarkdown from './4.RenderMarkdown/main';
-import JsdomProcessor from './5.JsdomProcessor/main';
-import CreateAllPage from './6.CreateAllPage/main';
-import CreateCategoryPage from './7.CreateCategoryPage/main';
+import CreateRss from './5.CreateRss/main';
+import JsdomProcessor from './6.JsdomProcessor/main';
+import CreateAllPage from './7.CreateAllPage/main';
+import CreateCategoryPage from './8.CreateCategoryPage/main';
 
 export type processorFunction = (content: contentType[]) => Promise<void>;
 
@@ -31,6 +32,7 @@ const main = async (content: contentType[]) => {
 	await runProcessor(content, InitMarkdownJson, 'Markdown JSON 数据');
 	await runProcessor(content, InitMarkdownTime, 'Markdown 时间数据');
 	await runProcessor(content, RenderMarkdown, 'Markdown 渲染');
+	await runProcessor(content, CreateRss, 'RSS 创建');
 	await runProcessor(content, JsdomProcessor, 'JSDom');
 	await runProcessor(content, CreateAllPage, '创建"特殊页面/所有页面"');
 	await runProcessor(content, CreateCategoryPage, '创建分类页面');

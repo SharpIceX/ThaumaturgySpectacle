@@ -116,6 +116,30 @@ export default {
 				rel: 'manifest',
 				href: '/manifest.webmanifest',
 			},
+
+			// RSS
+			{
+				rel: 'alternate',
+				type: 'application/rss+xml',
+				title: 'RSS',
+				href: '/rss.xml',
+			},
+
+			// Atom
+			{
+				rel: 'alternate',
+				type: 'application/atom+xml',
+				title: 'Atom',
+				href: '/atom.xml',
+			},
+
+			// Json Feed
+			{
+				rel: 'alternate',
+				type: 'application/feed+json',
+				title: 'JSON Feed',
+				href: '/feed.json',
+			},
 		],
 	},
 } satisfies NuxtConfig['app'];
