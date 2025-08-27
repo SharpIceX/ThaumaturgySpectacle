@@ -5,7 +5,7 @@
 	"description": "幻术渲染器",
 	"scripts": {
 		"build": "tsx ./src/main.ts",
-		"clean": "rimraf clean"
+		"clean": "rimraf dist"
 	},
 	"dependencies": {
 		"@ts-dotnet-packages/markdown-render": "link:../../dotnet-packages/MarkdownRender",

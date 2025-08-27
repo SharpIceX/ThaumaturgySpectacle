@@ -6,31 +6,34 @@ import InitMarkdownJson from './2.InitMarkdownJson/main';
 import InitMarkdownTime from './3.InitMarkdownTime/main';
 import RenderMarkdown from './4.RenderMarkdown/main';
 import JsdomProcessor from './5.JsdomProcessor/main';
+import CreateAllPage from './6.CreateAllPage/main';
+import CreateCategoryPage from './7.CreateCategoryPage/main';
 
 export type processorFunction = (content: contentType[]) => Promise<void>;
 
 const Log = new Logger('Processor');
 
+/**
+ * 运行处理器并记录时间
+ * @param content 内容数组
+ * @param processFunction 处理器函数
+ * @param stepName 处理步骤名称
+ */
+async function runProcessor(content: contentType[], processFunction: processorFunction, stepName: string) {
+	const start = Date.now();
+	await processFunction(content);
+	const duration = Date.now() - start;
+	Log.info(`${stepName}处理完成，用时${duration}ms`);
+}
+
 const main = async (content: contentType[]) => {
-	// 1. 首先初始化 Markdown 内容
-	await initMarkdownData(content);
-	Log.info('Markdown 数据处理完成');
-
-	// 2. 处理 Markdown JSON 数据
-	await InitMarkdownJson(content);
-	Log.info('Markdown JSON 数据处理完成');
-
-	// 3. 初始化 Markdown 时间数据
-	await InitMarkdownTime(content);
-	Log.info('Markdown 时间数据处理完成');
-
-	// 4. 渲染 Markdown 内容和生成 Front Matter
-	await RenderMarkdown(content);
-	Log.info('Markdown 渲染完成');
-
-	// 5. JSDom 处理
-	await JsdomProcessor(content);
-	Log.info('JSDom 处理完成');
+	await runProcessor(content, initMarkdownData, 'Markdown 数据');
+	await runProcessor(content, InitMarkdownJson, 'Markdown JSON 数据');
+	await runProcessor(content, InitMarkdownTime, 'Markdown 时间数据');
+	await runProcessor(content, RenderMarkdown, 'Markdown 渲染');
+	await runProcessor(content, JsdomProcessor, 'JSDom');
+	await runProcessor(content, CreateAllPage, '创建"特殊页面/所有页面"');
+	await runProcessor(content, CreateCategoryPage, '创建分类页面');
 };
 
 export default main;

@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import Logger from '../../logger';
 import type { processorFunction } from '../main';
 import wikiJsonSchema from '@ts/schema/dist/wiki.json';
+import contentRemove from '../../utils/content-remove';
 import type { Schema as WikiSchema } from '@ts/schema/types/wiki.d.ts';
 
 const Log = new Logger('Processor:InitMarkdownData');
@@ -22,14 +23,13 @@ const main: processorFunction = async content => {
 
 	await Promise.all(
 		content.map(async item => {
-			if (item.inputPath && item.inputPath.endsWith('.md')) {
+			if (item.inputPath && item.outputPath && item.outputPath.endsWith('.vue')) {
 				const dirname = path.dirname(item.inputPath);
 				const basename = path.basename(item.inputPath, path.extname(item.inputPath));
 				const jsonFilePath = path.join(dirname, `${basename}.json`);
 
 				// 不存在则跳过
 				if (!(await exists(jsonFilePath))) return;
-
 				RemoveFileList.add(jsonFilePath);
 
 				// 读取 JSON 文件内容
@@ -60,7 +60,7 @@ const main: processorFunction = async content => {
 						})
 						.join('\n\n');
 
-					Log.error(`校验 ${jsonFilePath} 文件失败，此 Markdown JSON 数据将被忽略：\n${errorMessages}`);
+					Log.error(`${jsonFilePath} 文件无法通过校验，此 Markdown JSON 数据将被忽略：\n${errorMessages}`);
 					return;
 				}
 
@@ -72,9 +72,7 @@ const main: processorFunction = async content => {
 	);
 
 	// 移除 JSON 文件项
-	if (RemoveFileList.size > 0) {
-		content = content.filter(item => item.inputPath && !RemoveFileList.has(item.inputPath));
-	}
+	contentRemove(content, RemoveFileList);
 };
 
 export default main;

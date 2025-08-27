@@ -7,6 +7,7 @@
 import { glob } from 'glob';
 import path from 'node:path';
 import Logger from './logger';
+import writeDisk from './write-disk';
 import { contentType } from './content';
 import Processor from './Processor/main.js';
 
@@ -17,7 +18,7 @@ export const projectPath = path.resolve(import.meta.dirname, '../../../');
 export const contentPath = path.join(projectPath, '/project/content/content');
 
 /** 输出目录 */
-const outputPath = path.resolve(import.meta.dirname, '../dist');
+export const outputPath = path.resolve(import.meta.dirname, '../dist');
 
 /** 所有数据 */
 const content: contentType[] = [];
@@ -25,6 +26,9 @@ const content: contentType[] = [];
 const Log = new Logger('Main');
 
 (async () => {
+	// 当前时间
+	const now = new Date();
+
 	// 获取内容目录下所有文件
 	const contentFilesList = await glob('**/*', {
 		cwd: contentPath,
@@ -50,6 +54,12 @@ const Log = new Logger('Main');
 	await Processor(content);
 	Log.info('处理器处理完毕');
 
-	// TODO: 后续写盘操作
-	console.log(content);
+	// 写盘
+	await writeDisk(content);
+	Log.info('全部内容写入完毕');
+
+	// 结束时间
+	const end = new Date();
+	const duration = (end.getTime() - now.getTime()) / 1000;
+	Log.info(`总用时: ${duration} 秒`);
 })();

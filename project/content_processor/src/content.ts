@@ -11,6 +11,9 @@ export interface contentType {
 	/** 内容 */
 	content?: string;
 
+	/* 强制复制到 pages 目录 */
+	forceCopyToPages?: boolean;
+
 	/** 元数据 */
 	metadata?: {
 		toc?: string;
@@ -22,9 +25,7 @@ export interface contentType {
 		frontMatter?: {
 			title: string;
 			description?: string;
-			categories?: string | string[];
+			category?: string | string[];
 		};
-
-		[key: string]: unknown;
 	};
 }

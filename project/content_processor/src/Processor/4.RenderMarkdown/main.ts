@@ -1,6 +1,7 @@
 import yaml from 'yaml';
 import Logger from '../../logger';
 import type { processorFunction } from '../main';
+import contentRemove from '../../utils/content-remove';
 import { Renderer } from '@ts-dotnet-packages/markdown-render';
 
 const Log = new Logger('Processor:RenderMarkdown');
@@ -10,7 +11,7 @@ const main: processorFunction = async content => {
 
 	await Promise.all(
 		content.map(async item => {
-			if (item.inputPath && item.outputPath && item.outputPath.endsWith('.md') && item.content) {
+			if (item.inputPath && item.outputPath && item.outputPath.endsWith('.vue') && item.content) {
 				const renderResult = Renderer.Render(item.content, true);
 
 				if (!renderResult.frontMatter) {
@@ -33,9 +34,7 @@ const main: processorFunction = async content => {
 	);
 
 	// 移除无法渲染的文件项
-	if (RemoveFileList.size > 0) {
-		content = content.filter(item => item.inputPath && !RemoveFileList.has(item.inputPath));
-	}
+	contentRemove(content, RemoveFileList);
 };
 
 export default main;

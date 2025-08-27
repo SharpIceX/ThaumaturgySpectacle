@@ -29,7 +29,5 @@ interface InfoboxCharacter {
 }
 
 export interface Schema {
-	components?: {
-		InfoBox?: InfoboxCustom | InfoboxCharacter;
-	};
+	InfoBox?: InfoboxCustom | InfoboxCharacter;
 }

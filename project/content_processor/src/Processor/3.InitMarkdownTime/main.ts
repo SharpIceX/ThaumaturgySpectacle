@@ -70,7 +70,7 @@ async function getUpdatedTime(filePath: string): Promise<DateTime> {
 const main: processorFunction = async content => {
 	await Promise.all(
 		content.map(async item => {
-			if (item.inputPath && item.outputPath && item.outputPath.endsWith('.md')) {
+			if (item.inputPath && item.outputPath && item.outputPath.endsWith('.vue')) {
 				if (!item.metadata) item.metadata = {};
 				item.metadata.time = {
 					created: await getCreatedTime(item.inputPath),
