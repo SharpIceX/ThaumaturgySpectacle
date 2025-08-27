@@ -1,7 +1,0 @@
-root: /wiki/
-
-source_dir: ../content/content
-public_dir: dist/pages
-
-exclude:
-  - '**/*.json'
