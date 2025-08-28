@@ -24,6 +24,7 @@ interface InfoboxCharacter {
 
 		性别?: '男' | '女';
 		物种?: string;
+		属性?: string | string[];
 		生活地区?: string;
 	};
 }

@@ -59,6 +59,15 @@ const characterInfoProcessor = (
 	// 物种
 	if (data.物种) ProcessorData.push({ content: '物种', content_right: data.物种 });
 
+	// 属性
+	if (data.属性) {
+		if (Array.isArray(data.属性)) {
+			ProcessorData.push({ content: '属性', content_right: data.属性.join('、') });
+		} else {
+			ProcessorData.push({ content: '属性', content_right: data.属性 });
+		}
+	}
+
 	// 生活地区
 	if (data.生活地区) ProcessorData.push({ content: '生活地区', content_right: data.生活地区 });
 
