@@ -1,0 +1,51 @@
+@import 'nord/src/lesscss/nord.less';
+
+// 脚注正文内的引用标记
+p {
+	a[href^='#fn'] {
+		color: @nord9;
+		text-decoration: none;
+
+		sup {
+			cursor: pointer;
+			font-size: 1em;
+			vertical-align: super;
+			color: @nord13;
+			transition: color 0.2s ease;
+
+			&:hover {
+				color: @nord14;
+			}
+		}
+	}
+}
+
+.footnotes {
+	hr {
+		display: none;
+	}
+
+	ol {
+		padding-left: 1.25rem;
+
+		li {
+			p {
+				margin: 0;
+
+				// 返回链接
+				a {
+					color: @nord9;
+					cursor: pointer;
+					font-weight: 600;
+					font-family: monospace;
+					text-decoration: none;
+					transition: color 0.2s ease;
+
+					&:hover {
+						color: @nord13;
+					}
+				}
+			}
+		}
+	}
+}

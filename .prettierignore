@@ -1,0 +1,19 @@
+# Node 模块
+*/node_modules/*
+
+# pnpm
+/pnpm-lock.yaml
+
+# 构建/编译缓存
+/.cache
+
+# 构建输出
+*/dist/*
+
+# C#项目
+/dotnet-packages/.vs
+/dotnet-packages/**/packages.lock.json
+# 其他项目
+/project/website/.nuxt
+/project/website/.output
+/project/content_processor/db.json

@@ -1,0 +1,21 @@
+{
+	"recommendations": [
+		// Vue
+		"vue.volar",
+
+		// UnoCSS
+		"antfu.unocss",
+
+		// ESLint
+		"dbaeumer.vscode-eslint",
+
+		// Axe Accessibility Linter
+		"deque-systems.vscode-axe-linter",
+
+		// 格式化工具
+		"esbenp.prettier-vscode", // Prettier
+
+		// Markdown
+		"davidanson.vscode-markdownlint" // Markdown Lint
+	]
+}

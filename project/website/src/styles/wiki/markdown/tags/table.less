@@ -1,0 +1,43 @@
+@import 'nord/src/lesscss/nord.less';
+
+table:not(.custom) {
+	border-collapse: collapse;
+	margin-bottom: 1em;
+	width: 100%;
+
+	// 表头
+	thead {
+		background-color: @nord3;
+
+		th {
+			font-weight: 600;
+			color: @nord6;
+		}
+	}
+
+	// 表格行
+	tbody > tr {
+		border-bottom: 1px solid @nord3;
+
+		&:nth-child(even) {
+			background-color: @nord1;
+		}
+
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+
+	// 单元格
+	td,
+	th {
+		padding: 8px 12px;
+		text-align: left;
+		border: 1px solid @nord3;
+	}
+
+	td[align='center'],
+	th[align='center'] {
+		text-align: center;
+	}
+}

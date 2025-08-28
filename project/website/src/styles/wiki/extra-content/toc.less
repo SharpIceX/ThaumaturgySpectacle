@@ -1,0 +1,39 @@
+@import url('nord/src/lesscss/nord.less');
+
+.toc {
+	@apply "w-inherit max-md:w-full";
+
+	top: 0;
+	position: sticky;
+
+	.toc-content {
+		@apply "max-h-[25rem] overflow-y-auto";
+
+		ol {
+			li {
+				counter-increment: item; // 计数器递增
+				padding-left: 1em; // 缩进
+
+				&::before {
+					opacity: 0.4;
+					margin-right: 0.5em; // 右边距
+					content: counters(item, '.'); // 使用计数器
+				}
+
+				li ol {
+					counter-reset: item; // 重置计数器
+				}
+
+				a {
+					&:hover {
+						@apply "text-nord10";
+					}
+				}
+			}
+		}
+
+		.select-toc {
+			background-color: saturate(@nord10, 30%);
+		}
+	}
+}

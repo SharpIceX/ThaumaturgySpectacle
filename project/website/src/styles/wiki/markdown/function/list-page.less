@@ -1,0 +1,34 @@
+@import 'nord/src/lesscss/nord.less';
+
+.custom.list-page {
+	gap: 0.5rem 2rem;
+	display: grid;
+	justify-items: center;
+	grid-template-columns: repeat(6, 1fr); /* 每行 6 个等宽列 */
+
+	li {
+		list-style-type: disc;
+
+		a {
+			color: @nord8;
+
+			&:hover {
+				color: @nord10;
+			}
+		}
+	}
+}
+
+// 小屏幕
+@media (max-width: 768px) {
+	.custom.list-page {
+		grid-template-columns: repeat(2, 1fr); /* 每行 2 个等宽列 */
+	}
+}
+
+// 中屏幕
+@media (min-width: 769px) and (max-width: 1024px) {
+	.custom.list-page {
+		grid-template-columns: repeat(3, 1fr); /* 每行 3 个等宽列 */
+	}
+}

@@ -1,0 +1,8 @@
+# Node 模块
+**/node_modules/*
+
+# C#
+**/dist/*
+
+# Visual Studio
+.vs/

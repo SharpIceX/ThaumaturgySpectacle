@@ -1,0 +1,54 @@
+{
+	"lang": "zh-CN",
+	"name": "幻术奇象",
+	"short_name": "幻术奇象",
+	"scope": "/",
+	"start_url": "/",
+	"orientation": "any",
+	"display": "standalone",
+	"theme_color": "#679DE3",
+	"background_color": "#ffffff",
+	"id": "https://ts.sharpice.top",
+	"description": "欢迎来到由锐冰打造的幻术与奇象的世界！",
+	"icons": [
+		{
+			"purpose": "any",
+			"sizes": "1024x1024",
+			"type": "image/png",
+			"src": "/favicon.png"
+		},
+		{
+			"purpose": "any",
+			"sizes": "512x512",
+			"type": "image/x-icon",
+			"src": "/favicon.ico"
+		},
+		{
+			"purpose": "any",
+			"sizes": "144x144",
+			"type": "image/png",
+			"src": "/siteicon/144.png"
+		},
+		{
+			"purpose": "any",
+			"sizes": "180x180",
+			"type": "image/png",
+			"src": "/siteicon/180.png"
+		}
+	],
+	"shortcuts": [
+		{
+			"name": "百科",
+			"short_name": "百科",
+			"description": "世界观百科",
+			"url": "/wiki",
+			"icons": [
+				{
+					"sizes": "1024x1024",
+					"src": "/favicon.png"
+				}
+			]
+		}
+	],
+	"categories": ["books", "entertainment", "utilities"]
+}

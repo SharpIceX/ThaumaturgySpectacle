@@ -1,0 +1,37 @@
+@import 'nord/src/lesscss/nord.less';
+h2 {
+	@apply "text-2xl font-bold mt-6 mb-2";
+}
+h3 {
+	@apply "text-xl font-semibold mt-5 mb-2";
+}
+h4 {
+	@apply "text-lg font-medium mt-4 mb-1.5";
+}
+h5 {
+	@apply "text-base font-normal mt-3 mb-1";
+}
+h6 {
+	@apply "text-sm font-light mt-2 mb-1";
+}
+
+// 提示性装饰
+h2,
+h3,
+h4,
+h5,
+h6 {
+	position: relative;
+	padding-left: 1rem;
+
+	&::after {
+		left: 0;
+		top: 5%;
+		height: 90%;
+		content: '';
+		width: 0.25rem;
+		position: absolute;
+		background-color: saturate(@nord9, 40%);
+		border-radius: 0.2rem;
+	}
+}

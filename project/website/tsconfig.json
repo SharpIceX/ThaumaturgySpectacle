@@ -1,0 +1,11 @@
+{
+	"extends": ["../../tsconfig.json", "./.nuxt/tsconfig.json"],
+	"compilerOptions": {
+		"types": ["../../types/global.d.ts"],
+		"paths": {
+			"@/*": ["./src/*"],
+			"$/*": ["./node_modules/*"]
+		},
+		"lib": ["DOM"]
+	}
+}

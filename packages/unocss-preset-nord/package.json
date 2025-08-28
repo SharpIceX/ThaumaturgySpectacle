@@ -1,0 +1,9 @@
+{
+	"name": "@ts/unocss-preset-nord",
+	"private": true,
+	"type": "module",
+	"main": "./main.ts",
+	"dependencies": {
+		"unocss": "^66.4.2"
+	}
+}

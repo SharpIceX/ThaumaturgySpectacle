@@ -1,0 +1,7 @@
+# Nuxt 开发/构建输出
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist

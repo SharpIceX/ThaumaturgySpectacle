@@ -1,0 +1,31 @@
+@import url('$/@unocss/reset/tailwind.css'); /* 样式重置 */
+
+@import './fonts.less';
+@import './nprogress.less';
+@import './vue3-toastify.less';
+@import './animation/main.less';
+@import './components/main.less';
+@import './overlayscrollbars.less';
+
+/* Wiki 样式 */
+@import './wiki/main.less';
+
+@import url('$/@fontsource/noto-color-emoji'); /* 彩色 Emoji 字体 */
+
+@import url('$/overlayscrollbars/styles/overlayscrollbars.css');
+
+body {
+	@apply grid;
+	@apply 'h-screen w-screen';
+	@apply 'bg-nord0 text-nord4';
+
+	font-family: 'Lxgw Bright', 'Noto Color Emoji', sans-serif;
+}
+
+svg {
+	fill: currentColor;
+
+	// 修复 svg 因为没有设置宽高而导致的显示问题
+	width: 24px;
+	height: 24px;
+}

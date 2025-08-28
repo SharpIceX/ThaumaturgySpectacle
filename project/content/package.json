@@ -1,0 +1,6 @@
+{
+	"name": "@ts/content",
+	"private": true,
+	"type": "module",
+	"description": "幻术奇象的内容，百科、小说等"
+}

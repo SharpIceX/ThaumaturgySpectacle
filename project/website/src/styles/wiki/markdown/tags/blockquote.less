@@ -1,0 +1,16 @@
+@import 'nord/src/lesscss/nord.less';
+
+blockquote:not(.custom) {
+	margin: 1em 0;
+	padding: 0.75em 1.25em;
+	font-style: italic;
+
+	border-left: 4px solid @nord8;
+	background-color: fade(@nord8, 10%);
+
+	border-radius: 4px;
+
+	& p {
+		margin: 0;
+	}
+}

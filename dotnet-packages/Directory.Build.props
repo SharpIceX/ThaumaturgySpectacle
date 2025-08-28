@@ -1,0 +1,15 @@
+<Project>
+	<PropertyGroup>
+		<!-- 通用配置 -->
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<!-- 构建中间目录 -->
+		<BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\.cache\dotnet-packages\$(MSBuildProjectName)\obj\</BaseIntermediateOutputPath>
+		<!-- 构建输出目录 -->
+		<CustomBuildPath>$(MSBuildProjectDirectory)\dist\</CustomBuildPath>
+		<OutputPath>$(CustomBuildPath)</OutputPath>
+		<!-- 构建输出选项 -->
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+</Project>

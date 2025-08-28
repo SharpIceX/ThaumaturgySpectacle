@@ -1,0 +1,39 @@
+{
+	"compilerOptions": {
+		/* 基础配置 */
+		"strict": true,
+		"allowJs": true,
+		"target": "ESNext",
+		"module": "ESNext",
+		"sourceMap": true, // 生成 sourcemap
+		"declaration": true, // 生成 .d.ts 声明文件
+		"declarationMap": true, // 声明文件的 sourcemap
+		"esModuleInterop": true, // 兼容 CommonJS/ES 模块
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"moduleResolution": "bundler",
+		"types": ["node"],
+
+		/* 检查 */
+		"alwaysStrict": true, // 在输出中保留 "use strict"
+		"skipLibCheck": false, // 检查库文件
+		"noImplicitAny": true, // 禁止隐式 any 类型
+		"noUnusedLocals": true, // 禁止未使用的局部变量
+		"noImplicitThis": true, // 禁止隐式 this 类型
+		"strictNullChecks": true, // 严格 null/undefined 检查
+		"noImplicitReturns": true, // 函数必须有明确返回
+		"noImplicitOverride": true, // 禁止隐式覆盖基类方法
+		"noUnusedParameters": true, // 禁止未使用的函数参数
+		"strictFunctionTypes": true, // 严格函数类型检查
+		"strictBindCallApply": true, // 严格 bind/call/apply 检查
+		"noUncheckedIndexedAccess": true, // 索引访问自动包含 undefined 类型
+		"exactOptionalPropertyTypes": true, // 可选属性必须明确定义 undefined
+		"noFallthroughCasesInSwitch": true, // switch 语句的穿透检查
+		"strictPropertyInitialization": true, // 类属性初始化检查
+		"allowSyntheticDefaultImports": true, // 允许默认导入非默认导出的模块
+		"forceConsistentCasingInFileNames": true, // 强制文件名大小写一致
+		"noPropertyAccessFromIndexSignature": true // 强制索引签名使用方括号语法
+	},
+	"include": ["**/*.ts", "**/*.vue"],
+	"exclude": ["**/node_modules", "**/dist"]
+}

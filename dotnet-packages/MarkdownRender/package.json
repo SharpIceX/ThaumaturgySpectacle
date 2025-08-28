@@ -1,0 +1,18 @@
+{
+	"name": "@ts-dotnet-packages/markdown-render",
+	"private": true,
+	"type": "module",
+	"main": "./dist/MarkdownRender.js",
+	"types": "./types/MarkdownRender.d.ts",
+	"scripts": {
+		"clean": "rimraf dist",
+		"build": "dotnet build -c Release",
+		"postinstall": "dotnet build -c Release"
+	},
+	"dependencies": {
+		"node-api-dotnet": "^0.9.15"
+	},
+	"devDependencies": {
+		"rimraf": "^6.0.1"
+	}
+}

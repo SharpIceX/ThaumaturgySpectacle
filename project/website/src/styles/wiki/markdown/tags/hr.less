@@ -1,0 +1,32 @@
+@import 'nord/src/lesscss/nord.less';
+
+hr {
+	width: 80%;
+	height: 2em;
+	border: none;
+	margin: 1em auto;
+	position: relative;
+	text-align: center;
+	line-height: 2em;
+
+	background:
+		linear-gradient(to right, fade(@nord4, 20%) 50%, transparent 50%) left,
+		linear-gradient(to left, fade(@nord4, 20%) 50%, transparent 50%) right;
+	background-size: 80% 1px;
+	background-repeat: no-repeat;
+
+	&::after {
+		content: '幻术奇象';
+		position: relative;
+	}
+
+	// 小屏幕
+	@media (max-width: 640px) {
+		background-size: 60% 1px;
+	}
+
+	// 中屏幕
+	@media (min-width: 641px) and (max-width: 1024px) {
+		background-size: 70% 1px;
+	}
+}

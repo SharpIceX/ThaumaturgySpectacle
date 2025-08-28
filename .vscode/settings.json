@@ -1,0 +1,43 @@
+{
+	// 保存时自动格式化代码
+	"editor.formatOnSave": true,
+
+	// 使用 Prettier 作为默认格式化工具
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+
+	// Unocss 自动补全的匹配类型为模糊匹配模式。
+	"unocss.autocomplete.matchType": "fuzzy",
+
+	// TypeScript
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+
+	// CSS 数据文件
+	"css.customData": [".vscode/customData/css/unocss.json"],
+
+	// ESLint 验证的文件类型
+	"eslint.validate": ["javascript", "typescript", "vue"],
+
+	// UnoCSS 支持的语言类型
+	"unocss.languageIds": ["javascript", "typescript", "less", "vue"],
+
+	"files.associations": {
+		".csharpierignore": "ignore"
+	},
+
+	// Markdown Lint
+	"markdownlint.config": {
+		"MD033": false
+	},
+
+	"json.schemas": [
+		{
+			"fileMatch": ["/project/content/content/**/*.json"],
+			"url": "./packages/schema/dist/wiki.json"
+		}
+	],
+
+	"[xml]": {
+		"editor.defaultFormatter": "csharpier.csharpier-vscode"
+	}
+}
