@@ -1,0 +1,62 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - name: 签出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 安装 pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 'latest'
+          run_install: false
+
+      - name: 安装 Node.js 环境
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+          cache: 'pnpm'
+
+      - name: 准备 .NET Core 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+          cache: true
+
+      - name: 还原 .NET 依赖
+        working-directory: ./dotnet-packages
+        run: dotnet restore ThaumaturgySpectacle.sln --locked-mode
+
+      - name: 安装 NodeJS 依赖
+        run: pnpm install --frozen-lockfile
+
+      - name: 构建 wiki
+        working-directory: ./project/content_processor
+        run: NODE_ENV=production pnpm run build
+
+      - name: 构建网站
+        working-directory: ./project/website
+        run: NODE_ENV=production pnpm run build
+
+      - name: 部署到 Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          packageManager: pnpm
+          command: pages deploy ./project/website/dist --project-name=thaumaturgy-spectacle
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

@@ -86,23 +86,6 @@ const config: InfiniteDepthConfigWithExtends = tseslint.config(
 			})()), //  这个是 Nuxt 的 ESLint 配置
 		],
 	},
-	// Content Processor 项目
-	{
-		files: ['**/*.cjs'],
-		basePath: path.join(ProjectPath, '/project/content_processor'),
-		extends: [tseslint.configs.disableTypeChecked, jsdoc.configs['flat/recommended']],
-		languageOptions: {
-			parserOptions: {
-				sourceType: 'commonjs',
-			},
-			globals: {
-				hexo: true,
-				...globals.node,
-				...globals.browser,
-				...globals.commonjs,
-			},
-		},
-	},
 	{
 		ignores: [
 			// TypeScript 类型
