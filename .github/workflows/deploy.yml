@@ -51,7 +51,7 @@ jobs:
 
       - name: 构建网站
         working-directory: ./project/website
-        run: NODE_ENV=production pnpm run build
+        run: NODE_ENV=production pnpm run generate
 
       - name: 部署到 Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
