@@ -12,42 +12,48 @@
 						</NuxtLink>
 					</li>
 					<li>
-						<NuxtLink to="/wiki" aria-label="百科">
-							<DropdownMenu>
-								<template #trigger>
-									<button aria-label="百科-下拉菜单" class="navbar-content">
+						<DropdownMenu>
+							<template #trigger>
+								<button aria-label="百科-下拉菜单" class="navbar-content">
+									<span aria-hidden="true">
+										<DescriptionIcon aria-hidden="true" />
+									</span>
+									<span class="navbar-text">百科</span>
+								</button>
+							</template>
+							<template #trigger-on>
+								<ArrowDropDownIcon />
+							</template>
+							<template #trigger-off>
+								<ArrowRightIcon aria-hidden="true" />
+							</template>
+							<template #content>
+								<li>
+									<NuxtLink :to="encodeURI('/wiki', true)" class="navbar-content">
 										<span aria-hidden="true">
-											<DescriptionIcon aria-hidden="true" />
+											<DescriptionIcon />
 										</span>
-										<span class="navbar-text">百科</span>
-									</button>
-								</template>
-								<template #trigger-on>
-									<ArrowDropDownIcon />
-								</template>
-								<template #trigger-off>
-									<ArrowRightIcon aria-hidden="true" />
-								</template>
-								<template #content>
-									<li>
-										<NuxtLink :to="encodeURI('/特殊页面/所有页面', true)" class="navbar-content">
-											<span aria-hidden="true">
-												<AllInclusiveIcon />
-											</span>
-											<span aria-label="所有页面" class="ml-2">所有页面</span>
-										</NuxtLink>
-									</li>
-									<li>
-										<NuxtLink :to="encodeURI('/分类', true)" class="navbar-content">
-											<span aria-hidden="true">
-												<FavoriteBorderIcon />
-											</span>
-											<span aria-label="分类" class="ml-2">分类</span>
-										</NuxtLink>
-									</li>
-								</template>
-							</DropdownMenu>
-						</NuxtLink>
+										<span aria-label="Wiki 首页" class="ml-2">首页</span>
+									</NuxtLink>
+								</li>
+								<li>
+									<NuxtLink :to="encodeURI('/特殊页面/所有页面', true)" class="navbar-content">
+										<span aria-hidden="true">
+											<AllInclusiveIcon />
+										</span>
+										<span aria-label="所有页面" class="ml-2">所有页面</span>
+									</NuxtLink>
+								</li>
+								<li>
+									<NuxtLink :to="encodeURI('/分类', true)" class="navbar-content">
+										<span aria-hidden="true">
+											<FavoriteBorderIcon />
+										</span>
+										<span aria-label="分类" class="ml-2">分类</span>
+									</NuxtLink>
+								</li>
+							</template>
+						</DropdownMenu>
 					</li>
 				</ul>
 				<div aria-hidden="true" class="mx-8 select-none text-nord8">
