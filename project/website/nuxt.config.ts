@@ -77,6 +77,9 @@ export default defineNuxtConfig({
 		)?.content,
 		url: 'https://ts.sharpice.top',
 	},
+	sitemap: {
+		discoverImages: false,
+	},
 	eslint: {
 		checker: false,
 	},
