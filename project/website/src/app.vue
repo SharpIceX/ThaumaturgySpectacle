@@ -1,5 +1,5 @@
 <template>
-	<div class="h-screen w-screen flex flex-col h-full">
+	<div class="h-screen w-screen flex flex-col">
 		<AppHeader />
 		<main class="flex-1">
 			<NuxtLayout>
