@@ -12,7 +12,7 @@
 		"clean": "rimraf dist .output"
 	},
 	"dependencies": {
-		"@fontsource/noto-color-emoji": "^5.2.8",
+		"@fontsource/noto-color-emoji": "^5.2.9",
 		"@lxgw/LxgwBright": "github:lxgw/LxgwBright#v5.526",
 		"@material-design-icons/svg": "^0.14.15",
 		"@ts/utils": "link:../utils",
@@ -20,7 +20,7 @@
 		"@vueuse/integrations": "^13.9.0",
 		"nord": "^0.2.1",
 		"nprogress": "^0.2.0",
-		"nuxt": "^3.19.0",
+		"nuxt": "^3.19.1",
 		"overlayscrollbars": "^2.12.0",
 		"pangu": "^7.2.0",
 		"vue": "^3.5.21",
