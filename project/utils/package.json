@@ -3,7 +3,7 @@
 	"private": true,
 	"type": "module",
 	"description": "幻术奇库",
-	"module": "./dist/esm/main.mjs",
+	"main": "./dist/esm/main.mjs",
 	"types": "./dist/esm/main.d.ts",
 	"scripts": {
 		"test": "vitest run",
