@@ -13,6 +13,9 @@ namespace MarkdownRender
 			.UseAlertBlocks((_renderer, _kind) => { }) //启用 GFM 警报块支持，并移除默认的 Action
 			.UseYamlFrontMatter() // 启用 Front Matter 支持
 			.UsePipeTables() // 启用管道表格支持（默认表格）
+			.UseCustomContainers() // 启用自定义容器支持
+			.UseGenericAttributes() // 启用通用属性支持
+			.UseSoftlineBreakAsHardlineBreak() // 将软换行视为硬换行
 			.Build();
 
 		[JSExport("Render")]
