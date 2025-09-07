@@ -9,6 +9,7 @@ if (fs.existsSync('./dist')) fs.rmSync('./dist', { recursive: true, force: true 
 
 export default [
 	// CommonJS
+	/* NOTE: 暂时不需要 CommonJS 版本
 	{
 		input: path.resolve('./src/main.ts'),
 		output: {
@@ -29,6 +30,7 @@ export default [
 		],
 		external: id => !id.startsWith('.') && !id.startsWith('/'),
 	},
+	*/
 
 	// ESM
 	{

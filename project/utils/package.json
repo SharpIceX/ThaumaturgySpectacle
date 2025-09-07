@@ -5,7 +5,6 @@
 	"description": "幻术奇库",
 	"module": "./dist/esm/main.mjs",
 	"types": "./dist/esm/main.d.ts",
-	"main": "./dist/commonjs/main.cjs",
 	"scripts": {
 		"test": "vitest run",
 		"build": "rollup -c",
