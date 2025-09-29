@@ -11,7 +11,7 @@ const main: processorFunction = async content => {
 				item.metadata?.frontMatter?.title,
 		) // 筛选出 wiki 页面
 		.map(element => toListItem(element)) // 转换为列表项
-		.sort((a, b) => a.title.localeCompare(b.title, 'zh-Hans-CN', { sensitivity: 'base' })); // 排序
+		.toSorted((a, b) => a.title.localeCompare(b.title, 'zh-Hans-CN', { sensitivity: 'base' })); // 排序
 
 	content.push({
 		outputPath: '特殊页面/所有页面.vue',

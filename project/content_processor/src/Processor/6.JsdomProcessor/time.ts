@@ -1,4 +1,4 @@
-import { subProcessorFunction } from './main';
+import type { subProcessorFunction } from './main';
 
 const main: subProcessorFunction = (document, data): string => {
 	const time = data.metadata?.time;

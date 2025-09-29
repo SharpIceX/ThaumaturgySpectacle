@@ -1,4 +1,4 @@
-import { contentType } from '../content';
+import type { contentType } from '../content';
 
 const contentRemove = (content: contentType[], filePathList: Set<string>): void => {
 	if (filePathList.size > 0) {

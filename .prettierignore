@@ -12,8 +12,10 @@
 
 # C#项目
 /dotnet-packages/.vs
+/dotnet-packages/**/dist
 /dotnet-packages/**/packages.lock.json
+
 # 其他项目
 /project/website/.nuxt
 /project/website/.output
-/project/content_processor/db.json
+/project/content_processor/dist

@@ -1,4 +1,4 @@
-import { contentType } from '../../content';
+import type { contentType } from '../../content';
 import type { processorFunction } from '../main';
 import toListItem from '../../utils/to-list-item';
 import generateListPage from '../../utils/generate-list-page';

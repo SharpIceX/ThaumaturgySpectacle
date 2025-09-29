@@ -1,5 +1,5 @@
 import Logger from '../../../logger';
-import { subProcessorFunction } from '../main';
+import type { subProcessorFunction } from '../main';
 import type { Schema as WikiSchema } from '@ts/schema/types/wiki.d.ts';
 
 import InfoBoxProcessor from './processor/infobox';

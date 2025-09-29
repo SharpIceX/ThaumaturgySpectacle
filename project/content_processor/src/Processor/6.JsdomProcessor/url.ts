@@ -1,7 +1,7 @@
 import path from 'node:path/posix';
 import { encodeURI } from '@ts/utils';
 import { contentPath } from '../../main';
-import { subProcessorFunction } from './main';
+import type { subProcessorFunction } from './main';
 
 const main: subProcessorFunction = (document, data) => {
 	const body = document.body;

@@ -1,5 +1,5 @@
 import Logger from '../logger';
-import { contentType } from '../content';
+import type { contentType } from '../content';
 
 import initMarkdownData from './1.InitMarkdownData/main';
 import InitMarkdownJson from './2.InitMarkdownJson/main';

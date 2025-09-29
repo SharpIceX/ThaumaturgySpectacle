@@ -1,6 +1,6 @@
 import path from 'node:path/posix';
 import Logger from '../../logger';
-import { contentType } from '../../content';
+import type { contentType } from '../../content';
 
 const Log = new Logger('Processor:JsdomProcessor:Assets');
 

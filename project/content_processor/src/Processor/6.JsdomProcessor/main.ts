@@ -6,9 +6,9 @@ import timeProcessor from './time';
 import { parse as acorn } from 'acorn';
 import assetsProcessor from './assets';
 import categoryProcessor from './category';
-import { contentType } from '../../content';
 import markdownJson from './markdown-json/main';
 import type { processorFunction } from '../main';
+import type { contentType } from '../../content';
 import generateVue from '../../utils/generate-vue';
 
 export type subProcessorFunction = (document: Document, item: contentType) => void;

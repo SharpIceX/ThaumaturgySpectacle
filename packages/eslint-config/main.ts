@@ -5,13 +5,15 @@ import path from 'node:path';
 import globals from 'globals';
 import eslint from '@eslint/js';
 import jsdoc from 'eslint-plugin-jsdoc';
+import tseslint from 'typescript-eslint';
 import pluginVue from 'eslint-plugin-vue';
 import vueParser from 'vue-eslint-parser';
+import { defineConfig } from 'eslint/config';
 import regexpPlugin from 'eslint-plugin-regexp';
 import pluginPromise from 'eslint-plugin-promise';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
-import tseslint, { type InfiniteDepthConfigWithExtends } from 'typescript-eslint';
+import type { ConfigWithExtends } from '@eslint/config-helpers';
 
 /**
  * @description 项目根目录路径
@@ -21,7 +23,7 @@ const ProjectPath = path.resolve(import.meta.dirname, '../../');
 /**
  * @description 通用 TypeScript 配置
  */
-const TypeScriptConfig: InfiniteDepthConfigWithExtends = {
+const TypeScriptConfig: ConfigWithExtends = {
 	extends: [tseslint.configs.strict, tseslint.configs.stylistic, jsdoc.configs['flat/recommended-typescript']],
 	languageOptions: {
 		parser: tseslint.parser,
@@ -32,7 +34,7 @@ const TypeScriptConfig: InfiniteDepthConfigWithExtends = {
 	},
 };
 
-const config: InfiniteDepthConfigWithExtends = tseslint.config(
+const config = defineConfig(
 	eslint.configs.recommended,
 	eslintPluginUnicorn.configs.recommended,
 	pluginPromise.configs['flat/recommended'],
@@ -91,7 +93,7 @@ const config: InfiniteDepthConfigWithExtends = tseslint.config(
 			// TypeScript 类型
 			'**/*.d.ts',
 			// 构建输出
-			'**/dits/**',
+			'**/dist/**',
 			// 构建/编译缓存
 			'**/.cache/**',
 			// C# 项目

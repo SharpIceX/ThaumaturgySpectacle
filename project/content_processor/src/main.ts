@@ -8,7 +8,7 @@ import { glob } from 'glob';
 import path from 'node:path';
 import Logger from './logger';
 import writeDisk from './write-disk';
-import { contentType } from './content';
+import type { contentType } from './content';
 import Processor from './Processor/main.js';
 
 /**项目根目录 */

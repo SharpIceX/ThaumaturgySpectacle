@@ -2,7 +2,7 @@ import path from 'node:path';
 import Logger from './logger';
 import fs from 'node:fs/promises';
 import { outputPath } from './main';
-import { contentType } from './content';
+import type { contentType } from './content';
 
 const Log = new Logger('WriteDisk');
 

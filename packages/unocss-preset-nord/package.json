@@ -4,6 +4,6 @@
 	"type": "module",
 	"main": "./main.ts",
 	"dependencies": {
-		"unocss": "^66.5.0"
+		"unocss": "^66.5.2"
 	}
 }
