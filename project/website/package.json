@@ -33,7 +33,7 @@
 		"@ts/schema": "link:../../packages/schema",
 		"@ts/unocss-preset-nord": "link:../../packages/unocss-preset-nord",
 		"@unocss/nuxt": "^66.5.2",
-		"isomorphic-git": "^1.33.2",
+		"isomorphic-git": "^1.33.3",
 		"less": "^4.4.1",
 		"nuxt-svgo": "^4.2.6",
 		"rimraf": "^6.0.1",
