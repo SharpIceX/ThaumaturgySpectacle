@@ -16,6 +16,6 @@
 /dotnet-packages/**/packages.lock.json
 
 # 其他项目
+/project/*/dist
 /project/website/.nuxt
 /project/website/.output
-/project/content_processor/dist
