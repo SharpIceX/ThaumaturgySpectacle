@@ -6,7 +6,6 @@
 	"types": "./types/MarkdownRender.d.ts",
 	"scripts": {
 		"clean": "rimraf dist",
-		"build": "dotnet build -c Release",
 		"postinstall": "dotnet build -c Release"
 	},
 	"dependencies": {
