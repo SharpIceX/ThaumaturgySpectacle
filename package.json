@@ -30,18 +30,18 @@
 		}
 	},
 	"scripts": {
-		"lint:js": "eslint .",
+		"lint": "eslint .",
 		"clean": "rimraf .cache",
 		"format": "prettier . --write"
 	},
 	"devDependencies": {
 		"@ts/eslint-conifg": "link:packages/eslint-config",
-		"@types/node": "^24.7.1",
+		"@types/node": "^24.8.1",
 		"eslint": "^9.37.0",
 		"prettier": "^3.6.2",
 		"rimraf": "^6.0.1",
-		"type-fest": "^5.0.1",
+		"type-fest": "^5.1.0",
 		"typescript": "^5.9.3",
-		"wrangler": "^4.42.2"
+		"wrangler": "^4.43.0"
 	}
 }
