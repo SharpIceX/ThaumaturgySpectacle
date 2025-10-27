@@ -44,7 +44,8 @@ const config = defineConfig(
 	// 通用配置
 	{
 		rules: {
-			eqeqeq: ['error', 'always'], // 强制要求使用 === 和 !==
+			eqeqeq: ['error', 'always'],
+			'unicorn/no-immediate-mutation': 'off',
 		},
 		languageOptions: {
 			parserOptions: {

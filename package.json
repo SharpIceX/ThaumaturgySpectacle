@@ -36,12 +36,12 @@
 	},
 	"devDependencies": {
 		"@ts/eslint-conifg": "link:packages/eslint-config",
-		"@types/node": "^24.8.1",
+		"@types/node": "^24.9.1",
 		"eslint": "^9.37.0",
 		"prettier": "^3.6.2",
 		"rimraf": "^6.0.1",
 		"type-fest": "^5.1.0",
 		"typescript": "^5.9.3",
-		"wrangler": "^4.43.0"
+		"wrangler": "^4.45.0"
 	}
 }
