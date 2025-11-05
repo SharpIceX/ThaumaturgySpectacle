@@ -14,9 +14,9 @@
 	"devDependencies": {
 		"@rollup/plugin-node-resolve": "^16.0.3",
 		"@rollup/plugin-typescript": "^12.3.0",
-		"rimraf": "^6.0.1",
+		"rimraf": "^6.1.0",
 		"rollup": "^4.52.5",
 		"typescript": "^5.9.3",
-		"vitest": "^4.0.4"
+		"vitest": "^4.0.7"
 	}
 }

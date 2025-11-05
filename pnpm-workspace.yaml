@@ -9,6 +9,3 @@ onlyBuiltDependencies:
   - sharp
   - unrs-resolver
   - workerd
-
-overrides:
-  eslint: 9.37.0
