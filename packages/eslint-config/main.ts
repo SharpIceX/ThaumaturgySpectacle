@@ -44,7 +44,7 @@ const config = defineConfig(
 	// 通用配置
 	{
 		rules: {
-			eqeqeq: ['error', 'always'],
+			eqeqeq: 'error',
 			'unicorn/no-immediate-mutation': 'off',
 		},
 		languageOptions: {
