@@ -6,11 +6,11 @@ import { Renderer } from '@ts-dotnet-packages/markdown-render';
 
 const Log = new Logger('Processor:RenderMarkdown');
 
-const main: processorFunction = async content => {
+const main: processorFunction = async (content) => {
 	const RemoveFileList = new Set<string>();
 
 	await Promise.all(
-		content.map(async item => {
+		content.map(async (item) => {
 			if (item.inputPath && item.outputPath && item.outputPath.endsWith('.vue') && item.content) {
 				const renderResult = Renderer.Render(item.content, true);
 

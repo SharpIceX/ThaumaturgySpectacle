@@ -2,15 +2,15 @@ import type { processorFunction } from '../main';
 import toListItem from '../../utils/to-list-item';
 import generateListPage from '../../utils/generate-list-page';
 
-const main: processorFunction = async content => {
+const main: processorFunction = async (content) => {
 	const wikiPages = content
 		.filter(
-			item =>
+			(item) =>
 				item.inputPath?.endsWith('.md') &&
 				item.outputPath?.endsWith('.vue') &&
 				item.metadata?.frontMatter?.title,
 		) // 筛选出 wiki 页面
-		.map(element => toListItem(element)) // 转换为列表项
+		.map((element) => toListItem(element)) // 转换为列表项
 		.toSorted((a, b) => a.title.localeCompare(b.title, 'zh-Hans-CN', { sensitivity: 'base' })); // 排序
 
 	content.push({

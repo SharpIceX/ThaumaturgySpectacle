@@ -18,11 +18,11 @@ const exists = async (filepath: string) => {
 	}
 };
 
-const main: processorFunction = async content => {
+const main: processorFunction = async (content) => {
 	const RemoveFileList = new Set<string>();
 
 	await Promise.all(
-		content.map(async item => {
+		content.map(async (item) => {
 			if (item.inputPath && item.outputPath && item.outputPath.endsWith('.vue')) {
 				const dirname = path.dirname(item.inputPath);
 				const basename = path.basename(item.inputPath, path.extname(item.inputPath));
@@ -54,7 +54,7 @@ const main: processorFunction = async content => {
 				const validate = new Ajv({ allErrors: true }).compile(wikiJsonSchema);
 				if (!validate(jsonData)) {
 					const errorMessages = (validate.errors || [])
-						.map(error => {
+						.map((error) => {
 							const path = error.instancePath || '未知';
 							return `路径: ${path || '(根)'}\n错误: ${error.message}`;
 						})

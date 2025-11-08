@@ -6,11 +6,13 @@
 		"target": "ESNext",
 		"module": "ESNext",
 		"types": ["node"],
+		"lib": ["ESNext", "DOM"],
 
 		/* 构建 */
 		"sourceMap": true,
 		"declaration": true,
-		"inlineSources": false,
+		"noEmitOnError": true,
+		"inlineSources": true,
 		"declarationMap": true,
 		"isolatedModules": true,
 		"esModuleInterop": true,
@@ -18,11 +20,13 @@
 		"moduleDetection": "force",
 		"verbatimModuleSyntax": true,
 		"moduleResolution": "Bundler",
+		"useDefineForClassFields": true,
 
 		/* 检查 */
 		"strict": true,
+		"checkJs": true,
 		"alwaysStrict": true,
-		"skipLibCheck": false,
+		"skipLibCheck": true,
 		"noImplicitAny": true,
 		"noImplicitThis": true,
 		"noUnusedLocals": true,

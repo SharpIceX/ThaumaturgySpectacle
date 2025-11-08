@@ -38,6 +38,7 @@ export default [
 		output: {
 			format: 'esm',
 			dir: './dist/esm',
+			sourcemap: 'inline',
 			preserveModules: true,
 			preserveModulesRoot: 'src',
 			entryFileNames: '[name].mjs',
@@ -51,6 +52,6 @@ export default [
 				tsconfig: path.resolve('./tsconfig.json'),
 			}),
 		],
-		external: id => !id.startsWith('.') && !id.startsWith('/'),
+		external: (id) => !id.startsWith('.') && !id.startsWith('/'),
 	},
 ] satisfies RollupOptions[];

@@ -6,11 +6,11 @@ import contentRemove from '../../utils/content-remove';
 
 const Log = new Logger('Processor:InitMarkdownData');
 
-const main: processorFunction = async content => {
+const main: processorFunction = async (content) => {
 	const RemoveFileList = new Set<string>();
 
 	await Promise.all(
-		content.map(async item => {
+		content.map(async (item) => {
 			if (item.inputPath && item.inputPath.endsWith('.md')) {
 				// 将 outputPath 的扩展名改为 .vue
 				const dirname = path.dirname(item.outputPath);

@@ -29,7 +29,7 @@ const main = (document: Document, data: contentType, content: contentType[]) => 
 		const assetsPath = path.normalize(path.join(dirname, source));
 
 		// 从 content 中查找对应的文件项，并加入 forceCopyToPages 标记
-		const assetItem = content.find(item => item.inputPath === assetsPath);
+		const assetItem = content.find((item) => item.inputPath === assetsPath);
 		if (assetItem) {
 			assetItem.forceCopyToPages = true;
 		} else {

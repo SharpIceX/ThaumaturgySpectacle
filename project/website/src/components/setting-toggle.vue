@@ -48,7 +48,7 @@ onMounted(() => {
 	}
 
 	// 监听状态变化并存储
-	watch(checkedState, value => {
+	watch(checkedState, (value) => {
 		localStorage.setItem(localStorageKey, String(value));
 		toast('设置已保存', {
 			position: toast.POSITION.TOP_RIGHT,

@@ -33,7 +33,7 @@ const generateListPage = (listData: ListDataType[], name: string) => {
 </div>
 <div class="content">
 <ul class="custom list-page">
-${listData.map(item => createListItem(item.url, item.title)).join('\n\t\t\t')}
+${listData.map((item) => createListItem(item.url, item.title)).join('\n\t\t\t')}
 </ul>
 </div>
 </template>

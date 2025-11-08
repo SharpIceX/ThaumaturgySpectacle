@@ -13,9 +13,9 @@ import generateVue from '../../utils/generate-vue';
 
 export type subProcessorFunction = (document: Document, item: contentType) => void;
 
-const main: processorFunction = async content => {
+const main: processorFunction = async (content) => {
 	await Promise.all(
-		content.map(async item => {
+		content.map(async (item) => {
 			if (item.inputPath && item.inputPath.endsWith('.md')) {
 				// 初始化 JSDOM
 				const dom = new jsdom.JSDOM(item.content);

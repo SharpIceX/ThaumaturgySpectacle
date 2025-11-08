@@ -16,14 +16,14 @@
 		"@lxgw/LxgwBright": "github:lxgw/LxgwBright#v5.526",
 		"@material-design-icons/svg": "^0.14.15",
 		"@ts/utils": "link:../utils",
-		"@unocss/reset": "^66.5.4",
+		"@unocss/reset": "^66.5.5",
 		"@vueuse/integrations": "^14.0.0",
 		"nord": "^0.2.1",
 		"nprogress": "^0.2.0",
-		"nuxt": "^4.2.0",
+		"nuxt": "^4.2.1",
 		"overlayscrollbars": "^2.12.0",
 		"pangu": "^7.2.0",
-		"vue": "^3.5.22",
+		"vue": "^3.5.24",
 		"vue-router": "^4.6.3",
 		"vue3-toastify": "^0.2.8"
 	},
@@ -32,11 +32,11 @@
 		"@nuxtjs/seo": "^3.2.2",
 		"@ts/schema": "link:../../packages/schema",
 		"@ts/unocss-preset-nord": "link:../../packages/unocss-preset-nord",
-		"@unocss/nuxt": "^66.5.4",
+		"@unocss/nuxt": "^66.5.5",
 		"isomorphic-git": "^1.34.2",
 		"less": "^4.4.2",
 		"nuxt-svgo": "^4.2.6",
 		"rimraf": "^6.1.0",
-		"unocss": "^66.5.4"
+		"unocss": "^66.5.5"
 	}
 }

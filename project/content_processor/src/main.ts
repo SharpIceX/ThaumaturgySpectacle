@@ -41,7 +41,7 @@ const Log = new Logger('Main');
 
 	// 写入初始数据
 	content.push(
-		...contentFilesList.map(filePath => {
+		...contentFilesList.map((filePath) => {
 			return {
 				inputPath: filePath,
 				outputPath: path.relative(contentPath, filePath),

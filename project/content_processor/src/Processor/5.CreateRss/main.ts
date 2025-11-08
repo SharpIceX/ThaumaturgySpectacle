@@ -9,7 +9,7 @@ import type { contentType } from '../../content';
 
 const main: processorFunction = async (content: contentType[]) => {
 	// 获取所有 wiki 页面（.md 源文件 -> .vue 输出，并且有更新时间）
-	const wikiPages = content.filter(item => item.inputPath?.endsWith('.md') && item.outputPath?.endsWith('.vue'));
+	const wikiPages = content.filter((item) => item.inputPath?.endsWith('.md') && item.outputPath?.endsWith('.vue'));
 
 	// 按更新时间降序排列（最新优先）
 	wikiPages.sort((a, b) => {

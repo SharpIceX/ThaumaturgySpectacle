@@ -11,9 +11,9 @@ const extractCategories = (page: contentType): string[] => {
 	return [];
 };
 
-const main: processorFunction = async content => {
+const main: processorFunction = async (content) => {
 	const wikiPages = content.filter(
-		item =>
+		(item) =>
 			item.inputPath?.endsWith('.md') && item.outputPath?.endsWith('.vue') && item.metadata?.frontMatter?.title,
 	); // 筛选出 wiki 页面
 
@@ -34,7 +34,7 @@ const main: processorFunction = async content => {
 	}
 
 	// 分类索引页
-	const categoryIndexList = [...allCategories].map(category => ({
+	const categoryIndexList = [...allCategories].map((category) => ({
 		url: `/分类/${category}`,
 		title: category,
 	}));
@@ -50,12 +50,12 @@ const main: processorFunction = async content => {
 
 	// 各分类页面
 	for (const category of allCategories) {
-		const matchedPages = wikiPages.filter(page => extractCategories(page).includes(category));
+		const matchedPages = wikiPages.filter((page) => extractCategories(page).includes(category));
 
 		content.push({
 			outputPath: `/分类/${category}/index.vue`,
 			content: generateListPage(
-				matchedPages.map(element => toListItem(element)),
+				matchedPages.map((element) => toListItem(element)),
 				`分类/${category}`,
 			),
 		});
@@ -66,7 +66,7 @@ const main: processorFunction = async content => {
 		content.push({
 			outputPath: '/分类/无分类/index.vue',
 			content: generateListPage(
-				uncategorizedPages.map(element => toListItem(element)),
+				uncategorizedPages.map((element) => toListItem(element)),
 				'分类/无分类',
 			),
 		});

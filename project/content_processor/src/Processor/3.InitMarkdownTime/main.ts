@@ -72,10 +72,10 @@ async function getUpdatedTime(filePath: string, cache: object): Promise<DateTime
 	return DateTime.now();
 }
 
-const main: processorFunction = async content => {
+const main: processorFunction = async (content) => {
 	const cache = {};
 	await Promise.all(
-		content.map(async item => {
+		content.map(async (item) => {
 			if (item.inputPath && item.outputPath && item.outputPath.endsWith('.vue')) {
 				if (!item.metadata) item.metadata = {};
 				item.metadata.time = {

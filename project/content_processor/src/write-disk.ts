@@ -8,7 +8,7 @@ const Log = new Logger('WriteDisk');
 
 const writeDisk = async (content: contentType[]): Promise<void> => {
 	await Promise.all(
-		content.map(async item => {
+		content.map(async (item) => {
 			const isPage = item.outputPath.endsWith('.vue') || item.forceCopyToPages;
 			const fullOutputPath = path.join(outputPath, isPage ? 'pages' : 'public', item.outputPath);
 

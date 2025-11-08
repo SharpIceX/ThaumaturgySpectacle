@@ -55,7 +55,7 @@ const handleScrollEvent = (callback: (scrollPosition: number) => void): void => 
  * @param contentCache 内容区域的 HTMLElement[]
  */
 const scrollToNearestHeading = (contentCache: HTMLElement[]): void => {
-	handleScrollEvent(scrollPosition => {
+	handleScrollEvent((scrollPosition) => {
 		const closestHeadingId = getClosestHeadingId(contentCache, scrollPosition);
 
 		// 只有在标题变化时才更新 URL
@@ -71,15 +71,15 @@ const scrollToNearestHeading = (contentCache: HTMLElement[]): void => {
  * @param tocLinksCache 目录链接的 HTMLElement[]
  */
 const updateTocHighlightOnScroll = (contentCache: HTMLElement[], tocLinksCache: HTMLElement[]): void => {
-	handleScrollEvent(scrollPosition => {
+	handleScrollEvent((scrollPosition) => {
 		const closestHeadingId = getClosestHeadingId(contentCache, scrollPosition);
 
 		// 移除之前选中的链接
-		const previousLink = tocLinksCache.find(l => l.classList.contains('select-toc'));
+		const previousLink = tocLinksCache.find((l) => l.classList.contains('select-toc'));
 		previousLink?.classList.remove('select-toc');
 
 		// 高亮当前的标题链接
-		const link = tocLinksCache.find(l => l.getAttribute('href') === `#${closestHeadingId}`);
+		const link = tocLinksCache.find((l) => l.getAttribute('href') === `#${closestHeadingId}`);
 		if (link) {
 			link.classList.add('select-toc');
 			link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
