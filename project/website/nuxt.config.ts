@@ -5,6 +5,8 @@ import appConfig from './app.config';
 import packageJson from './package.json';
 import { defineNuxtConfig } from 'nuxt/config';
 
+const isProduction = process.env['NODE_ENV'] === 'production';
+
 const GetBuildID = async (): Promise<string> => {
 	const head = await git.resolveRef({ fs, dir: path.resolve(import.meta.dirname, '../../'), ref: 'HEAD' });
 
@@ -50,7 +52,12 @@ export default defineNuxtConfig({
 		],
 	},
 	experimental: {
+		headNext: isProduction,
 		payloadExtraction: false,
+		asyncEntry: isProduction,
+		viewTransition: isProduction,
+		writeEarlyHints: isProduction,
+		inlineRouteRules: isProduction,
 	},
 	devServer: {
 		port: 8190,
@@ -61,9 +68,12 @@ export default defineNuxtConfig({
 			// 这个其实是因为在 package.json 使用了 Git 或 URL 依赖所导致的问题。
 			preserveSymlinks: true,
 		},
-		optimizeDeps: {
-			include: ['vue3-toastify', 'pangu/browser'],
+		esbuild: {
+			drop: isProduction ? ['console', 'debugger'] : [],
 		},
+	},
+	devtools: {
+		enabled: !isProduction,
 	},
 	unocss: {
 		nuxtLayers: true,

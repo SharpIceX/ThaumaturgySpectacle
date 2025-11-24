@@ -15,22 +15,30 @@ const Log = new Logger('Processor:InitMarkdownTime');
  * @returns Luxon DateTime 对象
  */
 async function getCreatedTime(filePath: string, cache: object): Promise<DateTime> {
-	const commits = await git.log({
-		fs,
-		dir: projectPath,
-		filepath: path.relative(projectPath, filePath),
-		cache,
-	});
+	try {
+		const commits = await git.log({
+			fs,
+			dir: projectPath,
+			filepath: path.relative(projectPath, filePath),
+			cache,
+		});
 
-	if (commits.length > 0) {
-		const firstCommit = commits.at(-1);
-		if (firstCommit?.commit?.author?.timestamp) {
-			const timestamp = firstCommit.commit.author.timestamp;
-			return DateTime.fromSeconds(timestamp);
+		if (commits.length > 0) {
+			const firstCommit = commits.at(-1);
+			if (firstCommit?.commit?.author?.timestamp) {
+				const timestamp = firstCommit.commit.author.timestamp;
+				return DateTime.fromSeconds(timestamp);
+			}
 		}
+		Log.warn(`文件 ${filePath} 没有提交记录或无法获取时间，使用当前时间作为创建时间`);
+		return DateTime.now();
+	} catch (error) {
+		if (error instanceof git.Errors.NotFoundError) {
+			Log.warn(`git对象中无法找到文件 ${filePath}，将使用当前时间作为创建时间`);
+			return DateTime.now();
+		}
+		throw error; // 其他错误
 	}
-	Log.warn(`文件 ${filePath} 没有提交记录或无法获取时间，使用当前时间作为创建时间`);
-	return DateTime.now();
 }
 
 /**

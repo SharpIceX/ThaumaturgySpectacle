@@ -4,21 +4,21 @@
     "net8.0": {
       "AngleSharp": {
         "type": "Direct",
-        "requested": "[1.3.0, )",
-        "resolved": "1.3.0",
-        "contentHash": "iHzfn4cK6CmhuURNdEpmSQCq5/HZFldEpkbnmqT9My8+6l2Sz3F+NxoqRA8z/jTkWB+SAu5boRdp4v/WtyjuIQ=="
+        "requested": "[1.4.0, )",
+        "resolved": "1.4.0",
+        "contentHash": "6ph8mpaQx0KL0COYRt0kI8MB9gSp1PtKijKMhJU//+aVFgKAJLKDesG/+26JSaVCOrHNgPf12wpfoyRcMYOeXg=="
       },
       "Markdig": {
         "type": "Direct",
-        "requested": "[0.42.0, )",
-        "resolved": "0.42.0",
-        "contentHash": "tINdftVfbTujqfPXrQOSl9/6XCS2Y4Zwz+i7UPBgxRNnDtI1CjyQ5UA/5sKoSOmfECyWkTztY/vbcc/u1DA8nA=="
+        "requested": "[0.43.0, )",
+        "resolved": "0.43.0",
+        "contentHash": "tbP3Y/GYC5pIUWXw6Iqf+R5CwBGA4VJswnlgS2x3TgcHoH4IlnGVmL7hfA1sXkZoCPm/4mhzS8cJUkWhQthaPg=="
       },
       "Microsoft.JavaScript.NodeApi.Generator": {
         "type": "Direct",
-        "requested": "[0.9.15, )",
-        "resolved": "0.9.15",
-        "contentHash": "v3aMj7xb5zeNDMGl12ri1lPMnD+5IVovnnRbxzLwTloH6njSdhGA6m09yQ4YzSxElvEugzD2DIRNf2WyLf1BPg==",
+        "requested": "[0.9.17, )",
+        "resolved": "0.9.17",
+        "contentHash": "HdVi2zooOHbtlnyuwMnNChCm6hTq0mvtO7WPNUiRF7qQKj2gpS38dgL5Zzj8qEY+Ss1L/IbeMtD3tFteaoDQsQ==",
         "dependencies": {
           "Microsoft.CodeAnalysis.Analyzers": "3.3.4",
           "Microsoft.CodeAnalysis.CSharp": "4.1.0",
