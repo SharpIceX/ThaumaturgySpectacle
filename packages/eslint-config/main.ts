@@ -1,6 +1,3 @@
-// SPDX-FileCopyrightText: 2025 锐冰 <SharpIce@SharpIce.top>
-// SPDX-License-Identifier: MIT
-
 import path from 'node:path';
 import globals from 'globals';
 import eslint from '@eslint/js';

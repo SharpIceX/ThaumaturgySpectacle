@@ -1,6 +1,8 @@
-// SPDX-FileCopyrightText: 2025 锐冰 <SharpIce@SharpIce.top>
-// SPDX-FileCopyrightText: 2016 Arctic Ice Studio <development@arcticicestudio.com> (Nord colors)
-// SPDX-License-Identifier: MIT
+/**
+ * SPDX-FileCopyrightText: 2025 锐冰 <SharpIce@SharpIce.top>
+ * SPDX-FileCopyrightText: 2016 Arctic Ice Studio <development@arcticicestudio.com> (Nord colors)
+ * SPDX-License-Identifier: MIT
+ */
 
 import type { Preset } from 'unocss';
 

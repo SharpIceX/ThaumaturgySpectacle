@@ -1,4 +1,4 @@
-# **幻术奇象 Thaumaturgy Spectacle**架空世界观项目
+# **幻术奇象 Thaumaturgy Spectacle**项目
 
 > [!NOTE]
 > **构建提示**

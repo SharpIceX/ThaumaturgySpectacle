@@ -22,7 +22,7 @@ interface InfoboxCharacter {
 		 */
 		角色图片?: string;
 
-		性别?: '男' | '女';
+		性别?: '男' | '女' | '未知';
 		物种?: string;
 		属性?: string | string[];
 		生活地区?: string;
