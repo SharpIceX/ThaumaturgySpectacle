@@ -38,10 +38,10 @@
 		"@ts/eslint-conifg": "link:packages/eslint-config",
 		"@types/node": "^24.10.1",
 		"eslint": "9.39.1",
-		"prettier": "^3.6.2",
+		"prettier": "^3.7.4",
 		"rimraf": "^6.1.2",
-		"type-fest": "^5.2.0",
+		"type-fest": "^5.3.1",
 		"typescript": "^5.9.3",
-		"wrangler": "^4.50.0"
+		"wrangler": "^4.53.0"
 	}
 }
