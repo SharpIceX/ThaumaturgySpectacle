@@ -9,7 +9,7 @@
 		"postinstall": "dotnet build -c Release"
 	},
 	"dependencies": {
-		"node-api-dotnet": "^0.9.17"
+		"node-api-dotnet": "^0.9.18"
 	},
 	"devDependencies": {
 		"rimraf": "^6.1.2"

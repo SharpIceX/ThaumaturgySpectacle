@@ -10,15 +10,15 @@
       },
       "Markdig": {
         "type": "Direct",
-        "requested": "[0.43.0, )",
-        "resolved": "0.43.0",
-        "contentHash": "tbP3Y/GYC5pIUWXw6Iqf+R5CwBGA4VJswnlgS2x3TgcHoH4IlnGVmL7hfA1sXkZoCPm/4mhzS8cJUkWhQthaPg=="
+        "requested": "[0.44.0, )",
+        "resolved": "0.44.0",
+        "contentHash": "X+CYMjcUnh/yO24wOSQxVFLiGqWrrtXJ5M7toHiM1Zk4Fg9UMLN5fkaq6FSOWH+mIprsHHgDMlq3MJhmrXalhg=="
       },
       "Microsoft.JavaScript.NodeApi.Generator": {
         "type": "Direct",
-        "requested": "[0.9.17, )",
-        "resolved": "0.9.17",
-        "contentHash": "HdVi2zooOHbtlnyuwMnNChCm6hTq0mvtO7WPNUiRF7qQKj2gpS38dgL5Zzj8qEY+Ss1L/IbeMtD3tFteaoDQsQ==",
+        "requested": "[0.9.18, )",
+        "resolved": "0.9.18",
+        "contentHash": "CtqWciu7pF9im/TSAQTC/D2tDscp4sE0BFnlg/t1zNDXJxHAYdcOGhIABZWqjPXzCoMDcjb1Ek1iq20OCdLqxA==",
         "dependencies": {
           "Microsoft.CodeAnalysis.Analyzers": "3.3.4",
           "Microsoft.CodeAnalysis.CSharp": "4.1.0",
