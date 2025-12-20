@@ -1,20 +1,48 @@
+@import 'nord/src/lesscss/nord.less';
+
 // 普通文本
 p,
 span {
 	@apply "leading-relaxed mb-3";
 }
 
-// 加粗
-strong {
-	@apply "font-bold";
-}
-
-// 斜体
-em {
-	font-style: italic;
-}
-
 // 删除线
 del {
-	@apply "line-through decoration-2";
+	position: relative;
+	text-decoration: none;
+
+	&::after {
+		content: '';
+		left: 0;
+		right: 0;
+		top: 50%;
+		height: 2px;
+		position: absolute;
+		background: currentColor;
+		transform: translateY(-50%);
+	}
+}
+
+// 插入文本
+ins {
+	position: relative;
+	text-decoration: none;
+
+	&::after {
+		content: '';
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 1px;
+		position: absolute;
+		background-color: @nord13;
+		transform: translateY(50%);
+	}
+}
+
+// 高亮文本
+mark {
+	padding: 0 0.3em;
+	border-radius: 0.3em;
+	background-color: @nord13;
 }

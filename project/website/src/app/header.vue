@@ -61,7 +61,7 @@
 				</div>
 				<ul>
 					<li v-for="item in menuItems.right" :key="item.to">
-						<NuxtLink :to="item.to" :aria-label="item.label" class="flex items-center space-x-1">
+						<NuxtLink :to="item.to" :aria-label="item.label" class="flex items-center gap-x-1">
 							<span aria-hidden="true">
 								<component :is="item.icon" />
 							</span>
@@ -113,7 +113,8 @@ const menuItems = {
 	}
 
 	.navbar-content {
-		@apply 'flex items-center space-x-1';
+		display: flex;
+		align-items: center;
 	}
 }
 </style>

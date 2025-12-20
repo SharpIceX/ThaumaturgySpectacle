@@ -55,7 +55,9 @@ const settingItems: settingItemsType = [
 
 <style lang="less" scoped>
 .custom.setting {
-	@apply space-y-xl;
+	@apply gap-y-xl;
+	display: flex;
+	flex-direction: column;
 
 	.setting-item {
 		display: flex;

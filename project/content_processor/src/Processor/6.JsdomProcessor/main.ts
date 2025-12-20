@@ -61,6 +61,7 @@ ${item.metadata?.frontMatter?.description ? `<p class="description">${item.metad
 <div class="content">
 ${document.body.innerHTML}
 </div>
+<hr />
 ${categoryElement}
 ${timeElement}
 </template>

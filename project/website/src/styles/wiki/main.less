@@ -5,9 +5,6 @@
 	display: flex;
 	flex-direction: column;
 
-	// 内容
-	@import url('./markdown/index.less');
-
 	// 标题
 	.title {
 		@apply "border-b-1 border-b-nord4 border-b-op-20 pb-2 mb-2";
@@ -21,38 +18,32 @@
 		}
 	}
 
+	// 内容
+	@import url('./markdown/index.less');
+
+	// 分割线
+	hr {
+		margin: 1rem 0;
+	}
+
 	// 分类
 	.category {
 		@apply "max-md:overflow-x-auto max-md:flex-nowrap";
-		@apply "border-t-1 border-t-nord4 border-t-op-20";
-		@apply "border-b-1 border-b-nord4 border-b-op-20";
+		@apply "border-1 border-nord4 border-op-20 rounded-md";
 
 		display: flex;
-
+		flex-wrap: wrap;
 		padding: 1rem;
 		margin: 1rem 0;
 		font-size: 1.2rem;
-		flex-wrap: wrap;
 		white-space: nowrap;
-
-		a {
-			padding: 0 0.8rem;
-			position: relative;
-			&::after {
-				top: 0;
-				right: 0;
-				bottom: 0;
-				width: 1px;
-				content: '';
-				position: absolute;
-				border-left: 1px solid rgba(@nord4, 0.2);
-			}
-		}
 	}
 
 	// 时间
 	.content-time {
-		@apply 'space-y-3';
+		@apply 'gap-y-3';
+		display: flex;
+		flex-direction: column;
 	}
 }
 

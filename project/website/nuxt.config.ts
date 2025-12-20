@@ -74,6 +74,16 @@ export default defineNuxtConfig({
 		esbuild: {
 			drop: isProduction ? ['console', 'debugger'] : [],
 		},
+		optimizeDeps: {
+			include: [
+				'@vue/devtools-core',
+				'@vue/devtools-kit',
+				'overlayscrollbars',
+				'@vueuse/integrations/useNProgress',
+				'vue3-toastify',
+				'pangu/browser',
+			],
+		},
 	},
 	devtools: {
 		enabled: !isProduction,
