@@ -88,6 +88,12 @@ export default {
 				name: 'color-scheme',
 				content: 'dark',
 			},
+
+			// SEO 相关
+			{
+				name: 'robots',
+				content: 'noimageindex',
+			},
 		],
 
 		link: [

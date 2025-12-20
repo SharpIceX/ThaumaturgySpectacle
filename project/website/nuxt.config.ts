@@ -38,6 +38,9 @@ export default defineNuxtConfig({
 			analyzerMode: 'static',
 		},
 	},
+	linkChecker: {
+		skipInspections: ['no-uppercase-chars'],
+	},
 	nitro: {
 		preset: 'cloudflare-pages-static',
 		prerender: {
@@ -88,6 +91,7 @@ export default defineNuxtConfig({
 		url: 'https://ts.sharpice.top',
 	},
 	sitemap: {
+		zeroRuntime: true,
 		discoverImages: false,
 	},
 	eslint: {

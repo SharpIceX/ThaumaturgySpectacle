@@ -3,20 +3,7 @@
 	"private": true,
 	"type": "module",
 	"description": "幻术奇库",
-	"main": "./dist/esm/main.mjs",
-	"types": "./dist/esm/main.d.ts",
-	"scripts": {
-		"test": "vitest run",
-		"build": "rollup -c",
-		"clean": "rimraf ./dist",
-		"postinstall": "rollup -c"
-	},
 	"devDependencies": {
-		"@rollup/plugin-node-resolve": "^16.0.3",
-		"@rollup/plugin-typescript": "^12.3.0",
-		"rimraf": "^6.1.2",
-		"rollup": "^4.53.5",
-		"typescript": "^5.9.3",
-		"vitest": "^4.0.16"
+		"typescript": "^5.9.3"
 	}
 }

@@ -1,5 +1,4 @@
 import escodegen from 'escodegen';
-import { encodeURI } from '@ts/utils';
 import { parse as acorn } from 'acorn';
 import generateVue from '../utils/generate-vue';
 
@@ -17,7 +16,7 @@ export interface ListDataType {
  * @returns 列表项的 HTML 字符串
  */
 const createListItem = (href: string, text: string): string =>
-	`<li><NuxtLink to="${encodeURI(href, true)}">${text}</NuxtLink></li>`;
+	`<li><NuxtLink to="${encodeURI(href)}">${text}</NuxtLink></li>`;
 
 /**
  * 生成页面内容的函数

@@ -1,10 +1,13 @@
 import Ajv from 'ajv';
+import os from 'node:os';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import Logger from '../../logger';
 import type { processorFunction } from '../main';
 import wikiJsonSchema from '@ts/schema/dist/wiki.json';
 import contentRemove from '../../utils/content-remove';
+import AsyncTaskQueue from '@ts/utils/src/async-task-queue';
+import type { GetTaskType } from '@ts/utils/src/async-task-queue';
 import type { Schema as WikiSchema } from '@ts/schema/types/wiki.d.ts';
 
 const Log = new Logger('Processor:InitMarkdownData');
@@ -19,57 +22,65 @@ const exists = async (filepath: string) => {
 };
 
 const main: processorFunction = async (content) => {
+	let index = 0;
 	const RemoveFileList = new Set<string>();
 
-	await Promise.all(
-		content.map(async (item) => {
-			if (item.inputPath && item.outputPath && item.outputPath.endsWith('.vue')) {
-				const dirname = path.dirname(item.inputPath);
-				const basename = path.basename(item.inputPath, path.extname(item.inputPath));
-				const jsonFilePath = path.join(dirname, `${basename}.json`);
+	const getTask: GetTaskType = async () => {
+		if (index >= content.length) return;
+		const item = content[index++];
 
-				// 不存在则跳过
-				if (!(await exists(jsonFilePath))) return;
-				RemoveFileList.add(jsonFilePath);
+		return async () => {
+			if (!(item?.inputPath && item.outputPath && item.outputPath.endsWith('.vue'))) return;
 
-				// 读取 JSON 文件内容
-				let jsonContent: string;
-				try {
-					jsonContent = await fs.readFile(jsonFilePath, 'utf8');
-				} catch (error) {
-					Log.error(`读取 ${jsonFilePath} 文件失败，此 Markdown JSON 数据将被忽略：\n${error}`);
-					return;
-				}
+			const dirname = path.dirname(item.inputPath);
+			const basename = path.basename(item.inputPath, path.extname(item.inputPath));
+			const jsonFilePath = path.join(dirname, `${basename}.json`);
 
-				// 解析 JSON 内容
-				let jsonData: WikiSchema;
-				try {
-					jsonData = JSON.parse(jsonContent) as WikiSchema;
-				} catch (error) {
-					Log.error(`解析 ${jsonFilePath} 文件失败，此 Markdown JSON 数据将被忽略：\n${error}`);
-					return;
-				}
+			// 不存在则跳过
+			if (!(await exists(jsonFilePath))) return;
+			RemoveFileList.add(jsonFilePath);
 
-				// 校验 JSON 数据格式
-				const validate = new Ajv({ allErrors: true }).compile(wikiJsonSchema);
-				if (!validate(jsonData)) {
-					const errorMessages = (validate.errors || [])
-						.map((error) => {
-							const path = error.instancePath || '未知';
-							return `路径: ${path || '(根)'}\n错误: ${error.message}`;
-						})
-						.join('\n\n');
-
-					Log.error(`${jsonFilePath} 文件无法通过校验，此 Markdown JSON 数据将被忽略：\n${errorMessages}`);
-					return;
-				}
-
-				// 写入 JSON 数据
-				if (!item.metadata) item.metadata = {};
-				item.metadata.json = jsonData;
+			// 读取 JSON 文件内容
+			let jsonContent: string;
+			try {
+				jsonContent = await fs.readFile(jsonFilePath, 'utf8');
+			} catch (error) {
+				Log.error(`读取 ${jsonFilePath} 文件失败，此 Markdown JSON 数据将被忽略：\n${error}`);
+				return;
 			}
-		}),
-	);
+
+			// 解析 JSON 内容
+			let jsonData: WikiSchema;
+			try {
+				jsonData = JSON.parse(jsonContent) as WikiSchema;
+			} catch (error) {
+				Log.error(`解析 ${jsonFilePath} 文件失败，此 Markdown JSON 数据将被忽略：\n${error}`);
+				return;
+			}
+
+			// 校验 JSON 数据格式
+			const validate = new Ajv({ allErrors: true }).compile(wikiJsonSchema);
+			if (!validate(jsonData)) {
+				const errorMessages = (validate.errors || [])
+					.map((error) => {
+						const path = error.instancePath || '未知';
+						return `路径: ${path || '(根)'}\n错误: ${error.message}`;
+					})
+					.join('\n\n');
+
+				Log.error(`${jsonFilePath} 文件无法通过校验，此 Markdown JSON 数据将被忽略：\n${errorMessages}`);
+				return;
+			}
+
+			// 写入 JSON 数据
+			if (!item.metadata) item.metadata = {};
+			item.metadata.json = jsonData;
+		};
+	};
+
+	const task = new AsyncTaskQueue(os.cpus().length, getTask);
+
+	await task.runAll();
 
 	// 移除 JSON 文件项
 	contentRemove(content, RemoveFileList);

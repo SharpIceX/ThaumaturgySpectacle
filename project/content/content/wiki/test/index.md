@@ -140,11 +140,15 @@ Hello, I am English
 - [ ] 任务列表项 2
 - [x] 任务列表项 3
 
-## 链接和图片
+## 超链接和图片
 
 ### 超链接
 
 [Github](https://github.com/)
+[站点首页](/)
+[Wiki 首页（直接跳转）](/wiki)
+[Wiki 首页（相对路径，Nuxt 会自动处理）](../)
+[锚点](#文本样式)
 
 ### [标题超链接 - 跳转 Github](https://github.com/)
 

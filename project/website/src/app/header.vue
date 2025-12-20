@@ -29,7 +29,7 @@
 							</template>
 							<template #content>
 								<li>
-									<NuxtLink :to="encodeURI('/wiki', true)" class="navbar-content">
+									<NuxtLink to="/wiki" class="navbar-content">
 										<span aria-hidden="true">
 											<DescriptionIcon />
 										</span>
@@ -37,7 +37,7 @@
 									</NuxtLink>
 								</li>
 								<li>
-									<NuxtLink :to="encodeURI('/特殊页面/所有页面', true)" class="navbar-content">
+									<NuxtLink :to="encodeURI('/特殊页面/所有页面')" class="navbar-content">
 										<span aria-hidden="true">
 											<AllInclusiveIcon />
 										</span>
@@ -45,7 +45,7 @@
 									</NuxtLink>
 								</li>
 								<li>
-									<NuxtLink :to="encodeURI('/分类', true)" class="navbar-content">
+									<NuxtLink :to="encodeURI('/分类')" class="navbar-content">
 										<span aria-hidden="true">
 											<FavoriteBorderIcon />
 										</span>
@@ -75,7 +75,6 @@
 </template>
 
 <script setup>
-import { encodeURI } from '@ts/utils';
 import DropdownMenu from '@/components/dropdown-menu.vue';
 import HomeIcon from '@material-design-icons/svg/outlined/home.svg';
 import SettingsMenuIcon from '@material-design-icons/svg/outlined/settings.svg';

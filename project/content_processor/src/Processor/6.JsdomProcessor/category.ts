@@ -1,4 +1,3 @@
-import { encodeURI } from '@ts/utils';
 import type { subProcessorFunction } from './main';
 
 const main: subProcessorFunction = (document, data): string => {
@@ -21,7 +20,7 @@ const main: subProcessorFunction = (document, data): string => {
 	// 生成分类链接
 	const categoryLinks = categorys.map((category) => {
 		const a = document.createElement('nuxt-link');
-		a.setAttribute('to', encodeURI(`/分类/${category}`, true));
+		a.setAttribute('to', encodeURI(`/分类/${category}`));
 		a.textContent = category;
 		return a;
 	});
