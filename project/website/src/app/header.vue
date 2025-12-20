@@ -37,7 +37,7 @@
 									</NuxtLink>
 								</li>
 								<li>
-									<NuxtLink :to="encodeURI('/特殊页面/所有页面')" class="navbar-content">
+									<NuxtLink to="/特殊页面/所有页面" class="navbar-content">
 										<span aria-hidden="true">
 											<AllInclusiveIcon />
 										</span>
@@ -45,7 +45,7 @@
 									</NuxtLink>
 								</li>
 								<li>
-									<NuxtLink :to="encodeURI('/分类')" class="navbar-content">
+									<NuxtLink to="/分类" class="navbar-content">
 										<span aria-hidden="true">
 											<FavoriteBorderIcon />
 										</span>

@@ -29,7 +29,7 @@ const main = (document: Document): string | false => {
 	const body = document.body;
 
 	const tocContent: TocContentType[] = [...body.querySelectorAll('h2, h3, h4, h5, h6')].map((heading) => {
-		const id = encodeURIComponent(heading.textContent).toLowerCase();
+		const id = encodeURIComponent(heading.textContent);
 		heading.id = id;
 
 		const level = {

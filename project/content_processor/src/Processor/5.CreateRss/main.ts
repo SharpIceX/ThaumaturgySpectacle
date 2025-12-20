@@ -48,7 +48,7 @@ const main: processorFunction = async (content: contentType[]) => {
 			? item.outputPath!.slice(0, -'index.vue'.length)
 			: item.outputPath!.slice(0, -'.vue'.length);
 
-		const link = encodeURI(`https://ts.sharpice.top/${link_dirname}`);
+		const link = `https://ts.sharpice.top/${link_dirname}`;
 
 		feed.addItem({
 			title: item.metadata!.frontMatter!.title,

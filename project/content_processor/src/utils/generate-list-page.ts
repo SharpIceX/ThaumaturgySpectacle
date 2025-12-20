@@ -15,8 +15,7 @@ export interface ListDataType {
  * @param text - 显示文本
  * @returns 列表项的 HTML 字符串
  */
-const createListItem = (href: string, text: string): string =>
-	`<li><NuxtLink to="${encodeURI(href)}">${text}</NuxtLink></li>`;
+const createListItem = (href: string, text: string): string => `<li><NuxtLink to="${href}">${text}</NuxtLink></li>`;
 
 /**
  * 生成页面内容的函数
