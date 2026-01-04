@@ -16,7 +16,7 @@
 		"@lxgw/LxgwBright": "github:lxgw/LxgwBright#v5.526",
 		"@material-design-icons/svg": "^0.14.15",
 		"@ts/utils": "link:../utils",
-		"@unocss/reset": "^66.5.11",
+		"@unocss/reset": "^66.5.12",
 		"@vueuse/integrations": "^14.1.0",
 		"nord": "^0.2.1",
 		"nprogress": "^0.2.0",
@@ -32,11 +32,11 @@
 		"@nuxtjs/seo": "^3.3.0",
 		"@ts/schema": "link:../../packages/schema",
 		"@ts/unocss-preset-nord": "link:../../packages/unocss-preset-nord",
-		"@unocss/nuxt": "^66.5.11",
+		"@unocss/nuxt": "^66.5.12",
 		"isomorphic-git": "^1.36.1",
 		"less": "^4.5.1",
 		"nuxt-svgo": "^4.2.6",
 		"rimraf": "^6.1.2",
-		"unocss": "^66.5.11"
+		"unocss": "^66.5.12"
 	}
 }

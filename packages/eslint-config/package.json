@@ -5,7 +5,7 @@
 	"main": "./main.ts",
 	"dependencies": {
 		"@eslint/js": "^9.39.2",
-		"@typescript-eslint/parser": "^8.50.1",
+		"@typescript-eslint/parser": "^8.51.0",
 		"eslint": "9.39.2",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-jsdoc": "61.5.0",
@@ -13,9 +13,9 @@
 		"eslint-plugin-regexp": "^2.10.0",
 		"eslint-plugin-unicorn": "^62.0.0",
 		"eslint-plugin-vue": "^10.6.2",
-		"globals": "^16.5.0",
+		"globals": "^17.0.0",
 		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.50.1",
+		"typescript-eslint": "^8.51.0",
 		"vue-eslint-parser": "^10.2.0"
 	}
 }
