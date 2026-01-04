@@ -55,12 +55,18 @@ export default defineNuxtConfig({
 		],
 	},
 	experimental: {
-		headNext: isProduction,
+		headNext: true,
+		typedPages: true,
 		payloadExtraction: false,
 		asyncEntry: isProduction,
-		viewTransition: isProduction,
 		writeEarlyHints: isProduction,
 		inlineRouteRules: isProduction,
+	},
+	future: {
+		typescriptBundlerResolution: false,
+	},
+	features: {
+		inlineStyles: true,
 	},
 	devServer: {
 		port: 8190,
