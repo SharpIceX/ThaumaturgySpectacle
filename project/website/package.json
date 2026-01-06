@@ -13,7 +13,7 @@
 	},
 	"dependencies": {
 		"@fontsource/noto-color-emoji": "^5.2.10",
-		"@lxgw/LxgwBright": "github:lxgw/LxgwBright#v5.526",
+		"@lxgw/LxgwBright": "github:lxgw/LxgwBright#v5.527",
 		"@material-design-icons/svg": "^0.14.15",
 		"@ts/utils": "link:../utils",
 		"@unocss/reset": "^66.5.12",
