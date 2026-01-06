@@ -3,7 +3,18 @@
 // 普通文本
 p,
 span {
-	@apply "leading-relaxed mb-3";
+	@apply "leading-[1.65] mb-4";
+}
+
+// 超链接
+a {
+	color: @nord8;
+	transition: color 0.2s ease;
+
+	&:hover {
+		color: @nord10;
+		text-decoration: underline;
+	}
 }
 
 // 删除线
@@ -16,7 +27,7 @@ del {
 		left: 0;
 		right: 0;
 		top: 50%;
-		height: 2px;
+		height: 1px;
 		position: absolute;
 		background: currentColor;
 		transform: translateY(-50%);
@@ -35,7 +46,7 @@ ins {
 		bottom: 0;
 		height: 1px;
 		position: absolute;
-		background-color: @nord13;
+		background-color: @nord14;
 		transform: translateY(50%);
 	}
 }
@@ -44,5 +55,5 @@ ins {
 mark {
 	padding: 0 0.3em;
 	border-radius: 0.3em;
-	background-color: @nord13;
+	background-color: fade(@nord14, 40%);
 }
