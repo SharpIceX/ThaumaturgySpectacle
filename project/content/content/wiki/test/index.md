@@ -202,8 +202,8 @@ Hello, I am English
 
 ### 自定义容器
 
-::: {.text-nord15 .bg-nord9}
-**加粗红色文本，和蓝色背景**
+::: {.text-nord3 .bg-white}
+**自定义的高亮容器**
 :::
 
 ### 笔记

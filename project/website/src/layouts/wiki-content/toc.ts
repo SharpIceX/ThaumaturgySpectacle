@@ -5,103 +5,85 @@
 /* eslint-disable unicorn/prefer-spread */
 
 /**
- * 获取离当前滚动位置最近的标题
- * @param contentCache 内容区域的 HTMLElement[]
- * @param scrollPosition 当前滚动位置
+ * 获取当前视口正在阅读的标题
+ * @param contentCache - 内容区域的 HTMLElement 数组
+ * @param scrollPosition - 当前滚动位置
  * @returns 最近的标题 id
  */
-const getClosestHeadingId = (contentCache: HTMLElement[], scrollPosition: number): string | undefined => {
-	let closestHeadingId: string | undefined = undefined;
-	let closestDistance = Infinity;
+const getActiveHeadingId = (contentCache: HTMLElement[], scrollPosition: number): string | undefined => {
+	const offset = 100;
+	const adjustedScroll = scrollPosition + offset;
 
-	for (const heading of contentCache) {
-		const distance = Math.abs(heading.offsetTop - scrollPosition);
-		if (distance < closestDistance) {
-			closestDistance = distance;
-			closestHeadingId = heading.id;
+	for (let index = contentCache.length - 1; index >= 0; index--) {
+		const heading = contentCache[index];
+		if (heading && heading.offsetTop <= adjustedScroll) {
+			return heading.id;
 		}
 	}
-
-	return closestHeadingId;
+	return contentCache[0]?.id;
 };
 
 /**
- * 通用的滚动处理逻辑
- * @param callback 滚动处理后的回调
+ * 合并滚动监听逻辑，并执行初始高亮
+ * @param contentCache - 内容区域的 HTMLElement 数组
+ * @param tocLinksCache - 目录链接的 HTMLElement 数组
  */
-const handleScrollEvent = (callback: (scrollPosition: number) => void): void => {
+const initScrollObserver = (contentCache: HTMLElement[], tocLinksCache: HTMLElement[]): void => {
 	let ticking = false;
-	let timer: ReturnType<typeof setTimeout> | undefined;
+	let lastId: string | undefined = undefined;
 
-	const handleScroll = () => {
-		if (!ticking) {
-			ticking = true;
-			if (timer) {
-				clearTimeout(timer);
+	// 封装更新逻辑，以便复用
+	const updateStatus = () => {
+		const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+		const activeId = getActiveHeadingId(contentCache, scrollPosition);
+
+		if (activeId && activeId !== lastId) {
+			lastId = activeId;
+
+			// 避免初始加载时重复推送相同的 hash
+			if (globalThis.location.hash !== `#${activeId}`) {
+				history.replaceState(undefined, '', `#${activeId}`);
 			}
-			timer = globalThis.setTimeout(() => {
-				const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-				callback(scrollPosition);
-				ticking = false;
-			}, 300);
+
+			for (const link of tocLinksCache) {
+				const isTarget = link.getAttribute('href') === `#${activeId}`;
+				link.classList.toggle('select-toc', isTarget);
+
+				if (isTarget) {
+					link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+				}
+			}
 		}
 	};
 
-	window.addEventListener('scroll', handleScroll);
-};
-
-/**
- * 滚动到最近的标题并更新 URL 锚点
- * @param contentCache 内容区域的 HTMLElement[]
- */
-const scrollToNearestHeading = (contentCache: HTMLElement[]): void => {
-	handleScrollEvent((scrollPosition) => {
-		const closestHeadingId = getClosestHeadingId(contentCache, scrollPosition);
-
-		// 只有在标题变化时才更新 URL
-		if (closestHeadingId && globalThis.location.hash !== `#${closestHeadingId}`) {
-			history.replaceState(undefined, '', `#${closestHeadingId}`);
+	const onScroll = () => {
+		if (!ticking) {
+			globalThis.requestAnimationFrame(() => {
+				updateStatus();
+				ticking = false;
+			});
+			ticking = true;
 		}
-	});
+	};
+
+	window.addEventListener('scroll', onScroll, { passive: true });
+
+	// 【关键修复】：页面加载完成后立即执行一次，确保初始状态高亮
+	updateStatus();
 };
 
 /**
- * 更新目录的高亮显示
- * @param contentCache 内容区域的 HTMLElement[]
- * @param tocLinksCache 目录链接的 HTMLElement[]
+ * 初始化目录功能
+ * @param content - 正文容器
+ * @param tocContainer - 目录容器
  */
-const updateTocHighlightOnScroll = (contentCache: HTMLElement[], tocLinksCache: HTMLElement[]): void => {
-	handleScrollEvent((scrollPosition) => {
-		const closestHeadingId = getClosestHeadingId(contentCache, scrollPosition);
+const toc = (content: HTMLElement, tocContainer: HTMLElement): void => {
+	const headings = Array.from(content.querySelectorAll('h1, h2, h3, h4, h5, h6')) as HTMLElement[];
+	const links = Array.from(tocContainer.querySelectorAll('a[href^="#"]')) as HTMLElement[];
 
-		// 移除之前选中的链接
-		const previousLink = tocLinksCache.find((l) => l.classList.contains('select-toc'));
-		previousLink?.classList.remove('select-toc');
+	if (headings.length === 0) return;
 
-		// 高亮当前的标题链接
-		const link = tocLinksCache.find((l) => l.getAttribute('href') === `#${closestHeadingId}`);
-		if (link) {
-			link.classList.add('select-toc');
-			link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-		}
-	});
-};
-
-/**
- * 初始化滚动事件监听
- * @param content 内容区域的 HTMLElement
- * @param toc 目录区域的 HTMLElement
- */
-const toc = (content: HTMLElement, toc: HTMLElement): void => {
-	const contentCache = Array.from(content.querySelectorAll('h2, h3, h4, h5, h6')) as HTMLElement[];
-	const tocLinksCache = Array.from(toc.querySelectorAll('a[href^="#"]')) as HTMLAnchorElement[];
-
-	scrollToNearestHeading(contentCache);
-
-	// 仅在非移动设备上启用目录高亮功能
-	if (!globalThis.matchMedia('(max-width: 600px)').matches) {
-		updateTocHighlightOnScroll(contentCache, tocLinksCache);
-	}
+	initScrollObserver(headings, links);
 };
 
 export default toc;

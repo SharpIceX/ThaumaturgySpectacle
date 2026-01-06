@@ -31,7 +31,7 @@ export default {
 			// 描述
 			{
 				name: 'description',
-				content: '欢迎来到幻术与奇象世界！',
+				content: '幻术与奇象的Wiki',
 			},
 			{
 				name: 'keywords',
@@ -41,7 +41,7 @@ export default {
 			//	Windows 磁贴图标
 			{
 				name: 'msapplication-TileColor',
-				content: '#679DE3',
+				content: '#88C0D0',
 			},
 			{
 				name: 'msapplication-TileImage',
@@ -51,7 +51,7 @@ export default {
 			// 网站主题颜色
 			{
 				name: 'theme-color',
-				content: '#679DE3',
+				content: '#88C0D0',
 			},
 
 			// 版权信息

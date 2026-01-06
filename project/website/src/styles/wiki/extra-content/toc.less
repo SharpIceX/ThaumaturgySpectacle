@@ -1,39 +1,74 @@
-@import url('nord/src/lesscss/nord.less');
+@import (reference) url('nord/src/lesscss/nord.less');
 
 .toc {
-	@apply "w-inherit max-md:w-full";
-
-	top: 0;
+	width: inherit;
 	position: sticky;
+	top: 1.5rem;
+	margin-bottom: 2rem;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+
+	// 目录卡片容器
+	> div {
+		max-height: 70vh; // 限制高度防止超出屏幕
+		overflow-y: auto; // 内容过多时启用内部滚动
+		border-radius: 0.5rem;
+	}
+
+	h1 {
+		margin-bottom: 1rem;
+		font-size: 1.25rem;
+		color: @nord6;
+	}
 
 	.toc-content {
-		@apply "max-h-[25rem] overflow-y-auto";
-
 		ol {
+			list-style: none;
+			counter-reset: item; // 初始化多级编号计数器
+			padding-left: 1.2rem;
+			margin: 0;
+
 			li {
-				counter-increment: item; // 计数器递增
-				padding-left: 1em; // 缩进
+				counter-increment: item; // 编号递增
+				margin: 0.4rem 0;
+				line-height: 1.5;
 
 				&::before {
-					opacity: 0.4;
-					margin-right: 0.5em; // 右边距
-					content: counters(item, '.'); // 使用计数器
-				}
-
-				li ol {
-					counter-reset: item; // 重置计数器
+					content: counters(item, '.') ' '; // 生成 1.1, 1.1.1 格式
+					color: @nord4;
+					font-family: monospace;
+					font-size: 0.85em;
+					margin-right: 0.5em;
+					opacity: 0.6;
 				}
 
 				a {
+					color: @nord4;
+					text-decoration: none;
+					transition: all 0.2s;
+					word-break: break-all;
+
 					&:hover {
-						@apply "text-nord10";
+						color: @nord8;
+					}
+
+					&.select-toc {
+						background-color: @nord8;
+						color: @nord0;
+						font-weight: 600;
+						padding: 2px 8px;
+						border-radius: 4px;
+						display: inline-block;
 					}
 				}
-			}
-		}
 
-		.select-toc {
-			background-color: saturate(@nord10, 30%);
+				ol {
+					margin-top: 0.2rem;
+					padding-left: 1rem;
+				}
+			}
 		}
 	}
 }

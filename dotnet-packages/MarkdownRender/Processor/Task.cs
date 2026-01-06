@@ -1,47 +1,60 @@
+using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 
 namespace MarkdownRender.Processor
 {
 	internal static class Task
 	{
+		private const string DoneMark = "✓";
+		private const string UndoneMark = "✗";
+
 		internal static void Render(IHtmlElement body)
 		{
-			var owner = body.Owner;
+			var owner = body.Owner!;
 
-			// 找到所有任务列表项
-			// <ul class="contains-task-list">
-			var taskListItems = body.QuerySelectorAll("ul.contains-task-list");
-
-			foreach (var list in taskListItems)
+			foreach (var list in body.QuerySelectorAll("ul.contains-task-list"))
 			{
-				var listItems = list.QuerySelectorAll("li");
-
-				foreach (var item in listItems)
+				foreach (var item in list.QuerySelectorAll("li"))
 				{
-					// 获取任务状态
-					var taskStatus = item.QuerySelector("input")?.GetAttribute("checked") == "checked";
+					var checkbox = item.QuerySelector("input[type=checkbox]");
+					if (checkbox == null)
+						continue;
 
-					// 获取内容
-					var content = item.TextContent.Trim();
+					var taskDone = checkbox.HasAttribute("checked");
 
-					// 任务状态元素
-					var statusSpan = owner!.CreateElement("span");
-					statusSpan.ClassName = taskStatus ? "task-status-done" : "task-status-undone";
-					statusSpan.TextContent = taskStatus ? "✓" : "✗";
+					// 获取文本内容（排除原有的 checkbox）
+					var contentNode = item.Clone(true) as IElement;
+					contentNode?.QuerySelector("input[type=checkbox]")?.Remove();
+					var content = contentNode?.TextContent.Trim() ?? string.Empty;
 
-					// 任务内容元素
+					// 清空原始项
+					item.InnerHtml = string.Empty;
+
+					// 创建状态容器
+					var statusWrapper = owner.CreateElement("span");
+					statusWrapper.SetAttribute("role", "checkbox");
+					statusWrapper.SetAttribute("aria-checked", taskDone ? "true" : "false");
+					statusWrapper.SetAttribute(
+						"aria-label",
+						$"任务：{content}，状态：{(taskDone ? "已完成" : "未完成")}"
+					);
+
+					// 支持键盘操作
+					statusWrapper.SetAttribute("tabindex", "0");
+
+					// 创建视觉图标 Span
+					var statusMark = owner.CreateElement("span");
+					statusMark.ClassName = taskDone ? "task-status-done" : "task-status-undone";
+					statusMark.TextContent = taskDone ? DoneMark : UndoneMark;
+
+					// 创建内容 Span
 					var contentSpan = owner.CreateElement("span");
 					contentSpan.ClassName = "task-content";
 					contentSpan.TextContent = content;
 
-					// 清空原有内容
-					item.InnerHtml = string.Empty;
-
-					// 设置无障碍相关属性
-					item.SetAttribute("aria-label", $"任务：{content}，状态：{(taskStatus ? "已完成" : "未完成")}");
-
-					// 添加新内容
-					item.Append(statusSpan);
+					// 组装结构
+					statusWrapper.Append(statusMark);
+					item.Append(statusWrapper);
 					item.Append(contentSpan);
 				}
 			}

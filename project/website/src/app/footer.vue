@@ -5,7 +5,7 @@
 			<a
 				href="https://github.com/SharpIceX"
 				aria-label="访问锐冰 (SharpIce) 的 GitHub 页面"
-				class="text-theme ml-1 mr-1 underline hover:no-underline">
+				class="text-nord8 ml-1 mr-1 underline hover:no-underline">
 				锐冰 (SharpIce)
 			</a>
 			保留所有权利。

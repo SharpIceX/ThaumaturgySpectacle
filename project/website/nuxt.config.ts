@@ -62,9 +62,6 @@ export default defineNuxtConfig({
 		writeEarlyHints: isProduction,
 		inlineRouteRules: isProduction,
 	},
-	future: {
-		typescriptBundlerResolution: false,
-	},
 	features: {
 		inlineStyles: true,
 	},
