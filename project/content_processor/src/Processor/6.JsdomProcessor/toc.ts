@@ -1,61 +1,83 @@
-import { Renderer } from '@ts-dotnet-packages/markdown-render';
+const main = (document: Document): string | undefined => {
+	// 获取所有 h2-h6 标题
+	const headings = document.querySelectorAll('h2, h3, h4, h5, h6');
+	if (headings.length === 0) {
+		return undefined;
+	}
 
-interface TocContentType {
-	id: string; // 生成的 ID
-	name: string; // 标题文本
-	level: 1 | 2 | 3 | 4 | 5; // 标题级别，对应 h2 到 h6
-}
+	const nav = document.createElement('nav');
+	nav.setAttribute('role', 'navigation');
+	nav.setAttribute('aria-label', 'Table of Contents');
 
-const generateTocMarkdown = (tocContent: TocContentType[]): string => {
-	const counters: number[] = []; // 存每层计数
+	const rootOl = document.createElement('ol');
+	nav.append(rootOl);
 
-	return tocContent
-		.map(({ id, name, level }: TocContentType) => {
-			// 初始化并自增当前层计数
-			counters[level - 1] = (counters[level - 1] || 0) + 1;
+	const stack: HTMLOListElement[] = [rootOl];
 
-			// 重置更深层级计数器
-			counters.length = level;
+	// 记录 ID 防止重复
+	const usedIds = new Set<string>();
 
-			const indent = '    '.repeat(level - 1); // 每层缩进 4 个空格
-			const number = counters[level - 1]; // 当前层编号
+	for (const heading of headings) {
+		const rawText = heading.textContent?.trim() ?? '';
 
-			return `${indent}${number}. [${name}](#${id})`;
-		})
-		.join('\n');
-};
+		let baseId =
+			heading.id ||
+			encodeURIComponent(
+				rawText
+					.toLowerCase() // 转小写
+					.replaceAll(/\s+/g, '-') // 空格替换为`-`
+					.replaceAll(/[^\w\u4E00-\u9FA5-]/g, ''), // 删除特殊标点
+			).slice(0, 50);
 
-const main = (document: Document): string | false => {
-	const body = document.body;
+		// 如果清理后的 ID 为空，则设置默认 ID
+		if (!baseId) baseId = 'section';
 
-	const tocContent: TocContentType[] = [...body.querySelectorAll('h2, h3, h4, h5, h6')].map((heading) => {
-		const id = encodeURIComponent(heading.textContent);
-		heading.id = id;
+		// 处理重复 ID
+		let finalId = baseId;
+		let counter = 1;
+		while (usedIds.has(finalId)) {
+			finalId = `${baseId}-${counter}`;
+			counter++;
+		}
+		usedIds.add(finalId);
 
-		const level = {
-			h2: 1,
-			h3: 2,
-			h4: 3,
-			h5: 4,
-			h6: 5,
-		}[heading.tagName.toLowerCase()] as 1 | 2 | 3 | 4 | 5;
+		// 写入新 ID
+		heading.id = finalId;
 
-		return {
-			id,
-			name: heading.textContent.trim(),
-			level,
-		};
-	});
+		// 计算层级
+		const level = Number.parseInt(heading.tagName.slice(1), 10) - 1;
 
-	// 构建 Markdown 格式目录
-	const tocMarkdown = generateTocMarkdown(tocContent);
+		// 4. 创建列表项
+		const li = document.createElement('li');
+		const anchor = document.createElement('a');
+		anchor.href = `#${finalId}`;
+		anchor.textContent = rawText;
+		li.append(anchor);
 
-	// 如果目录为空，返回空字符串
-	if (tocMarkdown.trim() === '') return false;
+		// 嵌套处理（含跳级处理）
+		while (level > stack.length) {
+			const lastContainer = stack.at(-1);
+			let lastLi = lastContainer?.lastElementChild as HTMLLIElement | null;
 
-	// 渲染 Markdown 为 HTML
-	const render = Renderer.Render(tocMarkdown, false);
-	return render.html;
+			if (!lastLi) {
+				lastLi = document.createElement('li');
+				lastLi.setAttribute('aria-hidden', 'true');
+				lastContainer?.append(lastLi);
+			}
+
+			const newSubList = document.createElement('ol');
+			lastLi.append(newSubList);
+			stack.push(newSubList);
+		}
+
+		while (level < stack.length) {
+			stack.pop();
+		}
+
+		stack.at(-1)?.append(li);
+	}
+
+	return nav.outerHTML;
 };
 
 export default main;
