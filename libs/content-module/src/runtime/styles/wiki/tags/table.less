@@ -1,0 +1,61 @@
+@import (reference) '$/nord/src/lesscss/nord.less';
+
+table {
+	display: table;
+	margin: 0 auto;
+	overflow: hidden;
+	border-spacing: 0;
+	border-radius: 8px;
+	border: 1px solid @nord3;
+	background-color: @nord0;
+	border-collapse: separate;
+
+	thead {
+		background-color: @nord3;
+		th {
+			color: @nord6;
+			font-weight: 600;
+			padding: 10px 16px;
+			white-space: nowrap;
+			border-bottom: 1px solid @nord3;
+			border-right: 1px solid fade(@nord4, 15%);
+
+			&:last-child {
+				border-right: none;
+			}
+		}
+	}
+
+	tbody tr {
+		&:nth-child(even) {
+			background-color: fade(@nord1, 40%);
+		}
+
+		td {
+			color: @nord4;
+			padding: 8px 16px;
+			word-break: normal;
+			overflow-wrap: anywhere;
+			border-bottom: 1px solid @nord3;
+			border-right: 1px solid @nord3;
+
+			&:last-child {
+				border-right: none;
+			}
+		}
+
+		&:last-child td {
+			border-bottom: none;
+		}
+	}
+
+	// 对齐属性
+	td[align='center'],
+	th[align='center'] {
+		text-align: center;
+	}
+	td[align='right'],
+	th[align='right'] {
+		text-align: right;
+	}
+}

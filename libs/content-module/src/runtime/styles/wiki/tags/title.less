@@ -1,0 +1,59 @@
+@import (reference) '$/nord/src/lesscss/nord.less';
+
+h2 {
+	font-weight: 700;
+	font-size: 1.5rem;
+	line-height: 2rem;
+	margin-top: 1.75rem;
+	margin-bottom: 0.75rem;
+}
+h3 {
+	font-weight: 600;
+	font-size: 1.25rem;
+	margin-top: 1.5rem;
+	line-height: 1.75rem;
+	margin-bottom: 0.625rem;
+}
+h4 {
+	font-weight: 500;
+	margin-top: 1.25rem;
+	font-size: 1.125rem;
+	line-height: 1.75rem;
+	margin-bottom: 0.5rem;
+}
+h5 {
+	font-size: 1rem;
+	font-weight: 400;
+	margin-top: 1rem;
+	line-height: 1.5rem;
+	margin-bottom: 0.375rem;
+}
+h6 {
+	font-weight: 400;
+	font-size: 0.875rem;
+	margin-top: 0.75rem;
+	line-height: 1.25rem;
+	margin-bottom: 0.375rem;
+}
+
+// 提示性装饰
+h2,
+h3,
+h4,
+h5,
+h6 {
+	display: flow-root;
+	position: relative;
+	padding-left: 1rem;
+
+	&::after {
+		left: 0;
+		top: 5%;
+		height: 90%;
+		content: '';
+		width: 0.25rem;
+		position: absolute;
+		border-radius: 0.2rem;
+		background-color: saturate(@nord9, 40%);
+	}
+}

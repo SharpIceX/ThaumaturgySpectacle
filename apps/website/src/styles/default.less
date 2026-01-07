@@ -1,0 +1,33 @@
+@import 'modern-normalize';
+@import (reference) '$/nord/src/lesscss/nord.less';
+
+html {
+	line-height: 1.5;
+	scrollbar-width: auto;
+	scroll-behavior: smooth;
+	scrollbar-gutter: stable;
+	scrollbar-color: @nord13 transparent;
+}
+
+body {
+	width: 100%;
+	color: @nord4;
+	background: @nord0;
+}
+
+a {
+	color: @nord8;
+	text-decoration: none;
+	transition: color 0.3s ease;
+
+	&:hover {
+		color: @nord10;
+	}
+}
+
+svg {
+	width: 1.5rem;
+	height: 1.5rem;
+	fill: currentColor;
+	display: inline-block;
+}

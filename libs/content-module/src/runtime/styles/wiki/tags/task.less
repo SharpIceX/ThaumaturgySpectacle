@@ -1,0 +1,22 @@
+@import (reference) '$/nord/src/lesscss/nord.less';
+
+li.task-list-item {
+	.task-list-item-checkbox {
+		top: -1.5px;
+		position: relative;
+		margin-right: 0.4rem;
+		vertical-align: middle;
+	}
+
+	input.task-list-item-checkbox:checked ~ .task-list-item-label {
+		color: @nord8;
+	}
+
+	input.task-list-item-checkbox:not(:checked) ~ .task-list-item-label {
+		color: @nord11;
+	}
+}
+
+li.task-list-item:has(input:checked) {
+	color: fade(@nord8, 60%);
+}

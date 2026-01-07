@@ -1,13 +1,17 @@
+shellEmulator: true
+shamefullyHoist: true
+disallowWorkspaceCycles: true
+
 packages:
-  - project/**
-  - packages/**
-  - dotnet-packages/**
+  - apps/**
+  - libs/**
 
 onlyBuiltDependencies:
   - '@parcel/watcher'
-  - better-sqlite3
   - esbuild
   - less
+  - lmdb
+  - msgpackr-extract
   - sharp
   - unrs-resolver
   - workerd

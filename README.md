@@ -1,4 +1,4 @@
-# **幻术奇象 Thaumaturgy Spectacle**项目
+<!-- markdownlint-disable MD033 MD041 -->
 
 > [!NOTE]
 > **构建提示**
@@ -20,9 +20,8 @@
 
 ## 依赖
 
-- Node.js 22.17+
-- pnpm 10.13+
-- .NET Core 10.0 SDK
+- Node.js 22.22+
+- pnpm 10.30+
 
 ```bash
 # 拉取仓库
@@ -32,14 +31,11 @@ cd ThaumaturgySpectacle
 
 # 安装依赖
 pnpm install --frozen-lockfile
-
-# 构建文章（开发必须）
-pnpm --dir ./project/content_processor run build
 ```
 
 ### 构建项目
 
 ```bash
 # 构建网站
-pnpm --dir ./project/website run generate
+pnpm --dir ./apps/website run generate
 ```

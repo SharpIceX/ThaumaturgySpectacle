@@ -1,0 +1,39 @@
+{
+	"name": "@ts/website",
+	"private": true,
+	"type": "module",
+	"version": "1.0.0",
+	"license": "MPL-2.0",
+	"scripts": {
+		"dev": "nuxt dev",
+		"build": "nuxt build",
+		"preview": "nuxt preview",
+		"generate": "nuxt generate",
+		"postinstall": "nuxt prepare",
+		"clean": "rimraf dist .output"
+	},
+	"dependencies": {
+		"@fontsource/noto-color-emoji": "^5.2.10",
+		"@fontsource/pretendard": "^5.2.5",
+		"@lxgw/LxgwBright": "github:lxgw/LxgwBright#v5.527",
+		"@material-design-icons/svg": "^0.14.15",
+		"@ts/shared": "workspace:*",
+		"@vueuse/integrations": "^14.2.1",
+		"find-up": "^8.0.0",
+		"modern-normalize": "^3.0.1",
+		"nord": "^0.2.1",
+		"nprogress": "^0.2.0",
+		"nuxt": "^4.3.1",
+		"vue": "^3.5.29"
+	},
+	"devDependencies": {
+		"@nuxt/eslint": "^1.15.2",
+		"@nuxtjs/seo": "^3.4.0",
+		"@ts/content-module": "workspace:*",
+		"isomorphic-git": "^1.37.2",
+		"less": "^4.5.1",
+		"lightningcss": "^1.31.1",
+		"nuxt-svgo": "^4.2.6",
+		"rimraf": "^6.1.3"
+	}
+}

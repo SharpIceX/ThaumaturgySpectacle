@@ -1,0 +1,57 @@
+{
+	"compilerOptions": {
+		/* 基础配置 */
+		"pretty": true,
+		"allowJs": true,
+		"jsx": "preserve",
+		"jsxFactory": "h",
+		"target": "ESNext",
+		"module": "ESNext",
+		"jsxFragmentFactory": "Fragment",
+		"jsxImportSource": "vue",
+		"lib": ["ESNext"],
+
+		/** 只做检查 */
+		"noEmit": true,
+
+		/* 构建 */
+		"sourceMap": true,
+		"declaration": false,
+		"noEmitOnError": true,
+		"inlineSources": true,
+		"declarationMap": false,
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"moduleDetection": "force",
+		"verbatimModuleSyntax": true,
+		"moduleResolution": "Bundler",
+		"useDefineForClassFields": true,
+
+		/* 检查 */
+		"strict": true,
+		"checkJs": true,
+		"alwaysStrict": true,
+		"skipLibCheck": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"strictNullChecks": true,
+		"noImplicitReturns": true,
+		"noUnusedParameters": true,
+		"allowUnusedLabels": false,
+		"noImplicitOverride": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"noImplicitUseStrict": false,
+		"allowUnreachableCode": false,
+		"noUncheckedIndexedAccess": true,
+		"exactOptionalPropertyTypes": true,
+		"useUnknownInCatchVariables": true,
+		"noFallthroughCasesInSwitch": true,
+		"strictPropertyInitialization": true,
+		"forceConsistentCasingInFileNames": true,
+		"noPropertyAccessFromIndexSignature": true
+	},
+	"exclude": ["**/node_modules", "**/dist", "**/.cache", "**/output"]
+}

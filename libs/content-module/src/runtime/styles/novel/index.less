@@ -1,0 +1,21 @@
+@import (reference) '$/nord/src/lesscss/nord.less';
+
+.novel-content {
+	width: 65%;
+	padding: 2rem;
+	line-height: 2;
+	border-radius: 12px;
+	background-color: @nord2;
+	text-autospace: ideograph-alpha;
+
+	// 小屏幕
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+
+	// 普通文本
+	@import './tags/text.less';
+
+	// 标题
+	@import './tags/title.less';
+}

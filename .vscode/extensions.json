@@ -3,19 +3,13 @@
 		// Vue
 		"vue.volar",
 
-		// UnoCSS
-		"antfu.unocss",
-
 		// ESLint
 		"dbaeumer.vscode-eslint",
 
-		// Axe Accessibility Linter
-		"deque-systems.vscode-axe-linter",
+		// Prettier
+		"esbenp.prettier-vscode",
 
-		// 格式化工具
-		"esbenp.prettier-vscode", // Prettier
-
-		// Markdown
-		"davidanson.vscode-markdownlint" // Markdown Lint
+		// MarkdownLint
+		"davidanson.vscode-markdownlint"
 	]
 }
