@@ -30,8 +30,14 @@ const main: processorFunction = async (content) => {
 			}
 
 			// 解析并存储 Front Matter
-			if (!item.metadata) item.metadata = {};
-			item.metadata.frontMatter = yaml.parse(renderResult.frontMatter) || {};
+			const frontMatter = yaml.parse(renderResult.frontMatter) || {};
+			item.metadata = {
+				...item.metadata,
+				frontMatter: {
+					type: 'wiki', // 默认为 wiki，如果 markdown 有定义则会被下面的覆盖
+					...frontMatter,
+				},
+			};
 
 			if (!item.metadata.frontMatter?.title) {
 				Log.error(`文件 ${item.inputPath} 的 Front Matter 中缺少 title 字段，将跳过渲染！`);

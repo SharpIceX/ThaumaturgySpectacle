@@ -25,6 +25,7 @@ export interface contentType {
 		frontMatter?: {
 			title: string;
 			description?: string;
+			type: 'wiki' | 'novel';
 			category?: string | string[];
 		};
 	};

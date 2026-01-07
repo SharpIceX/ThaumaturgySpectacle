@@ -51,6 +51,9 @@ const main: processorFunction = async (content) => {
 			// 返回处理后的内容
 			item.content = document.body.innerHTML;
 
+			// 内容类型
+			const type = item.metadata?.frontMatter?.type || 'wiki';
+
 			// Template 部分
 			const template = `
 <template v-slot:content>
@@ -58,7 +61,7 @@ const main: processorFunction = async (content) => {
 <h1>${item.metadata?.frontMatter?.title}</h1>
 ${item.metadata?.frontMatter?.description ? `<p class="description">${item.metadata.frontMatter.description}</p>` : ''}
 </div>
-<div class="content">
+<div class="${type === 'wiki' ? 'content' : `${type}-content`}">
 ${document.body.innerHTML}
 </div>
 <hr />
