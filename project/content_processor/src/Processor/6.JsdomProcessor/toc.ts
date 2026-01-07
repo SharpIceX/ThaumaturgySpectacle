@@ -18,16 +18,18 @@ const main = (document: Document): string | undefined => {
 	const usedIds = new Set<string>();
 
 	for (const heading of headings) {
-		const rawText = heading.textContent?.trim() ?? '';
+		const rawText = heading.textContent ?? '';
 
 		let baseId =
 			heading.id ||
-			encodeURIComponent(
-				rawText
-					.toLowerCase() // 转小写
-					.replaceAll(/\s+/g, '-') // 空格替换为`-`
-					.replaceAll(/[^\w\u4E00-\u9FA5-]/g, ''), // 删除特殊标点
-			).slice(0, 50);
+			rawText
+				.trim() // 去除首尾空格
+				.toLowerCase() // 转小写
+				.replaceAll(/\s+/g, '-') // 空格替换为连字符
+				.replaceAll(/[^\w\u4E00-\u9FA5-]/g, '') // 仅保留字母、数字、下划线、中文和连字符
+				.replaceAll(/-+/g, '-') // 连续连字符合并
+				.replaceAll(/^-+|-+$/g, '') // 去除首尾连字符
+				.slice(0, 50);
 
 		// 如果清理后的 ID 为空，则设置默认 ID
 		if (!baseId) baseId = 'section';
