@@ -45,6 +45,9 @@
 		"forceConsistentCasingInFileNames": true,
 		"noPropertyAccessFromIndexSignature": true
 	},
-	"include": ["**/*.ts", "**/*.vue"],
+	"vueCompilerOptions": {
+		"vitePressExtensions": [".md"]
+	},
+	"include": ["**/*.ts", "**/*.vue", "**/*.md"],
 	"exclude": ["**/node_modules", "**/dist"]
 }

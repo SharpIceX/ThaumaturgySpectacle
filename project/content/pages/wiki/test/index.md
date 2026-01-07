@@ -1,6 +1,6 @@
 ---
 title: 测试 Markdown 渲染
-description: 这是一个测试 Markdown 渲染的页面，包含各种 Markdown 语法
+description: 这是一个测试 Markdown 渲染的页面，包含各种扩展 Markdown 语法
 ---
 
 ## 标题层级测试

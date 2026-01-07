@@ -1,21 +1,14 @@
 <template>
-	<NuxtLayout name="wiki-content">
-		<template #content>
-			<div class="title">
-				<h1>设置</h1>
-			</div>
-			<div class="content">
-				<client-only>
-					<div class="custom setting">
-						<div v-for="item in settingItems" :key="item.settingID" class="setting-item">
-							<settingSwitch :default-state="item.defaultState" :setting-id="item.settingID" />
-							<p>{{ item.name }}</p>
-							<div v-if="item.description" :title="item.description">
-								<InfoIcon class="w-4 h-4" />
-							</div>
-						</div>
+	<NuxtLayout name="wiki-container">
+		<template #default>
+			<div class="custom setting">
+				<div v-for="item in settingItems" :key="item.settingID" class="setting-item">
+					<settingSwitch :default-state="item.defaultState" :setting-id="item.settingID" />
+					<p>{{ item.name }}</p>
+					<div v-if="item.description" :title="item.description">
+						<InfoIcon class="w-4 h-4" />
 					</div>
-				</client-only>
+				</div>
 			</div>
 		</template>
 	</NuxtLayout>

@@ -1,0 +1,15 @@
+{
+	"name": "@ts/wiki_module",
+	"type": "module",
+	"version": "1.0.0",
+	"main": "./src/module.ts",
+	"dependencies": {
+		"@nuxt/kit": "^4.2.2",
+		"luxon": "^3.7.2",
+		"remark-gfm": "^4.0.1",
+		"remark-math": "^6.0.0",
+		"remark-parse": "^11.0.0",
+		"unified": "^11.0.5",
+		"yaml": "^2.8.2"
+	}
+}

@@ -21,6 +21,9 @@
 	// UnoCSS 支持的语言类型
 	"unocss.languageIds": ["javascript", "typescript", "less", "vue"],
 
+	// Vue 和 Markdown 混合
+	"vue.server.includeLanguages": ["vue", "markdown"],
+
 	"files.associations": {
 		".csharpierignore": "ignore"
 	},

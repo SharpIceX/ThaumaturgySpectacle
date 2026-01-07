@@ -3,7 +3,6 @@ import path from 'node:path';
 import git from 'isomorphic-git';
 import appConfig from './app.config';
 import packageJson from './package.json';
-import { defineNuxtConfig } from 'nuxt/config';
 
 const isProduction = process.env['NODE_ENV'] === 'production';
 
@@ -26,9 +25,9 @@ export default defineNuxtConfig({
 	appId: 'thaumaturgy-spectacle',
 	compatibilityDate: '2025-08-28',
 	srcDir: path.resolve(import.meta.dirname, './src'),
-	modules: ['nuxt-svgo', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo'],
+	modules: ['@ts/wiki_module', 'nuxt-svgo', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo'],
 	css: ['@/styles/main.less'],
-	extends: [path.resolve(import.meta.dirname, '../content_processor/dist')],
+	extends: [path.resolve(import.meta.dirname, '../content')],
 	alias: {
 		'@': path.resolve(import.meta.dirname, './src'),
 		$: path.resolve(import.meta.dirname, './node_modules'),
