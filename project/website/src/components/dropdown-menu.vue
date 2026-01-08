@@ -29,7 +29,7 @@ function blurActiveElement() {
 </script>
 
 <style lang="less" scoped>
-@import (reference) url('nord/src/lesscss/nord.less');
+@import (reference) '$/nord/src/lesscss/nord.less';
 
 .dropdown {
 	display: flex;

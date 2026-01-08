@@ -23,7 +23,7 @@ defineOptions({
 </script>
 
 <style lang="less" scoped>
-@import (reference) url('nord/src/lesscss/nord.less');
+@import (reference) '$/nord/src/lesscss/nord.less';
 
 .wiki-container {
 	display: flex;
@@ -31,8 +31,12 @@ defineOptions({
 	justify-content: center;
 
 	.body {
+		@apply 'gap-y-2';
+
 		width: 60%;
 		padding: 2rem;
+		display: flex;
+		flex-direction: column;
 		border-radius: 0.5rem;
 		background-color: @nord1;
 
@@ -42,7 +46,7 @@ defineOptions({
 		}
 
 		.title {
-			@apply "border-b-1 border-b-nord4 border-b-op-20 pb-2 mb-4";
+			@apply "border-b-1 border-b-nord4 border-b-op-20 pb-2";
 
 			h1 {
 				@apply "text-3xl font-bold mb-1";

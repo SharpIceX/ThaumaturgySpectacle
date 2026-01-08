@@ -1,13 +1,5 @@
-import { unified } from 'unified';
 import type { Plugin } from 'vite';
-import remarkGfm from 'remark-gfm';
-import remarkMath from 'remark-math';
-import remarkParse from 'remark-parse';
-
-const processor = unified()
-	.use(remarkParse) // 核心
-	.use(remarkGfm) // 脚注、表格、任务列表、GFM 警报
-	.use(remarkMath); // 数学公式
+import { Renderer } from '../../../../dotnet-packages/MarkdownRender/dist/MarkdownRender';
 
 const MarkdownTransformPlugin = (): Plugin => {
 	return {
@@ -17,7 +9,7 @@ const MarkdownTransformPlugin = (): Plugin => {
 			// 忽略非 md 文件
 			if (!new URL(id, 'file://').pathname.endsWith('.md')) return;
 
-			let content = code.trim();
+			const content = code.trim();
 
 			if (!content || code.length === 0) this.error({ message: `不允许的操作：空 Markdown 文件`, id: id });
 
@@ -26,23 +18,23 @@ const MarkdownTransformPlugin = (): Plugin => {
 			if (newContent === content) {
 				this.error({ message: 'Frontmatter 格式非法或未闭合', id });
 			}
-			content = newContent;
 
-			const ast = JSON.stringify(processor.parse(content));
+			// 渲染
+			const HTML = Renderer.Render(newContent);
+
+			if (!HTML) {
+				this.error({ message: '渲染结果为空！', id });
+			}
 
 			return {
 				code: `
 <template>
 	<NuxtLayout name="wiki-container">
 		<template #default>
-			<WikiMarkdownAstRenderer :ast="ast" />
+			<WikiMarkdownContentRenderer>${HTML}</WikiMarkdownContentRenderer>
 		</template>
 	</NuxtLayout>
 </template>
-
-<script setup>
-const ast=${ast}
-</script>
 `,
 			};
 		},

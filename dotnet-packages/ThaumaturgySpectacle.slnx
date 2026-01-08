@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/_Project Files/">
+    <File Path=".csharpierignore" />
+    <File Path=".csharpierrc.json" />
+  </Folder>
+  <Project Path="MarkdownRender/MarkdownRender.csproj" />
+</Solution>

@@ -5,11 +5,9 @@
 	"main": "./src/module.ts",
 	"dependencies": {
 		"@nuxt/kit": "^4.2.2",
+		"@ts-dotnet-packages/markdown-render": "link:../../dotnet-packages/MarkdownRender",
+		"asciidoctor": "^3.0.4",
 		"luxon": "^3.7.2",
-		"remark-gfm": "^4.0.1",
-		"remark-math": "^6.0.0",
-		"remark-parse": "^11.0.0",
-		"unified": "^11.0.5",
 		"yaml": "^2.8.2"
 	}
 }

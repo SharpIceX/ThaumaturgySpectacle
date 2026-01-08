@@ -29,7 +29,7 @@ runs:
       env:
         NUGET_PACKAGES: ${{ github.workspace }}/.cache/nuget-packages
       working-directory: ./dotnet-packages
-      run: dotnet restore ThaumaturgySpectacle.sln --locked-mode
+      run: dotnet restore ThaumaturgySpectacle.slnx --locked-mode
       shell: bash
 
     - name: 安装 NodeJS 依赖

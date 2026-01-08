@@ -4,12 +4,16 @@ import { addLayout, addComponentsDir, addVitePlugin, defineNuxtModule, createRes
 
 const regExpMarkdown = /\.md$/;
 const regExpVue = /\.vue$/;
+const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtModule({
 	meta: {
 		name: '@ts/wiki_module',
 	},
 	setup(_options, nuxt) {
+		// 样式
+		nuxt.options.css.push(resolve('./runtime/styles/index.less'));
+
 		// Nuxt 路由扫描添加支持扫描 md 文件
 		nuxt.options.extensions.push('.md');
 
@@ -40,10 +44,8 @@ export default defineNuxtModule({
 		// 添加 Vite 预处理插件
 		addVitePlugin(plugin);
 
-		// 元数据处理
+		// 元数据扫描
 		nuxt.hook('pages:resolved', metadata);
-
-		const { resolve } = createResolver(import.meta.url);
 
 		// 注册全局 Wiki Layout
 		addLayout(

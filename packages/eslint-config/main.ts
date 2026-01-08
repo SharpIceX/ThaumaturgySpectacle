@@ -3,75 +3,40 @@ import globals from 'globals';
 import eslint from '@eslint/js';
 import jsdoc from 'eslint-plugin-jsdoc';
 import tseslint from 'typescript-eslint';
-import pluginVue from 'eslint-plugin-vue';
-import vueParser from 'vue-eslint-parser';
 import { defineConfig } from 'eslint/config';
 import regexpPlugin from 'eslint-plugin-regexp';
 import pluginPromise from 'eslint-plugin-promise';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
-import type { ConfigWithExtends } from '@eslint/config-helpers';
 
 /**
  * @description 项目根目录路径
  */
 const ProjectPath = path.resolve(import.meta.dirname, '../../');
 
-/**
- * @description 通用 TypeScript 配置
- */
-const TypeScriptConfig: ConfigWithExtends = {
-	extends: [tseslint.configs.strict, tseslint.configs.stylistic, jsdoc.configs['flat/recommended-typescript']],
-	languageOptions: {
-		parser: tseslint.parser,
-		parserOptions: {
-			sourceType: 'module',
-			tsconfigRootDir: ProjectPath,
-		},
-	},
-};
-
 const config = defineConfig(
 	eslint.configs.recommended,
+	tseslint.configs.strict,
+	tseslint.configs.stylistic,
 	eslintPluginUnicorn.configs.recommended,
 	pluginPromise.configs['flat/recommended'],
 	regexpPlugin.configs['flat/recommended'],
-	...pluginVue.configs['flat/recommended'],
+	jsdoc.configs['flat/recommended-typescript'],
 	eslintConfigPrettier,
-	// 通用配置
 	{
-		rules: {
-			eqeqeq: 'error',
-			'unicorn/no-immediate-mutation': 'off',
-		},
 		languageOptions: {
 			parserOptions: {
+				sourceType: 'module',
 				projectService: true,
 				ecmaVersion: 'latest',
-			},
-		},
-	},
-	{
-		...TypeScriptConfig,
-		files: ['**/*.ts'],
-		languageOptions: {
-			parserOptions: {
-				extraFileExtensions: ['.vue'],
+				tsconfigRootDir: ProjectPath,
 			},
 			globals: {
 				...globals['shared-node-browser'],
 			},
 		},
-	},
-	{
-		...TypeScriptConfig,
-		files: ['**/*.vue'],
-		languageOptions: {
-			parser: vueParser,
-			parserOptions: {
-				parser: tseslint.parser,
-				extraFileExtensions: ['.vue'],
-			},
+		rules: {
+			eqeqeq: 'error',
 		},
 	},
 	// Nuxt 项目

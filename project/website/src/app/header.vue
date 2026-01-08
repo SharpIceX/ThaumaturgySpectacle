@@ -96,7 +96,7 @@ const menuItems = {
 </script>
 
 <style lang="less" scoped>
-@import 'nord/src/lesscss/nord.less';
+@import (reference) '$/nord/src/lesscss/nord.less';
 
 .navbar {
 	display: flex;

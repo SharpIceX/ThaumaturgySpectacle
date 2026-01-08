@@ -1,7 +1,15 @@
 ---
 title: 测试 Markdown 渲染
 description: 这是一个测试 Markdown 渲染的页面，包含各种扩展 Markdown 语法
+
+category: '测试'
 ---
+
+<wiki-infobox :data="[
+{
+"left": "aa",
+}
+]" />
 
 ## 标题层级测试
 
@@ -200,12 +208,6 @@ Hello, I am English
 
 ## 强调信息
 
-### 自定义容器
-
-::: {.text-nord3 .bg-white}
-**自定义的高亮容器**
-:::
-
 ### 笔记
 
 > [!NOTE]
@@ -244,3 +246,7 @@ Hello, I am English
 [^2]: 这是脚注的内容2。
 
 [^3]: 这是脚注的内容3。
+
+```
+
+```
