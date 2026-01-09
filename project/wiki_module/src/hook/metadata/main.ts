@@ -11,8 +11,8 @@ const metadataHook = async (pages: NuxtPage[]) => {
 	for (const page of pages) {
 		const filepath = page.file as string;
 
-		// 忽略 md 以外的文件
-		if (!filepath.endsWith('.md')) continue;
+		// 忽略 adoc 以外的文件
+		if (!filepath.endsWith('.adoc')) continue;
 
 		const frontmatter = await frontmatterParse(filepath);
 		const timestamps = await getFileTimestamps(ProjectDirectory, filepath, git_cache);

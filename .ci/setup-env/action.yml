@@ -16,22 +16,6 @@ runs:
         node-version-file: 'package.json'
         cache: 'pnpm'
 
-    - name: 安装 .NET Core 10.0 环境
-      uses: actions/setup-dotnet@v5
-      env:
-        NUGET_PACKAGES: ${{ github.workspace }}/.cache/nuget-packages
-      with:
-        dotnet-version: '10.0.x'
-        cache: true
-        cache-dependency-path: |
-          dotnet-packages/**/packages.lock.json
-    - name: 还原 .NET 依赖
-      env:
-        NUGET_PACKAGES: ${{ github.workspace }}/.cache/nuget-packages
-      working-directory: ./dotnet-packages
-      run: dotnet restore ThaumaturgySpectacle.slnx --locked-mode
-      shell: bash
-
     - name: 安装 NodeJS 依赖
       run: pnpm install --frozen-lockfile
       shell: bash

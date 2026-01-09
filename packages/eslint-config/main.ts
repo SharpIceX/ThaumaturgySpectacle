@@ -57,10 +57,6 @@ const config = defineConfig(
 			'**/*.d.ts',
 			// 构建输出
 			'**/dist/**',
-			// 构建/编译缓存
-			'**/.cache/**',
-			// C# 项目
-			'**/dotnet-packages/**',
 			// Nuxt 项目文件
 			'**/.nuxt/**',
 			// Node 模块

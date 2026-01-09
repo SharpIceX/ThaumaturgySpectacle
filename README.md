@@ -22,7 +22,6 @@
 
 - Node.js 22.17+
 - pnpm 10.13+
-- .NET Core 10.0 SDK
 
 ```bash
 # 拉取仓库
@@ -32,9 +31,6 @@ cd ThaumaturgySpectacle
 
 # 安装依赖
 pnpm install --frozen-lockfile
-
-# 构建文章（开发必须）
-pnpm --dir ./project/content_processor run build
 ```
 
 ### 构建项目

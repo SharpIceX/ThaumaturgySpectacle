@@ -21,25 +21,6 @@
 	// UnoCSS 支持的语言类型
 	"unocss.languageIds": ["javascript", "typescript", "less", "vue"],
 
-	// Vue 和 Markdown 混合
-	"vue.server.includeLanguages": ["vue", "markdown"],
-
-	"files.associations": {
-		".csharpierignore": "ignore"
-	},
-
-	// Markdown Lint
-	"markdownlint.config": {
-		"MD033": false
-	},
-
-	"json.schemas": [
-		{
-			"fileMatch": ["/project/content/content/**/*.json"],
-			"url": "./packages/schema/dist/wiki.json"
-		}
-	],
-
 	"[xml]": {
 		"editor.defaultFormatter": "csharpier.csharpier-vscode"
 	}

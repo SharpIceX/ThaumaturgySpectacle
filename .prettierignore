@@ -4,17 +4,6 @@
 # pnpm
 /pnpm-lock.yaml
 
-# 构建/编译缓存
-/.cache
-
-# 构建输出
-*/dist/*
-
-# C#项目
-/dotnet-packages/.vs
-/dotnet-packages/**/dist
-/dotnet-packages/**/packages.lock.json
-
 # 其他项目
 /project/*/dist
 /project/website/.nuxt

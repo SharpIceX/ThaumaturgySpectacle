@@ -6,6 +6,3 @@
 
 # Node模块
 node_modules
-
-# 构建/编译缓存
-/.cache
