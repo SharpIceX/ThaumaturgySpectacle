@@ -47,7 +47,7 @@ function process(content: string): Type.RootNode {
 
 	const frontMatter = frontMatterParse(content);
 	if (frontMatter) {
-		if (Object.keys(frontMatter).length > 0) result.frontmatter = frontMatter;
+		if (Object.keys(frontMatter.metadata).length > 0) result.frontmatter = frontMatter;
 
 		// 确定切割点
 		const bodyStartOffset = frontMatter.position.end.offset ?? 0;
