@@ -1,7 +1,7 @@
 import { parse } from './parse';
-import * as Type from './types/main';
 import { frontMatterParse } from './utils/parse-frontmatter';
 import { shiftNodePosition } from './utils/shift-node-position';
+import { BlockNodeType, type RootNode } from './types/block-node';
 import { findCarriageReturn } from './utils/find-carriage-return';
 
 class CarriageReturnError extends Error {
@@ -15,10 +15,10 @@ class CarriageReturnError extends Error {
  * @throws {CarriageReturnError} 如果内容中包含回车符（`\r`），因为 WMD 格式规范要求仅使用 LF（`\n`）作为换行符
  * @throws {import('yaml').YAMLParseError} 当 Front Matter 中的 YAML 格式无效时抛出
  */
-function process(content: string): Type.RootNode {
+function process(content: string): RootNode {
 	const endLines = content.split(/\r?\n/);
-	const result: Type.RootNode = {
-		type: Type.NodeType.Root,
+	const result: RootNode = {
+		type: BlockNodeType.Root,
 		position: {
 			start: {
 				line: 0,

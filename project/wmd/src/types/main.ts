@@ -1,13 +1,5 @@
-enum NodeType {
-	/** 根节点，全文档唯一 */
-	Root = 'root',
-
-	/** 文档头部信息，全文档唯一 */
-	Frontmatter = 'frontmatter',
-
-	/** 文本 */
-	Text = 'text',
-}
+import type { BlockNodeType, BlockNode } from './block-node';
+import type { InlineNodeType, InlineNode } from './inline-node';
 
 /** 详细位置信息 */
 interface Point {
@@ -35,42 +27,9 @@ interface BaseNode {
 	position: Position;
 }
 
-/** 根节点 */
-interface RootNode extends BaseNode {
-	type: NodeType.Root;
-	frontmatter?: FrontmatterNode;
-	children?: Node[];
-}
+/** 所有节点类型 */
+type Node = BlockNode | InlineNode;
 
-/** Frontmatter 节点 */
-interface FrontmatterNode extends BaseNode {
-	type: NodeType.Frontmatter;
+type NodeType = InlineNodeType | BlockNodeType;
 
-	/** 元数据 */
-	metadata: {
-		/** 标题 */
-		title?: string;
-
-		/** 描述 */
-		description?: string;
-
-		/** 关键词 */
-		keywords?: string | string[];
-
-		/** 分类 */
-		category?: string | string[];
-	} & Record<string, unknown>;
-}
-
-/** 文本节点 */
-interface TextNode extends BaseNode {
-	type: NodeType.Text;
-	value: string;
-}
-
-/** 所有正文节点类型 */
-type Node = TextNode;
-
-export type { Point, Position, RootNode, FrontmatterNode, TextNode, Node };
-
-export { NodeType };
+export type { Point, Position, BaseNode, Node, NodeType };
