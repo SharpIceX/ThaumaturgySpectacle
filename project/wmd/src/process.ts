@@ -1,35 +1,36 @@
-import { parse } from './parse';
+import { parse } from './parse/main';
+import type { ParseError } from './types/error';
 import { frontMatterParse } from './utils/parse-frontmatter';
 import { shiftNodePosition } from './utils/shift-node-position';
-import { BlockNodeType, type RootNode } from './types/block-node';
 import { findCarriageReturn } from './utils/find-carriage-return';
+import { BlockNodeType, type RootNode } from './types/node/block-node';
 
 class CarriageReturnError extends Error {
 	override name = 'CarriageReturnError';
 }
 
+interface ResultType {
+	ast: RootNode;
+	error: ParseError[];
+}
+
 /**
- * WMD 解析器
+ * Wiki Markdown 解析器
  * @param content - WMD 文件的原始字符串内容
  * @returns 解析生成的抽象语法树（AST）根节点
  * @throws {CarriageReturnError} 如果内容中包含回车符（`\r`），因为 WMD 格式规范要求仅使用 LF（`\n`）作为换行符
  * @throws {import('yaml').YAMLParseError} 当 Front Matter 中的 YAML 格式无效时抛出
  */
-function process(content: string): RootNode {
-	const endLines = content.split(/\r?\n/);
-	const result: RootNode = {
-		type: BlockNodeType.Root,
-		position: {
-			start: {
-				line: 0,
-				column: 0,
-			},
-			end: {
-				line: endLines.length - 1,
-				column: endLines.at(-1)?.length ?? 0,
-				offset: content.length,
+function process(content: string): ResultType {
+	const result: ResultType = {
+		ast: {
+			type: BlockNodeType.Root,
+			position: {
+				start: { line: 0, column: 0, offset: 0 },
+				end: { line: 0, column: 0, offset: content.length },
 			},
 		},
+		error: [],
 	};
 
 	// 检查是否有`\r`换行符
@@ -45,9 +46,20 @@ function process(content: string): RootNode {
 		);
 	}
 
+	// 计算结束位置
+	let lastLineStart = 0;
+	for (let index = 0; index < content.length; index++) {
+		if (content.codePointAt(index) === 10) {
+			// '\n'
+			result.ast.position.end.line++;
+			lastLineStart = index + 1;
+		}
+	}
+	result.ast.position.end.column = content.length - lastLineStart;
+
 	const frontMatter = frontMatterParse(content);
 	if (frontMatter) {
-		if (Object.keys(frontMatter.metadata).length > 0) result.frontmatter = frontMatter;
+		if (Object.keys(frontMatter.metadata).length > 0) result.ast.frontmatter = frontMatter;
 
 		// 确定切割点
 		const bodyStartOffset = frontMatter.position.end.offset ?? 0;
@@ -58,15 +70,20 @@ function process(content: string): RootNode {
 
 		// 切割后可能有空的情况
 		if (bodyContent.trim()) {
-			const children = parse(bodyContent);
-			if (children) {
+			const parseResult = parse(bodyContent);
+			result.error.push(...parseResult.error);
+			if (parseResult.ast) {
 				// 修正子节点的位置信息
-				result.children = children.map((node) => shiftNodePosition(node, bodyStartOffset, bodyStartLine));
+				result.ast.children = parseResult.ast.map((node) =>
+					shiftNodePosition(node, bodyStartOffset, bodyStartLine),
+				);
 			}
 		}
 	} else {
-		const children = parse(content);
-		if (children) result.children = children;
+		const parseResult = parse(content);
+		result.error.push(...parseResult.error);
+
+		if (parseResult.ast) result.ast.children = parseResult.ast;
 	}
 
 	return result;

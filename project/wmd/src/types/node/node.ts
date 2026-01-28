@@ -10,7 +10,7 @@ interface Point {
 	column: number;
 
 	/** 全文偏移量（从 0 开始计数） */
-	offset?: number;
+	offset: number;
 }
 
 /** 节点在源码中的位置信息 */

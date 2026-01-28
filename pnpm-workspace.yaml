@@ -1,11 +1,12 @@
 packages:
   - project/**
   - packages/**
-  - dotnet-packages/**
+  - .vscode/extensions/**
 
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - better-sqlite3
+  - dprint
   - esbuild
   - less
   - sharp

@@ -1,0 +1,22 @@
+{
+	"name": "ts-wmd",
+	"type": "module",
+	"version": "1.0.0",
+	"displayName": "Wiki Markdown",
+	"description": "VSCode support extension for Wiki Markdown",
+	"engines": {
+		"vscode": "^1.108.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Formatters",
+		"Other"
+	],
+	"main": "./src/extension.ts",
+	"devDependencies": {
+		"@types/vscode": "^1.108.1",
+		"@types/mocha": "^10.0.10",
+		"@types/node": "22.x",
+		"typescript": "^5.9.3"
+	}
+}

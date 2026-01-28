@@ -31,7 +31,6 @@
 	"devDependencies": {
 		"@nuxt/eslint": "^1.12.1",
 		"@nuxtjs/seo": "^3.3.0",
-		"@ts/schema": "link:../../packages/schema",
 		"@ts/unocss-preset-nord": "link:../../packages/unocss-preset-nord",
 		"@unocss/nuxt": "^66.5.12",
 		"isomorphic-git": "^1.36.1",

@@ -18,7 +18,7 @@ export default {
 		titleTemplate: '%s | 幻术奇象',
 
 		htmlAttrs: {
-			lang: 'zh-CN',
+			lang: 'zh-Hans',
 			dir: 'ltr',
 			'data-overlayscrollbars-initialize': '',
 		},

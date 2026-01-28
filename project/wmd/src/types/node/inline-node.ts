@@ -1,4 +1,4 @@
-import type { BaseNode } from './main';
+import type { BaseNode } from './node';
 
 enum InlineNodeType {
 	/** 文本 */
