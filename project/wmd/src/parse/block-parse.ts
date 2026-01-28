@@ -29,7 +29,7 @@ function blockParse(content: string): ResultType {
 	let cursor = 0;
 
 	// 当前行
-	let line = 0;
+	let line = 1;
 
 	while (cursor < content.length) {
 		// lineEnd 是 \n 的索引
@@ -74,8 +74,8 @@ function blockParse(content: string): ResultType {
 			nodes.push({
 				type: BlockNodeType.Break,
 				position: {
-					start: { line: startLine, column: 0, offset: startOffset },
-					end: { line: startLine, column: currentLine.length, offset: endOffset },
+					start: { line: startLine, column: 1, offset: startOffset },
+					end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
 				},
 			});
 			next();
@@ -94,8 +94,8 @@ function blockParse(content: string): ResultType {
 				level: level as HeadingNode['level'],
 				children: [],
 				position: {
-					start: { line: startLine, column: 0, offset: startOffset },
-					end: { line: startLine, column: currentLine.length, offset: endOffset },
+					start: { line: startLine, column: 1, offset: startOffset },
+					end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
 				},
 			});
 			next();
@@ -140,10 +140,10 @@ function blockParse(content: string): ResultType {
 				ordered: isOrdered,
 				children: [],
 				position: {
-					start: { line: blockStartLine, column: 0, offset: blockStartOffset },
+					start: { line: blockStartLine, column: 1, offset: blockStartOffset },
 					end: {
 						line: blockStartLine + listLineCount - 1,
-						column: lastLineLength,
+						column: lastLineLength + 1,
 						offset: blockEndOffset,
 					},
 				},
@@ -170,8 +170,8 @@ function blockParse(content: string): ResultType {
 					backReferences: [],
 					children: [],
 					position: {
-						start: { line: startLine, column: 0, offset: startOffset },
-						end: { line: startLine, column: currentLine.length, offset: endOffset },
+						start: { line: startLine, column: 1, offset: startOffset },
+						end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
 					},
 				});
 
@@ -204,8 +204,8 @@ function blockParse(content: string): ResultType {
 					title,
 					src: source,
 					position: {
-						start: { line: startLine, column: 0, offset: startOffset },
-						end: { line: startLine, column: currentLine.length, offset: endOffset },
+						start: { line: startLine, column: 1, offset: startOffset },
+						end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
 					},
 				};
 
@@ -237,7 +237,7 @@ function blockParse(content: string): ResultType {
 			// 合并到上一个段落，只更新结束位置
 			lastNode.position.end = {
 				line: startLine,
-				column: currentLine.length,
+				column: currentLine.length + 1,
 				offset: endOffset,
 			};
 		} else {
@@ -245,8 +245,8 @@ function blockParse(content: string): ResultType {
 				type: BlockNodeType.Paragraph,
 				children: [],
 				position: {
-					start: { line: startLine, column: 0, offset: startOffset },
-					end: { line: startLine, column: currentLine.length, offset: endOffset },
+					start: { line: startLine, column: 1, offset: startOffset },
+					end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
 				},
 			});
 		}

@@ -25,9 +25,10 @@ function process(content: string): ResultType {
 	const result: ResultType = {
 		ast: {
 			type: BlockNodeType.Root,
+			children: [],
 			position: {
-				start: { line: 0, column: 0, offset: 0 },
-				end: { line: 0, column: 0, offset: content.length },
+				start: { line: 1, column: 1, offset: 0 },
+				end: { line: 1, column: 1, offset: content.length },
 			},
 		},
 		error: [],
@@ -47,15 +48,16 @@ function process(content: string): ResultType {
 	}
 
 	// 计算结束位置
+	let currentLine = 1;
 	let lastLineStart = 0;
 	for (let index = 0; index < content.length; index++) {
 		if (content.codePointAt(index) === 10) {
-			// '\n'
-			result.ast.position.end.line++;
+			currentLine++;
 			lastLineStart = index + 1;
 		}
 	}
-	result.ast.position.end.column = content.length - lastLineStart;
+	result.ast.position.end.line = currentLine;
+	result.ast.position.end.column = content.length - lastLineStart + 1;
 
 	const frontMatter = frontMatterParse(content);
 	if (frontMatter) {
@@ -75,7 +77,7 @@ function process(content: string): ResultType {
 			if (parseResult.ast) {
 				// 修正子节点的位置信息
 				result.ast.children = parseResult.ast.map((node) =>
-					shiftNodePosition(node, bodyStartOffset, bodyStartLine),
+					shiftNodePosition(node, bodyStartOffset, bodyStartLine - 1),
 				);
 			}
 		}

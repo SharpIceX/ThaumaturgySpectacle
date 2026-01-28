@@ -21,16 +21,16 @@ function findCarriageReturn(content: string): Point[] {
 		const size = code > 0xff_ff ? 2 : 1;
 
 		if (code === 13) {
-			// '\r'
+			// 发现 \r
 			results.push({
 				line: currentLine,
 				column: index - lineStartOffset + 1,
 				offset: index,
 			});
 		} else if (code === 10) {
-			// '\n'
+			// 发现 \n，行号增加，下一行的起点偏移量更新
 			currentLine++;
-			lineStartOffset = index + size;
+			lineStartOffset = index + 1; // 换行符本身占 1 位，下一行从 index + 1 开始
 		}
 
 		index += size;

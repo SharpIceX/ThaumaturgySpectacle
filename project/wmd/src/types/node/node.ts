@@ -3,13 +3,13 @@ import type { InlineNodeType, InlineNode } from './inline-node';
 
 /** 详细位置信息 */
 interface Point {
-	/** 行号 */
+	/** 行号（1-based） */
 	line: number;
 
-	/** 列号（0-based） */
+	/** 列号（1-based） */
 	column: number;
 
-	/** 全文偏移量（从 0 开始计数） */
+	/** 全文偏移量（0-based） */
 	offset: number;
 }
 

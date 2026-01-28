@@ -45,8 +45,8 @@ enum BlockNodeType {
 /** 根节点 */
 interface RootNode extends BaseNode {
 	type: BlockNodeType.Root;
+	children: Node[];
 	frontmatter?: FrontmatterNode;
-	children?: Node[];
 }
 
 /** Frontmatter 节点 */

@@ -22,7 +22,7 @@ function frontMatterParse(content: string): FrontmatterNode | undefined {
 		const afterMarker = markerPos + 4; // 跳过 "\n---"
 		searchPos = afterMarker;
 
-		// 情结束标记在文档末尾
+		// 结束标记在文档末尾
 		if (afterMarker === content.length) {
 			endMarkerStart = markerPos + 1; // 跳过 \n，指向 ---
 			endMarkerEnd = markerPos + 4; // 指向 --- 末尾
@@ -53,16 +53,16 @@ function frontMatterParse(content: string): FrontmatterNode | undefined {
 	if (metadata === null || typeof metadata !== 'object') return undefined;
 
 	// 计算结束位置
-	const endLine = content.slice(0, endMarkerEnd).split('\n').length - 1;
+	const endLine = content.slice(0, endMarkerEnd).split('\n').length;
 
 	return {
 		type: BlockNodeType.Frontmatter,
 		metadata,
 		position: {
-			start: { line: 0, column: 0, offset: 0 },
+			start: { line: 1, column: 1, offset: 0 },
 			end: {
 				line: endLine,
-				column: 0,
+				column: 4,
 				offset: endMarkerEnd,
 			},
 		},
