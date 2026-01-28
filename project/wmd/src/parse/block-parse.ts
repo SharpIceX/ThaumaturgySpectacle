@@ -1,15 +1,6 @@
-import type { ParseError } from '../types/error';
+import { ParseErrorCode, type ParseError } from '../types/error';
 import { BlockNodeType } from '../types/node/block-node';
-import type {
-	BlockNode,
-	HeadingNode,
-	ImageNode,
-	BlockquoteNode,
-	CodeNode,
-	FormulaNode,
-	MacroNode,
-	BreakNode,
-} from '../types/node/block-node';
+import type { BlockNode, HeadingNode, ImageNode, BlockquoteNode, CodeNode, MacroNode } from '../types/node/block-node';
 
 interface ResultType {
 	ast: BlockNode[];
@@ -85,8 +76,24 @@ function blockParse(content: string): ResultType {
 		// ========== 标题 ==========
 		if (currentLine.startsWith('#')) {
 			let level = 0;
-			while (currentLine[level] === '#' && level < 6) {
+
+			// 找到开头所有`#`
+			while (currentLine[level] === '#') {
 				level++;
+			}
+
+			// 校验级别是否合法
+			if (level > 6) {
+				errors.push({
+					code: ParseErrorCode.INVALID_HEADING_LEVEL,
+					position: {
+						start: { line: startLine, column: 1, offset: startOffset },
+						end: { line: startLine, column: level + 1, offset: startOffset + level },
+					},
+				});
+
+				// 修正为 6 级
+				level = 6;
 			}
 
 			nodes.push({
@@ -185,20 +192,46 @@ function blockParse(content: string): ResultType {
 			const titleEndIndex = currentLine.indexOf('](');
 			const linkEndIndex = currentLine.lastIndexOf(')');
 
+			// 确保基本的 Markdown 图片语法结构完整
 			if (titleEndIndex !== -1 && linkEndIndex > titleEndIndex) {
+				// 1. 提取标题内容 (去除前导的 ![ )
 				const title = currentLine.slice(2, titleEndIndex);
-				const contentWithParameters = currentLine.slice(titleEndIndex + 2, linkEndIndex);
 
-				const parts = contentWithParameters.trim().split(/\s+/);
-				const source = parts[0];
-				const parameters = parts.slice(1);
+				// 2. 提取括号内部的原始字符串并去除首尾空格
+				const rawContent = currentLine.slice(titleEndIndex + 2, linkEndIndex).trim();
 
-				// 提前处理 source 为 undefined 的极端情况（虽然正则拆分通常不会）
-				if (!source) {
-					next();
+				// --- 校验：如果括号内完全没有内容 ---
+				if (!rawContent) {
+					errors.push({
+						code: ParseErrorCode.MISSING_IMAGE_SOURCE,
+						position: {
+							start: { line: startLine, column: 1, offset: startOffset },
+							end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
+						},
+					});
+					next(); // 跳过当前行，不计入 AST
 					continue;
 				}
 
+				// 3. 按空格拆分链接与参数
+				const parts = rawContent.split(/\s+/);
+				const source = parts[0];
+
+				// --- 校验：如果第一个部分看起来像参数（包含=）或为空，说明缺失了核心链接 ---
+				if (!source || source.includes('=')) {
+					errors.push({
+						code: ParseErrorCode.MISSING_IMAGE_SOURCE,
+						position: {
+							start: { line: startLine, column: 1, offset: startOffset },
+							end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
+						},
+					});
+					next(); // 丢弃该节点
+					continue;
+				}
+
+				// 4. 链接校验通过，初始化图片节点
+				const parameters = parts.slice(1);
 				const imageNode: ImageNode = {
 					type: BlockNodeType.Image,
 					title,
@@ -209,26 +242,391 @@ function blockParse(content: string): ResultType {
 					},
 				};
 
+				// 5. 遍历并处理可选参数 (layout, scale)
 				for (const parameter of parameters) {
-					// 使用解构赋值，并给 value 一个默认空字符串，解决 undefined 报错
 					const [key, value = ''] = parameter.split('=');
+
+					/**
+					 * 计算参数在行内的偏移量，用于精准定位错误。
+					 * 我们从括号开始的位置后寻找该参数。
+					 */
+					const parameterIndexInLine = currentLine.indexOf(parameter, titleEndIndex);
+					const parameterPosition = {
+						start: {
+							line: startLine,
+							column: parameterIndexInLine + 1,
+							offset: startOffset + parameterIndexInLine,
+						},
+						end: {
+							line: startLine,
+							column: parameterIndexInLine + parameter.length + 1,
+							offset: startOffset + parameterIndexInLine + parameter.length,
+						},
+					};
 
 					if (key === 'layout') {
 						if (value === 'left' || value === 'right') {
 							imageNode.layout = value;
+						} else {
+							// 布局非法：记录错误，不应用属性
+							errors.push({
+								code: ParseErrorCode.INVALID_IMAGE_LAYOUT,
+								position: parameterPosition,
+							});
 						}
 					} else if (key === 'scale') {
-						const scale = Number.parseFloat(value);
-						if (!Number.isNaN(scale)) {
-							imageNode.scale = Math.round(scale * 100) / 100;
+						const scaleNumber = Number.parseFloat(value);
+						if (Number.isNaN(scaleNumber)) {
+							// 缩放非法：记录错误，不应用属性
+							errors.push({
+								code: ParseErrorCode.INVALID_IMAGE_SCALE,
+								position: parameterPosition,
+							});
+						} else {
+							/**
+							 * 直接截断两位小数逻辑：
+							 * 使用 Math.floor(n * 100) / 100 丢弃多余位
+							 */
+							imageNode.scale = Math.floor(scaleNumber * 100) / 100;
 						}
 					}
 				}
 
+				// 6. 将构建完成的图片节点推入结果集
 				nodes.push(imageNode);
 				next();
 				continue;
 			}
+		}
+
+		// ========== 引用块/强调信息 ==========
+		if (currentLine.startsWith('>')) {
+			const blockStartLine = line;
+			const blockStartOffset = cursor;
+
+			let probeCursor = cursor;
+			let blockEndOffset = cursor;
+			let lastLineLength = 0;
+			let totalLines = 0;
+
+			// 明确指定类型
+			let alertType: BlockquoteNode['alertType'] = undefined;
+
+			while (probeCursor < content.length) {
+				const nextNl = content.indexOf('\n', probeCursor);
+				const lineEnd = nextNl === -1 ? content.length : nextNl;
+				const lineText = content.slice(probeCursor, lineEnd);
+
+				if (lineText.startsWith('>')) {
+					// 仅在处理第一行时尝试匹配 Alert 标识
+					if (totalLines === 0) {
+						const alertMatch = lineText.match(/^>\s*\[(NOTE|TIP|WARNING|DANGER|IMPORTANT)\]\s*$/i);
+						// 修正：先判断 match 是否存在，再访问索引
+						if (alertMatch && alertMatch[1]) {
+							alertType = alertMatch[1].toLowerCase() as BlockquoteNode['alertType'];
+						}
+					}
+
+					totalLines++;
+					lastLineLength = lineText.length;
+					blockEndOffset = lineEnd;
+
+					if (nextNl === -1) break;
+					probeCursor = nextNl + 1;
+				} else {
+					break;
+				}
+			}
+
+			// 构造节点
+			const blockquoteNode: BlockquoteNode = {
+				type: BlockNodeType.Blockquote,
+				children: [],
+				position: {
+					start: { line: blockStartLine, column: 1, offset: blockStartOffset },
+					end: {
+						line: blockStartLine + totalLines - 1,
+						column: lastLineLength + 1,
+						offset: blockEndOffset,
+					},
+				},
+			};
+
+			// 只有有值时才写入属性，避开 exactOptionalPropertyTypes 限制
+			if (alertType) {
+				blockquoteNode.alertType = alertType;
+			}
+
+			nodes.push(blockquoteNode);
+
+			const jumpTarget = blockEndOffset === content.length ? content.length : blockEndOffset + 1;
+			next(totalLines, jumpTarget);
+			continue;
+		}
+
+		// ========== 代码块 ==========
+		if (currentLine.startsWith('```')) {
+			const blockStartLine = line;
+			const blockStartOffset = cursor;
+
+			const infoString = currentLine.slice(3).trim();
+			let language: string | undefined;
+			let remark: string | undefined;
+
+			if (infoString) {
+				const parts = infoString.split(/\s+/);
+				language = parts[0];
+				if (parts.length > 1) {
+					remark = parts.slice(1).join(' ');
+				}
+			}
+
+			const contentLines: string[] = [];
+			let foundClosing = false;
+			let probeCursor = content.indexOf('\n', cursor);
+			if (probeCursor === -1) probeCursor = content.length;
+			else probeCursor += 1;
+
+			let currentProbeLine = line + 1;
+
+			while (probeCursor < content.length) {
+				const nextNl = content.indexOf('\n', probeCursor);
+				const lineEnd = nextNl === -1 ? content.length : nextNl;
+				const lineText = content.slice(probeCursor, lineEnd);
+
+				if (lineText.trimEnd() === '```') {
+					foundClosing = true;
+					const blockEndOffset = lineEnd;
+
+					// --- 修正部分：构造符合 exactOptionalPropertyTypes 的对象 ---
+					const codeNode: CodeNode = {
+						type: BlockNodeType.Code,
+						value: contentLines.join('\n'),
+						position: {
+							start: { line: blockStartLine, column: 1, offset: blockStartOffset },
+							end: { line: currentProbeLine, column: lineText.length + 1, offset: blockEndOffset },
+						},
+					};
+
+					// 只有在有值的情况下才写入属性
+					if (language) codeNode.language = language;
+					if (remark) codeNode.remark = remark;
+
+					nodes.push(codeNode);
+					// -------------------------------------------------------
+
+					const totalLinesHandled = currentProbeLine - blockStartLine + 1;
+					const jumpTarget = nextNl === -1 ? content.length : nextNl + 1;
+					next(totalLinesHandled, jumpTarget);
+					break;
+				}
+
+				contentLines.push(lineText);
+				probeCursor = nextNl === -1 ? content.length : nextNl + 1;
+				currentProbeLine++;
+			}
+
+			// 未闭合的错误处理逻辑 (同理应用上面的 codeNode 构造方式)
+			if (!foundClosing) {
+				errors.push({
+					code: ParseErrorCode.UNCLOSED_CODE_BLOCK,
+					position: {
+						start: { line: blockStartLine, column: 1, offset: blockStartOffset },
+						end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
+					},
+				});
+
+				const codeNode: CodeNode = {
+					type: BlockNodeType.Code,
+					value: contentLines.join('\n'),
+					position: {
+						start: { line: blockStartLine, column: 1, offset: blockStartOffset },
+						end: {
+							line: currentProbeLine - 1,
+							column: contentLines.at(-1)?.length || 1,
+							offset: content.length,
+						},
+					},
+				};
+				if (language) codeNode.language = language;
+				if (remark) codeNode.remark = remark;
+
+				nodes.push(codeNode);
+				next(currentProbeLine - blockStartLine, content.length);
+			}
+			continue;
+		}
+
+		// ========== 公式块 ==========
+		if (currentLine.startsWith('$$')) {
+			const blockStartLine = line;
+			const blockStartOffset = cursor;
+
+			const contentLines: string[] = [];
+			let foundClosing = false;
+
+			// 跳过起始行 $$，从下一行开始查找
+			let probeCursor = content.indexOf('\n', cursor);
+			if (probeCursor === -1) probeCursor = content.length;
+			else probeCursor += 1;
+
+			let currentProbeLine = line + 1;
+
+			while (probeCursor < content.length) {
+				const nextNl = content.indexOf('\n', probeCursor);
+				const lineEnd = nextNl === -1 ? content.length : nextNl;
+				const lineText = content.slice(probeCursor, lineEnd);
+
+				// 检查闭合标识符 $$
+				// 注意：公式块的闭合符通常也单独占据一行
+				if (lineText.trim() === '$$') {
+					foundClosing = true;
+					const blockEndOffset = lineEnd;
+
+					nodes.push({
+						type: BlockNodeType.Formula,
+						value: contentLines.join('\n'),
+						position: {
+							start: { line: blockStartLine, column: 1, offset: blockStartOffset },
+							end: { line: currentProbeLine, column: lineText.length + 1, offset: blockEndOffset },
+						},
+					});
+
+					const totalLinesHandled = currentProbeLine - blockStartLine + 1;
+					const jumpTarget = nextNl === -1 ? content.length : nextNl + 1;
+					next(totalLinesHandled, jumpTarget);
+					break;
+				}
+
+				contentLines.push(lineText);
+				probeCursor = nextNl === -1 ? content.length : nextNl + 1;
+				currentProbeLine++;
+			}
+
+			// 错误处理：未找到闭合的 $$
+			if (!foundClosing) {
+				errors.push({
+					code: ParseErrorCode.UNCLOSED_FORMULA_BLOCK,
+					position: {
+						start: { line: blockStartLine, column: 1, offset: blockStartOffset },
+						end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
+					},
+				});
+
+				// 兜底：将后续所有行作为公式内容
+				nodes.push({
+					type: BlockNodeType.Formula,
+					value: contentLines.join('\n'),
+					position: {
+						start: { line: blockStartLine, column: 1, offset: blockStartOffset },
+						end: {
+							line: currentProbeLine - 1,
+							column: contentLines.at(-1)?.length || 1,
+							offset: content.length,
+						},
+					},
+				});
+				next(currentProbeLine - blockStartLine, content.length);
+			}
+			continue;
+		}
+
+		// ========== 宏 ==========
+		if (currentLine.startsWith(':::')) {
+			const blockStartLine = line;
+			const blockStartOffset = cursor;
+
+			// 1. 解析首行：提取名称和参数
+			// 示例："::: tabs type=card" -> name: "tabs", args: "type=card"
+			const infoString = currentLine.slice(3).trim();
+			let name = '';
+			let arguments_: string | undefined;
+
+			if (infoString) {
+				const firstSpaceIndex = infoString.search(/\s/);
+				if (firstSpaceIndex === -1) {
+					name = infoString; // 只有名称，如 "::: myMacro"
+				} else {
+					name = infoString.slice(0, firstSpaceIndex);
+					// 提取空格后的内容，并去掉首尾多余空格
+					const rawArguments = infoString.slice(firstSpaceIndex).trim();
+					if (rawArguments) {
+						arguments_ = rawArguments;
+					}
+				}
+			}
+
+			// 2. 收集宏内容
+			const contentLines: string[] = [];
+			let foundClosing = false;
+			let probeCursor = content.indexOf('\n', cursor);
+			if (probeCursor === -1) probeCursor = content.length;
+			else probeCursor += 1;
+
+			let currentProbeLine = line + 1;
+
+			while (probeCursor < content.length) {
+				const nextNl = content.indexOf('\n', probeCursor);
+				const lineEnd = nextNl === -1 ? content.length : nextNl;
+				const lineText = content.slice(probeCursor, lineEnd);
+
+				// 检查闭合标识符 :::
+				if (lineText.trim() === ':::') {
+					foundClosing = true;
+
+					const macroNode: MacroNode = {
+						type: BlockNodeType.Macro,
+						name: name,
+						value: contentLines.join('\n'),
+						position: {
+							start: { line: blockStartLine, column: 1, offset: blockStartOffset },
+							end: { line: currentProbeLine, column: lineText.length + 1, offset: lineEnd },
+						},
+					};
+
+					if (arguments_) macroNode.args = arguments_;
+
+					nodes.push(macroNode);
+
+					const jumpTarget = nextNl === -1 ? content.length : nextNl + 1;
+					next(currentProbeLine - blockStartLine + 1, jumpTarget);
+					break;
+				}
+
+				contentLines.push(lineText);
+				probeCursor = nextNl === -1 ? content.length : nextNl + 1;
+				currentProbeLine++;
+			}
+
+			// 3. 错误处理：未闭合
+			if (!foundClosing) {
+				errors.push({
+					code: ParseErrorCode.UNCLOSED_MACRO_BLOCK,
+					position: {
+						start: { line: blockStartLine, column: 1, offset: blockStartOffset },
+						end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
+					},
+				});
+
+				const macroNode: MacroNode = {
+					type: BlockNodeType.Macro,
+					name: name,
+					value: contentLines.join('\n'),
+					position: {
+						start: { line: blockStartLine, column: 1, offset: blockStartOffset },
+						end: {
+							line: currentProbeLine - 1,
+							column: contentLines.at(-1)?.length || 1,
+							offset: content.length,
+						},
+					},
+				};
+				if (arguments_) macroNode.args = arguments_;
+
+				nodes.push(macroNode);
+				next(currentProbeLine - blockStartLine, content.length);
+			}
+			continue;
 		}
 
 		// ========== 段落 (兜底) ==========

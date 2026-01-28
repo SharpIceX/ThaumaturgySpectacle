@@ -130,7 +130,7 @@ interface CodeNode extends BaseNode {
 	type: BlockNodeType.Code;
 
 	/** 高亮使用的语言 */
-	language: string;
+	language?: string;
 
 	/** 备注，也可以是文件名 */
 	remark?: string;
@@ -155,7 +155,7 @@ interface MacroNode extends BaseNode {
 	name: string;
 
 	/** 宏参数 */
-	args: string;
+	args?: string;
 
 	/** 宏内容 */
 	value: string;

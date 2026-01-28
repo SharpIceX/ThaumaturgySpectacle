@@ -3,8 +3,9 @@
 		"type": "root",
 		"children": [
 			{
-				"type": "paragraph",
-				"children": [],
+				"type": "macro",
+				"name": "infobox",
+				"value": "!|文字在上图片在下|![./test.png]|\n!|![./test.png]|文字在下图片在上|\n|这是一行合并|\n|这是左边|这是右边|\n|![./test.png]|左边图片右边文字|\n|左边文字右边图片|![./test.png]|",
 				"position": {
 					"start": {
 						"line": 11,
@@ -12,12 +13,31 @@
 						"offset": 172
 					},
 					"end": {
+						"line": 18,
+						"column": 4,
+						"offset": 310
+					}
+				},
+				"raw": "::: infobox\n!|文字在上图片在下|![./test.png]|\n!|![./test.png]|文字在下图片在上|\n|这是一行合并|\n|这是左边|这是右边|\n|![./test.png]|左边图片右边文字|\n|左边文字右边图片|![./test.png]|\n:::"
+			},
+			{
+				"type": "macro",
+				"name": "infobox",
+				"value": "|image|![./test.png]|\n|年龄|20\n|名称|这是名称|\n|栖息地|这是栖息地|",
+				"position": {
+					"start": {
+						"line": 20,
+						"column": 1,
+						"offset": 312
+					},
+					"end": {
 						"line": 25,
 						"column": 4,
 						"offset": 383
 					}
 				},
-				"raw": "::: infobox\n!|文字在上图片在下|![./test.png]|\n!|![./test.png]|文字在下图片在上|\n|这是一行合并|\n|这是左边|这是右边|\n|![./test.png]|左边图片右边文字|\n|左边文字右边图片|![./test.png]|\n:::\n\n::: infobox 角色信息\n|image|![./test.png]|\n|年龄|20\n|名称|这是名称|\n|栖息地|这是栖息地|\n:::"
+				"args": "角色信息",
+				"raw": "::: infobox 角色信息\n|image|![./test.png]|\n|年龄|20\n|名称|这是名称|\n|栖息地|这是栖息地|\n:::"
 			},
 			{
 				"type": "heading",
@@ -1220,7 +1240,7 @@
 				"raw": "## 引用测试"
 			},
 			{
-				"type": "paragraph",
+				"type": "blockquote",
 				"children": [],
 				"position": {
 					"start": {
@@ -1295,33 +1315,34 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 226,
+						"line": 225,
 						"column": 1,
-						"offset": 2487
+						"offset": 2486
 					},
 					"end": {
-						"line": 226,
+						"line": 225,
 						"column": 7,
-						"offset": 2493
+						"offset": 2492
 					}
 				},
 				"raw": "### 笔记"
 			},
 			{
-				"type": "paragraph",
+				"type": "blockquote",
 				"children": [],
 				"position": {
 					"start": {
-						"line": 227,
+						"line": 226,
 						"column": 1,
-						"offset": 2494
+						"offset": 2493
 					},
 					"end": {
-						"line": 231,
+						"line": 230,
 						"column": 19,
-						"offset": 2534
+						"offset": 2533
 					}
 				},
+				"alertType": "note",
 				"raw": ">[NOTE]\n>\n>这是第一行内容。\n>\n>>这是第二行内容，支持分段和嵌套。"
 			},
 			{
@@ -1330,33 +1351,34 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 233,
+						"line": 232,
 						"column": 1,
-						"offset": 2536
+						"offset": 2535
 					},
 					"end": {
-						"line": 233,
+						"line": 232,
 						"column": 7,
-						"offset": 2542
+						"offset": 2541
 					}
 				},
 				"raw": "### 提示"
 			},
 			{
-				"type": "paragraph",
+				"type": "blockquote",
 				"children": [],
 				"position": {
 					"start": {
-						"line": 234,
+						"line": 233,
 						"column": 1,
-						"offset": 2543
+						"offset": 2542
 					},
 					"end": {
-						"line": 238,
+						"line": 237,
 						"column": 19,
-						"offset": 2582
+						"offset": 2581
 					}
 				},
+				"alertType": "tip",
 				"raw": ">[TIP]\n>\n>这是第一行内容。\n>\n>>这是第二行内容，支持分段和嵌套。"
 			},
 			{
@@ -1365,33 +1387,34 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 240,
+						"line": 239,
 						"column": 1,
-						"offset": 2584
+						"offset": 2583
 					},
 					"end": {
-						"line": 240,
+						"line": 239,
 						"column": 7,
-						"offset": 2590
+						"offset": 2589
 					}
 				},
 				"raw": "### 警告"
 			},
 			{
-				"type": "paragraph",
+				"type": "blockquote",
 				"children": [],
 				"position": {
 					"start": {
-						"line": 241,
+						"line": 240,
 						"column": 1,
-						"offset": 2591
+						"offset": 2590
 					},
 					"end": {
-						"line": 245,
+						"line": 244,
 						"column": 19,
-						"offset": 2634
+						"offset": 2633
 					}
 				},
+				"alertType": "warning",
 				"raw": ">[WARNING]\n>\n>这是第一行内容。\n>\n>>这是第二行内容，支持分段和嵌套。"
 			},
 			{
@@ -1400,33 +1423,34 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 247,
+						"line": 246,
 						"column": 1,
-						"offset": 2636
+						"offset": 2635
 					},
 					"end": {
-						"line": 247,
+						"line": 246,
 						"column": 7,
-						"offset": 2642
+						"offset": 2641
 					}
 				},
 				"raw": "### 危险"
 			},
 			{
-				"type": "paragraph",
+				"type": "blockquote",
 				"children": [],
 				"position": {
 					"start": {
-						"line": 248,
+						"line": 247,
 						"column": 1,
-						"offset": 2643
+						"offset": 2642
 					},
 					"end": {
-						"line": 252,
+						"line": 251,
 						"column": 19,
-						"offset": 2685
+						"offset": 2684
 					}
 				},
+				"alertType": "danger",
 				"raw": ">[DANGER]\n>\n>这是第一行内容。\n>\n>>这是第二行内容，支持分段和嵌套。"
 			},
 			{
@@ -1435,33 +1459,34 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 254,
+						"line": 253,
 						"column": 1,
-						"offset": 2687
+						"offset": 2686
 					},
 					"end": {
-						"line": 254,
+						"line": 253,
 						"column": 7,
-						"offset": 2693
+						"offset": 2692
 					}
 				},
 				"raw": "### 重要"
 			},
 			{
-				"type": "paragraph",
+				"type": "blockquote",
 				"children": [],
 				"position": {
 					"start": {
-						"line": 255,
+						"line": 254,
 						"column": 1,
-						"offset": 2694
+						"offset": 2693
 					},
 					"end": {
-						"line": 259,
+						"line": 258,
 						"column": 19,
-						"offset": 2739
+						"offset": 2738
 					}
 				},
+				"alertType": "important",
 				"raw": ">[IMPORTANT]\n>\n>这是第一行内容。\n>\n>>这是第二行内容，支持分段和嵌套。"
 			},
 			{
@@ -1470,14 +1495,14 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 261,
+						"line": 260,
 						"column": 1,
-						"offset": 2741
+						"offset": 2740
 					},
 					"end": {
-						"line": 261,
+						"line": 260,
 						"column": 9,
-						"offset": 2749
+						"offset": 2748
 					}
 				},
 				"raw": "## 代码块测试"
@@ -1487,14 +1512,14 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 263,
+						"line": 262,
 						"column": 1,
-						"offset": 2751
+						"offset": 2750
 					},
 					"end": {
-						"line": 263,
+						"line": 262,
 						"column": 22,
-						"offset": 2772
+						"offset": 2771
 					}
 				},
 				"raw": "代码`npm install`是行内代码。"
@@ -1505,34 +1530,69 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 265,
+						"line": 264,
 						"column": 1,
-						"offset": 2774
+						"offset": 2773
 					},
 					"end": {
-						"line": 265,
+						"line": 264,
 						"column": 12,
-						"offset": 2785
+						"offset": 2784
 					}
 				},
 				"raw": "### 普通独立代码块"
+			},
+			{
+				"type": "code",
+				"value": "console.log('Hello World!');",
+				"position": {
+					"start": {
+						"line": 265,
+						"column": 1,
+						"offset": 2785
+					},
+					"end": {
+						"line": 267,
+						"column": 4,
+						"offset": 2824
+					}
+				},
+				"language": "js",
+				"raw": "``` js\nconsole.log('Hello World!');\n```"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
 				"position": {
 					"start": {
-						"line": 266,
+						"line": 269,
 						"column": 1,
-						"offset": 2786
+						"offset": 2826
 					},
 					"end": {
-						"line": 273,
-						"column": 4,
-						"offset": 2849
+						"line": 269,
+						"column": 11,
+						"offset": 2836
 					}
 				},
-				"raw": "``` js\nconsole.log('Hello World!');\n```\n\n什么都没有就是纯文本\n```\n纯文本\n```"
+				"raw": "什么都没有就是纯文本"
+			},
+			{
+				"type": "code",
+				"value": "纯文本",
+				"position": {
+					"start": {
+						"line": 270,
+						"column": 1,
+						"offset": 2837
+					},
+					"end": {
+						"line": 272,
+						"column": 4,
+						"offset": 2848
+					}
+				},
+				"raw": "```\n纯文本\n```"
 			},
 			{
 				"type": "heading",
@@ -1540,33 +1600,35 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 275,
+						"line": 274,
 						"column": 1,
-						"offset": 2851
+						"offset": 2850
 					},
 					"end": {
-						"line": 275,
+						"line": 274,
 						"column": 20,
-						"offset": 2870
+						"offset": 2869
 					}
 				},
 				"raw": "### 带备注（也可以用于表示文件名）"
 			},
 			{
-				"type": "paragraph",
-				"children": [],
+				"type": "code",
+				"value": "console.log('Hello World!');",
 				"position": {
 					"start": {
-						"line": 276,
+						"line": 275,
 						"column": 1,
-						"offset": 2871
+						"offset": 2870
 					},
 					"end": {
-						"line": 278,
+						"line": 277,
 						"column": 4,
-						"offset": 2917
+						"offset": 2916
 					}
 				},
+				"language": "js",
+				"remark": "文件名.js",
 				"raw": "``` js 文件名.js\nconsole.log('Hello World!');\n```"
 			},
 			{
@@ -1575,14 +1637,14 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 280,
+						"line": 279,
 						"column": 1,
-						"offset": 2919
+						"offset": 2918
 					},
 					"end": {
-						"line": 280,
+						"line": 279,
 						"column": 8,
-						"offset": 2926
+						"offset": 2925
 					}
 				},
 				"raw": "## 数学公式"
@@ -1592,14 +1654,14 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 282,
+						"line": 281,
 						"column": 1,
-						"offset": 2928
+						"offset": 2927
 					},
 					"end": {
-						"line": 282,
+						"line": 281,
 						"column": 26,
-						"offset": 2953
+						"offset": 2952
 					}
 				},
 				"raw": "这个$e^{i\\pi} + 1 = 0$是欧拉公式"
@@ -1610,14 +1672,14 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 284,
+						"line": 283,
 						"column": 1,
-						"offset": 2955
+						"offset": 2954
 					},
 					"end": {
-						"line": 284,
+						"line": 283,
 						"column": 11,
-						"offset": 2965
+						"offset": 2964
 					}
 				},
 				"raw": "## 独立数学公式块"
@@ -1627,17 +1689,68 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 285,
+						"line": 284,
 						"column": 1,
-						"offset": 2966
+						"offset": 2965
 					},
 					"end": {
-						"line": 296,
-						"column": 3,
-						"offset": 3124
+						"line": 284,
+						"column": 6,
+						"offset": 2970
 					}
 				},
-				"raw": "高斯积分：\n$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$\n\n多行推导：\n$$\n\\begin{aligned}\n(a+b)^2 &= a^2 + 2ab + b^2 \\\\\n        &= (a-b)^2 + 4ab\n\\end{aligned}\n$$"
+				"raw": "高斯积分："
+			},
+			{
+				"type": "formula",
+				"value": "\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}",
+				"position": {
+					"start": {
+						"line": 285,
+						"column": 1,
+						"offset": 2971
+					},
+					"end": {
+						"line": 287,
+						"column": 3,
+						"offset": 3025
+					}
+				},
+				"raw": "$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 289,
+						"column": 1,
+						"offset": 3027
+					},
+					"end": {
+						"line": 289,
+						"column": 6,
+						"offset": 3032
+					}
+				},
+				"raw": "多行推导："
+			},
+			{
+				"type": "formula",
+				"value": "\\begin{aligned}\n(a+b)^2 &= a^2 + 2ab + b^2 \\\\\n        &= (a-b)^2 + 4ab\n\\end{aligned}",
+				"position": {
+					"start": {
+						"line": 290,
+						"column": 1,
+						"offset": 3033
+					},
+					"end": {
+						"line": 295,
+						"column": 3,
+						"offset": 3123
+					}
+				},
+				"raw": "$$\n\\begin{aligned}\n(a+b)^2 &= a^2 + 2ab + b^2 \\\\\n        &= (a-b)^2 + 4ab\n\\end{aligned}\n$$"
 			},
 			{
 				"type": "heading",
@@ -1645,14 +1758,14 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 298,
+						"line": 297,
 						"column": 1,
-						"offset": 3126
+						"offset": 3125
 					},
 					"end": {
-						"line": 298,
+						"line": 297,
 						"column": 7,
-						"offset": 3132
+						"offset": 3131
 					}
 				},
 				"raw": "## 分割线"
@@ -1662,14 +1775,14 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 299,
+						"line": 298,
 						"column": 1,
-						"offset": 3133
+						"offset": 3132
 					},
 					"end": {
-						"line": 299,
+						"line": 298,
 						"column": 6,
-						"offset": 3138
+						"offset": 3137
 					}
 				},
 				"raw": "分割线开始"
@@ -1678,14 +1791,14 @@
 				"type": "break",
 				"position": {
 					"start": {
-						"line": 300,
+						"line": 299,
 						"column": 1,
-						"offset": 3139
+						"offset": 3138
 					},
 					"end": {
-						"line": 300,
+						"line": 299,
 						"column": 4,
-						"offset": 3142
+						"offset": 3141
 					}
 				},
 				"raw": "---"
@@ -1695,14 +1808,14 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 301,
+						"line": 300,
 						"column": 1,
-						"offset": 3143
+						"offset": 3142
 					},
 					"end": {
-						"line": 301,
+						"line": 300,
 						"column": 6,
-						"offset": 3148
+						"offset": 3147
 					}
 				},
 				"raw": "分割线结束"
@@ -1713,34 +1826,34 @@
 				"children": [],
 				"position": {
 					"start": {
-						"line": 303,
+						"line": 302,
 						"column": 1,
-						"offset": 3150
+						"offset": 3149
 					},
 					"end": {
-						"line": 303,
+						"line": 302,
 						"column": 6,
-						"offset": 3155
+						"offset": 3154
 					}
 				},
 				"raw": "### 宏"
 			},
 			{
-				"type": "paragraph",
-				"children": [],
+				"type": "code",
+				"value": "::: 宏名称 宏名称的空格后是可选的宏参数，会打包放入AST，需要渲染器自己解析\n这是宏内容，直到出现下一个三个点结束，会一起打包到AST。\n宏在AST有个特殊的`name`字段表示宏名称。\n宏最终由解析器后处理或渲染器处理。\n:::",
 				"position": {
 					"start": {
-						"line": 304,
+						"line": 303,
 						"column": 1,
-						"offset": 3156
+						"offset": 3155
 					},
 					"end": {
-						"line": 310,
+						"line": 309,
 						"column": 4,
-						"offset": 3280
+						"offset": 3281
 					}
 				},
-				"raw": "```\n::: 宏名称 空格后是可选的宏参数，会连空格开始直到换行结束一起打包到AST\n这是宏内容，直到出现下一个三个点结束，会一起打包到AST。\n宏在AST有个特殊的`name`字段表示宏名称。\n宏最终由解析器后处理或渲染器处理。\n:::\n```"
+				"raw": "```\n::: 宏名称 宏名称的空格后是可选的宏参数，会打包放入AST，需要渲染器自己解析\n这是宏内容，直到出现下一个三个点结束，会一起打包到AST。\n宏在AST有个特殊的`name`字段表示宏名称。\n宏最终由解析器后处理或渲染器处理。\n:::\n```"
 			}
 		],
 		"position": {
@@ -1750,9 +1863,9 @@
 				"offset": 0
 			},
 			"end": {
-				"line": 311,
+				"line": 310,
 				"column": 1,
-				"offset": 3281
+				"offset": 3282
 			}
 		},
 		"frontmatter": {
