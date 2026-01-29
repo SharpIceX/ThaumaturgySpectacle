@@ -12,7 +12,7 @@
 		// Axe Accessibility Linter
 		"deque-systems.vscode-axe-linter",
 
-		// 格式化工具
-		"esbenp.prettier-vscode" // Prettier
+		// Prettier
+		"esbenp.prettier-vscode"
 	]
 }

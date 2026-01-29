@@ -19,9 +19,5 @@
 	"eslint.validate": ["javascript", "typescript", "vue"],
 
 	// UnoCSS 支持的语言类型
-	"unocss.languageIds": ["javascript", "typescript", "less", "vue"],
-
-	"[xml]": {
-		"editor.defaultFormatter": "csharpier.csharpier-vscode"
-	}
+	"unocss.languageIds": ["javascript", "typescript", "less", "vue"]
 }

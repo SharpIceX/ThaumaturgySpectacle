@@ -1,5 +1,5 @@
-import { ParseErrorCode, type ParseError } from '../types/error';
 import { BlockNodeType } from '../types/node/block-node';
+import { ParseErrorCode, type ParseError } from '../types/error';
 import type { BlockNode, HeadingNode, ImageNode, BlockquoteNode, CodeNode, MacroNode } from '../types/node/block-node';
 
 interface ResultType {
@@ -74,25 +74,27 @@ function blockParse(content: string): ResultType {
 		}
 
 		// ========== 标题 ==========
-		if (currentLine.startsWith('#')) {
+		if (currentLine[0] === '#') {
 			let level = 0;
+			const length = currentLine.length;
 
-			// 找到开头所有`#`
-			while (currentLine[level] === '#') {
+			// 获取标题等级
+			while (level < length && currentLine[level] === '#') {
 				level++;
 			}
 
-			// 校验级别是否合法
+			// 开始位置
+			const startPos = { line: startLine, column: 1, offset: startOffset };
+
+			// 校验级别
 			if (level > 6) {
 				errors.push({
 					code: ParseErrorCode.INVALID_HEADING_LEVEL,
 					position: {
-						start: { line: startLine, column: 1, offset: startOffset },
+						start: startPos,
 						end: { line: startLine, column: level + 1, offset: startOffset + level },
 					},
 				});
-
-				// 修正为 6 级
 				level = 6;
 			}
 
@@ -101,10 +103,11 @@ function blockParse(content: string): ResultType {
 				level: level as HeadingNode['level'],
 				children: [],
 				position: {
-					start: { line: startLine, column: 1, offset: startOffset },
-					end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
+					start: startPos,
+					end: { line: startLine, column: length + 1, offset: endOffset },
 				},
 			});
+
 			next();
 			continue;
 		}
@@ -165,25 +168,36 @@ function blockParse(content: string): ResultType {
 
 		// ========== 脚注定义 ==========
 		if (currentLine.startsWith('[^')) {
-			const closingBracketIndex = currentLine.indexOf(']');
+			const closingIndex = currentLine.indexOf(']');
 
-			// 确保有闭合括号
-			if (closingBracketIndex !== -1) {
-				const label = currentLine.slice(2, closingBracketIndex);
+			// 理论上这个 if 不会出现 false 情况
+			if (closingIndex !== -1) {
+				// 提取 label
+				const label = currentLine.slice(2, closingIndex);
 
-				nodes.push({
-					type: BlockNodeType.FootnoteDefinition,
-					label: label,
-					backReferences: [],
-					children: [],
-					position: {
-						start: { line: startLine, column: 1, offset: startOffset },
-						end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
-					},
-				});
+				if (label.length > 0) {
+					nodes.push({
+						type: BlockNodeType.FootnoteDefinition,
+						label: label,
+						backReferences: [],
+						children: [],
+						position: {
+							start: {
+								line: startLine,
+								column: 1,
+								offset: startOffset,
+							},
+							end: {
+								line: startLine,
+								column: currentLine.length + 1,
+								offset: endOffset,
+							},
+						},
+					});
 
-				next();
-				continue;
+					next();
+					continue;
+				}
 			}
 		}
 
@@ -192,33 +206,21 @@ function blockParse(content: string): ResultType {
 			const titleEndIndex = currentLine.indexOf('](');
 			const linkEndIndex = currentLine.lastIndexOf(')');
 
-			// 确保基本的 Markdown 图片语法结构完整
+			// 校验格式
 			if (titleEndIndex !== -1 && linkEndIndex > titleEndIndex) {
-				// 1. 提取标题内容 (去除前导的 ![ )
 				const title = currentLine.slice(2, titleEndIndex);
 
-				// 2. 提取括号内部的原始字符串并去除首尾空格
+				// 提取括号内容并修剪两端空格
 				const rawContent = currentLine.slice(titleEndIndex + 2, linkEndIndex).trim();
 
-				// --- 校验：如果括号内完全没有内容 ---
-				if (!rawContent) {
-					errors.push({
-						code: ParseErrorCode.MISSING_IMAGE_SOURCE,
-						position: {
-							start: { line: startLine, column: 1, offset: startOffset },
-							end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
-						},
-					});
-					next(); // 跳过当前行，不计入 AST
-					continue;
-				}
-
-				// 3. 按空格拆分链接与参数
+				// 拆开参数
 				const parts = rawContent.split(/\s+/);
+
+				// 第一个参数绝对是 URL
 				const source = parts[0];
 
-				// --- 校验：如果第一个部分看起来像参数（包含=）或为空，说明缺失了核心链接 ---
-				if (!source || source.includes('=')) {
+				// 如果括号内为空，则不计入 AST
+				if (!rawContent || !source) {
 					errors.push({
 						code: ParseErrorCode.MISSING_IMAGE_SOURCE,
 						position: {
@@ -226,12 +228,10 @@ function blockParse(content: string): ResultType {
 							end: { line: startLine, column: currentLine.length + 1, offset: endOffset },
 						},
 					});
-					next(); // 丢弃该节点
+					next();
 					continue;
 				}
 
-				// 4. 链接校验通过，初始化图片节点
-				const parameters = parts.slice(1);
 				const imageNode: ImageNode = {
 					type: BlockNodeType.Image,
 					title,
@@ -242,33 +242,45 @@ function blockParse(content: string): ResultType {
 					},
 				};
 
-				// 5. 遍历并处理可选参数 (layout, scale)
+				// 处理后续可选参数
+				const parameters = parts.slice(1);
+
+				/**
+				 * 动态搜索起点定位：
+				 * 从 source 结束后的位置开始查找参数，彻底避免参数与 URL 冲突。
+				 */
+				const sourceRelativeIndex = currentLine.slice(titleEndIndex + 2).indexOf(source);
+				let searchOffsetInLine = titleEndIndex + 2 + sourceRelativeIndex + source.length;
+
 				for (const parameter of parameters) {
 					const [key, value = ''] = parameter.split('=');
 
-					/**
-					 * 计算参数在行内的偏移量，用于精准定位错误。
-					 * 我们从括号开始的位置后寻找该参数。
-					 */
-					const parameterIndexInLine = currentLine.indexOf(parameter, titleEndIndex);
+					const parameterIndexInLine = currentLine.indexOf(parameter, searchOffsetInLine);
+					const safeIndex = parameterIndexInLine === -1 ? searchOffsetInLine : parameterIndexInLine;
+
 					const parameterPosition = {
 						start: {
 							line: startLine,
-							column: parameterIndexInLine + 1,
-							offset: startOffset + parameterIndexInLine,
+							column: safeIndex + 1,
+							offset: startOffset + safeIndex,
 						},
 						end: {
 							line: startLine,
-							column: parameterIndexInLine + parameter.length + 1,
-							offset: startOffset + parameterIndexInLine + parameter.length,
+							column: safeIndex + parameter.length + 1,
+							offset: startOffset + safeIndex + parameter.length,
 						},
 					};
 
+					// 更新搜索起点
+					if (parameterIndexInLine !== -1) {
+						searchOffsetInLine = parameterIndexInLine + parameter.length;
+					}
+
+					// 参数语义校验
 					if (key === 'layout') {
 						if (value === 'left' || value === 'right') {
-							imageNode.layout = value;
+							imageNode.layout = value as 'left' | 'right';
 						} else {
-							// 布局非法：记录错误，不应用属性
 							errors.push({
 								code: ParseErrorCode.INVALID_IMAGE_LAYOUT,
 								position: parameterPosition,
@@ -276,23 +288,19 @@ function blockParse(content: string): ResultType {
 						}
 					} else if (key === 'scale') {
 						const scaleNumber = Number.parseFloat(value);
-						if (Number.isNaN(scaleNumber)) {
-							// 缩放非法：记录错误，不应用属性
+						// 校验：必须是正数且不能是 NaN
+						if (Number.isNaN(scaleNumber) || scaleNumber <= 0) {
 							errors.push({
 								code: ParseErrorCode.INVALID_IMAGE_SCALE,
 								position: parameterPosition,
 							});
 						} else {
-							/**
-							 * 直接截断两位小数逻辑：
-							 * 使用 Math.floor(n * 100) / 100 丢弃多余位
-							 */
+							// 逻辑：直接截断两位小数
 							imageNode.scale = Math.floor(scaleNumber * 100) / 100;
 						}
 					}
 				}
 
-				// 6. 将构建完成的图片节点推入结果集
 				nodes.push(imageNode);
 				next();
 				continue;
@@ -308,8 +316,6 @@ function blockParse(content: string): ResultType {
 			let blockEndOffset = cursor;
 			let lastLineLength = 0;
 			let totalLines = 0;
-
-			// 明确指定类型
 			let alertType: BlockquoteNode['alertType'] = undefined;
 
 			while (probeCursor < content.length) {
@@ -317,13 +323,17 @@ function blockParse(content: string): ResultType {
 				const lineEnd = nextNl === -1 ? content.length : nextNl;
 				const lineText = content.slice(probeCursor, lineEnd);
 
+				// 只要是以 > 开头，就属于同一个引用块
+				// 注意：这里可以根据需求决定是否允许 > 前有空格
 				if (lineText.startsWith('>')) {
 					// 仅在处理第一行时尝试匹配 Alert 标识
 					if (totalLines === 0) {
+						// 增加对 alertMatch 的防御性处理
 						const alertMatch = lineText.match(/^>\s*\[(NOTE|TIP|WARNING|DANGER|IMPORTANT)\]\s*$/i);
-						// 修正：先判断 match 是否存在，再访问索引
-						if (alertMatch && alertMatch[1]) {
-							alertType = alertMatch[1].toLowerCase() as BlockquoteNode['alertType'];
+						const capturedType = alertMatch?.[1]?.toLowerCase();
+
+						if (capturedType) {
+							alertType = capturedType as BlockquoteNode['alertType'];
 						}
 					}
 
@@ -334,14 +344,14 @@ function blockParse(content: string): ResultType {
 					if (nextNl === -1) break;
 					probeCursor = nextNl + 1;
 				} else {
+					// 如果遇到空行或不以 > 开头的行，中断引用块
 					break;
 				}
 			}
 
-			// 构造节点
 			const blockquoteNode: BlockquoteNode = {
 				type: BlockNodeType.Blockquote,
-				children: [],
+				children: [], // 这里的 children 将在后续递归解析内容时填充
 				position: {
 					start: { line: blockStartLine, column: 1, offset: blockStartOffset },
 					end: {
@@ -352,13 +362,13 @@ function blockParse(content: string): ResultType {
 				},
 			};
 
-			// 只有有值时才写入属性，避开 exactOptionalPropertyTypes 限制
 			if (alertType) {
 				blockquoteNode.alertType = alertType;
 			}
 
 			nodes.push(blockquoteNode);
 
+			// 步进：totalLines 告诉外部跳过多少行，jumpTarget 告诉外部光标移动到哪
 			const jumpTarget = blockEndOffset === content.length ? content.length : blockEndOffset + 1;
 			next(totalLines, jumpTarget);
 			continue;
