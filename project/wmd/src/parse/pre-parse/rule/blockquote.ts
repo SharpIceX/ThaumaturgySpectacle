@@ -1,6 +1,6 @@
 import type { ParseRule } from '../main';
 import { ParseErrorCode } from '../../../types/error';
-import { BlockNodeType, type BlockquoteNode } from '../../../types/node/block-node';
+import { preNodeType, type BlockquoteNode } from '../../../types/node/pre-node';
 
 /** 允许的 Alert 类型集合 */
 const ALLOWED_ALERTS = new Set(['note', 'tip', 'warning', 'danger', 'important']);
@@ -69,7 +69,7 @@ const blockquote: ParseRule = (originalContent, currentLineContent, line, offset
 	}
 
 	const blockquoteNode: BlockquoteNode = {
-		type: BlockNodeType.Blockquote,
+		type: preNodeType.Blockquote,
 		children: [],
 		position: {
 			start: { line, column: 1, offset },

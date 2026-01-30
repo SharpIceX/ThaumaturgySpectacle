@@ -6,11 +6,11 @@ import blockquote from './rule/blockquote';
 import thematicBreak from './rule/thematic-break';
 import { type ParseError } from '../../types/error';
 import footnoteDefinition from './rule/footnote-definition';
-import { BlockNodeType } from '../../types/node/block-node';
-import type { BlockNode } from '../../types/node/block-node';
+import { preNodeType } from '../../types/node/pre-node';
+import type { preNode } from '../../types/node/pre-node';
 
 interface ResultType {
-	ast: BlockNode[];
+	ast: preNode[];
 	error: ParseError[];
 }
 
@@ -19,7 +19,7 @@ type ParseRule = (
 	currentLineContent: string,
 	line: number,
 	offset: number,
-	node: BlockNode[],
+	node: preNode[],
 	error: ParseError[],
 ) => { jumpLine?: number } | boolean | undefined;
 
@@ -47,12 +47,12 @@ const rules = [
 ];
 
 /**
- * Wiki Markdown 块解析
+ * Wiki Markdown 预解析
  * @param content Wiki Markdown 内容
  * @returns 解析结果
  */
-function blockParse(content: string): ResultType {
-	const nodes: BlockNode[] = [];
+function preParse(content: string): ResultType {
+	const nodes: preNode[] = [];
 	const errors: ParseError[] = [];
 
 	let currentLine = 1;
@@ -108,7 +108,7 @@ function blockParse(content: string): ResultType {
 		 * 空行会跳过处理并拉开 offset，从而自然触发新段落的创建。
 		 */
 		const isContinuous =
-			lastNode && lastNode.type === BlockNodeType.Paragraph && lastNode.position.end.offset >= currentOffset - 1;
+			lastNode && lastNode.type === preNodeType.Paragraph && lastNode.position.end.offset >= currentOffset - 1;
 
 		if (isContinuous) {
 			// 合并到已有段落
@@ -119,7 +119,7 @@ function blockParse(content: string): ResultType {
 			};
 		} else {
 			nodes.push({
-				type: BlockNodeType.Paragraph,
+				type: preNodeType.Paragraph,
 				children: [],
 				position: {
 					start: { line: currentLine, column: 1, offset: currentOffset },
@@ -134,5 +134,5 @@ function blockParse(content: string): ResultType {
 	return { ast: nodes, error: errors };
 }
 
-export { blockParse };
+export { preParse };
 export type { ParseRule };

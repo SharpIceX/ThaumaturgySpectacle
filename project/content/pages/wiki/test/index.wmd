@@ -193,16 +193,16 @@ Github：[Github](https://github.com)
 ## 图片测试
 
 ### 默认无环绕显示在中心
-![图片标题](./test/png)
+![图片标题](./test.png)
 
 ### 左环绕
-![图片标题](./test/png layout=left)
+![图片标题](./test.png layout=left)
 
 ### 右环绕
-![图片标题](./test/png layout=right)
+![图片标题](./test.png layout=right)
 
 ### 缩放 0.5
-![图片标题](./test/png scale=0.5)
+![图片标题](./test.png scale=0.5)
 
 ## 引用测试
 > 这是一级引用

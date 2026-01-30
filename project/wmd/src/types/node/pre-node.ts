@@ -1,7 +1,7 @@
 import type { BaseNode, Node } from './node';
 import type { InlineNode } from './inline-node';
 
-enum BlockNodeType {
+enum preNodeType {
 	/** 根节点，全文档唯一 */
 	Root = 'root',
 
@@ -44,14 +44,14 @@ enum BlockNodeType {
 
 /** 根节点 */
 interface RootNode extends BaseNode {
-	type: BlockNodeType.Root;
+	type: preNodeType.Root;
 	children: Node[];
 	frontmatter?: FrontmatterNode;
 }
 
 /** Frontmatter 节点 */
 interface FrontmatterNode extends BaseNode {
-	type: BlockNodeType.Frontmatter;
+	type: preNodeType.Frontmatter;
 
 	/** 元数据 */
 	metadata: {
@@ -71,20 +71,20 @@ interface FrontmatterNode extends BaseNode {
 
 /** 段落节点 */
 interface ParagraphNode extends BaseNode {
-	type: BlockNodeType.Paragraph;
+	type: preNodeType.Paragraph;
 	children: InlineNode[];
 }
 
 /** 标题节点 */
 interface HeadingNode extends BaseNode {
-	type: BlockNodeType.Heading;
+	type: preNodeType.Heading;
 	level: 1 | 2 | 3 | 4 | 5 | 6;
 	children: InlineNode[];
 }
 
 /** 列表节点 */
 interface ListNode extends BaseNode {
-	type: BlockNodeType.List;
+	type: preNodeType.List;
 
 	/** true 为有序 (.)，false 为无序 (-) */
 	ordered: boolean;
@@ -94,13 +94,13 @@ interface ListNode extends BaseNode {
 
 /** 列表项节点 */
 interface ListItemNode extends BaseNode {
-	type: BlockNodeType.ListItem;
+	type: preNodeType.ListItem;
 	children: Node[];
 }
 
 /** 图片节点 */
 interface ImageNode extends BaseNode {
-	type: BlockNodeType.Image;
+	type: preNodeType.Image;
 
 	/** 图片标题 */
 	title: string;
@@ -117,7 +117,7 @@ interface ImageNode extends BaseNode {
 
 /** 引用块节点 */
 interface BlockquoteNode extends BaseNode {
-	type: BlockNodeType.Blockquote;
+	type: preNodeType.Blockquote;
 
 	/** 如果是警报块，则此处有值 */
 	alertType?: 'note' | 'tip' | 'warning' | 'danger' | 'important';
@@ -127,7 +127,7 @@ interface BlockquoteNode extends BaseNode {
 
 /** 代码块节点 */
 interface CodeNode extends BaseNode {
-	type: BlockNodeType.Code;
+	type: preNodeType.Code;
 
 	/** 高亮使用的语言 */
 	language?: string;
@@ -141,7 +141,7 @@ interface CodeNode extends BaseNode {
 
 /** 公式块节点 */
 interface FormulaNode extends BaseNode {
-	type: BlockNodeType.Formula;
+	type: preNodeType.Formula;
 
 	/** 公式内容 */
 	value: string;
@@ -149,7 +149,7 @@ interface FormulaNode extends BaseNode {
 
 /** 宏节点 */
 interface MacroNode extends BaseNode {
-	type: BlockNodeType.Macro;
+	type: preNodeType.Macro;
 
 	/** 宏名称 */
 	name: string;
@@ -163,12 +163,12 @@ interface MacroNode extends BaseNode {
 
 /** 分隔线节点 */
 interface BreakNode extends BaseNode {
-	type: BlockNodeType.Break;
+	type: preNodeType.Break;
 }
 
 /** 脚注内容源 */
 interface FootnoteDefinitionNode extends BaseNode {
-	type: BlockNodeType.FootnoteDefinition;
+	type: preNodeType.FootnoteDefinition;
 
 	/** 脚注标识符，用于匹配正文中的引用 */
 	label: string;
@@ -179,7 +179,7 @@ interface FootnoteDefinitionNode extends BaseNode {
 	children: InlineNode[];
 }
 
-type BlockNode =
+type preNode =
 	| RootNode
 	| FrontmatterNode
 	| ParagraphNode
@@ -196,7 +196,7 @@ type BlockNode =
 
 export type {
 	RootNode,
-	BlockNode,
+	preNode,
 	FrontmatterNode,
 	ParagraphNode,
 	HeadingNode,
@@ -210,4 +210,4 @@ export type {
 	BreakNode,
 	FootnoteDefinitionNode,
 };
-export { BlockNodeType };
+export { preNodeType };

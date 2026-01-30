@@ -1,5 +1,5 @@
 import type { ParseRule } from '../main';
-import { BlockNodeType } from '../../../types/node/block-node';
+import { preNodeType } from '../../../types/node/pre-node';
 
 const thematicBreak: ParseRule = (_originalContent, currentLineContent, line, offset, node) => {
 	// 确保是分隔符
@@ -8,7 +8,7 @@ const thematicBreak: ParseRule = (_originalContent, currentLineContent, line, of
 	const length = currentLineContent.length;
 
 	node.push({
-		type: BlockNodeType.Break,
+		type: preNodeType.Break,
 		position: {
 			start: {
 				line: line,

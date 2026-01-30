@@ -1,6 +1,6 @@
 import type { ParseRule } from '../main';
 import { ParseErrorCode } from '../../../types/error';
-import { BlockNodeType, type ImageNode } from '../../../types/node/block-node';
+import { preNodeType, type ImageNode } from '../../../types/node/pre-node';
 
 const image: ParseRule = (_originalContent, currentLineContent, line, offset, node, errors) => {
 	// 确保是图片
@@ -31,7 +31,7 @@ const image: ParseRule = (_originalContent, currentLineContent, line, offset, no
 	}
 
 	const imageNode: ImageNode = {
-		type: BlockNodeType.Image,
+		type: preNodeType.Image,
 		title,
 		src: source,
 		position: {

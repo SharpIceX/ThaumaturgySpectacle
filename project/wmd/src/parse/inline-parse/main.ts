@@ -1,6 +1,6 @@
-import type { Node } from '../types/node/node';
-import type { BlockNode } from '../types/node/block-node';
-import { ParseErrorCode, type ParseError } from '../types/error';
+import type { Node } from '../../types/node/node';
+import type { preNode } from '../../types/node/pre-node';
+import { ParseErrorCode, type ParseError } from '../../types/error';
 
 interface ResultType {
 	ast: Node[];
@@ -13,7 +13,7 @@ interface ResultType {
  * @param node 块节点
  * @returns 解析结果
  */
-function inlineParse(content: string, node: BlockNode[]): ResultType {
+function inlineParse(content: string, node: preNode[]): ResultType {
 	const nodes: Node[] = node;
 	const errors: ParseError[] = [];
 

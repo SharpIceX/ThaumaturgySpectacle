@@ -1,4 +1,4 @@
-import type { BlockNodeType, BlockNode } from './block-node';
+import type { preNodeType, preNode } from './pre-node';
 import type { InlineNodeType, InlineNode } from './inline-node';
 
 /** 详细位置信息 */
@@ -28,8 +28,8 @@ interface BaseNode {
 }
 
 /** 所有节点类型 */
-type Node = BlockNode | InlineNode;
+type Node = preNode | InlineNode;
 
-type NodeType = InlineNodeType | BlockNodeType;
+type NodeType = InlineNodeType | preNodeType;
 
 export type { Point, Position, BaseNode, Node, NodeType };

@@ -1,5 +1,5 @@
 import yaml from 'yaml';
-import { type FrontmatterNode, BlockNodeType } from '../types/node/block-node';
+import { type FrontmatterNode, preNodeType } from '../types/node/pre-node';
 
 /**
  * FrontMatter 解析器 - 静默失败模式
@@ -56,7 +56,7 @@ function frontMatterParse(content: string): FrontmatterNode | undefined {
 	const endLine = content.slice(0, endMarkerEnd).split('\n').length;
 
 	return {
-		type: BlockNodeType.Frontmatter,
+		type: preNodeType.Frontmatter,
 		metadata,
 		position: {
 			start: { line: 1, column: 1, offset: 0 },

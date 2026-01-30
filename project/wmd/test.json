@@ -2539,7 +2539,7 @@
 			{
 				"type": "image",
 				"title": "图片标题",
-				"src": "./test/png",
+				"src": "./test.png",
 				"position": {
 					"start": {
 						"line": 196,
@@ -2552,7 +2552,7 @@
 						"offset": 2190
 					}
 				},
-				"raw": "![图片标题](./test/png)"
+				"raw": "![图片标题](./test.png)"
 			},
 			{
 				"type": "heading",
@@ -2575,7 +2575,7 @@
 			{
 				"type": "image",
 				"title": "图片标题",
-				"src": "./test/png",
+				"src": "./test.png",
 				"position": {
 					"start": {
 						"line": 199,
@@ -2589,7 +2589,7 @@
 					}
 				},
 				"layout": "left",
-				"raw": "![图片标题](./test/png layout=left)"
+				"raw": "![图片标题](./test.png layout=left)"
 			},
 			{
 				"type": "heading",
@@ -2612,7 +2612,7 @@
 			{
 				"type": "image",
 				"title": "图片标题",
-				"src": "./test/png",
+				"src": "./test.png",
 				"position": {
 					"start": {
 						"line": 202,
@@ -2626,7 +2626,7 @@
 					}
 				},
 				"layout": "right",
-				"raw": "![图片标题](./test/png layout=right)"
+				"raw": "![图片标题](./test.png layout=right)"
 			},
 			{
 				"type": "heading",
@@ -2649,7 +2649,7 @@
 			{
 				"type": "image",
 				"title": "图片标题",
-				"src": "./test/png",
+				"src": "./test.png",
 				"position": {
 					"start": {
 						"line": 205,
@@ -2663,7 +2663,7 @@
 					}
 				},
 				"scale": 0.5,
-				"raw": "![图片标题](./test/png scale=0.5)"
+				"raw": "![图片标题](./test.png scale=0.5)"
 			},
 			{
 				"type": "heading",

@@ -1,5 +1,5 @@
 import type { ParseRule } from '../main';
-import { BlockNodeType, type FootnoteDefinitionNode } from '../../../types/node/block-node';
+import { preNodeType, type FootnoteDefinitionNode } from '../../../types/node/pre-node';
 
 const footnoteDefinition: ParseRule = (_originalContent, currentLineContent, line, offset, nodes) => {
 	// 1. 快速探测：是否以 [^ 开头
@@ -22,7 +22,7 @@ const footnoteDefinition: ParseRule = (_originalContent, currentLineContent, lin
 
 	// 3. 构建 FootnoteDefinition 节点
 	const footnoteNode: FootnoteDefinitionNode = {
-		type: BlockNodeType.FootnoteDefinition,
+		type: preNodeType.FootnoteDefinition,
 		label: label,
 		backReferences: [],
 		children: [],

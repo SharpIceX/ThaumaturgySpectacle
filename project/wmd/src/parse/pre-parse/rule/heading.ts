@@ -1,7 +1,7 @@
 import type { ParseRule } from '../main';
 import { ParseErrorCode } from '../../../types/error';
-import { BlockNodeType } from '../../../types/node/block-node';
-import type { HeadingNode } from '../../../types/node/block-node';
+import { preNodeType } from '../../../types/node/pre-node';
+import type { HeadingNode } from '../../../types/node/pre-node';
 
 const heading: ParseRule = (_originalContent, currentLineContent, line, offset, node, errors) => {
 	// 确保是标题
@@ -34,7 +34,7 @@ const heading: ParseRule = (_originalContent, currentLineContent, line, offset, 
 	}
 
 	node.push({
-		type: BlockNodeType.Heading,
+		type: preNodeType.Heading,
 		level: finalLevel as HeadingNode['level'],
 		children: [],
 		position: {

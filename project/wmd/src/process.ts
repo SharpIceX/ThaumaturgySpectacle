@@ -3,7 +3,7 @@ import type { ParseError } from './types/error';
 import { frontMatterParse } from './utils/parse-frontmatter';
 import { shiftNodePosition } from './utils/shift-node-position';
 import { findCarriageReturn } from './utils/find-carriage-return';
-import { BlockNodeType, type RootNode } from './types/node/block-node';
+import { preNodeType, type RootNode } from './types/node/pre-node';
 
 class CarriageReturnError extends Error {
 	override name = 'CarriageReturnError';
@@ -24,7 +24,7 @@ interface ResultType {
 function process(content: string): ResultType {
 	const result: ResultType = {
 		ast: {
-			type: BlockNodeType.Root,
+			type: preNodeType.Root,
 			children: [],
 			position: {
 				start: { line: 1, column: 1, offset: 0 },

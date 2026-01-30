@@ -1,6 +1,6 @@
 import type { Node } from '../types/node/node';
-import { blockParse } from './block-parse/main';
-import { inlineParse } from './inline-parse';
+import { preParse } from './pre-parse/main';
+import { inlineParse } from './inline-parse/main';
 import type { ParseError } from '../types/error';
 
 interface ResultType {
@@ -14,12 +14,12 @@ interface ResultType {
  * @returns 解析结果
  */
 function parse(content: string): ResultType {
-	const { ast, error: blockErrors } = blockParse(content);
+	const { ast, error: preParseErrors } = preParse(content);
 	const { error: inlineErrors } = inlineParse(content, ast);
 
 	return {
 		ast,
-		error: [...blockErrors, ...inlineErrors],
+		error: [...preParseErrors, ...inlineErrors],
 	};
 }
 

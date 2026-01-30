@@ -1,5 +1,5 @@
 import type { ParseRule } from '../main';
-import { BlockNodeType, type ListNode, type ListItemNode } from '../../../types/node/block-node';
+import { preNodeType, type ListNode, type ListItemNode } from '../../../types/node/pre-node';
 
 /** 内部使用的扁平化列表项接口 */
 interface FlatListItem {
@@ -28,7 +28,7 @@ const LIST_LINE_RE = /^([-.]+)\s+(\S.*)$/;
  * @returns 返回初始化的 ListNode 对象
  */
 const createListNode = (ordered: boolean, item: FlatListItem): ListNode => ({
-	type: BlockNodeType.List,
+	type: preNodeType.List,
 	ordered,
 	children: [],
 	position: {
@@ -43,7 +43,7 @@ const createListNode = (ordered: boolean, item: FlatListItem): ListNode => ({
  * @returns 返回初始化的 ListItemNode 对象
  */
 const createListItemNode = (item: FlatListItem): ListItemNode => ({
-	type: BlockNodeType.ListItem,
+	type: preNodeType.ListItem,
 	children: [],
 	position: {
 		start: { line: item.line, column: 1, offset: item.offset },

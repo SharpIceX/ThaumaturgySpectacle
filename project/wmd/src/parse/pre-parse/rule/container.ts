@@ -1,12 +1,12 @@
 import type { ParseRule } from '../main';
 import { ParseErrorCode } from '../../../types/error';
-import { BlockNodeType, type CodeNode, type MacroNode, type FormulaNode } from '../../../types/node/block-node';
+import { preNodeType, type CodeNode, type MacroNode, type FormulaNode } from '../../../types/node/pre-node';
 
 /** 允许的 container */
 const FENCE_MAP = {
-	'```': { type: BlockNodeType.Code, error: ParseErrorCode.UNCLOSED_CODE_BLOCK },
-	$$: { type: BlockNodeType.Formula, error: ParseErrorCode.UNCLOSED_FORMULA_BLOCK },
-	':::': { type: BlockNodeType.Macro, error: ParseErrorCode.UNCLOSED_MACRO_BLOCK },
+	'```': { type: preNodeType.Code, error: ParseErrorCode.UNCLOSED_CODE_BLOCK },
+	$$: { type: preNodeType.Formula, error: ParseErrorCode.UNCLOSED_FORMULA_BLOCK },
+	':::': { type: preNodeType.Macro, error: ParseErrorCode.UNCLOSED_MACRO_BLOCK },
 } as const;
 
 const container: ParseRule = (originalContent, currentLineContent, line, offset, node, errors) => {
@@ -25,13 +25,13 @@ const container: ParseRule = (originalContent, currentLineContent, line, offset,
 	let name: string | undefined;
 	let arguments_: string | undefined;
 
-	if (type === BlockNodeType.Code && infoString.length > 0) {
+	if (type === preNodeType.Code && infoString.length > 0) {
 		const [lang, ...remarks] = infoString.split(/\s+/);
 		language = lang;
 		if (remarks.length > 0) {
 			remark = remarks.join(' ');
 		}
-	} else if (type === BlockNodeType.Macro && infoString.length > 0) {
+	} else if (type === preNodeType.Macro && infoString.length > 0) {
 		const firstSpace = infoString.search(/\s/);
 		if (firstSpace === -1) {
 			name = infoString;
@@ -62,17 +62,17 @@ const container: ParseRule = (originalContent, currentLineContent, line, offset,
 				},
 			};
 
-			if (type === BlockNodeType.Code) {
-				node.push({ type: BlockNodeType.Code, language, remark, ...commonProperties } as CodeNode);
-			} else if (type === BlockNodeType.Macro) {
+			if (type === preNodeType.Code) {
+				node.push({ type: preNodeType.Code, language, remark, ...commonProperties } as CodeNode);
+			} else if (type === preNodeType.Macro) {
 				node.push({
-					type: BlockNodeType.Macro,
+					type: preNodeType.Macro,
 					name: name || '',
 					args: arguments_,
 					...commonProperties,
 				} as MacroNode);
 			} else {
-				node.push({ type: BlockNodeType.Formula, ...commonProperties } as FormulaNode);
+				node.push({ type: preNodeType.Formula, ...commonProperties } as FormulaNode);
 			}
 
 			return { jumpLine: currentProbeLine - blockStartLine };
@@ -108,17 +108,17 @@ const container: ParseRule = (originalContent, currentLineContent, line, offset,
 		},
 	};
 
-	if (type === BlockNodeType.Code) {
-		node.push({ type: BlockNodeType.Code, language, remark, ...commonPropertiesFallback } as CodeNode);
-	} else if (type === BlockNodeType.Macro) {
+	if (type === preNodeType.Code) {
+		node.push({ type: preNodeType.Code, language, remark, ...commonPropertiesFallback } as CodeNode);
+	} else if (type === preNodeType.Macro) {
 		node.push({
-			type: BlockNodeType.Macro,
+			type: preNodeType.Macro,
 			name: name || '',
 			args: arguments_,
 			...commonPropertiesFallback,
 		} as MacroNode);
 	} else {
-		node.push({ type: BlockNodeType.Formula, ...commonPropertiesFallback } as FormulaNode);
+		node.push({ type: preNodeType.Formula, ...commonPropertiesFallback } as FormulaNode);
 	}
 
 	return { jumpLine: currentProbeLine - blockStartLine - 1 };
