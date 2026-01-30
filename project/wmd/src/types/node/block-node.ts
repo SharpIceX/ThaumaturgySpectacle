@@ -35,7 +35,7 @@ enum BlockNodeType {
 	/** 宏 */
 	Macro = 'macro',
 
-	/** 分割线 */
+	/** 分隔线 */
 	Break = 'break',
 
 	/** 脚注内容源 */
@@ -161,7 +161,7 @@ interface MacroNode extends BaseNode {
 	value: string;
 }
 
-/** 分割线节点 */
+/** 分隔线节点 */
 interface BreakNode extends BaseNode {
 	type: BlockNodeType.Break;
 }

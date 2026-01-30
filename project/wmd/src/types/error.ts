@@ -6,6 +6,10 @@ enum ParseErrorCode {
 	INVALID_IMAGE_SCALE = 'INVALID_IMAGE_SCALE',
 	INVALID_IMAGE_LAYOUT = 'INVALID_IMAGE_LAYOUT',
 	MISSING_IMAGE_SOURCE = 'MISSING_IMAGE_SOURCE',
+	IMAGE_SCALE_TOO_MANY_DECIMALS = 'IMAGE_SCALE_TOO_MANY_DECIMALS',
+
+	// 引用块
+	INVALID_BLOCKQUOTE_ALERT_TYPE = 'INVALID_BLOCKQUOTE_ALERT_TYPE',
 
 	// 代码块
 	UNCLOSED_CODE_BLOCK = 'UNCLOSED_CODE_BLOCK',
@@ -26,6 +30,10 @@ const ParseErrorMessage: Record<ParseErrorCode, string> = {
 	[ParseErrorCode.INVALID_IMAGE_SCALE]: '图片缩放比例非法：必须是一个有效的数字（如 0.5）',
 	[ParseErrorCode.INVALID_IMAGE_LAYOUT]: '图片布局参数错误：仅支持 "left" 或 "right"',
 	[ParseErrorCode.MISSING_IMAGE_SOURCE]: '图片解析失败：缺少图片源链接',
+	[ParseErrorCode.IMAGE_SCALE_TOO_MANY_DECIMALS]: '图片缩放比例警告：小数位超过 2 位，多余部分已被截断',
+
+	// 引用块
+	[ParseErrorCode.INVALID_BLOCKQUOTE_ALERT_TYPE]: '不支持的强调信息类型',
 
 	// 代码块
 	[ParseErrorCode.UNCLOSED_CODE_BLOCK]: '代码块语法错误：未找到闭合反引号',

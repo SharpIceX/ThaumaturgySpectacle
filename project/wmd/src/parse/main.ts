@@ -1,5 +1,5 @@
 import type { Node } from '../types/node/node';
-import { blockParse } from './block-parse';
+import { blockParse } from './block-parse/main';
 import { inlineParse } from './inline-parse';
 import type { ParseError } from '../types/error';
 

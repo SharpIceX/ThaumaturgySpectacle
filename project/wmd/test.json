@@ -23,6 +23,7 @@
 			{
 				"type": "macro",
 				"name": "infobox",
+				"args": "角色信息",
 				"value": "图片: ./test.png\n年龄: 20\n名称: 这是名称\n栖息地: 这是栖息地",
 				"position": {
 					"start": {
@@ -36,7 +37,6 @@
 						"offset": 341
 					}
 				},
-				"args": "角色信息",
 				"raw": "::: infobox 角色信息\n图片: ./test.png\n年龄: 20\n名称: 这是名称\n栖息地: 这是栖息地\n:::"
 			},
 			{
@@ -265,12 +265,63 @@
 						"offset": 614
 					},
 					"end": {
+						"line": 41,
+						"column": 11,
+						"offset": 624
+					}
+				},
+				"raw": "这是一段普通的文本。"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 43,
+						"column": 1,
+						"offset": 626
+					},
+					"end": {
+						"line": 43,
+						"column": 24,
+						"offset": 649
+					}
+				},
+				"raw": "这是一段中英English没有空格的测试文本。"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 45,
+						"column": 1,
+						"offset": 651
+					},
+					"end": {
+						"line": 45,
+						"column": 24,
+						"offset": 674
+					}
+				},
+				"raw": "这是一段中 英English带空格的测试文本。"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 47,
+						"column": 1,
+						"offset": 676
+					},
+					"end": {
 						"line": 49,
 						"column": 6,
 						"offset": 702
 					}
 				},
-				"raw": "这是一段普通的文本。\n\n这是一段中英English没有空格的测试文本。\n\n这是一段中 英English带空格的测试文本。\n\n这是一段多行文本，\n会被直接合并为一行，\n就像这样。"
+				"raw": "这是一段多行文本，\n会被直接合并为一行，\n就像这样。"
 			},
 			{
 				"type": "heading",
@@ -318,12 +369,29 @@
 						"offset": 724
 					},
 					"end": {
+						"line": 54,
+						"column": 13,
+						"offset": 736
+					}
+				},
+				"raw": "床前明月光，疑是地上霜。"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 56,
+						"column": 1,
+						"offset": 738
+					},
+					"end": {
 						"line": 56,
 						"column": 13,
 						"offset": 750
 					}
 				},
-				"raw": "床前明月光，疑是地上霜。\n\n举头望明月，低头思故乡。"
+				"raw": "举头望明月，低头思故乡。"
 			},
 			{
 				"type": "heading",
@@ -353,12 +421,29 @@
 						"offset": 761
 					},
 					"end": {
+						"line": 59,
+						"column": 13,
+						"offset": 773
+					}
+				},
+				"raw": "床前明月光，疑是地上霜。"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 61,
+						"column": 1,
+						"offset": 775
+					},
+					"end": {
 						"line": 61,
 						"column": 13,
 						"offset": 787
 					}
 				},
-				"raw": "床前明月光，疑是地上霜。\n\n舉頭望明月，低頭思故鄉。"
+				"raw": "舉頭望明月，低頭思故鄉。"
 			},
 			{
 				"type": "heading",
@@ -563,12 +648,148 @@
 						"offset": 1023
 					},
 					"end": {
+						"line": 80,
+						"column": 9,
+						"offset": 1031
+					}
+				},
+				"raw": "这是_斜体文本_"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 82,
+						"column": 1,
+						"offset": 1033
+					},
+					"end": {
+						"line": 82,
+						"column": 11,
+						"offset": 1043
+					}
+				},
+				"raw": "这是**粗体文本**"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 84,
+						"column": 1,
+						"offset": 1045
+					},
+					"end": {
+						"line": 84,
+						"column": 15,
+						"offset": 1059
+					}
+				},
+				"raw": "这是**_斜体加粗文本_**"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 86,
+						"column": 1,
+						"offset": 1061
+					},
+					"end": {
+						"line": 86,
+						"column": 10,
+						"offset": 1070
+					}
+				},
+				"raw": "这是~~删除线~~"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 88,
+						"column": 1,
+						"offset": 1072
+					},
+					"end": {
+						"line": 88,
+						"column": 12,
+						"offset": 1083
+					}
+				},
+				"raw": "这是++下划线文本++"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 90,
+						"column": 1,
+						"offset": 1085
+					},
+					"end": {
+						"line": 90,
+						"column": 13,
+						"offset": 1097
+					}
+				},
+				"raw": "这是下标文本 H~2~O"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 92,
+						"column": 1,
+						"offset": 1099
+					},
+					"end": {
+						"line": 92,
+						"column": 12,
+						"offset": 1110
+					}
+				},
+				"raw": "这是上标文本 X^2^"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 94,
+						"column": 1,
+						"offset": 1112
+					},
+					"end": {
+						"line": 94,
+						"column": 11,
+						"offset": 1122
+					}
+				},
+				"raw": "这是--插入文本--"
+			},
+			{
+				"type": "paragraph",
+				"children": [],
+				"position": {
+					"start": {
+						"line": 96,
+						"column": 1,
+						"offset": 1124
+					},
+					"end": {
 						"line": 96,
 						"column": 11,
 						"offset": 1134
 					}
 				},
-				"raw": "这是_斜体文本_\n\n这是**粗体文本**\n\n这是**_斜体加粗文本_**\n\n这是~~删除线~~\n\n这是++下划线文本++\n\n这是下标文本 H~2~O\n\n这是上标文本 X^2^\n\n这是--插入文本--\n\n这是==高亮文本=="
+				"raw": "这是==高亮文本=="
 			},
 			{
 				"type": "heading",
@@ -609,7 +830,167 @@
 			{
 				"type": "list",
 				"ordered": false,
-				"children": [],
+				"children": [
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 101,
+								"column": 1,
+								"offset": 1154
+							},
+							"end": {
+								"line": 101,
+								"column": 9,
+								"offset": 1162
+							}
+						},
+						"raw": "- 无序列表 1"
+					},
+					{
+						"type": "list_item",
+						"children": [
+							{
+								"type": "list",
+								"ordered": false,
+								"children": [
+									{
+										"type": "list_item",
+										"children": [],
+										"position": {
+											"start": {
+												"line": 103,
+												"column": 1,
+												"offset": 1172
+											},
+											"end": {
+												"line": 103,
+												"column": 12,
+												"offset": 1183
+											}
+										},
+										"raw": "-- 无序列表 3.1"
+									},
+									{
+										"type": "list_item",
+										"children": [
+											{
+												"type": "list",
+												"ordered": false,
+												"children": [
+													{
+														"type": "list_item",
+														"children": [],
+														"position": {
+															"start": {
+																"line": 105,
+																"column": 1,
+																"offset": 1196
+															},
+															"end": {
+																"line": 105,
+																"column": 15,
+																"offset": 1210
+															}
+														},
+														"raw": "--- 无序列表 3.2.1"
+													}
+												],
+												"position": {
+													"start": {
+														"line": 105,
+														"column": 1,
+														"offset": 1196
+													},
+													"end": {
+														"line": 105,
+														"column": 15,
+														"offset": 1210
+													}
+												},
+												"raw": "--- 无序列表 3.2.1"
+											}
+										],
+										"position": {
+											"start": {
+												"line": 104,
+												"column": 1,
+												"offset": 1184
+											},
+											"end": {
+												"line": 104,
+												"column": 12,
+												"offset": 1195
+											}
+										},
+										"raw": "-- 无序列表 3.2"
+									}
+								],
+								"position": {
+									"start": {
+										"line": 103,
+										"column": 1,
+										"offset": 1172
+									},
+									"end": {
+										"line": 105,
+										"column": 15,
+										"offset": 1210
+									}
+								},
+								"raw": "-- 无序列表 3.1\n-- 无序列表 3.2\n--- 无序列表 3.2.1"
+							}
+						],
+						"position": {
+							"start": {
+								"line": 102,
+								"column": 1,
+								"offset": 1163
+							},
+							"end": {
+								"line": 102,
+								"column": 9,
+								"offset": 1171
+							}
+						},
+						"raw": "- 无序列表 2"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 106,
+								"column": 1,
+								"offset": 1211
+							},
+							"end": {
+								"line": 106,
+								"column": 9,
+								"offset": 1219
+							}
+						},
+						"raw": "- 无序列表 4"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 107,
+								"column": 1,
+								"offset": 1220
+							},
+							"end": {
+								"line": 107,
+								"column": 9,
+								"offset": 1228
+							}
+						},
+						"raw": "- 无序列表 5"
+					}
+				],
 				"position": {
 					"start": {
 						"line": 101,
@@ -645,7 +1026,167 @@
 			{
 				"type": "list",
 				"ordered": false,
-				"children": [],
+				"children": [
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 110,
+								"column": 1,
+								"offset": 1241
+							},
+							"end": {
+								"line": 110,
+								"column": 9,
+								"offset": 1249
+							}
+						},
+						"raw": "- 无序列表 1"
+					},
+					{
+						"type": "list_item",
+						"children": [
+							{
+								"type": "list",
+								"ordered": false,
+								"children": [
+									{
+										"type": "list_item",
+										"children": [],
+										"position": {
+											"start": {
+												"line": 112,
+												"column": 1,
+												"offset": 1259
+											},
+											"end": {
+												"line": 112,
+												"column": 12,
+												"offset": 1270
+											}
+										},
+										"raw": "-- 无序列表 3.1"
+									},
+									{
+										"type": "list_item",
+										"children": [
+											{
+												"type": "list",
+												"ordered": false,
+												"children": [
+													{
+														"type": "list_item",
+														"children": [],
+														"position": {
+															"start": {
+																"line": 114,
+																"column": 1,
+																"offset": 1283
+															},
+															"end": {
+																"line": 114,
+																"column": 15,
+																"offset": 1297
+															}
+														},
+														"raw": "--- 无序列表 3.2.1"
+													}
+												],
+												"position": {
+													"start": {
+														"line": 114,
+														"column": 1,
+														"offset": 1283
+													},
+													"end": {
+														"line": 114,
+														"column": 15,
+														"offset": 1297
+													}
+												},
+												"raw": "--- 无序列表 3.2.1"
+											}
+										],
+										"position": {
+											"start": {
+												"line": 113,
+												"column": 1,
+												"offset": 1271
+											},
+											"end": {
+												"line": 113,
+												"column": 12,
+												"offset": 1282
+											}
+										},
+										"raw": "-- 无序列表 3.2"
+									}
+								],
+								"position": {
+									"start": {
+										"line": 112,
+										"column": 1,
+										"offset": 1259
+									},
+									"end": {
+										"line": 114,
+										"column": 15,
+										"offset": 1297
+									}
+								},
+								"raw": "-- 无序列表 3.1\n-- 无序列表 3.2\n--- 无序列表 3.2.1"
+							}
+						],
+						"position": {
+							"start": {
+								"line": 111,
+								"column": 1,
+								"offset": 1250
+							},
+							"end": {
+								"line": 111,
+								"column": 9,
+								"offset": 1258
+							}
+						},
+						"raw": "- 无序列表 2"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 115,
+								"column": 1,
+								"offset": 1298
+							},
+							"end": {
+								"line": 115,
+								"column": 9,
+								"offset": 1306
+							}
+						},
+						"raw": "- 无序列表 4"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 116,
+								"column": 1,
+								"offset": 1307
+							},
+							"end": {
+								"line": 116,
+								"column": 9,
+								"offset": 1315
+							}
+						},
+						"raw": "- 无序列表 5"
+					}
+				],
 				"position": {
 					"start": {
 						"line": 110,
@@ -681,7 +1222,201 @@
 			{
 				"type": "list",
 				"ordered": true,
-				"children": [],
+				"children": [
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 119,
+								"column": 1,
+								"offset": 1328
+							},
+							"end": {
+								"line": 119,
+								"column": 9,
+								"offset": 1336
+							}
+						},
+						"raw": ". 有序列表 1"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 120,
+								"column": 1,
+								"offset": 1337
+							},
+							"end": {
+								"line": 120,
+								"column": 9,
+								"offset": 1345
+							}
+						},
+						"raw": ". 有序列表 2"
+					},
+					{
+						"type": "list_item",
+						"children": [
+							{
+								"type": "list",
+								"ordered": true,
+								"children": [
+									{
+										"type": "list_item",
+										"children": [],
+										"position": {
+											"start": {
+												"line": 122,
+												"column": 1,
+												"offset": 1355
+											},
+											"end": {
+												"line": 122,
+												"column": 12,
+												"offset": 1366
+											}
+										},
+										"raw": ".. 有序列表 3.1"
+									},
+									{
+										"type": "list_item",
+										"children": [],
+										"position": {
+											"start": {
+												"line": 123,
+												"column": 1,
+												"offset": 1367
+											},
+											"end": {
+												"line": 123,
+												"column": 12,
+												"offset": 1378
+											}
+										},
+										"raw": ".. 有序列表 3.2"
+									},
+									{
+										"type": "list_item",
+										"children": [
+											{
+												"type": "list",
+												"ordered": true,
+												"children": [
+													{
+														"type": "list_item",
+														"children": [],
+														"position": {
+															"start": {
+																"line": 125,
+																"column": 1,
+																"offset": 1391
+															},
+															"end": {
+																"line": 125,
+																"column": 15,
+																"offset": 1405
+															}
+														},
+														"raw": "... 有序列表 3.3.1"
+													}
+												],
+												"position": {
+													"start": {
+														"line": 125,
+														"column": 1,
+														"offset": 1391
+													},
+													"end": {
+														"line": 125,
+														"column": 15,
+														"offset": 1405
+													}
+												},
+												"raw": "... 有序列表 3.3.1"
+											}
+										],
+										"position": {
+											"start": {
+												"line": 124,
+												"column": 1,
+												"offset": 1379
+											},
+											"end": {
+												"line": 124,
+												"column": 12,
+												"offset": 1390
+											}
+										},
+										"raw": ".. 有序列表 3.3"
+									}
+								],
+								"position": {
+									"start": {
+										"line": 122,
+										"column": 1,
+										"offset": 1355
+									},
+									"end": {
+										"line": 125,
+										"column": 15,
+										"offset": 1405
+									}
+								},
+								"raw": ".. 有序列表 3.1\n.. 有序列表 3.2\n.. 有序列表 3.3\n... 有序列表 3.3.1"
+							}
+						],
+						"position": {
+							"start": {
+								"line": 121,
+								"column": 1,
+								"offset": 1346
+							},
+							"end": {
+								"line": 121,
+								"column": 9,
+								"offset": 1354
+							}
+						},
+						"raw": ". 有序列表 3"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 126,
+								"column": 1,
+								"offset": 1406
+							},
+							"end": {
+								"line": 126,
+								"column": 9,
+								"offset": 1414
+							}
+						},
+						"raw": ". 有序列表 4"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 127,
+								"column": 1,
+								"offset": 1415
+							},
+							"end": {
+								"line": 127,
+								"column": 9,
+								"offset": 1423
+							}
+						},
+						"raw": ". 有序列表 5"
+					}
+				],
 				"position": {
 					"start": {
 						"line": 119,
@@ -717,7 +1452,201 @@
 			{
 				"type": "list",
 				"ordered": true,
-				"children": [],
+				"children": [
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 130,
+								"column": 1,
+								"offset": 1436
+							},
+							"end": {
+								"line": 130,
+								"column": 9,
+								"offset": 1444
+							}
+						},
+						"raw": ". 有序列表 1"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 131,
+								"column": 1,
+								"offset": 1445
+							},
+							"end": {
+								"line": 131,
+								"column": 9,
+								"offset": 1453
+							}
+						},
+						"raw": ". 有序列表 2"
+					},
+					{
+						"type": "list_item",
+						"children": [
+							{
+								"type": "list",
+								"ordered": true,
+								"children": [
+									{
+										"type": "list_item",
+										"children": [],
+										"position": {
+											"start": {
+												"line": 133,
+												"column": 1,
+												"offset": 1463
+											},
+											"end": {
+												"line": 133,
+												"column": 12,
+												"offset": 1474
+											}
+										},
+										"raw": ".. 有序列表 3.1"
+									},
+									{
+										"type": "list_item",
+										"children": [],
+										"position": {
+											"start": {
+												"line": 134,
+												"column": 1,
+												"offset": 1475
+											},
+											"end": {
+												"line": 134,
+												"column": 12,
+												"offset": 1486
+											}
+										},
+										"raw": ".. 有序列表 3.2"
+									},
+									{
+										"type": "list_item",
+										"children": [
+											{
+												"type": "list",
+												"ordered": true,
+												"children": [
+													{
+														"type": "list_item",
+														"children": [],
+														"position": {
+															"start": {
+																"line": 136,
+																"column": 1,
+																"offset": 1499
+															},
+															"end": {
+																"line": 136,
+																"column": 15,
+																"offset": 1513
+															}
+														},
+														"raw": "... 有序列表 3.3.1"
+													}
+												],
+												"position": {
+													"start": {
+														"line": 136,
+														"column": 1,
+														"offset": 1499
+													},
+													"end": {
+														"line": 136,
+														"column": 15,
+														"offset": 1513
+													}
+												},
+												"raw": "... 有序列表 3.3.1"
+											}
+										],
+										"position": {
+											"start": {
+												"line": 135,
+												"column": 1,
+												"offset": 1487
+											},
+											"end": {
+												"line": 135,
+												"column": 12,
+												"offset": 1498
+											}
+										},
+										"raw": ".. 有序列表 3.3"
+									}
+								],
+								"position": {
+									"start": {
+										"line": 133,
+										"column": 1,
+										"offset": 1463
+									},
+									"end": {
+										"line": 136,
+										"column": 15,
+										"offset": 1513
+									}
+								},
+								"raw": ".. 有序列表 3.1\n.. 有序列表 3.2\n.. 有序列表 3.3\n... 有序列表 3.3.1"
+							}
+						],
+						"position": {
+							"start": {
+								"line": 132,
+								"column": 1,
+								"offset": 1454
+							},
+							"end": {
+								"line": 132,
+								"column": 9,
+								"offset": 1462
+							}
+						},
+						"raw": ". 有序列表 3"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 137,
+								"column": 1,
+								"offset": 1514
+							},
+							"end": {
+								"line": 137,
+								"column": 9,
+								"offset": 1522
+							}
+						},
+						"raw": ". 有序列表 4"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 138,
+								"column": 1,
+								"offset": 1523
+							},
+							"end": {
+								"line": 138,
+								"column": 9,
+								"offset": 1531
+							}
+						},
+						"raw": ". 有序列表 5"
+					}
+				],
 				"position": {
 					"start": {
 						"line": 130,
@@ -753,7 +1682,167 @@
 			{
 				"type": "list",
 				"ordered": false,
-				"children": [],
+				"children": [
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 141,
+								"column": 1,
+								"offset": 1549
+							},
+							"end": {
+								"line": 141,
+								"column": 9,
+								"offset": 1557
+							}
+						},
+						"raw": "- 无序列表 1"
+					},
+					{
+						"type": "list_item",
+						"children": [
+							{
+								"type": "list",
+								"ordered": true,
+								"children": [
+									{
+										"type": "list_item",
+										"children": [],
+										"position": {
+											"start": {
+												"line": 143,
+												"column": 1,
+												"offset": 1567
+											},
+											"end": {
+												"line": 143,
+												"column": 12,
+												"offset": 1578
+											}
+										},
+										"raw": ".. 无序列表 3.1"
+									},
+									{
+										"type": "list_item",
+										"children": [
+											{
+												"type": "list",
+												"ordered": true,
+												"children": [
+													{
+														"type": "list_item",
+														"children": [],
+														"position": {
+															"start": {
+																"line": 145,
+																"column": 1,
+																"offset": 1591
+															},
+															"end": {
+																"line": 145,
+																"column": 15,
+																"offset": 1605
+															}
+														},
+														"raw": "... 无序列表 3.2.1"
+													}
+												],
+												"position": {
+													"start": {
+														"line": 145,
+														"column": 1,
+														"offset": 1591
+													},
+													"end": {
+														"line": 145,
+														"column": 15,
+														"offset": 1605
+													}
+												},
+												"raw": "... 无序列表 3.2.1"
+											}
+										],
+										"position": {
+											"start": {
+												"line": 144,
+												"column": 1,
+												"offset": 1579
+											},
+											"end": {
+												"line": 144,
+												"column": 12,
+												"offset": 1590
+											}
+										},
+										"raw": ".. 无序列表 3.2"
+									}
+								],
+								"position": {
+									"start": {
+										"line": 143,
+										"column": 1,
+										"offset": 1567
+									},
+									"end": {
+										"line": 145,
+										"column": 15,
+										"offset": 1605
+									}
+								},
+								"raw": ".. 无序列表 3.1\n.. 无序列表 3.2\n... 无序列表 3.2.1"
+							}
+						],
+						"position": {
+							"start": {
+								"line": 142,
+								"column": 1,
+								"offset": 1558
+							},
+							"end": {
+								"line": 142,
+								"column": 9,
+								"offset": 1566
+							}
+						},
+						"raw": "- 无序列表 2"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 146,
+								"column": 1,
+								"offset": 1606
+							},
+							"end": {
+								"line": 146,
+								"column": 9,
+								"offset": 1614
+							}
+						},
+						"raw": "- 无序列表 4"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 147,
+								"column": 1,
+								"offset": 1615
+							},
+							"end": {
+								"line": 147,
+								"column": 9,
+								"offset": 1623
+							}
+						},
+						"raw": "- 无序列表 5"
+					}
+				],
 				"position": {
 					"start": {
 						"line": 141,
@@ -789,7 +1878,258 @@
 			{
 				"type": "list",
 				"ordered": true,
-				"children": [],
+				"children": [
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 150,
+								"column": 1,
+								"offset": 1641
+							},
+							"end": {
+								"line": 150,
+								"column": 9,
+								"offset": 1649
+							}
+						},
+						"raw": ". 无序列表 1"
+					},
+					{
+						"type": "list_item",
+						"children": [
+							{
+								"type": "list",
+								"ordered": false,
+								"children": [
+									{
+										"type": "list_item",
+										"children": [],
+										"position": {
+											"start": {
+												"line": 152,
+												"column": 1,
+												"offset": 1659
+											},
+											"end": {
+												"line": 152,
+												"column": 12,
+												"offset": 1670
+											}
+										},
+										"raw": "-- 无序列表 3.1"
+									},
+									{
+										"type": "list_item",
+										"children": [
+											{
+												"type": "list",
+												"ordered": false,
+												"children": [
+													{
+														"type": "list_item",
+														"children": [],
+														"position": {
+															"start": {
+																"line": 154,
+																"column": 1,
+																"offset": 1683
+															},
+															"end": {
+																"line": 154,
+																"column": 15,
+																"offset": 1697
+															}
+														},
+														"raw": "--- 无序列表 3.2.1"
+													}
+												],
+												"position": {
+													"start": {
+														"line": 154,
+														"column": 1,
+														"offset": 1683
+													},
+													"end": {
+														"line": 154,
+														"column": 15,
+														"offset": 1697
+													}
+												},
+												"raw": "--- 无序列表 3.2.1"
+											}
+										],
+										"position": {
+											"start": {
+												"line": 153,
+												"column": 1,
+												"offset": 1671
+											},
+											"end": {
+												"line": 153,
+												"column": 12,
+												"offset": 1682
+											}
+										},
+										"raw": "-- 无序列表 3.2"
+									}
+								],
+								"position": {
+									"start": {
+										"line": 152,
+										"column": 1,
+										"offset": 1659
+									},
+									"end": {
+										"line": 154,
+										"column": 15,
+										"offset": 1697
+									}
+								},
+								"raw": "-- 无序列表 3.1\n-- 无序列表 3.2\n--- 无序列表 3.2.1"
+							}
+						],
+						"position": {
+							"start": {
+								"line": 151,
+								"column": 1,
+								"offset": 1650
+							},
+							"end": {
+								"line": 151,
+								"column": 9,
+								"offset": 1658
+							}
+						},
+						"raw": ". 无序列表 2"
+					},
+					{
+						"type": "list_item",
+						"children": [
+							{
+								"type": "list",
+								"ordered": false,
+								"children": [
+									{
+										"type": "list_item",
+										"children": [],
+										"position": {
+											"start": {
+												"line": 156,
+												"column": 1,
+												"offset": 1707
+											},
+											"end": {
+												"line": 156,
+												"column": 12,
+												"offset": 1718
+											}
+										},
+										"raw": "-- 无序列表 5.1"
+									},
+									{
+										"type": "list_item",
+										"children": [
+											{
+												"type": "list",
+												"ordered": false,
+												"children": [
+													{
+														"type": "list_item",
+														"children": [],
+														"position": {
+															"start": {
+																"line": 158,
+																"column": 1,
+																"offset": 1731
+															},
+															"end": {
+																"line": 158,
+																"column": 15,
+																"offset": 1745
+															}
+														},
+														"raw": "--- 无序列表 5.2.1"
+													}
+												],
+												"position": {
+													"start": {
+														"line": 158,
+														"column": 1,
+														"offset": 1731
+													},
+													"end": {
+														"line": 158,
+														"column": 15,
+														"offset": 1745
+													}
+												},
+												"raw": "--- 无序列表 5.2.1"
+											}
+										],
+										"position": {
+											"start": {
+												"line": 157,
+												"column": 1,
+												"offset": 1719
+											},
+											"end": {
+												"line": 157,
+												"column": 12,
+												"offset": 1730
+											}
+										},
+										"raw": "-- 无序列表 5.2"
+									}
+								],
+								"position": {
+									"start": {
+										"line": 156,
+										"column": 1,
+										"offset": 1707
+									},
+									"end": {
+										"line": 158,
+										"column": 15,
+										"offset": 1745
+									}
+								},
+								"raw": "-- 无序列表 5.1\n-- 无序列表 5.2\n--- 无序列表 5.2.1"
+							}
+						],
+						"position": {
+							"start": {
+								"line": 155,
+								"column": 1,
+								"offset": 1698
+							},
+							"end": {
+								"line": 155,
+								"column": 9,
+								"offset": 1706
+							}
+						},
+						"raw": ". 无序列表 4"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 159,
+								"column": 1,
+								"offset": 1746
+							},
+							"end": {
+								"line": 159,
+								"column": 9,
+								"offset": 1754
+							}
+						},
+						"raw": ". 无序列表 6"
+					}
+				],
 				"position": {
 					"start": {
 						"line": 150,
@@ -970,7 +2310,59 @@
 			{
 				"type": "list",
 				"ordered": false,
-				"children": [],
+				"children": [
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 179,
+								"column": 1,
+								"offset": 1972
+							},
+							"end": {
+								"line": 179,
+								"column": 14,
+								"offset": 1985
+							}
+						},
+						"raw": "- [x] 任务列表项 1"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 180,
+								"column": 1,
+								"offset": 1986
+							},
+							"end": {
+								"line": 180,
+								"column": 14,
+								"offset": 1999
+							}
+						},
+						"raw": "- [ ] 任务列表项 2"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 181,
+								"column": 1,
+								"offset": 2000
+							},
+							"end": {
+								"line": 181,
+								"column": 14,
+								"offset": 2013
+							}
+						},
+						"raw": "- [x] 任务列表项 3"
+					}
+				],
 				"position": {
 					"start": {
 						"line": 179,
@@ -1006,7 +2398,59 @@
 			{
 				"type": "list",
 				"ordered": true,
-				"children": [],
+				"children": [
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 184,
+								"column": 1,
+								"offset": 2025
+							},
+							"end": {
+								"line": 184,
+								"column": 14,
+								"offset": 2038
+							}
+						},
+						"raw": ". [x] 任务列表项 1"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 185,
+								"column": 1,
+								"offset": 2039
+							},
+							"end": {
+								"line": 185,
+								"column": 14,
+								"offset": 2052
+							}
+						},
+						"raw": ". [ ] 任务列表项 2"
+					},
+					{
+						"type": "list_item",
+						"children": [],
+						"position": {
+							"start": {
+								"line": 186,
+								"column": 1,
+								"offset": 2053
+							},
+							"end": {
+								"line": 186,
+								"column": 14,
+								"offset": 2066
+							}
+						},
+						"raw": ". [x] 任务列表项 3"
+					}
+				],
 				"position": {
 					"start": {
 						"line": 184,
@@ -1544,6 +2988,7 @@
 			},
 			{
 				"type": "code",
+				"language": "js",
 				"value": "console.log('Hello World!');",
 				"position": {
 					"start": {
@@ -1557,7 +3002,6 @@
 						"offset": 2782
 					}
 				},
-				"language": "js",
 				"raw": "``` js\nconsole.log('Hello World!');\n```"
 			},
 			{
@@ -1614,6 +3058,8 @@
 			},
 			{
 				"type": "code",
+				"language": "js",
+				"remark": "文件名.js",
 				"value": "console.log('Hello World!');",
 				"position": {
 					"start": {
@@ -1627,8 +3073,6 @@
 						"offset": 2874
 					}
 				},
-				"language": "js",
-				"remark": "文件名.js",
 				"raw": "``` js 文件名.js\nconsole.log('Hello World!');\n```"
 			},
 			{
@@ -1768,7 +3212,7 @@
 						"offset": 3089
 					}
 				},
-				"raw": "## 分割线"
+				"raw": "## 分隔线"
 			},
 			{
 				"type": "paragraph",
@@ -1785,7 +3229,7 @@
 						"offset": 3095
 					}
 				},
-				"raw": "分割线开始"
+				"raw": "分隔线开始"
 			},
 			{
 				"type": "break",
@@ -1818,7 +3262,7 @@
 						"offset": 3105
 					}
 				},
-				"raw": "分割线结束"
+				"raw": "分隔线结束"
 			},
 			{
 				"type": "heading",
