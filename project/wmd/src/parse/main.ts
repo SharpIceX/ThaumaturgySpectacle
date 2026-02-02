@@ -14,13 +14,10 @@ interface ResultType {
  * @returns 解析结果
  */
 function parse(content: string): ResultType {
-	const { ast, error: preParseErrors } = preParse(content);
-	const { error: inlineErrors } = inlineParse(content, ast);
+	const { ast, error } = preParse(content);
+	//inlineParse(content, ast, error);
 
-	return {
-		ast,
-		error: [...preParseErrors, ...inlineErrors],
-	};
+	return { ast, error };
 }
 
 export { parse };

@@ -25,11 +25,11 @@ function process(content: string): ResultType {
 	const result: ResultType = {
 		ast: {
 			type: preNodeType.Root,
-			children: [],
 			position: {
 				start: { line: 1, column: 1, offset: 0 },
 				end: { line: 1, column: 1, offset: content.length },
 			},
+			children: [],
 		},
 		error: [],
 	};
