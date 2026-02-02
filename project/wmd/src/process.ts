@@ -61,14 +61,14 @@ function process(content: string): ResultType {
 
 	const frontMatter = frontMatterParse(content);
 	if (frontMatter) {
-		if (Object.keys(frontMatter.metadata).length > 0) result.ast.frontmatter = frontMatter;
-
 		// 确定切割点
-		const bodyStartOffset = frontMatter.position.end.offset ?? 0;
+		const bodyStartOffset = frontMatter.position.end.offset;
 		const bodyStartLine = frontMatter.position.end.line;
 
 		// 切割内容
 		const bodyContent = content.slice(bodyStartOffset);
+
+		console.log(bodyContent);
 
 		// 切割后可能有空的情况
 		if (bodyContent.trim()) {

@@ -1,4 +1,7 @@
 enum ParseErrorCode {
+	// 通用
+	TRAILING_CHARACTERS_AFTER_CLOSING = 'TRAILING_CHARACTERS_AFTER_CLOSING',
+
 	// 标题
 	INVALID_HEADING_LEVEL = 'INVALID_HEADING_LEVEL',
 
@@ -23,6 +26,9 @@ enum ParseErrorCode {
 
 /** 错误详情映射表 */
 const ParseErrorMessage: Record<ParseErrorCode, string> = {
+	// 通用
+	[ParseErrorCode.TRAILING_CHARACTERS_AFTER_CLOSING]: '闭合标记后存在多余字符',
+
 	// 标题
 	[ParseErrorCode.INVALID_HEADING_LEVEL]: '标题级别错误：标题最高仅支持 6 级',
 

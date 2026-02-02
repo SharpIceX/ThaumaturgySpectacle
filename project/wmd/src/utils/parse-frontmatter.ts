@@ -2,49 +2,27 @@ import yaml from 'yaml';
 import { type FrontmatterNode, preNodeType } from '../types/node/pre-node';
 
 /**
- * FrontMatter 解析器 - 静默失败模式
+ * FrontMatter 解析器
  * @param content wmd 文件内容（换行符已统一为 \n）
  * @returns 有效的 Front Matter 节点，否则返回 undefined
  * @throws {import('yaml').YAMLParseError} 仅当 YAML 内容无效时抛出（标记格式错误静默失败）
  */
 function frontMatterParse(content: string): FrontmatterNode | undefined {
-	// 开头必须以`---\n`打头
-	if (!content.startsWith('---\n')) return;
+	// 判断开头是否为起始
+	const startMatch = content.match(/^---[ \t]*\n/);
+	if (!startMatch) return;
+	const startOffset = startMatch[0].length;
 
-	let endMarkerStart = -1;
-	let endMarkerEnd = -1;
-	let searchPos = 3; // 从第一个换行符位置开始搜索
+	// 查找闭合位置
+	const closeRegex = /\n---[ \t]*(?=\n|$)/g;
+	closeRegex.lastIndex = startOffset;
 
-	while (searchPos < content.length) {
-		const markerPos = content.indexOf('\n---', searchPos);
-		if (markerPos === -1) break;
+	const closeMatch = closeRegex.exec(content);
+	if (!closeMatch) return; // 没找到闭合标记
+	const closeOffset = closeMatch.index;
 
-		const afterMarker = markerPos + 4; // 跳过 "\n---"
-		searchPos = afterMarker;
-
-		// 结束标记在文档末尾
-		if (afterMarker === content.length) {
-			endMarkerStart = markerPos + 1; // 跳过 \n，指向 ---
-			endMarkerEnd = markerPos + 4; // 指向 --- 末尾
-			break;
-		}
-
-		// 结束标记后紧跟换行符
-		if (content[afterMarker] === '\n') {
-			endMarkerStart = markerPos + 1; // 跳过 \n
-			endMarkerEnd = markerPos + 4; // 指向 --- 末尾（不含后续 \n）
-			break;
-		}
-
-		// 无效结束标记（后跟非换行字符或空格）
-		continue;
-	}
-
-	// 未找到有效结束标记
-	if (endMarkerStart === -1) return;
-
-	// 提取 YAML 内容
-	const yamlContent = content.slice(4, endMarkerStart);
+	// 提取 yaml 内容
+	const yamlContent = content.slice(startOffset, closeOffset);
 
 	// 解析 YAML
 	const metadata = yaml.parse(yamlContent);
@@ -53,7 +31,19 @@ function frontMatterParse(content: string): FrontmatterNode | undefined {
 	if (metadata === null || typeof metadata !== 'object') return undefined;
 
 	// 计算结束位置
-	const endLine = content.slice(0, endMarkerEnd).split('\n').length;
+	const endMarkerEnd = closeOffset + closeMatch[0].length;
+
+	// 计算行号
+	let lineCount = 1;
+	for (let index = 0; index < endMarkerEnd; index++) {
+		if (content[index] === '\n') {
+			lineCount++;
+		}
+	}
+
+	// 计算列号
+	const lastLineStart = content.lastIndexOf('\n', endMarkerEnd - 1);
+	const column = endMarkerEnd - lastLineStart;
 
 	return {
 		type: preNodeType.Frontmatter,
@@ -61,8 +51,8 @@ function frontMatterParse(content: string): FrontmatterNode | undefined {
 		position: {
 			start: { line: 1, column: 1, offset: 0 },
 			end: {
-				line: endLine,
-				column: 4,
+				line: lineCount,
+				column: column,
 				offset: endMarkerEnd,
 			},
 		},
