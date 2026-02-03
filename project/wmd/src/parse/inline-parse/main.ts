@@ -12,25 +12,22 @@ function inlineParse(content: string, preNodes: preNode[], errors: ParseError[])
 	for (const node of preNodes) {
 		switch (node.type) {
 			case preNodeType.Heading: {
-				const rawLine = content.slice(node.position.start.offset, node.position.end.offset);
+				const rawLine = content.slice(node.start, node.end);
 
-				// 处理包括`#`h和空格在内长度
+				// 计算前缀长度以及后面空格
 				const prefixMatch = rawLine.match(/^#+ +/);
-				const prefixLength = prefixMatch ? prefixMatch[0].length : node.level;
+				const prefixLength = prefixMatch ? prefixMatch[0].length : 0;
+
 				const currentLineContent = rawLine.slice(prefixLength);
 
-				const result = walk(currentLineContent, {
-					line: node.position.start.line,
-					column: node.position.start.column + prefixLength,
-					offset: node.position.start.offset + prefixLength,
-				});
-
+				const result = walk(currentLineContent, node.start + prefixLength);
 				errors.push(...result.error);
 				node.children = result.ast;
+
 				break;
 			}
 
-			// TODO: 其他处理
+			// TODO: 其他类型处理
 		}
 	}
 }

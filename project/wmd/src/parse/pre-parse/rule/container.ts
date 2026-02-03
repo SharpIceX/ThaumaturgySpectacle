@@ -9,13 +9,12 @@ const FENCE_MAP = {
 	':::': { type: preNodeType.Macro, error: ParseErrorCode.UNCLOSED_MACRO_BLOCK },
 } as const;
 
-const container: ParseRule = (originalContent, currentLineContent, line, offset, node, errors) => {
+const container: ParseRule = (originalContent, currentLineContent, offset, node, errors) => {
 	// 确保是支持的 container
 	const prefix = (['```', '$$', ':::'] as const).find((p) => currentLineContent.startsWith(p));
 	if (!prefix) return;
 
 	const { type, error: errorCode } = FENCE_MAP[prefix];
-	const blockStartLine = line;
 	const blockStartOffset = offset;
 
 	// 解析元数据
@@ -46,20 +45,18 @@ const container: ParseRule = (originalContent, currentLineContent, line, offset,
 	let probeCursor = originalContent.indexOf('\n', offset);
 	probeCursor = probeCursor === -1 ? originalContent.length : probeCursor + 1;
 
-	let currentProbeLine = line + 1;
-
 	while (probeCursor < originalContent.length) {
 		const nextNewline = originalContent.indexOf('\n', probeCursor);
 		const lineEnd = nextNewline === -1 ? originalContent.length : nextNewline;
 		const lineText = originalContent.slice(probeCursor, lineEnd);
 
+		// 检查闭合标记
 		if (lineText.trimEnd() === prefix) {
+			const nextLineOffset = nextNewline === -1 ? originalContent.length : nextNewline + 1;
 			const commonProperties = {
 				value: contentLines.join('\n'),
-				position: {
-					start: { line: blockStartLine, column: 1, offset: blockStartOffset },
-					end: { line: currentProbeLine, column: lineText.length + 1, offset: lineEnd },
-				},
+				start: blockStartOffset,
+				end: lineEnd,
 			};
 
 			if (type === preNodeType.Code) {
@@ -75,37 +72,25 @@ const container: ParseRule = (originalContent, currentLineContent, line, offset,
 				node.push({ type: preNodeType.Formula, ...commonProperties } as FormulaNode);
 			}
 
-			return { jumpLine: currentProbeLine - blockStartLine };
+			// 返回闭合标记下一行的起始偏移量
+			return nextLineOffset;
 		}
 
 		contentLines.push(lineText);
 		probeCursor = nextNewline === -1 ? originalContent.length : nextNewline + 1;
-		currentProbeLine++;
 	}
 
-	// 未闭合错误
+	// 未闭合错误处理
 	errors.push({
 		code: errorCode,
-		position: {
-			start: { line: blockStartLine, column: 1, offset: blockStartOffset },
-			end: {
-				line: blockStartLine,
-				column: currentLineContent.length + 1,
-				offset: offset + currentLineContent.length,
-			},
-		},
+		start: blockStartOffset,
+		end: offset + currentLineContent.length,
 	});
 
 	const commonPropertiesFallback = {
 		value: contentLines.join('\n'),
-		position: {
-			start: { line: blockStartLine, column: 1, offset: blockStartOffset },
-			end: {
-				line: currentProbeLine - 1,
-				column: contentLines.at(-1)?.length || 1,
-				offset: originalContent.length,
-			},
-		},
+		start: blockStartOffset,
+		end: originalContent.length,
 	};
 
 	if (type === preNodeType.Code) {
@@ -121,7 +106,8 @@ const container: ParseRule = (originalContent, currentLineContent, line, offset,
 		node.push({ type: preNodeType.Formula, ...commonPropertiesFallback } as FormulaNode);
 	}
 
-	return { jumpLine: currentProbeLine - blockStartLine - 1 };
+	// 已经扫描到文件末尾，直接返回最大长度
+	return originalContent.length;
 };
 
 export default container;

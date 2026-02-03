@@ -7,65 +7,47 @@ interface FlatListItem {
 	level: number;
 	isOrdered: boolean;
 	content: string;
-	line: number;
-	offset: number;
+	start: number;
+	end: number;
 	rawLine: string;
 }
 
-/**
- * 严格匹配列表标识符：
- * 1. 必须以 - 或 . 开头
- * 2. 后面必须跟一个空格
- * 3. 之后才是内容
- * 修复：将 .* 替换为 [^\s\r\n].* 以避免正则回溯问题
- */
 const LIST_LINE_RE = /^([-.]+)\s+(\S.*)$/;
 
 /**
  * 辅助：创建 ListNode
- * @param ordered - 是否是有序列表
- * @param item - 列表项原始数据
- * @returns 返回初始化的 ListNode 对象
  */
 const createListNode = (ordered: boolean, item: FlatListItem): ListNode => ({
 	type: preNodeType.List,
 	ordered,
 	children: [],
-	position: {
-		start: { line: item.line, column: 1, offset: item.offset },
-		end: { line: item.line, column: 1, offset: item.offset },
-	},
+	start: item.start,
+	end: item.end,
 });
 
 /**
  * 辅助：创建 ListItemNode
- * @param item - 列表项原始数据
- * @returns 返回初始化的 ListItemNode 对象
  */
 const createListItemNode = (item: FlatListItem): ListItemNode => ({
 	type: preNodeType.ListItem,
 	children: [],
-	position: {
-		start: { line: item.line, column: 1, offset: item.offset },
-		end: { line: item.line, column: item.rawLine.length + 1, offset: item.offset + item.rawLine.length },
-	},
+	start: item.start,
+	end: item.end,
 });
 
-const list: ParseRule = (originalContent, currentLineContent, line, offset, nodes) => {
-	// 1. 探测：当前行是否是列表开头？
+const list: ParseRule = (originalContent, currentLineContent, offset, nodes) => {
+	// 确保当前行是否是列表开头
 	const firstMatch = currentLineContent.match(LIST_LINE_RE);
-	if (!firstMatch) return false;
+	if (!firstMatch) return;
 
 	// --- 阶段一：词法分析 ---
-	const allLines = originalContent.split('\n');
+	// 从当前 offset 开始切割，避免 split 全文带来的性能开销
+	const remainingLines = originalContent.slice(offset).split('\n');
 	const flatItems: FlatListItem[] = [];
 	let temporaryOffset = offset;
-	let index = line - 1;
 
-	while (index < allLines.length) {
-		const rawLine = allLines[index] ?? '';
+	for (const rawLine of remainingLines) {
 		const match = rawLine.match(LIST_LINE_RE);
-
 		if (!match) break;
 
 		flatItems.push({
@@ -73,23 +55,22 @@ const list: ParseRule = (originalContent, currentLineContent, line, offset, node
 			level: (match[1] ?? '').length,
 			isOrdered: (match[1] ?? '').includes('.'),
 			content: match[2] ?? '',
-			line: index + 1,
-			offset: temporaryOffset,
+			start: temporaryOffset,
+			end: temporaryOffset + rawLine.length,
 			rawLine,
 		});
 
+		// 推进 offset：行长 + \n
 		temporaryOffset += rawLine.length + 1;
-		index++;
 	}
 
-	if (flatItems.length === 0) return false;
+	if (flatItems.length === 0) return;
 
 	// --- 阶段二：语法分析 ---
-	const firstItem = flatItems[0];
-	if (!firstItem) return false;
-
+	const firstItem = flatItems[0]!;
 	const rootList = createListNode(firstItem.isOrdered, firstItem);
 
+	// 维持你原有的 stack 逻辑
 	const stack: { listNode: ListNode; level: number }[] = [{ listNode: rootList, level: firstItem.level }];
 
 	for (const item of flatItems) {
@@ -120,13 +101,14 @@ const list: ParseRule = (originalContent, currentLineContent, line, offset, node
 
 		// 更新容器及所有父级的 End 位置
 		for (const s of stack) {
-			s.listNode.position.end = { ...itemNode.position.end };
+			s.listNode.end = itemNode.end;
 		}
 	}
 
 	nodes.push(rootList);
 
-	return { jumpLine: flatItems.length - 1 };
+	// 适配新的返回值：返回处理完列表后的新 Offset
+	return temporaryOffset;
 };
 
 export default list;

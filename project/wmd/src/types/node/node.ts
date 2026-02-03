@@ -1,30 +1,13 @@
 import type { preNodeType, preNode } from './pre-node';
 import type { InlineNodeType, InlineNode } from './inline-node';
 
-/** 详细位置信息 */
-interface Point {
-	/** 行号（1-based） */
-	line: number;
-
-	/** 列号（1-based） */
-	column: number;
-
-	/** 全文偏移量（0-based） */
-	offset: number;
-}
-
-/** 节点在源码中的位置信息 */
-interface Position {
-	/** 节点的起始位置 */
-	start: Point;
-
-	/** 节点的结束位置（不包含此位置本身） */
-	end: Point;
-}
-
 /** 基本节点 */
 interface BaseNode {
-	position: Position;
+	/** 起始偏移量 */
+	start: number;
+
+	/** 结束偏移量 */
+	end: number;
 }
 
 /** 所有节点类型 */
@@ -32,4 +15,4 @@ type Node = preNode | InlineNode;
 
 type NodeType = InlineNodeType | preNodeType;
 
-export type { Point, Position, BaseNode, Node, NodeType };
+export type { BaseNode, Node, NodeType };

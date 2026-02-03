@@ -2,7 +2,7 @@ import type { ParseRule } from '../main';
 import { ParseErrorCode } from '../../../types/error';
 import { preNodeType, type ImageNode } from '../../../types/node/pre-node';
 
-const image: ParseRule = (_originalContent, currentLineContent, line, offset, node, errors) => {
+const image: ParseRule = (_originalContent, currentLineContent, offset, node, errors) => {
 	// 确保是图片
 	if (!currentLineContent.startsWith('![')) return;
 
@@ -18,14 +18,12 @@ const image: ParseRule = (_originalContent, currentLineContent, line, offset, no
 	const parts = rawContent.split(/\s+/);
 	const source = parts[0];
 
-	// 如果括号内为空，则不计入 AST，作为段落（其实目前实现是跳过解析）
+	// 如果括号内为空，则不处理，让段落兜底
 	if (!rawContent || !source) {
 		errors.push({
 			code: ParseErrorCode.MISSING_IMAGE_SOURCE,
-			position: {
-				start: { line, column: 1, offset },
-				end: { line, column: lineLength + 1, offset: offset + lineLength },
-			},
+			start: offset,
+			end: offset + lineLength,
 		});
 		return;
 	}
@@ -34,10 +32,8 @@ const image: ParseRule = (_originalContent, currentLineContent, line, offset, no
 		type: preNodeType.Image,
 		title,
 		src: source,
-		position: {
-			start: { line, column: 1, offset },
-			end: { line, column: lineLength + 1, offset: offset + lineLength },
-		},
+		start: offset,
+		end: offset + lineLength,
 	};
 
 	// 处理后续可选参数
@@ -52,18 +48,9 @@ const image: ParseRule = (_originalContent, currentLineContent, line, offset, no
 		const parameterIndexInLine = currentLineContent.indexOf(parameter, searchOffsetInLine);
 		const safeIndex = parameterIndexInLine === -1 ? searchOffsetInLine : parameterIndexInLine;
 
-		const parameterPosition = {
-			start: {
-				line: line,
-				column: safeIndex + 1,
-				offset: offset + safeIndex,
-			},
-			end: {
-				line: line,
-				column: safeIndex + parameter.length + 1,
-				offset: offset + safeIndex + parameter.length,
-			},
-		};
+		// 参数的扁平化偏移量位置
+		const parameterStart = offset + safeIndex;
+		const parameterEnd = offset + safeIndex + parameter.length;
 
 		// 更新搜索起点
 		if (parameterIndexInLine !== -1) {
@@ -77,7 +64,8 @@ const image: ParseRule = (_originalContent, currentLineContent, line, offset, no
 			} else {
 				errors.push({
 					code: ParseErrorCode.INVALID_IMAGE_LAYOUT,
-					position: parameterPosition,
+					start: parameterStart,
+					end: parameterEnd,
 				});
 			}
 		} else if (key === 'scale') {
@@ -85,18 +73,18 @@ const image: ParseRule = (_originalContent, currentLineContent, line, offset, no
 			if (Number.isNaN(scaleNumber) || scaleNumber <= 0) {
 				errors.push({
 					code: ParseErrorCode.INVALID_IMAGE_SCALE,
-					position: parameterPosition,
+					start: parameterStart,
+					end: parameterEnd,
 				});
 			} else {
-				// 校验并处理小数位：直接截断两位以后的小数
+				// 校验并处理小数位
 				const dotIndex = value.indexOf('.');
 				if (dotIndex !== -1 && value.length > dotIndex + 3) {
-					// 超过两位小数
 					errors.push({
 						code: ParseErrorCode.IMAGE_SCALE_TOO_MANY_DECIMALS,
-						position: parameterPosition,
+						start: parameterStart,
+						end: parameterEnd,
 					});
-					// 直接截断两位小数后多余部分，而不是四舍五入
 					imageNode.scale = Number.parseFloat(value.slice(0, dotIndex + 3));
 				} else {
 					imageNode.scale = scaleNumber;

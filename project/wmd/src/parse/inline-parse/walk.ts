@@ -1,6 +1,5 @@
-import type { Point } from '../../main';
 import { ParseErrorCode, type ParseError } from '../../types/error';
-import { type InlineNode, InlineNodeType } from '../../types/node/inline-node';
+import { type InlineNode, InlineNodeType, type StrongNode } from '../../types/node/inline-node';
 
 interface ResultType {
 	ast: InlineNode[];
@@ -9,148 +8,115 @@ interface ResultType {
 
 /**
  * 行内语法解析
- * @param content 一段文本
- * @param start 起始位置点（包含 line, column, offset）
+ * @param content 待解析的文本片段
+ * @param offset 需要增加的起始偏移量
  * @returns 解析结果
  */
-function walk(content: string, start: Point): ResultType {
+function walk(content: string, offset: number): ResultType {
 	const ast: InlineNode[] = [];
 	const errors: ParseError[] = [];
 
-	let relativeOffset = 0;
-	let pendingTextStart = 0;
+	let pos = 0;
 
-	const { line, column: baseColumn, offset: baseOffset } = start;
+	/**
+	 * 处理对称格式标记
+	 * @param marker 对称标记字符串
+	 * @param type 对应的节点类型
+	 * @returns 是否成功匹配并处理了标记
+	 */
+	const handleSymmetry = (marker: string, type: InlineNodeType): boolean => {
+		// 确保是对应标记
+		if (!content.startsWith(marker, pos)) return false;
 
-	const flushText = (endRelativeOffset: number) => {
-		if (endRelativeOffset > pendingTextStart) {
-			const textValue = content.slice(pendingTextStart, endRelativeOffset);
+		// 寻找闭合标记
+		const closeIndex = content.indexOf(marker, pos + marker.length);
+		if (closeIndex === -1) return false;
+
+		const innerContent = content.slice(pos + marker.length, closeIndex);
+		const result = walk(innerContent, offset + pos + marker.length);
+
+		errors.push(...result.error);
+
+		ast.push({
+			type: type,
+			children: result.ast,
+			start: offset + pos,
+			end: offset + closeIndex + marker.length,
+		} as StrongNode);
+
+		pos = closeIndex + marker.length;
+
+		return true;
+	};
+
+	while (pos < content.length) {
+		const char = content[pos] as string;
+
+		// ========== 加粗 ==========
+		if (handleSymmetry('**', InlineNodeType.Strong)) continue;
+
+		// ========== 斜体 ==========
+		if (handleSymmetry('--', InlineNodeType.Italic)) continue;
+
+		// ========== 删除线 ==========
+		if (handleSymmetry('~~', InlineNodeType.Strikethrough)) continue;
+
+		// ========== 下划线 ==========
+		if (handleSymmetry('__', InlineNodeType.Underline)) continue;
+
+		// ========== 插入文本 ==========
+		if (handleSymmetry('++', InlineNodeType.Inserted)) continue;
+
+		// ========== 高亮文本 ==========
+		if (handleSymmetry('==', InlineNodeType.Highlight)) continue;
+
+		// ========== 下标（删除线之后） ==========
+		if (handleSymmetry('~', InlineNodeType.Subscript)) continue;
+
+		// ========== 上标 ==========
+		if (handleSymmetry('^', InlineNodeType.Superscript)) continue;
+
+		// ========== 脚注引用 ==========
+		/*
+		if (content.startsWith('[^', pos)) {
+			// 找到闭合标签
+			const closeIndex = content.indexOf(']', pos + 2);
+			if (closeIndex !== -1) {
+				const label = content.slice(pos + 2, closeIndex);
+				if (label.length > 0) {
+					ast.push({
+						type: InlineNodeType.FootnoteReference,
+						label: label,
+						refId: `ref-${label}-${offset + pos}`,
+						start: offset + pos,
+						end: offset + closeIndex + 1,
+					});
+
+					pos = closeIndex + 1;
+					continue;
+				}
+			}
+		}
+		*/
+
+		// ========== 纯文本（兜底） ==========
+		const lastNode = ast.at(-1);
+		if (lastNode?.type === InlineNodeType.Text) {
+			// 如果上一个是文字则合并
+			lastNode.end += 1;
+			lastNode.value += char;
+		} else {
+			// 否则创建新的
 			ast.push({
 				type: InlineNodeType.Text,
-				value: textValue,
-				position: {
-					start: {
-						line,
-						column: baseColumn + pendingTextStart,
-						offset: baseOffset + pendingTextStart,
-					},
-					end: {
-						line,
-						column: baseColumn + endRelativeOffset,
-						offset: baseOffset + endRelativeOffset,
-					},
-				},
-			} as any);
+				value: char,
+				start: offset + pos,
+				end: offset + pos + 1,
+			});
 		}
-	};
-
-	// 1. 处理对称标记 (加粗, 斜体等)
-	const handleSymmetry = (marker: string, type: InlineNodeType): boolean => {
-		if (!content.startsWith(marker, relativeOffset)) return false;
-		const markerLength = marker.length;
-		const closeIndex = content.indexOf(marker, relativeOffset + markerLength);
-		if (closeIndex === -1) return false;
-
-		flushText(relativeOffset);
-
-		const innerContent = content.slice(relativeOffset + markerLength, closeIndex);
-		const innerResult = walk(innerContent, {
-			line,
-			column: baseColumn + relativeOffset + markerLength,
-			offset: baseOffset + relativeOffset + markerLength,
-		});
-
-		ast.push({
-			type,
-			children: innerResult.ast,
-			position: {
-				start: { line, column: baseColumn + relativeOffset, offset: baseOffset + relativeOffset },
-				end: {
-					line,
-					column: baseColumn + closeIndex + markerLength,
-					offset: baseOffset + closeIndex + markerLength,
-				},
-			},
-		} as any);
-
-		relativeOffset = closeIndex + markerLength;
-		pendingTextStart = relativeOffset;
-		return true;
-	};
-
-	// 2. 处理行内代码 `code`
-	const handleInlineCode = (): boolean => {
-		if (content[relativeOffset] !== '`') return false;
-		const closeIndex = content.indexOf('`', relativeOffset + 1);
-		if (closeIndex === -1) return false;
-
-		flushText(relativeOffset);
-		const codeValue = content.slice(relativeOffset + 1, closeIndex);
-
-		ast.push({
-			type: InlineNodeType.Code, // 假设你有这个类型
-			value: codeValue,
-			position: {
-				start: { line, column: baseColumn + relativeOffset, offset: baseOffset + relativeOffset },
-				end: { line, column: baseColumn + closeIndex + 1, offset: baseOffset + closeIndex + 1 },
-			},
-		} as any);
-
-		relativeOffset = closeIndex + 1;
-		pendingTextStart = relativeOffset;
-		return true;
-	};
-
-	// 3. 处理链接 [text](url)
-	const handleLink = (): boolean => {
-		if (content[relativeOffset] !== '[') return false;
-
-		// 简单的正则或索引匹配：[内容](链接)
-		const match = content.slice(relativeOffset).match(/^\[([^\]]+)\]\(([^)]+)\)/);
-		if (!match) return false;
-
-		flushText(relativeOffset);
-		const [fullMatch, linkText, linkUrl] = match;
-
-		ast.push({
-			type: InlineNodeType.Link,
-			value: linkText,
-			url: linkUrl,
-			position: {
-				start: { line, column: baseColumn + relativeOffset, offset: baseOffset + relativeOffset },
-				end: {
-					line,
-					column: baseColumn + relativeOffset + fullMatch.length,
-					offset: baseOffset + relativeOffset + fullMatch.length,
-				},
-			},
-		} as any);
-
-		relativeOffset += fullMatch.length;
-		pendingTextStart = relativeOffset;
-		return true;
-	};
-
-	while (relativeOffset < content.length) {
-		if (
-			handleSymmetry('**', InlineNodeType.Strong) ||
-			handleSymmetry('--', InlineNodeType.Italic) ||
-			handleInlineCode() ||
-			handleLink() ||
-			handleSymmetry('~~', InlineNodeType.Strikethrough) ||
-			handleSymmetry('__', InlineNodeType.Underline) ||
-			handleSymmetry('++', InlineNodeType.Inserted) ||
-			handleSymmetry('==', InlineNodeType.Highlight)
-		) {
-			continue;
-		}
-
-		const codePoint = content.codePointAt(relativeOffset);
-		const charLength = codePoint !== undefined && codePoint > 0xff_ff ? 2 : 1;
-		relativeOffset += charLength;
+		pos++;
 	}
 
-	flushText(relativeOffset);
 	return { ast, error: errors };
 }
 

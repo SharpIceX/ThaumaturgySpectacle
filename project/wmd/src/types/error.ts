@@ -53,10 +53,8 @@ const ParseErrorMessage: Record<ParseErrorCode, string> = {
 
 interface ParseError {
 	code: ParseErrorCode;
-	position: {
-		start: { line: number; column: number; offset: number };
-		end: { line: number; column: number; offset: number };
-	};
+	start: number;
+	end: number;
 }
 
 export { ParseErrorCode, ParseErrorMessage };

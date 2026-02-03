@@ -1,35 +1,15 @@
 {
 	"ast": {
 		"type": "root",
-		"position": {
-			"start": {
-				"line": 1,
-				"column": 1,
-				"offset": 0
-			},
-			"end": {
-				"line": 308,
-				"column": 1,
-				"offset": 3250
-			}
-		},
+		"start": 1,
+		"end": 3250,
 		"children": [
 			{
 				"type": "macro",
 				"name": "infobox",
 				"value": "- [这是一行合并]\n- [这是左边, 这是右边]\n- [{img: ./test.png}, 左边图片右边文字]\n- [左边文字右边图片, {img: ./test.png}]",
-				"position": {
-					"start": {
-						"line": 11,
-						"column": 1,
-						"offset": 172
-					},
-					"end": {
-						"line": 16,
-						"column": 4,
-						"offset": 277
-					}
-				},
+				"start": 172,
+				"end": 277,
 				"raw": "::: infobox\n- [这是一行合并]\n- [这是左边, 这是右边]\n- [{img: ./test.png}, 左边图片右边文字]\n- [左边文字右边图片, {img: ./test.png}]\n:::"
 			},
 			{
@@ -37,18 +17,8 @@
 				"name": "infobox",
 				"args": "角色信息",
 				"value": "图片:./test.png\n年龄:20\n名称:这是名称\n栖息地:这是栖息地",
-				"position": {
-					"start": {
-						"line": 18,
-						"column": 1,
-						"offset": 279
-					},
-					"end": {
-						"line": 23,
-						"column": 4,
-						"offset": 337
-					}
-				},
+				"start": 279,
+				"end": 337,
 				"raw": "::: infobox 角色信息\n图片:./test.png\n年龄:20\n名称:这是名称\n栖息地:这是栖息地\n:::"
 			},
 			{
@@ -58,33 +28,13 @@
 					{
 						"type": "text",
 						"value": "标题 1.1 (h1) —— 不建议在文档中使用",
-						"position": {
-							"start": {
-								"line": 25,
-								"column": 3,
-								"offset": 341
-							},
-							"end": {
-								"line": 25,
-								"column": 27,
-								"offset": 365
-							}
-						},
+						"start": 341,
+						"end": 365,
 						"raw": "标题 1.1 (h1) —— 不建议在文档中使用"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 25,
-						"column": 1,
-						"offset": 339
-					},
-					"end": {
-						"line": 25,
-						"column": 27,
-						"offset": 365
-					}
-				},
+				"start": 339,
+				"end": 365,
 				"raw": "# 标题 1.1 (h1) —— 不建议在文档中使用"
 			},
 			{
@@ -94,33 +44,13 @@
 					{
 						"type": "text",
 						"value": "标题 1.2 (h2)",
-						"position": {
-							"start": {
-								"line": 26,
-								"column": 4,
-								"offset": 369
-							},
-							"end": {
-								"line": 26,
-								"column": 15,
-								"offset": 380
-							}
-						},
+						"start": 369,
+						"end": 380,
 						"raw": "标题 1.2 (h2)"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 26,
-						"column": 1,
-						"offset": 366
-					},
-					"end": {
-						"line": 26,
-						"column": 15,
-						"offset": 380
-					}
-				},
+				"start": 366,
+				"end": 380,
 				"raw": "## 标题 1.2 (h2)"
 			},
 			{
@@ -130,33 +60,13 @@
 					{
 						"type": "text",
 						"value": "标题 1.3 (h3)",
-						"position": {
-							"start": {
-								"line": 27,
-								"column": 5,
-								"offset": 385
-							},
-							"end": {
-								"line": 27,
-								"column": 16,
-								"offset": 396
-							}
-						},
+						"start": 385,
+						"end": 396,
 						"raw": "标题 1.3 (h3)"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 27,
-						"column": 1,
-						"offset": 381
-					},
-					"end": {
-						"line": 27,
-						"column": 16,
-						"offset": 396
-					}
-				},
+				"start": 381,
+				"end": 396,
 				"raw": "### 标题 1.3 (h3)"
 			},
 			{
@@ -166,33 +76,13 @@
 					{
 						"type": "text",
 						"value": "标题 1.4 (h4)",
-						"position": {
-							"start": {
-								"line": 28,
-								"column": 6,
-								"offset": 402
-							},
-							"end": {
-								"line": 28,
-								"column": 17,
-								"offset": 413
-							}
-						},
+						"start": 402,
+						"end": 413,
 						"raw": "标题 1.4 (h4)"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 28,
-						"column": 1,
-						"offset": 397
-					},
-					"end": {
-						"line": 28,
-						"column": 17,
-						"offset": 413
-					}
-				},
+				"start": 397,
+				"end": 413,
 				"raw": "#### 标题 1.4 (h4)"
 			},
 			{
@@ -202,33 +92,13 @@
 					{
 						"type": "text",
 						"value": "标题 1.5 (h5)",
-						"position": {
-							"start": {
-								"line": 29,
-								"column": 7,
-								"offset": 420
-							},
-							"end": {
-								"line": 29,
-								"column": 18,
-								"offset": 431
-							}
-						},
+						"start": 420,
+						"end": 431,
 						"raw": "标题 1.5 (h5)"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 29,
-						"column": 1,
-						"offset": 414
-					},
-					"end": {
-						"line": 29,
-						"column": 18,
-						"offset": 431
-					}
-				},
+				"start": 414,
+				"end": 431,
 				"raw": "##### 标题 1.5 (h5)"
 			},
 			{
@@ -238,33 +108,13 @@
 					{
 						"type": "text",
 						"value": "标题 1.6 (h6)",
-						"position": {
-							"start": {
-								"line": 30,
-								"column": 8,
-								"offset": 439
-							},
-							"end": {
-								"line": 30,
-								"column": 19,
-								"offset": 450
-							}
-						},
+						"start": 439,
+						"end": 450,
 						"raw": "标题 1.6 (h6)"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 30,
-						"column": 1,
-						"offset": 432
-					},
-					"end": {
-						"line": 30,
-						"column": 19,
-						"offset": 450
-					}
-				},
+				"start": 432,
+				"end": 450,
 				"raw": "###### 标题 1.6 (h6)"
 			},
 			{
@@ -274,18 +124,8 @@
 					{
 						"type": "text",
 						"value": "复杂测试：",
-						"position": {
-							"start": {
-								"line": 32,
-								"column": 4,
-								"offset": 455
-							},
-							"end": {
-								"line": 32,
-								"column": 9,
-								"offset": 460
-							}
-						},
+						"start": 455,
+						"end": 460,
 						"raw": "复杂测试："
 					},
 					{
@@ -296,166 +136,38 @@
 								"children": [
 									{
 										"type": "text",
-										"value": "含有斜体加粗标题内包链接 ",
-										"position": {
-											"start": {
-												"line": 32,
-												"column": 13,
-												"offset": 464
-											},
-											"end": {
-												"line": 32,
-												"column": 26,
-												"offset": 477
-											}
-										},
-										"raw": "含有斜体加粗标题内包链接 "
-									},
-									{
-										"type": "link",
-										"value": "Github",
-										"url": "https://github.com",
-										"position": {
-											"start": {
-												"line": 32,
-												"column": 26,
-												"offset": 477
-											},
-											"end": {
-												"line": 32,
-												"column": 54,
-												"offset": 505
-											}
-										},
-										"raw": "[Github](https://github.com)"
-									},
-									{
-										"type": "text",
-										"value": " ",
-										"position": {
-											"start": {
-												"line": 32,
-												"column": 54,
-												"offset": 505
-											},
-											"end": {
-												"line": 32,
-												"column": 55,
-												"offset": 506
-											}
-										},
-										"raw": " "
-									},
-									{
-										"value": "console.log('Hello World!')",
-										"position": {
-											"start": {
-												"line": 32,
-												"column": 55,
-												"offset": 506
-											},
-											"end": {
-												"line": 32,
-												"column": 84,
-												"offset": 535
-											}
-										},
-										"raw": "`console.log('Hello World!')`"
-									},
-									{
-										"type": "text",
-										"value": " 粗斜体",
-										"position": {
-											"start": {
-												"line": 32,
-												"column": 84,
-												"offset": 535
-											},
-											"end": {
-												"line": 32,
-												"column": 88,
-												"offset": 539
-											}
-										},
-										"raw": " 粗斜体"
+										"value": "含有斜体加粗标题内包链接 [Github](https://github.com) `console.log('Hello World!')` 粗斜体",
+										"start": 464,
+										"end": 539,
+										"raw": "含有斜体加粗标题内包链接 [Github](https://github.com) `console.log('Hello World!')` 粗斜体"
 									}
 								],
-								"position": {
-									"start": {
-										"line": 32,
-										"column": 11,
-										"offset": 462
-									},
-									"end": {
-										"line": 32,
-										"column": 90,
-										"offset": 541
-									}
-								},
+								"start": 462,
+								"end": 541,
 								"raw": "--含有斜体加粗标题内包链接 [Github](https://github.com) `console.log('Hello World!')` 粗斜体--"
 							},
 							{
 								"type": "text",
 								"value": "粗体",
-								"position": {
-									"start": {
-										"line": 32,
-										"column": 90,
-										"offset": 541
-									},
-									"end": {
-										"line": 32,
-										"column": 92,
-										"offset": 543
-									}
-								},
+								"start": 541,
+								"end": 543,
 								"raw": "粗体"
 							}
 						],
-						"position": {
-							"start": {
-								"line": 32,
-								"column": 9,
-								"offset": 460
-							},
-							"end": {
-								"line": 32,
-								"column": 94,
-								"offset": 545
-							}
-						},
+						"start": 460,
+						"end": 545,
 						"raw": "**--含有斜体加粗标题内包链接 [Github](https://github.com) `console.log('Hello World!')` 粗斜体--粗体**"
 					},
 					{
 						"type": "text",
 						"value": " 外在内容",
-						"position": {
-							"start": {
-								"line": 32,
-								"column": 94,
-								"offset": 545
-							},
-							"end": {
-								"line": 32,
-								"column": 99,
-								"offset": 550
-							}
-						},
+						"start": 545,
+						"end": 550,
 						"raw": " 外在内容"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 32,
-						"column": 1,
-						"offset": 452
-					},
-					"end": {
-						"line": 32,
-						"column": 99,
-						"offset": 550
-					}
-				},
+				"start": 452,
+				"end": 550,
 				"raw": "## 复杂测试：**--含有斜体加粗标题内包链接 [Github](https://github.com) `console.log('Hello World!')` 粗斜体--粗体** 外在内容"
 			},
 			{
@@ -465,33 +177,13 @@
 					{
 						"type": "text",
 						"value": "特殊标题",
-						"position": {
-							"start": {
-								"line": 34,
-								"column": 4,
-								"offset": 555
-							},
-							"end": {
-								"line": 34,
-								"column": 8,
-								"offset": 559
-							}
-						},
+						"start": 555,
+						"end": 559,
 						"raw": "特殊标题"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 34,
-						"column": 1,
-						"offset": 552
-					},
-					"end": {
-						"line": 34,
-						"column": 8,
-						"offset": 559
-					}
-				},
+				"start": 552,
+				"end": 559,
 				"raw": "## 特殊标题"
 			},
 			{
@@ -504,48 +196,18 @@
 							{
 								"type": "text",
 								"value": "加粗标题",
-								"position": {
-									"start": {
-										"line": 35,
-										"column": 7,
-										"offset": 566
-									},
-									"end": {
-										"line": 35,
-										"column": 11,
-										"offset": 570
-									}
-								},
+								"start": 566,
+								"end": 570,
 								"raw": "加粗标题"
 							}
 						],
-						"position": {
-							"start": {
-								"line": 35,
-								"column": 5,
-								"offset": 564
-							},
-							"end": {
-								"line": 35,
-								"column": 13,
-								"offset": 572
-							}
-						},
+						"start": 564,
+						"end": 572,
 						"raw": "**加粗标题**"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 35,
-						"column": 1,
-						"offset": 560
-					},
-					"end": {
-						"line": 35,
-						"column": 13,
-						"offset": 572
-					}
-				},
+				"start": 560,
+				"end": 572,
 				"raw": "### **加粗标题**"
 			},
 			{
@@ -553,54 +215,24 @@
 				"level": 3,
 				"children": [
 					{
-						"type": "underline",
+						"type": "italic",
 						"children": [
 							{
 								"type": "text",
 								"value": "斜体标题",
-								"position": {
-									"start": {
-										"line": 36,
-										"column": 7,
-										"offset": 579
-									},
-									"end": {
-										"line": 36,
-										"column": 11,
-										"offset": 583
-									}
-								},
+								"start": 579,
+								"end": 583,
 								"raw": "斜体标题"
 							}
 						],
-						"position": {
-							"start": {
-								"line": 36,
-								"column": 5,
-								"offset": 577
-							},
-							"end": {
-								"line": 36,
-								"column": 13,
-								"offset": 585
-							}
-						},
-						"raw": "__斜体标题__"
+						"start": 577,
+						"end": 585,
+						"raw": "--斜体标题--"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 36,
-						"column": 1,
-						"offset": 573
-					},
-					"end": {
-						"line": 36,
-						"column": 13,
-						"offset": 585
-					}
-				},
-				"raw": "### __斜体标题__"
+				"start": 573,
+				"end": 585,
+				"raw": "### --斜体标题--"
 			},
 			{
 				"type": "heading",
@@ -610,69 +242,29 @@
 						"type": "strong",
 						"children": [
 							{
-								"type": "underline",
+								"type": "italic",
 								"children": [
 									{
 										"type": "text",
 										"value": "斜体加粗的标题",
-										"position": {
-											"start": {
-												"line": 37,
-												"column": 9,
-												"offset": 594
-											},
-											"end": {
-												"line": 37,
-												"column": 16,
-												"offset": 601
-											}
-										},
+										"start": 594,
+										"end": 601,
 										"raw": "斜体加粗的标题"
 									}
 								],
-								"position": {
-									"start": {
-										"line": 37,
-										"column": 7,
-										"offset": 592
-									},
-									"end": {
-										"line": 37,
-										"column": 18,
-										"offset": 603
-									}
-								},
-								"raw": "__斜体加粗的标题__"
+								"start": 592,
+								"end": 603,
+								"raw": "--斜体加粗的标题--"
 							}
 						],
-						"position": {
-							"start": {
-								"line": 37,
-								"column": 5,
-								"offset": 590
-							},
-							"end": {
-								"line": 37,
-								"column": 20,
-								"offset": 605
-							}
-						},
-						"raw": "**__斜体加粗的标题__**"
+						"start": 590,
+						"end": 605,
+						"raw": "**--斜体加粗的标题--**"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 37,
-						"column": 1,
-						"offset": 586
-					},
-					"end": {
-						"line": 37,
-						"column": 20,
-						"offset": 605
-					}
-				},
-				"raw": "### **__斜体加粗的标题__**"
+				"start": 586,
+				"end": 605,
+				"raw": "### **--斜体加粗的标题--**"
 			},
 			{
 				"type": "heading",
@@ -681,101 +273,41 @@
 					{
 						"type": "text",
 						"value": "文本测试",
-						"position": {
-							"start": {
-								"line": 39,
-								"column": 4,
-								"offset": 610
-							},
-							"end": {
-								"line": 39,
-								"column": 8,
-								"offset": 614
-							}
-						},
+						"start": 610,
+						"end": 614,
 						"raw": "文本测试"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 39,
-						"column": 1,
-						"offset": 607
-					},
-					"end": {
-						"line": 39,
-						"column": 8,
-						"offset": 614
-					}
-				},
+				"start": 607,
+				"end": 614,
 				"raw": "## 文本测试"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 41,
-						"column": 1,
-						"offset": 616
-					},
-					"end": {
-						"line": 41,
-						"column": 11,
-						"offset": 626
-					}
-				},
+				"start": 616,
+				"end": 626,
 				"raw": "这是一段普通的文本。"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 43,
-						"column": 1,
-						"offset": 628
-					},
-					"end": {
-						"line": 43,
-						"column": 24,
-						"offset": 651
-					}
-				},
+				"start": 628,
+				"end": 651,
 				"raw": "这是一段中英English没有空格的测试文本。"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 45,
-						"column": 1,
-						"offset": 653
-					},
-					"end": {
-						"line": 45,
-						"column": 24,
-						"offset": 676
-					}
-				},
+				"start": 653,
+				"end": 676,
 				"raw": "这是一段中 英English带空格的测试文本。"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 47,
-						"column": 1,
-						"offset": 678
-					},
-					"end": {
-						"line": 49,
-						"column": 6,
-						"offset": 704
-					}
-				},
+				"start": 678,
+				"end": 704,
 				"raw": "这是一段多行文本，\n会被直接合并为一行，\n就像这样。"
 			},
 			{
@@ -785,33 +317,13 @@
 					{
 						"type": "text",
 						"value": "渲染字体测试",
-						"position": {
-							"start": {
-								"line": 51,
-								"column": 4,
-								"offset": 709
-							},
-							"end": {
-								"line": 51,
-								"column": 10,
-								"offset": 715
-							}
-						},
+						"start": 709,
+						"end": 715,
 						"raw": "渲染字体测试"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 51,
-						"column": 1,
-						"offset": 706
-					},
-					"end": {
-						"line": 51,
-						"column": 10,
-						"offset": 715
-					}
-				},
+				"start": 706,
+				"end": 715,
 				"raw": "## 渲染字体测试"
 			},
 			{
@@ -821,67 +333,27 @@
 					{
 						"type": "text",
 						"value": "简体中文",
-						"position": {
-							"start": {
-								"line": 53,
-								"column": 5,
-								"offset": 721
-							},
-							"end": {
-								"line": 53,
-								"column": 9,
-								"offset": 725
-							}
-						},
+						"start": 721,
+						"end": 725,
 						"raw": "简体中文"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 53,
-						"column": 1,
-						"offset": 717
-					},
-					"end": {
-						"line": 53,
-						"column": 9,
-						"offset": 725
-					}
-				},
+				"start": 717,
+				"end": 725,
 				"raw": "### 简体中文"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 54,
-						"column": 1,
-						"offset": 726
-					},
-					"end": {
-						"line": 54,
-						"column": 13,
-						"offset": 738
-					}
-				},
+				"start": 726,
+				"end": 738,
 				"raw": "床前明月光，疑是地上霜。"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 56,
-						"column": 1,
-						"offset": 740
-					},
-					"end": {
-						"line": 56,
-						"column": 13,
-						"offset": 752
-					}
-				},
+				"start": 740,
+				"end": 752,
 				"raw": "举头望明月，低头思故乡。"
 			},
 			{
@@ -891,67 +363,27 @@
 					{
 						"type": "text",
 						"value": "繁体中文",
-						"position": {
-							"start": {
-								"line": 58,
-								"column": 5,
-								"offset": 758
-							},
-							"end": {
-								"line": 58,
-								"column": 9,
-								"offset": 762
-							}
-						},
+						"start": 758,
+						"end": 762,
 						"raw": "繁体中文"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 58,
-						"column": 1,
-						"offset": 754
-					},
-					"end": {
-						"line": 58,
-						"column": 9,
-						"offset": 762
-					}
-				},
+				"start": 754,
+				"end": 762,
 				"raw": "### 繁体中文"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 59,
-						"column": 1,
-						"offset": 763
-					},
-					"end": {
-						"line": 59,
-						"column": 13,
-						"offset": 775
-					}
-				},
+				"start": 763,
+				"end": 775,
 				"raw": "床前明月光，疑是地上霜。"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 61,
-						"column": 1,
-						"offset": 777
-					},
-					"end": {
-						"line": 61,
-						"column": 13,
-						"offset": 789
-					}
-				},
+				"start": 777,
+				"end": 789,
 				"raw": "舉頭望明月，低頭思故鄉。"
 			},
 			{
@@ -961,50 +393,20 @@
 					{
 						"type": "text",
 						"value": "日语",
-						"position": {
-							"start": {
-								"line": 63,
-								"column": 5,
-								"offset": 795
-							},
-							"end": {
-								"line": 63,
-								"column": 7,
-								"offset": 797
-							}
-						},
+						"start": 795,
+						"end": 797,
 						"raw": "日语"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 63,
-						"column": 1,
-						"offset": 791
-					},
-					"end": {
-						"line": 63,
-						"column": 7,
-						"offset": 797
-					}
-				},
+				"start": 791,
+				"end": 797,
 				"raw": "### 日语"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 64,
-						"column": 1,
-						"offset": 798
-					},
-					"end": {
-						"line": 64,
-						"column": 24,
-						"offset": 821
-					}
-				},
+				"start": 798,
+				"end": 821,
 				"raw": "ナナチ、大丈夫？　ミティのことは…忘れないよ。"
 			},
 			{
@@ -1014,50 +416,20 @@
 					{
 						"type": "text",
 						"value": "韩语",
-						"position": {
-							"start": {
-								"line": 66,
-								"column": 5,
-								"offset": 827
-							},
-							"end": {
-								"line": 66,
-								"column": 7,
-								"offset": 829
-							}
-						},
+						"start": 827,
+						"end": 829,
 						"raw": "韩语"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 66,
-						"column": 1,
-						"offset": 823
-					},
-					"end": {
-						"line": 66,
-						"column": 7,
-						"offset": 829
-					}
-				},
+				"start": 823,
+				"end": 829,
 				"raw": "### 韩语"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 67,
-						"column": 1,
-						"offset": 830
-					},
-					"end": {
-						"line": 67,
-						"column": 38,
-						"offset": 867
-					}
-				},
+				"start": 830,
+				"end": 867,
 				"raw": "키스의 고유조건은 입술끼리 만나야 하고 특별한 기술은 필요치 않다."
 			},
 			{
@@ -1067,50 +439,20 @@
 					{
 						"type": "text",
 						"value": "拉丁字母",
-						"position": {
-							"start": {
-								"line": 69,
-								"column": 5,
-								"offset": 873
-							},
-							"end": {
-								"line": 69,
-								"column": 9,
-								"offset": 877
-							}
-						},
+						"start": 873,
+						"end": 877,
 						"raw": "拉丁字母"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 69,
-						"column": 1,
-						"offset": 869
-					},
-					"end": {
-						"line": 69,
-						"column": 9,
-						"offset": 877
-					}
-				},
+				"start": 869,
+				"end": 877,
 				"raw": "### 拉丁字母"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 70,
-						"column": 1,
-						"offset": 878
-					},
-					"end": {
-						"line": 70,
-						"column": 45,
-						"offset": 922
-					}
-				},
+				"start": 878,
+				"end": 922,
 				"raw": "The quick brown fox jumps over the lazy dog."
 			},
 			{
@@ -1120,50 +462,20 @@
 					{
 						"type": "text",
 						"value": "俄语",
-						"position": {
-							"start": {
-								"line": 72,
-								"column": 5,
-								"offset": 928
-							},
-							"end": {
-								"line": 72,
-								"column": 7,
-								"offset": 930
-							}
-						},
+						"start": 928,
+						"end": 930,
 						"raw": "俄语"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 72,
-						"column": 1,
-						"offset": 924
-					},
-					"end": {
-						"line": 72,
-						"column": 7,
-						"offset": 930
-					}
-				},
+				"start": 924,
+				"end": 930,
 				"raw": "### 俄语"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 73,
-						"column": 1,
-						"offset": 931
-					},
-					"end": {
-						"line": 73,
-						"column": 58,
-						"offset": 988
-					}
-				},
+				"start": 931,
+				"end": 988,
 				"raw": "Съешь же ещё этих мягких французских булок, да выпей чаю."
 			},
 			{
@@ -1173,50 +485,20 @@
 					{
 						"type": "text",
 						"value": "Emoji",
-						"position": {
-							"start": {
-								"line": 75,
-								"column": 5,
-								"offset": 994
-							},
-							"end": {
-								"line": 75,
-								"column": 10,
-								"offset": 999
-							}
-						},
+						"start": 994,
+						"end": 999,
 						"raw": "Emoji"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 75,
-						"column": 1,
-						"offset": 990
-					},
-					"end": {
-						"line": 75,
-						"column": 10,
-						"offset": 999
-					}
-				},
+				"start": 990,
+				"end": 999,
 				"raw": "### Emoji"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 76,
-						"column": 1,
-						"offset": 1000
-					},
-					"end": {
-						"line": 76,
-						"column": 15,
-						"offset": 1014
-					}
-				},
+				"start": 1000,
+				"end": 1014,
 				"raw": "😀😁😂🤣😃😄😆"
 			},
 			{
@@ -1226,186 +508,76 @@
 					{
 						"type": "text",
 						"value": "文本样式",
-						"position": {
-							"start": {
-								"line": 78,
-								"column": 4,
-								"offset": 1019
-							},
-							"end": {
-								"line": 78,
-								"column": 8,
-								"offset": 1023
-							}
-						},
+						"start": 1019,
+						"end": 1023,
 						"raw": "文本样式"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 78,
-						"column": 1,
-						"offset": 1016
-					},
-					"end": {
-						"line": 78,
-						"column": 8,
-						"offset": 1023
-					}
-				},
+				"start": 1016,
+				"end": 1023,
 				"raw": "## 文本样式"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 80,
-						"column": 1,
-						"offset": 1025
-					},
-					"end": {
-						"line": 80,
-						"column": 11,
-						"offset": 1035
-					}
-				},
+				"start": 1025,
+				"end": 1035,
 				"raw": "这是--斜体文本--"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 82,
-						"column": 1,
-						"offset": 1037
-					},
-					"end": {
-						"line": 82,
-						"column": 11,
-						"offset": 1047
-					}
-				},
+				"start": 1037,
+				"end": 1047,
 				"raw": "这是**粗体文本**"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 84,
-						"column": 1,
-						"offset": 1049
-					},
-					"end": {
-						"line": 84,
-						"column": 17,
-						"offset": 1065
-					}
-				},
+				"start": 1049,
+				"end": 1065,
 				"raw": "这是**--斜体加粗文本--**"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 86,
-						"column": 1,
-						"offset": 1067
-					},
-					"end": {
-						"line": 86,
-						"column": 10,
-						"offset": 1076
-					}
-				},
+				"start": 1067,
+				"end": 1076,
 				"raw": "这是~~删除线~~"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 88,
-						"column": 1,
-						"offset": 1078
-					},
-					"end": {
-						"line": 88,
-						"column": 12,
-						"offset": 1089
-					}
-				},
+				"start": 1078,
+				"end": 1089,
 				"raw": "这是__下划线文本__"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 90,
-						"column": 1,
-						"offset": 1091
-					},
-					"end": {
-						"line": 90,
-						"column": 11,
-						"offset": 1101
-					}
-				},
+				"start": 1091,
+				"end": 1101,
 				"raw": "这是++插入文本++"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 92,
-						"column": 1,
-						"offset": 1103
-					},
-					"end": {
-						"line": 92,
-						"column": 11,
-						"offset": 1113
-					}
-				},
+				"start": 1103,
+				"end": 1113,
 				"raw": "这是==高亮文本=="
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 94,
-						"column": 1,
-						"offset": 1115
-					},
-					"end": {
-						"line": 94,
-						"column": 13,
-						"offset": 1127
-					}
-				},
+				"start": 1115,
+				"end": 1127,
 				"raw": "这是下标文本 H~2~O"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 96,
-						"column": 1,
-						"offset": 1129
-					},
-					"end": {
-						"line": 96,
-						"column": 12,
-						"offset": 1140
-					}
-				},
+				"start": 1129,
+				"end": 1140,
 				"raw": "这是上标文本 X^2^"
 			},
 			{
@@ -1415,33 +587,13 @@
 					{
 						"type": "text",
 						"value": "列表",
-						"position": {
-							"start": {
-								"line": 98,
-								"column": 4,
-								"offset": 1145
-							},
-							"end": {
-								"line": 98,
-								"column": 6,
-								"offset": 1147
-							}
-						},
+						"start": 1145,
+						"end": 1147,
 						"raw": "列表"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 98,
-						"column": 1,
-						"offset": 1142
-					},
-					"end": {
-						"line": 98,
-						"column": 6,
-						"offset": 1147
-					}
-				},
+				"start": 1142,
+				"end": 1147,
 				"raw": "## 列表"
 			},
 			{
@@ -1451,33 +603,13 @@
 					{
 						"type": "text",
 						"value": "无序列表 1",
-						"position": {
-							"start": {
-								"line": 100,
-								"column": 5,
-								"offset": 1153
-							},
-							"end": {
-								"line": 100,
-								"column": 11,
-								"offset": 1159
-							}
-						},
+						"start": 1153,
+						"end": 1159,
 						"raw": "无序列表 1"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 100,
-						"column": 1,
-						"offset": 1149
-					},
-					"end": {
-						"line": 100,
-						"column": 11,
-						"offset": 1159
-					}
-				},
+				"start": 1149,
+				"end": 1159,
 				"raw": "### 无序列表 1"
 			},
 			{
@@ -1487,18 +619,8 @@
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 101,
-								"column": 1,
-								"offset": 1160
-							},
-							"end": {
-								"line": 101,
-								"column": 9,
-								"offset": 1168
-							}
-						},
+						"start": 1160,
+						"end": 1168,
 						"raw": "- 无序列表 1"
 					},
 					{
@@ -1511,18 +633,8 @@
 									{
 										"type": "list_item",
 										"children": [],
-										"position": {
-											"start": {
-												"line": 103,
-												"column": 1,
-												"offset": 1178
-											},
-											"end": {
-												"line": 103,
-												"column": 12,
-												"offset": 1189
-											}
-										},
+										"start": 1178,
+										"end": 1189,
 										"raw": "-- 无序列表 3.1"
 									},
 									{
@@ -1535,127 +647,47 @@
 													{
 														"type": "list_item",
 														"children": [],
-														"position": {
-															"start": {
-																"line": 105,
-																"column": 1,
-																"offset": 1202
-															},
-															"end": {
-																"line": 105,
-																"column": 15,
-																"offset": 1216
-															}
-														},
+														"start": 1202,
+														"end": 1216,
 														"raw": "--- 无序列表 3.2.1"
 													}
 												],
-												"position": {
-													"start": {
-														"line": 105,
-														"column": 1,
-														"offset": 1202
-													},
-													"end": {
-														"line": 105,
-														"column": 15,
-														"offset": 1216
-													}
-												},
+												"start": 1202,
+												"end": 1216,
 												"raw": "--- 无序列表 3.2.1"
 											}
 										],
-										"position": {
-											"start": {
-												"line": 104,
-												"column": 1,
-												"offset": 1190
-											},
-											"end": {
-												"line": 104,
-												"column": 12,
-												"offset": 1201
-											}
-										},
+										"start": 1190,
+										"end": 1201,
 										"raw": "-- 无序列表 3.2"
 									}
 								],
-								"position": {
-									"start": {
-										"line": 103,
-										"column": 1,
-										"offset": 1178
-									},
-									"end": {
-										"line": 105,
-										"column": 15,
-										"offset": 1216
-									}
-								},
+								"start": 1178,
+								"end": 1216,
 								"raw": "-- 无序列表 3.1\n-- 无序列表 3.2\n--- 无序列表 3.2.1"
 							}
 						],
-						"position": {
-							"start": {
-								"line": 102,
-								"column": 1,
-								"offset": 1169
-							},
-							"end": {
-								"line": 102,
-								"column": 9,
-								"offset": 1177
-							}
-						},
+						"start": 1169,
+						"end": 1177,
 						"raw": "- 无序列表 2"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 106,
-								"column": 1,
-								"offset": 1217
-							},
-							"end": {
-								"line": 106,
-								"column": 9,
-								"offset": 1225
-							}
-						},
+						"start": 1217,
+						"end": 1225,
 						"raw": "- 无序列表 4"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 107,
-								"column": 1,
-								"offset": 1226
-							},
-							"end": {
-								"line": 107,
-								"column": 9,
-								"offset": 1234
-							}
-						},
+						"start": 1226,
+						"end": 1234,
 						"raw": "- 无序列表 5"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 101,
-						"column": 1,
-						"offset": 1160
-					},
-					"end": {
-						"line": 107,
-						"column": 9,
-						"offset": 1234
-					}
-				},
+				"start": 1160,
+				"end": 1234,
 				"raw": "- 无序列表 1\n- 无序列表 2\n-- 无序列表 3.1\n-- 无序列表 3.2\n--- 无序列表 3.2.1\n- 无序列表 4\n- 无序列表 5"
 			},
 			{
@@ -1665,33 +697,13 @@
 					{
 						"type": "text",
 						"value": "无序列表 2",
-						"position": {
-							"start": {
-								"line": 109,
-								"column": 5,
-								"offset": 1240
-							},
-							"end": {
-								"line": 109,
-								"column": 11,
-								"offset": 1246
-							}
-						},
+						"start": 1240,
+						"end": 1246,
 						"raw": "无序列表 2"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 109,
-						"column": 1,
-						"offset": 1236
-					},
-					"end": {
-						"line": 109,
-						"column": 11,
-						"offset": 1246
-					}
-				},
+				"start": 1236,
+				"end": 1246,
 				"raw": "### 无序列表 2"
 			},
 			{
@@ -1701,18 +713,8 @@
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 110,
-								"column": 1,
-								"offset": 1247
-							},
-							"end": {
-								"line": 110,
-								"column": 9,
-								"offset": 1255
-							}
-						},
+						"start": 1247,
+						"end": 1255,
 						"raw": "- 无序列表 1"
 					},
 					{
@@ -1725,18 +727,8 @@
 									{
 										"type": "list_item",
 										"children": [],
-										"position": {
-											"start": {
-												"line": 112,
-												"column": 1,
-												"offset": 1265
-											},
-											"end": {
-												"line": 112,
-												"column": 12,
-												"offset": 1276
-											}
-										},
+										"start": 1265,
+										"end": 1276,
 										"raw": "-- 无序列表 3.1"
 									},
 									{
@@ -1749,127 +741,47 @@
 													{
 														"type": "list_item",
 														"children": [],
-														"position": {
-															"start": {
-																"line": 114,
-																"column": 1,
-																"offset": 1289
-															},
-															"end": {
-																"line": 114,
-																"column": 15,
-																"offset": 1303
-															}
-														},
+														"start": 1289,
+														"end": 1303,
 														"raw": "--- 无序列表 3.2.1"
 													}
 												],
-												"position": {
-													"start": {
-														"line": 114,
-														"column": 1,
-														"offset": 1289
-													},
-													"end": {
-														"line": 114,
-														"column": 15,
-														"offset": 1303
-													}
-												},
+												"start": 1289,
+												"end": 1303,
 												"raw": "--- 无序列表 3.2.1"
 											}
 										],
-										"position": {
-											"start": {
-												"line": 113,
-												"column": 1,
-												"offset": 1277
-											},
-											"end": {
-												"line": 113,
-												"column": 12,
-												"offset": 1288
-											}
-										},
+										"start": 1277,
+										"end": 1288,
 										"raw": "-- 无序列表 3.2"
 									}
 								],
-								"position": {
-									"start": {
-										"line": 112,
-										"column": 1,
-										"offset": 1265
-									},
-									"end": {
-										"line": 114,
-										"column": 15,
-										"offset": 1303
-									}
-								},
+								"start": 1265,
+								"end": 1303,
 								"raw": "-- 无序列表 3.1\n-- 无序列表 3.2\n--- 无序列表 3.2.1"
 							}
 						],
-						"position": {
-							"start": {
-								"line": 111,
-								"column": 1,
-								"offset": 1256
-							},
-							"end": {
-								"line": 111,
-								"column": 9,
-								"offset": 1264
-							}
-						},
+						"start": 1256,
+						"end": 1264,
 						"raw": "- 无序列表 2"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 115,
-								"column": 1,
-								"offset": 1304
-							},
-							"end": {
-								"line": 115,
-								"column": 9,
-								"offset": 1312
-							}
-						},
+						"start": 1304,
+						"end": 1312,
 						"raw": "- 无序列表 4"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 116,
-								"column": 1,
-								"offset": 1313
-							},
-							"end": {
-								"line": 116,
-								"column": 9,
-								"offset": 1321
-							}
-						},
+						"start": 1313,
+						"end": 1321,
 						"raw": "- 无序列表 5"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 110,
-						"column": 1,
-						"offset": 1247
-					},
-					"end": {
-						"line": 116,
-						"column": 9,
-						"offset": 1321
-					}
-				},
+				"start": 1247,
+				"end": 1321,
 				"raw": "- 无序列表 1\n- 无序列表 2\n-- 无序列表 3.1\n-- 无序列表 3.2\n--- 无序列表 3.2.1\n- 无序列表 4\n- 无序列表 5"
 			},
 			{
@@ -1879,33 +791,13 @@
 					{
 						"type": "text",
 						"value": "有序列表 1",
-						"position": {
-							"start": {
-								"line": 118,
-								"column": 5,
-								"offset": 1327
-							},
-							"end": {
-								"line": 118,
-								"column": 11,
-								"offset": 1333
-							}
-						},
+						"start": 1327,
+						"end": 1333,
 						"raw": "有序列表 1"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 118,
-						"column": 1,
-						"offset": 1323
-					},
-					"end": {
-						"line": 118,
-						"column": 11,
-						"offset": 1333
-					}
-				},
+				"start": 1323,
+				"end": 1333,
 				"raw": "### 有序列表 1"
 			},
 			{
@@ -1915,35 +807,15 @@
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 119,
-								"column": 1,
-								"offset": 1334
-							},
-							"end": {
-								"line": 119,
-								"column": 9,
-								"offset": 1342
-							}
-						},
+						"start": 1334,
+						"end": 1342,
 						"raw": ". 有序列表 1"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 120,
-								"column": 1,
-								"offset": 1343
-							},
-							"end": {
-								"line": 120,
-								"column": 9,
-								"offset": 1351
-							}
-						},
+						"start": 1343,
+						"end": 1351,
 						"raw": ". 有序列表 2"
 					},
 					{
@@ -1956,35 +828,15 @@
 									{
 										"type": "list_item",
 										"children": [],
-										"position": {
-											"start": {
-												"line": 122,
-												"column": 1,
-												"offset": 1361
-											},
-											"end": {
-												"line": 122,
-												"column": 12,
-												"offset": 1372
-											}
-										},
+										"start": 1361,
+										"end": 1372,
 										"raw": ".. 有序列表 3.1"
 									},
 									{
 										"type": "list_item",
 										"children": [],
-										"position": {
-											"start": {
-												"line": 123,
-												"column": 1,
-												"offset": 1373
-											},
-											"end": {
-												"line": 123,
-												"column": 12,
-												"offset": 1384
-											}
-										},
+										"start": 1373,
+										"end": 1384,
 										"raw": ".. 有序列表 3.2"
 									},
 									{
@@ -1997,127 +849,47 @@
 													{
 														"type": "list_item",
 														"children": [],
-														"position": {
-															"start": {
-																"line": 125,
-																"column": 1,
-																"offset": 1397
-															},
-															"end": {
-																"line": 125,
-																"column": 15,
-																"offset": 1411
-															}
-														},
+														"start": 1397,
+														"end": 1411,
 														"raw": "... 有序列表 3.3.1"
 													}
 												],
-												"position": {
-													"start": {
-														"line": 125,
-														"column": 1,
-														"offset": 1397
-													},
-													"end": {
-														"line": 125,
-														"column": 15,
-														"offset": 1411
-													}
-												},
+												"start": 1397,
+												"end": 1411,
 												"raw": "... 有序列表 3.3.1"
 											}
 										],
-										"position": {
-											"start": {
-												"line": 124,
-												"column": 1,
-												"offset": 1385
-											},
-											"end": {
-												"line": 124,
-												"column": 12,
-												"offset": 1396
-											}
-										},
+										"start": 1385,
+										"end": 1396,
 										"raw": ".. 有序列表 3.3"
 									}
 								],
-								"position": {
-									"start": {
-										"line": 122,
-										"column": 1,
-										"offset": 1361
-									},
-									"end": {
-										"line": 125,
-										"column": 15,
-										"offset": 1411
-									}
-								},
+								"start": 1361,
+								"end": 1411,
 								"raw": ".. 有序列表 3.1\n.. 有序列表 3.2\n.. 有序列表 3.3\n... 有序列表 3.3.1"
 							}
 						],
-						"position": {
-							"start": {
-								"line": 121,
-								"column": 1,
-								"offset": 1352
-							},
-							"end": {
-								"line": 121,
-								"column": 9,
-								"offset": 1360
-							}
-						},
+						"start": 1352,
+						"end": 1360,
 						"raw": ". 有序列表 3"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 126,
-								"column": 1,
-								"offset": 1412
-							},
-							"end": {
-								"line": 126,
-								"column": 9,
-								"offset": 1420
-							}
-						},
+						"start": 1412,
+						"end": 1420,
 						"raw": ". 有序列表 4"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 127,
-								"column": 1,
-								"offset": 1421
-							},
-							"end": {
-								"line": 127,
-								"column": 9,
-								"offset": 1429
-							}
-						},
+						"start": 1421,
+						"end": 1429,
 						"raw": ". 有序列表 5"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 119,
-						"column": 1,
-						"offset": 1334
-					},
-					"end": {
-						"line": 127,
-						"column": 9,
-						"offset": 1429
-					}
-				},
+				"start": 1334,
+				"end": 1429,
 				"raw": ". 有序列表 1\n. 有序列表 2\n. 有序列表 3\n.. 有序列表 3.1\n.. 有序列表 3.2\n.. 有序列表 3.3\n... 有序列表 3.3.1\n. 有序列表 4\n. 有序列表 5"
 			},
 			{
@@ -2127,33 +899,13 @@
 					{
 						"type": "text",
 						"value": "有序列表 2",
-						"position": {
-							"start": {
-								"line": 129,
-								"column": 5,
-								"offset": 1435
-							},
-							"end": {
-								"line": 129,
-								"column": 11,
-								"offset": 1441
-							}
-						},
+						"start": 1435,
+						"end": 1441,
 						"raw": "有序列表 2"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 129,
-						"column": 1,
-						"offset": 1431
-					},
-					"end": {
-						"line": 129,
-						"column": 11,
-						"offset": 1441
-					}
-				},
+				"start": 1431,
+				"end": 1441,
 				"raw": "### 有序列表 2"
 			},
 			{
@@ -2163,35 +915,15 @@
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 130,
-								"column": 1,
-								"offset": 1442
-							},
-							"end": {
-								"line": 130,
-								"column": 9,
-								"offset": 1450
-							}
-						},
+						"start": 1442,
+						"end": 1450,
 						"raw": ". 有序列表 1"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 131,
-								"column": 1,
-								"offset": 1451
-							},
-							"end": {
-								"line": 131,
-								"column": 9,
-								"offset": 1459
-							}
-						},
+						"start": 1451,
+						"end": 1459,
 						"raw": ". 有序列表 2"
 					},
 					{
@@ -2204,35 +936,15 @@
 									{
 										"type": "list_item",
 										"children": [],
-										"position": {
-											"start": {
-												"line": 133,
-												"column": 1,
-												"offset": 1469
-											},
-											"end": {
-												"line": 133,
-												"column": 12,
-												"offset": 1480
-											}
-										},
+										"start": 1469,
+										"end": 1480,
 										"raw": ".. 有序列表 3.1"
 									},
 									{
 										"type": "list_item",
 										"children": [],
-										"position": {
-											"start": {
-												"line": 134,
-												"column": 1,
-												"offset": 1481
-											},
-											"end": {
-												"line": 134,
-												"column": 12,
-												"offset": 1492
-											}
-										},
+										"start": 1481,
+										"end": 1492,
 										"raw": ".. 有序列表 3.2"
 									},
 									{
@@ -2245,127 +957,47 @@
 													{
 														"type": "list_item",
 														"children": [],
-														"position": {
-															"start": {
-																"line": 136,
-																"column": 1,
-																"offset": 1505
-															},
-															"end": {
-																"line": 136,
-																"column": 15,
-																"offset": 1519
-															}
-														},
+														"start": 1505,
+														"end": 1519,
 														"raw": "... 有序列表 3.3.1"
 													}
 												],
-												"position": {
-													"start": {
-														"line": 136,
-														"column": 1,
-														"offset": 1505
-													},
-													"end": {
-														"line": 136,
-														"column": 15,
-														"offset": 1519
-													}
-												},
+												"start": 1505,
+												"end": 1519,
 												"raw": "... 有序列表 3.3.1"
 											}
 										],
-										"position": {
-											"start": {
-												"line": 135,
-												"column": 1,
-												"offset": 1493
-											},
-											"end": {
-												"line": 135,
-												"column": 12,
-												"offset": 1504
-											}
-										},
+										"start": 1493,
+										"end": 1504,
 										"raw": ".. 有序列表 3.3"
 									}
 								],
-								"position": {
-									"start": {
-										"line": 133,
-										"column": 1,
-										"offset": 1469
-									},
-									"end": {
-										"line": 136,
-										"column": 15,
-										"offset": 1519
-									}
-								},
+								"start": 1469,
+								"end": 1519,
 								"raw": ".. 有序列表 3.1\n.. 有序列表 3.2\n.. 有序列表 3.3\n... 有序列表 3.3.1"
 							}
 						],
-						"position": {
-							"start": {
-								"line": 132,
-								"column": 1,
-								"offset": 1460
-							},
-							"end": {
-								"line": 132,
-								"column": 9,
-								"offset": 1468
-							}
-						},
+						"start": 1460,
+						"end": 1468,
 						"raw": ". 有序列表 3"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 137,
-								"column": 1,
-								"offset": 1520
-							},
-							"end": {
-								"line": 137,
-								"column": 9,
-								"offset": 1528
-							}
-						},
+						"start": 1520,
+						"end": 1528,
 						"raw": ". 有序列表 4"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 138,
-								"column": 1,
-								"offset": 1529
-							},
-							"end": {
-								"line": 138,
-								"column": 9,
-								"offset": 1537
-							}
-						},
+						"start": 1529,
+						"end": 1537,
 						"raw": ". 有序列表 5"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 130,
-						"column": 1,
-						"offset": 1442
-					},
-					"end": {
-						"line": 138,
-						"column": 9,
-						"offset": 1537
-					}
-				},
+				"start": 1442,
+				"end": 1537,
 				"raw": ". 有序列表 1\n. 有序列表 2\n. 有序列表 3\n.. 有序列表 3.1\n.. 有序列表 3.2\n.. 有序列表 3.3\n... 有序列表 3.3.1\n. 有序列表 4\n. 有序列表 5"
 			},
 			{
@@ -2375,33 +1007,13 @@
 					{
 						"type": "text",
 						"value": "无序和有序混合列表 1",
-						"position": {
-							"start": {
-								"line": 140,
-								"column": 5,
-								"offset": 1543
-							},
-							"end": {
-								"line": 140,
-								"column": 16,
-								"offset": 1554
-							}
-						},
+						"start": 1543,
+						"end": 1554,
 						"raw": "无序和有序混合列表 1"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 140,
-						"column": 1,
-						"offset": 1539
-					},
-					"end": {
-						"line": 140,
-						"column": 16,
-						"offset": 1554
-					}
-				},
+				"start": 1539,
+				"end": 1554,
 				"raw": "### 无序和有序混合列表 1"
 			},
 			{
@@ -2411,18 +1023,8 @@
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 141,
-								"column": 1,
-								"offset": 1555
-							},
-							"end": {
-								"line": 141,
-								"column": 9,
-								"offset": 1563
-							}
-						},
+						"start": 1555,
+						"end": 1563,
 						"raw": "- 无序列表 1"
 					},
 					{
@@ -2435,18 +1037,8 @@
 									{
 										"type": "list_item",
 										"children": [],
-										"position": {
-											"start": {
-												"line": 143,
-												"column": 1,
-												"offset": 1573
-											},
-											"end": {
-												"line": 143,
-												"column": 12,
-												"offset": 1584
-											}
-										},
+										"start": 1573,
+										"end": 1584,
 										"raw": ".. 无序列表 3.1"
 									},
 									{
@@ -2459,127 +1051,47 @@
 													{
 														"type": "list_item",
 														"children": [],
-														"position": {
-															"start": {
-																"line": 145,
-																"column": 1,
-																"offset": 1597
-															},
-															"end": {
-																"line": 145,
-																"column": 15,
-																"offset": 1611
-															}
-														},
+														"start": 1597,
+														"end": 1611,
 														"raw": "... 无序列表 3.2.1"
 													}
 												],
-												"position": {
-													"start": {
-														"line": 145,
-														"column": 1,
-														"offset": 1597
-													},
-													"end": {
-														"line": 145,
-														"column": 15,
-														"offset": 1611
-													}
-												},
+												"start": 1597,
+												"end": 1611,
 												"raw": "... 无序列表 3.2.1"
 											}
 										],
-										"position": {
-											"start": {
-												"line": 144,
-												"column": 1,
-												"offset": 1585
-											},
-											"end": {
-												"line": 144,
-												"column": 12,
-												"offset": 1596
-											}
-										},
+										"start": 1585,
+										"end": 1596,
 										"raw": ".. 无序列表 3.2"
 									}
 								],
-								"position": {
-									"start": {
-										"line": 143,
-										"column": 1,
-										"offset": 1573
-									},
-									"end": {
-										"line": 145,
-										"column": 15,
-										"offset": 1611
-									}
-								},
+								"start": 1573,
+								"end": 1611,
 								"raw": ".. 无序列表 3.1\n.. 无序列表 3.2\n... 无序列表 3.2.1"
 							}
 						],
-						"position": {
-							"start": {
-								"line": 142,
-								"column": 1,
-								"offset": 1564
-							},
-							"end": {
-								"line": 142,
-								"column": 9,
-								"offset": 1572
-							}
-						},
+						"start": 1564,
+						"end": 1572,
 						"raw": "- 无序列表 2"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 146,
-								"column": 1,
-								"offset": 1612
-							},
-							"end": {
-								"line": 146,
-								"column": 9,
-								"offset": 1620
-							}
-						},
+						"start": 1612,
+						"end": 1620,
 						"raw": "- 无序列表 4"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 147,
-								"column": 1,
-								"offset": 1621
-							},
-							"end": {
-								"line": 147,
-								"column": 9,
-								"offset": 1629
-							}
-						},
+						"start": 1621,
+						"end": 1629,
 						"raw": "- 无序列表 5"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 141,
-						"column": 1,
-						"offset": 1555
-					},
-					"end": {
-						"line": 147,
-						"column": 9,
-						"offset": 1629
-					}
-				},
+				"start": 1555,
+				"end": 1629,
 				"raw": "- 无序列表 1\n- 无序列表 2\n.. 无序列表 3.1\n.. 无序列表 3.2\n... 无序列表 3.2.1\n- 无序列表 4\n- 无序列表 5"
 			},
 			{
@@ -2589,33 +1101,13 @@
 					{
 						"type": "text",
 						"value": "无序和有序混合列表 2",
-						"position": {
-							"start": {
-								"line": 149,
-								"column": 5,
-								"offset": 1635
-							},
-							"end": {
-								"line": 149,
-								"column": 16,
-								"offset": 1646
-							}
-						},
+						"start": 1635,
+						"end": 1646,
 						"raw": "无序和有序混合列表 2"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 149,
-						"column": 1,
-						"offset": 1631
-					},
-					"end": {
-						"line": 149,
-						"column": 16,
-						"offset": 1646
-					}
-				},
+				"start": 1631,
+				"end": 1646,
 				"raw": "### 无序和有序混合列表 2"
 			},
 			{
@@ -2625,18 +1117,8 @@
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 150,
-								"column": 1,
-								"offset": 1647
-							},
-							"end": {
-								"line": 150,
-								"column": 9,
-								"offset": 1655
-							}
-						},
+						"start": 1647,
+						"end": 1655,
 						"raw": ". 无序列表 1"
 					},
 					{
@@ -2649,18 +1131,8 @@
 									{
 										"type": "list_item",
 										"children": [],
-										"position": {
-											"start": {
-												"line": 152,
-												"column": 1,
-												"offset": 1665
-											},
-											"end": {
-												"line": 152,
-												"column": 12,
-												"offset": 1676
-											}
-										},
+										"start": 1665,
+										"end": 1676,
 										"raw": "-- 无序列表 3.1"
 									},
 									{
@@ -2673,78 +1145,28 @@
 													{
 														"type": "list_item",
 														"children": [],
-														"position": {
-															"start": {
-																"line": 154,
-																"column": 1,
-																"offset": 1689
-															},
-															"end": {
-																"line": 154,
-																"column": 15,
-																"offset": 1703
-															}
-														},
+														"start": 1689,
+														"end": 1703,
 														"raw": "--- 无序列表 3.2.1"
 													}
 												],
-												"position": {
-													"start": {
-														"line": 154,
-														"column": 1,
-														"offset": 1689
-													},
-													"end": {
-														"line": 154,
-														"column": 15,
-														"offset": 1703
-													}
-												},
+												"start": 1689,
+												"end": 1703,
 												"raw": "--- 无序列表 3.2.1"
 											}
 										],
-										"position": {
-											"start": {
-												"line": 153,
-												"column": 1,
-												"offset": 1677
-											},
-											"end": {
-												"line": 153,
-												"column": 12,
-												"offset": 1688
-											}
-										},
+										"start": 1677,
+										"end": 1688,
 										"raw": "-- 无序列表 3.2"
 									}
 								],
-								"position": {
-									"start": {
-										"line": 152,
-										"column": 1,
-										"offset": 1665
-									},
-									"end": {
-										"line": 154,
-										"column": 15,
-										"offset": 1703
-									}
-								},
+								"start": 1665,
+								"end": 1703,
 								"raw": "-- 无序列表 3.1\n-- 无序列表 3.2\n--- 无序列表 3.2.1"
 							}
 						],
-						"position": {
-							"start": {
-								"line": 151,
-								"column": 1,
-								"offset": 1656
-							},
-							"end": {
-								"line": 151,
-								"column": 9,
-								"offset": 1664
-							}
-						},
+						"start": 1656,
+						"end": 1664,
 						"raw": ". 无序列表 2"
 					},
 					{
@@ -2757,18 +1179,8 @@
 									{
 										"type": "list_item",
 										"children": [],
-										"position": {
-											"start": {
-												"line": 156,
-												"column": 1,
-												"offset": 1713
-											},
-											"end": {
-												"line": 156,
-												"column": 12,
-												"offset": 1724
-											}
-										},
+										"start": 1713,
+										"end": 1724,
 										"raw": "-- 无序列表 5.1"
 									},
 									{
@@ -2781,110 +1193,40 @@
 													{
 														"type": "list_item",
 														"children": [],
-														"position": {
-															"start": {
-																"line": 158,
-																"column": 1,
-																"offset": 1737
-															},
-															"end": {
-																"line": 158,
-																"column": 15,
-																"offset": 1751
-															}
-														},
+														"start": 1737,
+														"end": 1751,
 														"raw": "--- 无序列表 5.2.1"
 													}
 												],
-												"position": {
-													"start": {
-														"line": 158,
-														"column": 1,
-														"offset": 1737
-													},
-													"end": {
-														"line": 158,
-														"column": 15,
-														"offset": 1751
-													}
-												},
+												"start": 1737,
+												"end": 1751,
 												"raw": "--- 无序列表 5.2.1"
 											}
 										],
-										"position": {
-											"start": {
-												"line": 157,
-												"column": 1,
-												"offset": 1725
-											},
-											"end": {
-												"line": 157,
-												"column": 12,
-												"offset": 1736
-											}
-										},
+										"start": 1725,
+										"end": 1736,
 										"raw": "-- 无序列表 5.2"
 									}
 								],
-								"position": {
-									"start": {
-										"line": 156,
-										"column": 1,
-										"offset": 1713
-									},
-									"end": {
-										"line": 158,
-										"column": 15,
-										"offset": 1751
-									}
-								},
+								"start": 1713,
+								"end": 1751,
 								"raw": "-- 无序列表 5.1\n-- 无序列表 5.2\n--- 无序列表 5.2.1"
 							}
 						],
-						"position": {
-							"start": {
-								"line": 155,
-								"column": 1,
-								"offset": 1704
-							},
-							"end": {
-								"line": 155,
-								"column": 9,
-								"offset": 1712
-							}
-						},
+						"start": 1704,
+						"end": 1712,
 						"raw": ". 无序列表 4"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 159,
-								"column": 1,
-								"offset": 1752
-							},
-							"end": {
-								"line": 159,
-								"column": 9,
-								"offset": 1760
-							}
-						},
+						"start": 1752,
+						"end": 1760,
 						"raw": ". 无序列表 6"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 150,
-						"column": 1,
-						"offset": 1647
-					},
-					"end": {
-						"line": 159,
-						"column": 9,
-						"offset": 1760
-					}
-				},
+				"start": 1647,
+				"end": 1760,
 				"raw": ". 无序列表 1\n. 无序列表 2\n-- 无序列表 3.1\n-- 无序列表 3.2\n--- 无序列表 3.2.1\n. 无序列表 4\n-- 无序列表 5.1\n-- 无序列表 5.2\n--- 无序列表 5.2.1\n. 无序列表 6"
 			},
 			{
@@ -2894,50 +1236,20 @@
 					{
 						"type": "text",
 						"value": "脚注",
-						"position": {
-							"start": {
-								"line": 161,
-								"column": 4,
-								"offset": 1765
-							},
-							"end": {
-								"line": 161,
-								"column": 6,
-								"offset": 1767
-							}
-						},
+						"start": 1765,
+						"end": 1767,
 						"raw": "脚注"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 161,
-						"column": 1,
-						"offset": 1762
-					},
-					"end": {
-						"line": 161,
-						"column": 6,
-						"offset": 1767
-					}
-				},
+				"start": 1762,
+				"end": 1767,
 				"raw": "## 脚注"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 162,
-						"column": 1,
-						"offset": 1768
-					},
-					"end": {
-						"line": 165,
-						"column": 20,
-						"offset": 1836
-					}
-				},
+				"start": 1768,
+				"end": 1836,
 				"raw": "这是一个脚注的示例1 [^1]\n这是一个脚注的示例2 [^2]\n这是第一次引用共享脚注 [^3]\n这是第二次引用同一个共享脚注 [^3]"
 			},
 			{
@@ -2945,18 +1257,8 @@
 				"label": "1",
 				"backReferences": [],
 				"children": [],
-				"position": {
-					"start": {
-						"line": 167,
-						"column": 1,
-						"offset": 1838
-					},
-					"end": {
-						"line": 167,
-						"column": 25,
-						"offset": 1862
-					}
-				},
+				"start": 1838,
+				"end": 1862,
 				"raw": "[^1] 脚注内容1 最终会被解析器放到文档末尾"
 			},
 			{
@@ -2964,18 +1266,8 @@
 				"label": "2",
 				"backReferences": [],
 				"children": [],
-				"position": {
-					"start": {
-						"line": 168,
-						"column": 1,
-						"offset": 1863
-					},
-					"end": {
-						"line": 168,
-						"column": 25,
-						"offset": 1887
-					}
-				},
+				"start": 1863,
+				"end": 1887,
 				"raw": "[^2]：脚注内容2 最终会被解析器放到文档末尾"
 			},
 			{
@@ -2983,18 +1275,8 @@
 				"label": "3",
 				"backReferences": [],
 				"children": [],
-				"position": {
-					"start": {
-						"line": 169,
-						"column": 1,
-						"offset": 1888
-					},
-					"end": {
-						"line": 169,
-						"column": 27,
-						"offset": 1914
-					}
-				},
+				"start": 1888,
+				"end": 1914,
 				"raw": "[^3]：共享脚注内容3 最终会被解析器放到文档末尾"
 			},
 			{
@@ -3004,33 +1286,13 @@
 					{
 						"type": "text",
 						"value": "任务",
-						"position": {
-							"start": {
-								"line": 171,
-								"column": 4,
-								"offset": 1919
-							},
-							"end": {
-								"line": 171,
-								"column": 6,
-								"offset": 1921
-							}
-						},
+						"start": 1919,
+						"end": 1921,
 						"raw": "任务"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 171,
-						"column": 1,
-						"offset": 1916
-					},
-					"end": {
-						"line": 171,
-						"column": 6,
-						"offset": 1921
-					}
-				},
+				"start": 1916,
+				"end": 1921,
 				"raw": "## 任务"
 			},
 			{
@@ -3040,50 +1302,20 @@
 					{
 						"type": "text",
 						"value": "普通任务",
-						"position": {
-							"start": {
-								"line": 173,
-								"column": 4,
-								"offset": 1926
-							},
-							"end": {
-								"line": 173,
-								"column": 8,
-								"offset": 1930
-							}
-						},
+						"start": 1926,
+						"end": 1930,
 						"raw": "普通任务"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 173,
-						"column": 1,
-						"offset": 1923
-					},
-					"end": {
-						"line": 173,
-						"column": 8,
-						"offset": 1930
-					}
-				},
+				"start": 1923,
+				"end": 1930,
 				"raw": "## 普通任务"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 174,
-						"column": 1,
-						"offset": 1931
-					},
-					"end": {
-						"line": 176,
-						"column": 12,
-						"offset": 1966
-					}
-				},
+				"start": 1931,
+				"end": 1966,
 				"raw": "[x] 任务列表项 1\n[ ] 任务列表项 2\n[x] 任务列表项 3"
 			},
 			{
@@ -3093,33 +1325,13 @@
 					{
 						"type": "text",
 						"value": "无序列表任务",
-						"position": {
-							"start": {
-								"line": 178,
-								"column": 4,
-								"offset": 1971
-							},
-							"end": {
-								"line": 178,
-								"column": 10,
-								"offset": 1977
-							}
-						},
+						"start": 1971,
+						"end": 1977,
 						"raw": "无序列表任务"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 178,
-						"column": 1,
-						"offset": 1968
-					},
-					"end": {
-						"line": 178,
-						"column": 10,
-						"offset": 1977
-					}
-				},
+				"start": 1968,
+				"end": 1977,
 				"raw": "## 无序列表任务"
 			},
 			{
@@ -3129,67 +1341,27 @@
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 179,
-								"column": 1,
-								"offset": 1978
-							},
-							"end": {
-								"line": 179,
-								"column": 14,
-								"offset": 1991
-							}
-						},
+						"start": 1978,
+						"end": 1991,
 						"raw": "- [x] 任务列表项 1"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 180,
-								"column": 1,
-								"offset": 1992
-							},
-							"end": {
-								"line": 180,
-								"column": 14,
-								"offset": 2005
-							}
-						},
+						"start": 1992,
+						"end": 2005,
 						"raw": "- [ ] 任务列表项 2"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 181,
-								"column": 1,
-								"offset": 2006
-							},
-							"end": {
-								"line": 181,
-								"column": 14,
-								"offset": 2019
-							}
-						},
+						"start": 2006,
+						"end": 2019,
 						"raw": "- [x] 任务列表项 3"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 179,
-						"column": 1,
-						"offset": 1978
-					},
-					"end": {
-						"line": 181,
-						"column": 14,
-						"offset": 2019
-					}
-				},
+				"start": 1978,
+				"end": 2019,
 				"raw": "- [x] 任务列表项 1\n- [ ] 任务列表项 2\n- [x] 任务列表项 3"
 			},
 			{
@@ -3199,33 +1371,13 @@
 					{
 						"type": "text",
 						"value": "有序列表任务",
-						"position": {
-							"start": {
-								"line": 183,
-								"column": 4,
-								"offset": 2024
-							},
-							"end": {
-								"line": 183,
-								"column": 10,
-								"offset": 2030
-							}
-						},
+						"start": 2024,
+						"end": 2030,
 						"raw": "有序列表任务"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 183,
-						"column": 1,
-						"offset": 2021
-					},
-					"end": {
-						"line": 183,
-						"column": 10,
-						"offset": 2030
-					}
-				},
+				"start": 2021,
+				"end": 2030,
 				"raw": "## 有序列表任务"
 			},
 			{
@@ -3235,67 +1387,27 @@
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 184,
-								"column": 1,
-								"offset": 2031
-							},
-							"end": {
-								"line": 184,
-								"column": 14,
-								"offset": 2044
-							}
-						},
+						"start": 2031,
+						"end": 2044,
 						"raw": ". [x] 任务列表项 1"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 185,
-								"column": 1,
-								"offset": 2045
-							},
-							"end": {
-								"line": 185,
-								"column": 14,
-								"offset": 2058
-							}
-						},
+						"start": 2045,
+						"end": 2058,
 						"raw": ". [ ] 任务列表项 2"
 					},
 					{
 						"type": "list_item",
 						"children": [],
-						"position": {
-							"start": {
-								"line": 186,
-								"column": 1,
-								"offset": 2059
-							},
-							"end": {
-								"line": 186,
-								"column": 14,
-								"offset": 2072
-							}
-						},
+						"start": 2059,
+						"end": 2072,
 						"raw": ". [x] 任务列表项 3"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 184,
-						"column": 1,
-						"offset": 2031
-					},
-					"end": {
-						"line": 186,
-						"column": 14,
-						"offset": 2072
-					}
-				},
+				"start": 2031,
+				"end": 2072,
 				"raw": ". [x] 任务列表项 1\n. [ ] 任务列表项 2\n. [x] 任务列表项 3"
 			},
 			{
@@ -3305,50 +1417,20 @@
 					{
 						"type": "text",
 						"value": "超链接测试",
-						"position": {
-							"start": {
-								"line": 188,
-								"column": 4,
-								"offset": 2077
-							},
-							"end": {
-								"line": 188,
-								"column": 9,
-								"offset": 2082
-							}
-						},
+						"start": 2077,
+						"end": 2082,
 						"raw": "超链接测试"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 188,
-						"column": 1,
-						"offset": 2074
-					},
-					"end": {
-						"line": 188,
-						"column": 9,
-						"offset": 2082
-					}
-				},
+				"start": 2074,
+				"end": 2082,
 				"raw": "## 超链接测试"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 189,
-						"column": 1,
-						"offset": 2083
-					},
-					"end": {
-						"line": 191,
-						"column": 18,
-						"offset": 2151
-					}
-				},
+				"start": 2083,
+				"end": 2151,
 				"raw": "Github：[Github](https://github.com)\n网站首页：[hare](/)\n返回上一级：[hare](../)"
 			},
 			{
@@ -3358,33 +1440,13 @@
 					{
 						"type": "text",
 						"value": "图片测试",
-						"position": {
-							"start": {
-								"line": 193,
-								"column": 4,
-								"offset": 2156
-							},
-							"end": {
-								"line": 193,
-								"column": 8,
-								"offset": 2160
-							}
-						},
+						"start": 2156,
+						"end": 2160,
 						"raw": "图片测试"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 193,
-						"column": 1,
-						"offset": 2153
-					},
-					"end": {
-						"line": 193,
-						"column": 8,
-						"offset": 2160
-					}
-				},
+				"start": 2153,
+				"end": 2160,
 				"raw": "## 图片测试"
 			},
 			{
@@ -3394,51 +1456,21 @@
 					{
 						"type": "text",
 						"value": "默认无环绕显示在中心",
-						"position": {
-							"start": {
-								"line": 195,
-								"column": 5,
-								"offset": 2166
-							},
-							"end": {
-								"line": 195,
-								"column": 15,
-								"offset": 2176
-							}
-						},
+						"start": 2166,
+						"end": 2176,
 						"raw": "默认无环绕显示在中心"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 195,
-						"column": 1,
-						"offset": 2162
-					},
-					"end": {
-						"line": 195,
-						"column": 15,
-						"offset": 2176
-					}
-				},
+				"start": 2162,
+				"end": 2176,
 				"raw": "### 默认无环绕显示在中心"
 			},
 			{
 				"type": "image",
 				"title": "图片标题",
 				"src": "./test.png",
-				"position": {
-					"start": {
-						"line": 196,
-						"column": 1,
-						"offset": 2177
-					},
-					"end": {
-						"line": 196,
-						"column": 20,
-						"offset": 2196
-					}
-				},
+				"start": 2177,
+				"end": 2196,
 				"raw": "![图片标题](./test.png)"
 			},
 			{
@@ -3448,51 +1480,21 @@
 					{
 						"type": "text",
 						"value": "左环绕",
-						"position": {
-							"start": {
-								"line": 198,
-								"column": 5,
-								"offset": 2202
-							},
-							"end": {
-								"line": 198,
-								"column": 8,
-								"offset": 2205
-							}
-						},
+						"start": 2202,
+						"end": 2205,
 						"raw": "左环绕"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 198,
-						"column": 1,
-						"offset": 2198
-					},
-					"end": {
-						"line": 198,
-						"column": 8,
-						"offset": 2205
-					}
-				},
+				"start": 2198,
+				"end": 2205,
 				"raw": "### 左环绕"
 			},
 			{
 				"type": "image",
 				"title": "图片标题",
 				"src": "./test.png",
-				"position": {
-					"start": {
-						"line": 199,
-						"column": 1,
-						"offset": 2206
-					},
-					"end": {
-						"line": 199,
-						"column": 32,
-						"offset": 2237
-					}
-				},
+				"start": 2206,
+				"end": 2237,
 				"layout": "left",
 				"raw": "![图片标题](./test.png layout=left)"
 			},
@@ -3503,51 +1505,21 @@
 					{
 						"type": "text",
 						"value": "右环绕",
-						"position": {
-							"start": {
-								"line": 201,
-								"column": 5,
-								"offset": 2243
-							},
-							"end": {
-								"line": 201,
-								"column": 8,
-								"offset": 2246
-							}
-						},
+						"start": 2243,
+						"end": 2246,
 						"raw": "右环绕"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 201,
-						"column": 1,
-						"offset": 2239
-					},
-					"end": {
-						"line": 201,
-						"column": 8,
-						"offset": 2246
-					}
-				},
+				"start": 2239,
+				"end": 2246,
 				"raw": "### 右环绕"
 			},
 			{
 				"type": "image",
 				"title": "图片标题",
 				"src": "./test.png",
-				"position": {
-					"start": {
-						"line": 202,
-						"column": 1,
-						"offset": 2247
-					},
-					"end": {
-						"line": 202,
-						"column": 33,
-						"offset": 2279
-					}
-				},
+				"start": 2247,
+				"end": 2279,
 				"layout": "right",
 				"raw": "![图片标题](./test.png layout=right)"
 			},
@@ -3558,51 +1530,21 @@
 					{
 						"type": "text",
 						"value": "缩放 0.5",
-						"position": {
-							"start": {
-								"line": 204,
-								"column": 5,
-								"offset": 2285
-							},
-							"end": {
-								"line": 204,
-								"column": 11,
-								"offset": 2291
-							}
-						},
+						"start": 2285,
+						"end": 2291,
 						"raw": "缩放 0.5"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 204,
-						"column": 1,
-						"offset": 2281
-					},
-					"end": {
-						"line": 204,
-						"column": 11,
-						"offset": 2291
-					}
-				},
+				"start": 2281,
+				"end": 2291,
 				"raw": "### 缩放 0.5"
 			},
 			{
 				"type": "image",
 				"title": "图片标题",
 				"src": "./test.png",
-				"position": {
-					"start": {
-						"line": 205,
-						"column": 1,
-						"offset": 2292
-					},
-					"end": {
-						"line": 205,
-						"column": 30,
-						"offset": 2321
-					}
-				},
+				"start": 2292,
+				"end": 2321,
 				"scale": 0.5,
 				"raw": "![图片标题](./test.png scale=0.5)"
 			},
@@ -3613,50 +1555,20 @@
 					{
 						"type": "text",
 						"value": "引用测试",
-						"position": {
-							"start": {
-								"line": 207,
-								"column": 4,
-								"offset": 2326
-							},
-							"end": {
-								"line": 207,
-								"column": 8,
-								"offset": 2330
-							}
-						},
+						"start": 2326,
+						"end": 2330,
 						"raw": "引用测试"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 207,
-						"column": 1,
-						"offset": 2323
-					},
-					"end": {
-						"line": 207,
-						"column": 8,
-						"offset": 2330
-					}
-				},
+				"start": 2323,
+				"end": 2330,
 				"raw": "## 引用测试"
 			},
 			{
 				"type": "blockquote",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 208,
-						"column": 1,
-						"offset": 2331
-					},
-					"end": {
-						"line": 215,
-						"column": 12,
-						"offset": 2420
-					}
-				},
+				"start": 2331,
+				"end": 2420,
 				"raw": "> 这是一级引用\n>> 这是二级引用\n>>> 这是三级引用\n>>> **这是粗体**\n>>> __这是斜体__\n>>> **--这是粗斜体--**\n>>>\n> 上面是空的三级引用"
 			},
 			{
@@ -3666,50 +1578,20 @@
 					{
 						"type": "text",
 						"value": "表格",
-						"position": {
-							"start": {
-								"line": 217,
-								"column": 4,
-								"offset": 2425
-							},
-							"end": {
-								"line": 217,
-								"column": 6,
-								"offset": 2427
-							}
-						},
+						"start": 2425,
+						"end": 2427,
 						"raw": "表格"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 217,
-						"column": 1,
-						"offset": 2422
-					},
-					"end": {
-						"line": 217,
-						"column": 6,
-						"offset": 2427
-					}
-				},
+				"start": 2422,
+				"end": 2427,
 				"raw": "## 表格"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 219,
-						"column": 1,
-						"offset": 2429
-					},
-					"end": {
-						"line": 219,
-						"column": 15,
-						"offset": 2443
-					}
-				},
+				"start": 2429,
+				"end": 2443,
 				"raw": "不支持表格，之后会采用宏支持"
 			},
 			{
@@ -3719,33 +1601,13 @@
 					{
 						"type": "text",
 						"value": "强调信息",
-						"position": {
-							"start": {
-								"line": 221,
-								"column": 4,
-								"offset": 2448
-							},
-							"end": {
-								"line": 221,
-								"column": 8,
-								"offset": 2452
-							}
-						},
+						"start": 2448,
+						"end": 2452,
 						"raw": "强调信息"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 221,
-						"column": 1,
-						"offset": 2445
-					},
-					"end": {
-						"line": 221,
-						"column": 8,
-						"offset": 2452
-					}
-				},
+				"start": 2445,
+				"end": 2452,
 				"raw": "## 强调信息"
 			},
 			{
@@ -3755,50 +1617,20 @@
 					{
 						"type": "text",
 						"value": "笔记",
-						"position": {
-							"start": {
-								"line": 223,
-								"column": 5,
-								"offset": 2458
-							},
-							"end": {
-								"line": 223,
-								"column": 7,
-								"offset": 2460
-							}
-						},
+						"start": 2458,
+						"end": 2460,
 						"raw": "笔记"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 223,
-						"column": 1,
-						"offset": 2454
-					},
-					"end": {
-						"line": 223,
-						"column": 7,
-						"offset": 2460
-					}
-				},
+				"start": 2454,
+				"end": 2460,
 				"raw": "### 笔记"
 			},
 			{
 				"type": "blockquote",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 224,
-						"column": 1,
-						"offset": 2461
-					},
-					"end": {
-						"line": 228,
-						"column": 19,
-						"offset": 2501
-					}
-				},
+				"start": 2461,
+				"end": 2501,
 				"alertType": "note",
 				"raw": ">[NOTE]\n>\n>这是第一行内容。\n>\n>>这是第二行内容，支持分段和嵌套。"
 			},
@@ -3809,50 +1641,20 @@
 					{
 						"type": "text",
 						"value": "提示",
-						"position": {
-							"start": {
-								"line": 230,
-								"column": 5,
-								"offset": 2507
-							},
-							"end": {
-								"line": 230,
-								"column": 7,
-								"offset": 2509
-							}
-						},
+						"start": 2507,
+						"end": 2509,
 						"raw": "提示"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 230,
-						"column": 1,
-						"offset": 2503
-					},
-					"end": {
-						"line": 230,
-						"column": 7,
-						"offset": 2509
-					}
-				},
+				"start": 2503,
+				"end": 2509,
 				"raw": "### 提示"
 			},
 			{
 				"type": "blockquote",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 231,
-						"column": 1,
-						"offset": 2510
-					},
-					"end": {
-						"line": 235,
-						"column": 19,
-						"offset": 2549
-					}
-				},
+				"start": 2510,
+				"end": 2549,
 				"alertType": "tip",
 				"raw": ">[TIP]\n>\n>这是第一行内容。\n>\n>>这是第二行内容，支持分段和嵌套。"
 			},
@@ -3863,50 +1665,20 @@
 					{
 						"type": "text",
 						"value": "警告",
-						"position": {
-							"start": {
-								"line": 237,
-								"column": 5,
-								"offset": 2555
-							},
-							"end": {
-								"line": 237,
-								"column": 7,
-								"offset": 2557
-							}
-						},
+						"start": 2555,
+						"end": 2557,
 						"raw": "警告"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 237,
-						"column": 1,
-						"offset": 2551
-					},
-					"end": {
-						"line": 237,
-						"column": 7,
-						"offset": 2557
-					}
-				},
+				"start": 2551,
+				"end": 2557,
 				"raw": "### 警告"
 			},
 			{
 				"type": "blockquote",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 238,
-						"column": 1,
-						"offset": 2558
-					},
-					"end": {
-						"line": 242,
-						"column": 19,
-						"offset": 2601
-					}
-				},
+				"start": 2558,
+				"end": 2601,
 				"alertType": "warning",
 				"raw": ">[WARNING]\n>\n>这是第一行内容。\n>\n>>这是第二行内容，支持分段和嵌套。"
 			},
@@ -3917,50 +1689,20 @@
 					{
 						"type": "text",
 						"value": "危险",
-						"position": {
-							"start": {
-								"line": 244,
-								"column": 5,
-								"offset": 2607
-							},
-							"end": {
-								"line": 244,
-								"column": 7,
-								"offset": 2609
-							}
-						},
+						"start": 2607,
+						"end": 2609,
 						"raw": "危险"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 244,
-						"column": 1,
-						"offset": 2603
-					},
-					"end": {
-						"line": 244,
-						"column": 7,
-						"offset": 2609
-					}
-				},
+				"start": 2603,
+				"end": 2609,
 				"raw": "### 危险"
 			},
 			{
 				"type": "blockquote",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 245,
-						"column": 1,
-						"offset": 2610
-					},
-					"end": {
-						"line": 249,
-						"column": 19,
-						"offset": 2652
-					}
-				},
+				"start": 2610,
+				"end": 2652,
 				"alertType": "danger",
 				"raw": ">[DANGER]\n>\n>这是第一行内容。\n>\n>>这是第二行内容，支持分段和嵌套。"
 			},
@@ -3971,50 +1713,20 @@
 					{
 						"type": "text",
 						"value": "重要",
-						"position": {
-							"start": {
-								"line": 251,
-								"column": 5,
-								"offset": 2658
-							},
-							"end": {
-								"line": 251,
-								"column": 7,
-								"offset": 2660
-							}
-						},
+						"start": 2658,
+						"end": 2660,
 						"raw": "重要"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 251,
-						"column": 1,
-						"offset": 2654
-					},
-					"end": {
-						"line": 251,
-						"column": 7,
-						"offset": 2660
-					}
-				},
+				"start": 2654,
+				"end": 2660,
 				"raw": "### 重要"
 			},
 			{
 				"type": "blockquote",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 252,
-						"column": 1,
-						"offset": 2661
-					},
-					"end": {
-						"line": 256,
-						"column": 19,
-						"offset": 2706
-					}
-				},
+				"start": 2661,
+				"end": 2706,
 				"alertType": "important",
 				"raw": ">[IMPORTANT]\n>\n>这是第一行内容。\n>\n>>这是第二行内容，支持分段和嵌套。"
 			},
@@ -4025,50 +1737,20 @@
 					{
 						"type": "text",
 						"value": "代码块测试",
-						"position": {
-							"start": {
-								"line": 258,
-								"column": 4,
-								"offset": 2711
-							},
-							"end": {
-								"line": 258,
-								"column": 9,
-								"offset": 2716
-							}
-						},
+						"start": 2711,
+						"end": 2716,
 						"raw": "代码块测试"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 258,
-						"column": 1,
-						"offset": 2708
-					},
-					"end": {
-						"line": 258,
-						"column": 9,
-						"offset": 2716
-					}
-				},
+				"start": 2708,
+				"end": 2716,
 				"raw": "## 代码块测试"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 260,
-						"column": 1,
-						"offset": 2718
-					},
-					"end": {
-						"line": 260,
-						"column": 22,
-						"offset": 2739
-					}
-				},
+				"start": 2718,
+				"end": 2739,
 				"raw": "代码`npm install`是行内代码。"
 			},
 			{
@@ -4078,85 +1760,35 @@
 					{
 						"type": "text",
 						"value": "普通独立代码块",
-						"position": {
-							"start": {
-								"line": 262,
-								"column": 5,
-								"offset": 2745
-							},
-							"end": {
-								"line": 262,
-								"column": 12,
-								"offset": 2752
-							}
-						},
+						"start": 2745,
+						"end": 2752,
 						"raw": "普通独立代码块"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 262,
-						"column": 1,
-						"offset": 2741
-					},
-					"end": {
-						"line": 262,
-						"column": 12,
-						"offset": 2752
-					}
-				},
+				"start": 2741,
+				"end": 2752,
 				"raw": "### 普通独立代码块"
 			},
 			{
 				"type": "code",
 				"language": "js",
 				"value": "console.log('Hello World!');",
-				"position": {
-					"start": {
-						"line": 263,
-						"column": 1,
-						"offset": 2753
-					},
-					"end": {
-						"line": 265,
-						"column": 4,
-						"offset": 2792
-					}
-				},
+				"start": 2753,
+				"end": 2792,
 				"raw": "``` js\nconsole.log('Hello World!');\n```"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 267,
-						"column": 1,
-						"offset": 2794
-					},
-					"end": {
-						"line": 267,
-						"column": 11,
-						"offset": 2804
-					}
-				},
+				"start": 2794,
+				"end": 2804,
 				"raw": "什么都没有就是纯文本"
 			},
 			{
 				"type": "code",
 				"value": "纯文本",
-				"position": {
-					"start": {
-						"line": 268,
-						"column": 1,
-						"offset": 2805
-					},
-					"end": {
-						"line": 270,
-						"column": 4,
-						"offset": 2816
-					}
-				},
+				"start": 2805,
+				"end": 2816,
 				"raw": "```\n纯文本\n```"
 			},
 			{
@@ -4166,33 +1798,13 @@
 					{
 						"type": "text",
 						"value": "带备注（也可以用于表示文件名）",
-						"position": {
-							"start": {
-								"line": 272,
-								"column": 5,
-								"offset": 2822
-							},
-							"end": {
-								"line": 272,
-								"column": 20,
-								"offset": 2837
-							}
-						},
+						"start": 2822,
+						"end": 2837,
 						"raw": "带备注（也可以用于表示文件名）"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 272,
-						"column": 1,
-						"offset": 2818
-					},
-					"end": {
-						"line": 272,
-						"column": 20,
-						"offset": 2837
-					}
-				},
+				"start": 2818,
+				"end": 2837,
 				"raw": "### 带备注（也可以用于表示文件名）"
 			},
 			{
@@ -4200,18 +1812,8 @@
 				"language": "js",
 				"remark": "文件名.js",
 				"value": "console.log('Hello World!');",
-				"position": {
-					"start": {
-						"line": 273,
-						"column": 1,
-						"offset": 2838
-					},
-					"end": {
-						"line": 275,
-						"column": 4,
-						"offset": 2884
-					}
-				},
+				"start": 2838,
+				"end": 2884,
 				"raw": "``` js 文件名.js\nconsole.log('Hello World!');\n```"
 			},
 			{
@@ -4221,50 +1823,20 @@
 					{
 						"type": "text",
 						"value": "数学公式",
-						"position": {
-							"start": {
-								"line": 277,
-								"column": 4,
-								"offset": 2889
-							},
-							"end": {
-								"line": 277,
-								"column": 8,
-								"offset": 2893
-							}
-						},
+						"start": 2889,
+						"end": 2893,
 						"raw": "数学公式"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 277,
-						"column": 1,
-						"offset": 2886
-					},
-					"end": {
-						"line": 277,
-						"column": 8,
-						"offset": 2893
-					}
-				},
+				"start": 2886,
+				"end": 2893,
 				"raw": "## 数学公式"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 279,
-						"column": 1,
-						"offset": 2895
-					},
-					"end": {
-						"line": 279,
-						"column": 26,
-						"offset": 2920
-					}
-				},
+				"start": 2895,
+				"end": 2920,
 				"raw": "这个$e^{i\\pi} + 1 = 0$是欧拉公式"
 			},
 			{
@@ -4274,101 +1846,41 @@
 					{
 						"type": "text",
 						"value": "独立数学公式块",
-						"position": {
-							"start": {
-								"line": 281,
-								"column": 4,
-								"offset": 2925
-							},
-							"end": {
-								"line": 281,
-								"column": 11,
-								"offset": 2932
-							}
-						},
+						"start": 2925,
+						"end": 2932,
 						"raw": "独立数学公式块"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 281,
-						"column": 1,
-						"offset": 2922
-					},
-					"end": {
-						"line": 281,
-						"column": 11,
-						"offset": 2932
-					}
-				},
+				"start": 2922,
+				"end": 2932,
 				"raw": "## 独立数学公式块"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 282,
-						"column": 1,
-						"offset": 2933
-					},
-					"end": {
-						"line": 282,
-						"column": 6,
-						"offset": 2938
-					}
-				},
+				"start": 2933,
+				"end": 2938,
 				"raw": "高斯积分："
 			},
 			{
 				"type": "formula",
 				"value": "\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}",
-				"position": {
-					"start": {
-						"line": 283,
-						"column": 1,
-						"offset": 2939
-					},
-					"end": {
-						"line": 285,
-						"column": 3,
-						"offset": 2993
-					}
-				},
+				"start": 2939,
+				"end": 2993,
 				"raw": "$$\n\\int_{-\\infty}^{\\infty} e^{-x^2} dx = \\sqrt{\\pi}\n$$"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 287,
-						"column": 1,
-						"offset": 2995
-					},
-					"end": {
-						"line": 287,
-						"column": 6,
-						"offset": 3000
-					}
-				},
+				"start": 2995,
+				"end": 3000,
 				"raw": "多行推导："
 			},
 			{
 				"type": "formula",
 				"value": "\\begin{aligned}\n(a+b)^2 &= a^2 + 2ab + b^2 \\\\\n        &= (a-b)^2 + 4ab\n\\end{aligned}",
-				"position": {
-					"start": {
-						"line": 288,
-						"column": 1,
-						"offset": 3001
-					},
-					"end": {
-						"line": 293,
-						"column": 3,
-						"offset": 3091
-					}
-				},
+				"start": 3001,
+				"end": 3091,
 				"raw": "$$\n\\begin{aligned}\n(a+b)^2 &= a^2 + 2ab + b^2 \\\\\n        &= (a-b)^2 + 4ab\n\\end{aligned}\n$$"
 			},
 			{
@@ -4378,83 +1890,33 @@
 					{
 						"type": "text",
 						"value": "分隔线",
-						"position": {
-							"start": {
-								"line": 295,
-								"column": 4,
-								"offset": 3096
-							},
-							"end": {
-								"line": 295,
-								"column": 7,
-								"offset": 3099
-							}
-						},
+						"start": 3096,
+						"end": 3099,
 						"raw": "分隔线"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 295,
-						"column": 1,
-						"offset": 3093
-					},
-					"end": {
-						"line": 295,
-						"column": 7,
-						"offset": 3099
-					}
-				},
+				"start": 3093,
+				"end": 3099,
 				"raw": "## 分隔线"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 296,
-						"column": 1,
-						"offset": 3100
-					},
-					"end": {
-						"line": 296,
-						"column": 6,
-						"offset": 3105
-					}
-				},
+				"start": 3100,
+				"end": 3105,
 				"raw": "分隔线开始"
 			},
 			{
 				"type": "break",
-				"position": {
-					"start": {
-						"line": 297,
-						"column": 1,
-						"offset": 3106
-					},
-					"end": {
-						"line": 297,
-						"column": 4,
-						"offset": 3109
-					}
-				},
+				"start": 3106,
+				"end": 3109,
 				"raw": "---"
 			},
 			{
 				"type": "paragraph",
 				"children": [],
-				"position": {
-					"start": {
-						"line": 298,
-						"column": 1,
-						"offset": 3110
-					},
-					"end": {
-						"line": 298,
-						"column": 6,
-						"offset": 3115
-					}
-				},
+				"start": 3110,
+				"end": 3115,
 				"raw": "分隔线结束"
 			},
 			{
@@ -4464,50 +1926,20 @@
 					{
 						"type": "text",
 						"value": "宏",
-						"position": {
-							"start": {
-								"line": 300,
-								"column": 5,
-								"offset": 3121
-							},
-							"end": {
-								"line": 300,
-								"column": 6,
-								"offset": 3122
-							}
-						},
+						"start": 3121,
+						"end": 3122,
 						"raw": "宏"
 					}
 				],
-				"position": {
-					"start": {
-						"line": 300,
-						"column": 1,
-						"offset": 3117
-					},
-					"end": {
-						"line": 300,
-						"column": 6,
-						"offset": 3122
-					}
-				},
+				"start": 3117,
+				"end": 3122,
 				"raw": "### 宏"
 			},
 			{
 				"type": "code",
 				"value": "::: 宏名称 宏名称的空格后是可选的宏参数，会打包放入AST，需要渲染器自己解析\n这是宏内容，直到出现下一个三个点结束，会一起打包到AST。\n宏在AST有个特殊的`name`字段表示宏名称。\n宏最终由解析器后处理或渲染器处理。\n:::",
-				"position": {
-					"start": {
-						"line": 301,
-						"column": 1,
-						"offset": 3123
-					},
-					"end": {
-						"line": 307,
-						"column": 4,
-						"offset": 3249
-					}
-				},
+				"start": 3123,
+				"end": 3249,
 				"raw": "```\n::: 宏名称 宏名称的空格后是可选的宏参数，会打包放入AST，需要渲染器自己解析\n这是宏内容，直到出现下一个三个点结束，会一起打包到AST。\n宏在AST有个特殊的`name`字段表示宏名称。\n宏最终由解析器后处理或渲染器处理。\n:::\n```"
 			}
 		],
@@ -4519,18 +1951,8 @@
 				"keywords": "Wiki Markdown, wmd, 渲染测试",
 				"category": "测试"
 			},
-			"position": {
-				"start": {
-					"line": 1,
-					"column": 1,
-					"offset": 0
-				},
-				"end": {
-					"line": 9,
-					"column": 4,
-					"offset": 170
-				}
-			}
+			"start": 0,
+			"end": 170
 		}
 	},
 	"error": []

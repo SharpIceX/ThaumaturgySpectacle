@@ -25,10 +25,8 @@ function process(content: string): ResultType {
 	const result: ResultType = {
 		ast: {
 			type: preNodeType.Root,
-			position: {
-				start: { line: 1, column: 1, offset: 0 },
-				end: { line: 1, column: 1, offset: content.length },
-			},
+			start: 1,
+			end: content.length,
 			children: [],
 		},
 		error: [],
@@ -37,52 +35,41 @@ function process(content: string): ResultType {
 	// 检查是否有`\r`换行符
 	const carriageReturns = findCarriageReturn(content);
 	if (carriageReturns.length > 0) {
-		const count = carriageReturns.length;
-		const detail = carriageReturns
-			.slice(0, 5)
-			.map((p) => `L${p.line}:C${p.column}`)
+		const total = carriageReturns.length;
+		const limit = 5;
+
+		const locations = carriageReturns
+			.slice(0, limit)
+			.map(({ line, column }) => `[${line}:${column}]`)
 			.join(', ');
+
+		const suffix = total > limit ? ` ...等共 ${total} 处` : '';
+
 		throw new CarriageReturnError(
-			`格式错误: 检测到 ${count} 处非法的回车符 (\\r)。\n位置提示: ${detail}${count > 5 ? '...' : ''}`,
+			`格式错误：文档包含非法的回车符 (\\r)。请使用 LF (\\n) 换行。\n` + `位置：${locations}${suffix}`,
 		);
 	}
 
-	// 计算结束位置
-	let currentLine = 1;
-	let lastLineStart = 0;
-	for (let index = 0; index < content.length; index++) {
-		if (content.codePointAt(index) === 10) {
-			currentLine++;
-			lastLineStart = index + 1;
-		}
-	}
-	result.ast.position.end.line = currentLine;
-	result.ast.position.end.column = content.length - lastLineStart + 1;
-
+	// 处理文档内容
 	const frontMatter = frontMatterParse(content);
 	if (frontMatter) {
-		// 确定切割点
-		const bodyStartOffset = frontMatter.position.end.offset;
-		const bodyStartLine = frontMatter.position.end.line;
+		result.ast.frontmatter = frontMatter;
 
-		// 切割内容
-		const bodyContent = content.slice(bodyStartOffset);
+		const bodyContent = content.slice(frontMatter.end);
+		const parseResult = parse(bodyContent);
 
-		console.log(bodyContent);
+		result.error.push(...parseResult.error);
 
-		// 切割后可能有空的情况
-		if (bodyContent.trim()) {
-			const parseResult = parse(bodyContent);
-			result.error.push(...parseResult.error);
-			if (parseResult.ast) {
-				// 修正子节点的位置信息
-				result.ast.children = parseResult.ast.map((node) =>
-					shiftNodePosition(node, bodyStartOffset, bodyStartLine - 1),
-				);
+		// 修正偏移
+		if (parseResult.ast) {
+			for (const node of parseResult.ast) {
+				shiftNodePosition(node, frontMatter.end);
 			}
 		}
+		result.ast.children = parseResult.ast;
 	} else {
 		const parseResult = parse(content);
+
 		result.error.push(...parseResult.error);
 
 		if (parseResult.ast) result.ast.children = parseResult.ast;

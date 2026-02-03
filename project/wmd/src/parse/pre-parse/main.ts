@@ -17,11 +17,10 @@ interface ResultType {
 type ParseRule = (
 	originalContent: string,
 	currentLineContent: string,
-	line: number,
 	offset: number,
 	node: preNode[],
 	error: ParseError[],
-) => { jumpLine?: number } | boolean | undefined;
+) => number | true | undefined;
 
 const rules = [
 	// 分隔线
@@ -55,80 +54,52 @@ function preParse(content: string): ResultType {
 	const nodes: preNode[] = [];
 	const errors: ParseError[] = [];
 
-	let currentLine = 1;
 	let currentOffset = 0;
+	const totalLength = content.length;
 
-	mainLoop: while (currentOffset < content.length) {
-		// 获取当前行信息
+	mainLoop: while (currentOffset < totalLength) {
+		// 获取当前行边界
 		const lineEnd = content.indexOf('\n', currentOffset);
-		const isLastLine = lineEnd === -1;
-		const endOffset = isLastLine ? content.length : lineEnd;
+		const endOffset = lineEnd === -1 ? totalLength : lineEnd;
+		const nextLineOffset = lineEnd === -1 ? totalLength : lineEnd + 1;
+
 		const currentLineContent = content.slice(currentOffset, endOffset);
 
 		// ========== 空行 ==========
-		if (currentLineContent.trim() === '') {
-			currentOffset = isLastLine ? content.length : lineEnd + 1;
-			currentLine++;
+		if (/^[ \t]*$/.test(currentLineContent)) {
+			currentOffset = nextLineOffset;
 			continue;
 		}
 
 		// ========== 规则匹配 ==========
 		for (const rule of rules) {
-			const result = rule(content, currentLineContent, currentLine, currentOffset, nodes, errors);
-			if (result) {
-				const jumpLineCount = typeof result === 'object' ? (result.jumpLine ?? 0) : 0;
-
-				if (jumpLineCount === 0) {
-					// 当行
-					currentOffset = isLastLine ? content.length : lineEnd + 1;
-					currentLine++;
-				} else {
-					// 多行匹配，执行跳行
-					const linesToSkip = jumpLineCount + 1;
-					for (let index = 0; index < linesToSkip; index++) {
-						const nextLineBreak = content.indexOf('\n', currentOffset);
-						if (nextLineBreak === -1) {
-							currentOffset = content.length;
-							currentLine++;
-							break;
-						}
-						currentOffset = nextLineBreak + 1;
-						currentLine++;
-					}
-				}
+			const result = rule(content, currentLineContent, currentOffset, nodes, errors);
+			if (result !== undefined) {
+				currentOffset = typeof result === 'number' ? result : nextLineOffset;
 				continue mainLoop;
 			}
 		}
 
-		// ========== 段落（兜底） ==========
+		// ========== 段落处理 (兜底) ==========
 		const lastNode = nodes.at(-1);
 
 		/**
-		 * 若当前行与上一段落之间没有空行（偏移量差值 <= 1），则视为同一段落。
-		 * 空行会跳过处理并拉开 offset，从而自然触发新段落的创建。
+		 * 判定是否连续：
+		 * 若上一节点是段落，且其结束位置正好是当前行的起点 - 1 (即中间只隔了一个 \n)，则合并。
+		 * 如果中间有空格/空行，空行检测逻辑会提前推进 currentOffset，从而断开此条件。
 		 */
-		const isContinuous =
-			lastNode && lastNode.type === preNodeType.Paragraph && lastNode.position.end.offset >= currentOffset - 1;
-
-		if (isContinuous) {
-			// 合并到已有段落
-			lastNode.position.end = {
-				line: currentLine,
-				column: currentLineContent.length + 1,
-				offset: endOffset,
-			};
+		if (lastNode?.type === preNodeType.Paragraph && lastNode.end === currentOffset - 1) {
+			lastNode.end = endOffset;
 		} else {
 			nodes.push({
 				type: preNodeType.Paragraph,
 				children: [],
-				position: {
-					start: { line: currentLine, column: 1, offset: currentOffset },
-					end: { line: currentLine, column: currentLineContent.length + 1, offset: endOffset },
-				},
+				start: currentOffset,
+				end: endOffset,
 			});
 		}
-		currentOffset = isLastLine ? content.length : lineEnd + 1;
-		currentLine++;
+
+		currentOffset = nextLineOffset;
 	}
 
 	return { ast: nodes, error: errors };

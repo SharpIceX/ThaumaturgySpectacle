@@ -5,13 +5,11 @@ import { preNodeType, type BlockquoteNode } from '../../../types/node/pre-node';
 /** 允许的 Alert 类型集合 */
 const ALLOWED_ALERTS = new Set(['note', 'tip', 'warning', 'danger', 'important']);
 
-const blockquote: ParseRule = (originalContent, currentLineContent, line, offset, node, errors) => {
+const blockquote: ParseRule = (originalContent, currentLineContent, offset, node, errors) => {
 	// 确保是引用块
 	if (currentLineContent[0] !== '>') return;
 
-	let totalLines = 1;
 	let blockEndOffset = offset + currentLineContent.length;
-	let lastLineLength = currentLineContent.length;
 	let alertType: BlockquoteNode['alertType'];
 
 	// 解析第一行的 Alert 标识
@@ -41,10 +39,9 @@ const blockquote: ParseRule = (originalContent, currentLineContent, line, offset
 				} else {
 					errors.push({
 						code: ParseErrorCode.INVALID_BLOCKQUOTE_ALERT_TYPE,
-						position: {
-							start: { line, column: 1, offset },
-							end: { line, column: firstLine.length + 1, offset: offset + firstLine.length },
-						},
+						// 扁平化报错位置
+						start: offset,
+						end: offset + firstLine.length,
 					});
 				}
 			}
@@ -52,16 +49,17 @@ const blockquote: ParseRule = (originalContent, currentLineContent, line, offset
 	}
 
 	// 向下探测后续行
+	// blockEndOffset 目前是第一行的末尾（不含 \n）
 	let probeCursor = blockEndOffset + 1;
+
 	while (probeCursor < originalContent.length) {
-		// 探测下一行的开头
+		// 探测下一行的开头是否依然是 '>'
 		if (originalContent[probeCursor] !== '>') break;
 
 		const nextNl = originalContent.indexOf('\n', probeCursor);
 		const lineEnd = nextNl === -1 ? originalContent.length : nextNl;
 
-		totalLines++;
-		lastLineLength = lineEnd - probeCursor;
+		// 更新块的结束偏移量
 		blockEndOffset = lineEnd;
 
 		if (nextNl === -1) break;
@@ -71,22 +69,18 @@ const blockquote: ParseRule = (originalContent, currentLineContent, line, offset
 	const blockquoteNode: BlockquoteNode = {
 		type: preNodeType.Blockquote,
 		children: [],
-		position: {
-			start: { line, column: 1, offset },
-			end: {
-				line: line + totalLines - 1,
-				column: lastLineLength + 1,
-				offset: blockEndOffset,
-			},
-		},
+		// 扁平化 start / end
+		start: offset,
+		end: blockEndOffset,
 	};
 
 	if (alertType) blockquoteNode.alertType = alertType;
 	node.push(blockquoteNode);
 
-	return {
-		jumpLine: totalLines - 1,
-	};
+	// 计算跳转位置：如果有换行符则跳过换行符，否则跳到文件末尾
+	const jumpOffset = blockEndOffset < originalContent.length ? blockEndOffset + 1 : blockEndOffset;
+
+	return jumpOffset;
 };
 
 export default blockquote;

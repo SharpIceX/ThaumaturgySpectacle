@@ -1,4 +1,7 @@
-import type { Point } from '../main';
+interface Point {
+	line: number;
+	column: number;
+}
 
 /**
  * 检查 Wiki Markdown 文件内容中所有 `\r`（回车符）的位置
@@ -13,19 +16,15 @@ function findCarriageReturn(content: string): Point[] {
 
 	for (let index = 0; index < content.length; ) {
 		const code = content.codePointAt(index);
-		if (code === undefined) {
-			// 理论上不会发生
-			break;
-		}
+		if (code === undefined) break; // 理论上不会发生
 
 		const size = code > 0xff_ff ? 2 : 1;
 
 		if (code === 13) {
-			// 发现 \r
+			// 发现 `\r`
 			results.push({
 				line: currentLine,
 				column: index - lineStartOffset + 1,
-				offset: index,
 			});
 		} else if (code === 10) {
 			// 发现 \n，行号增加，下一行的起点偏移量更新
