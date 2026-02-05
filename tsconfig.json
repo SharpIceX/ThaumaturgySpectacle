@@ -6,7 +6,7 @@
 		"target": "ESNext",
 		"module": "ESNext",
 		"types": ["node"],
-		"lib": ["ESNext", "DOM"],
+		"lib": ["ESNext"],
 
 		/* 构建 */
 		"sourceMap": true,

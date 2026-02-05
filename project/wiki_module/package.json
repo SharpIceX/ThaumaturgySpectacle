@@ -4,9 +4,29 @@
 	"version": "1.0.0",
 	"main": "./src/module.ts",
 	"dependencies": {
+		"@mdit/plugin-alert": "^0.22.4",
+		"@mdit/plugin-attrs": "^0.24.2",
+		"@mdit/plugin-footnote": "^0.22.4",
+		"@mdit/plugin-ins": "^0.22.2",
+		"@mdit/plugin-katex": "^0.24.2",
+		"@mdit/plugin-mark": "^0.22.2",
+		"@mdit/plugin-ruby": "^0.22.2",
+		"@mdit/plugin-spoiler": "^0.22.3",
+		"@mdit/plugin-sub": "^0.23.1",
+		"@mdit/plugin-sup": "^0.23.1",
+		"@mdit/plugin-tasklist": "^0.22.3",
 		"@nuxt/kit": "^4.2.2",
-		"asciidoctor": "^3.0.4",
+		"@shikijs/markdown-it": "^3.22.0",
+		"@ts/utils": "link:../utils",
 		"katex": "^0.16.27",
-		"luxon": "^3.7.2"
+		"lmdb": "^3.5.1",
+		"luxon": "^3.7.2",
+		"markdown-it": "^14.1.0",
+		"markdown-it-cjk-friendly": "^2.0.1",
+		"smol-toml": "^1.6.0"
+	},
+	"devDependencies": {
+		"@types/luxon": "^3.7.1",
+		"@types/markdown-it": "^14.1.2"
 	}
 }

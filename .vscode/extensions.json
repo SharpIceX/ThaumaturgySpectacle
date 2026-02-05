@@ -13,6 +13,9 @@
 		"deque-systems.vscode-axe-linter",
 
 		// Prettier
-		"esbenp.prettier-vscode"
+		"esbenp.prettier-vscode",
+
+		// MarkdownLint
+		"davidanson.vscode-markdownlint"
 	]
 }

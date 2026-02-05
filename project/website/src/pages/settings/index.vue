@@ -1,7 +1,7 @@
 <template>
 	<NuxtLayout name="wiki-container">
 		<template #default>
-			<div class="custom setting">
+			<div class="setting">
 				<div v-for="item in settingItems" :key="item.settingID" class="setting-item">
 					<settingSwitch :default-state="item.defaultState" :setting-id="item.settingID" />
 					<p>{{ item.name }}</p>
@@ -47,7 +47,7 @@ const settingItems: settingItemsType = [
 </script>
 
 <style lang="less" scoped>
-.custom.setting {
+.setting {
 	@apply gap-y-xl;
 	display: flex;
 	flex-direction: column;

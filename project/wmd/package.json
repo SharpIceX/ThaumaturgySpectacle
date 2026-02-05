@@ -1,9 +1,0 @@
-{
-	"name": "@ts/wmd",
-	"type": "module",
-	"version": "1.0.0",
-	"main": "./src/main.ts",
-	"dependencies": {
-		"yaml": "^2.8.2"
-	}
-}

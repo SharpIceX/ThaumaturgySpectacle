@@ -9,6 +9,8 @@ onlyBuiltDependencies:
   - dprint
   - esbuild
   - less
+  - lmdb
+  - msgpackr-extract
   - sharp
   - unrs-resolver
   - workerd

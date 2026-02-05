@@ -1,8 +1,14 @@
-import plugin from './plugin/plugin';
-import metadata from './hook/metadata/main';
-import { addLayout, addComponentsDir, addVitePlugin, defineNuxtModule, createResolver } from '@nuxt/kit';
+import path from 'node:path';
+import { moduleStore } from './store';
+import closeHook from './compiler/hooks/close';
+import { Renderer } from './compiler/renderer/main';
+import ViteVirtual from './compiler/plugin/virtual';
+import metadataHook from './compiler/hooks/metadata';
+import tsconfigHook from './compiler/hooks/tsconfig';
+import viteTransform from './compiler/plugin/transform';
+import { addVitePlugin, defineNuxtModule, createResolver, addLayout } from '@nuxt/kit';
 
-const regExpAsciiDocument = /\.adoc$/;
+const regExpAsciiDocument = /\.md$/;
 const regExpVue = /\.vue$/;
 const { resolve } = createResolver(import.meta.url);
 
@@ -12,15 +18,17 @@ export default defineNuxtModule({
 	},
 	setup(_options, nuxt) {
 		// 样式
-		nuxt.options.css.push(resolve('./runtime/styles/index.less'));
+		nuxt.options.css.push(resolve('./runtime/styles/index.less'), resolve('../node_modules/katex/dist/katex.css'));
 
-		// Nuxt 路由扫描添加支持扫描 adoc 文件
-		nuxt.options.extensions.push('.adoc');
+		// 允许 Nuxt 解析器识别 .md 后缀
+		nuxt.options.extensions.push('.md');
 
-		// Vite Vue 插件支持处理 adoc 文件
+		// Vite Vue 插件支持处理 md 文件
 		nuxt.options.vite ||= {};
 		nuxt.options.vite.vue ||= {};
-		nuxt.options.vite.vue.include = [regExpVue, regExpAsciiDocument];
+		const existingInclude = nuxt.options.vite.vue.include || [regExpVue];
+		const includeArray = Array.isArray(existingInclude) ? existingInclude : [existingInclude]; //转换为数组
+		nuxt.options.vite.vue.include = [...new Set([...includeArray, regExpAsciiDocument])]; // 去重
 
 		// Nuxt 页面元数据扫描支持
 		const transform = (nuxt.options.imports.transform ||= {});
@@ -41,28 +49,25 @@ export default defineNuxtModule({
 			transform.include = [...new Set([...includeArray, regExpAsciiDocument, regExpVue])];
 		}
 
-		// 添加 Vite 预处理插件
-		addVitePlugin(plugin);
+		// 初始化 Markdown 渲染器实例
+		moduleStore.renderer = new Renderer(path.join(nuxt.options.buildDir, '.cache/markdown-render.db'));
 
-		// 元数据扫描
-		// nuxt.hook('pages:resolved', metadata);
-
-		// 注册全局 Wiki Layout
 		addLayout(
 			{
-				src: resolve('./runtime/layouts/wiki-container.vue'),
+				src: resolve('./runtime/layout/wiki-container.vue'),
 				filename: 'layouts/wiki-container.vue',
 			},
 			'wiki-container',
 		);
 
-		// 注册全局组件库
-		addComponentsDir({
-			path: resolve('./runtime/components'),
-			watch: true,
-			global: true,
-			prefix: 'Wiki',
-			pathPrefix: false,
-		});
+		addVitePlugin(ViteVirtual);
+		addVitePlugin(viteTransform);
+
+		// 元数据扫描
+		if (!nuxt.options._prepare) {
+			nuxt.hook('pages:resolved', metadataHook);
+		}
+		nuxt.hook('prepare:types', tsconfigHook);
+		nuxt.hook('close', closeHook);
 	},
 });
