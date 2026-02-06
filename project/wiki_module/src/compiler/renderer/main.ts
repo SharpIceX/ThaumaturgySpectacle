@@ -4,7 +4,7 @@ import { useLogger } from '@nuxt/kit';
 import { render, type WikiRenderResult } from './markdown';
 import { open as lmdbOpen, type RootDatabase } from 'lmdb';
 
-const logger = useLogger('markdown-render-cache');
+const logger = useLogger('@ts/wiki_module:markdown-render/cache');
 
 class Renderer {
 	private isClosed = false;

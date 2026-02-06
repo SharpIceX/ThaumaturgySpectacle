@@ -6,10 +6,10 @@ import fs from 'node:fs/promises';
 import { moduleStore } from '../../store';
 import type { NuxtHooks } from '@nuxt/schema';
 import { useNuxt, useLogger } from '@nuxt/kit';
-import AsyncTaskQueue from '@ts/utils/src/async-task-queue';
+import AsyncTaskQueue from '@ts/utils/src/general/async-task-queue';
 
 const gitCache = {};
-const logger = useLogger('wiki_module:scanning-metadata');
+const logger = useLogger('@wiki_module/scanning-metadata');
 const projectPath = path.resolve(useNuxt().options.rootDir, '../../');
 
 /**

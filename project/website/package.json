@@ -12,6 +12,7 @@
 		"clean": "rimraf dist .output"
 	},
 	"dependencies": {
+		"@fontsource-variable/jetbrains-mono": "^5.2.8",
 		"@fontsource/noto-color-emoji": "^5.2.10",
 		"@lxgw/LxgwBright": "github:lxgw/LxgwBright#v5.527",
 		"@material-design-icons/svg": "^0.14.15",

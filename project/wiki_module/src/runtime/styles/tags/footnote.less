@@ -1,49 +1,28 @@
 @import (reference) '$/nord/src/lesscss/nord.less';
 
-// 脚注正文内的引用标记
-p {
-	a[href^='#fn'] {
-		color: @nord9;
+// 脚注引用
+.footnote-ref a {
+	color: @nord13;
 
-		sup {
-			color: @nord13;
-			font-size: 1em;
-			transition:
-				color 0.2s ease,
-				text-decoration 0.2s ease;
-
-			&:hover {
-				color: @nord14;
-			}
-		}
+	&:hover {
+		color: @nord14;
 	}
 }
 
+// 脚注定义
 .footnotes {
-	hr {
-		display: none;
+	.footnote-backref {
+		color: @nord9;
+		padding: 0 2px;
+		transition: color 0.2s ease;
+
+		&:hover {
+			color: @nord13;
+		}
 	}
 
-	ol {
-		padding-left: 1.25rem;
-
-		li {
-			p {
-				margin: 0;
-
-				// 返回链接
-				a {
-					color: @nord9;
-					font-weight: 600;
-					font-family: monospace;
-					transition: all 0.2s ease;
-
-					&:hover {
-						color: @nord13;
-						background-color: fade(@nord13, 10%);
-					}
-				}
-			}
-		}
+	// 解决你担心的间距问题
+	.footnotes-list .footnote-item p {
+		display: inline;
 	}
 }

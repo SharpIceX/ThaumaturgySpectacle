@@ -1,55 +1,75 @@
 @import (reference) '$/nord/src/lesscss/nord.less';
 
-// 基础容器
 .markdown-alert {
+	gap: 0.5rem;
 	display: flex;
-	align-items: flex-start;
-	gap: 0.75rem;
-	padding: 0.75rem 1rem;
 	margin-bottom: 1rem;
+	align-items: stretch;
+	padding: 0.75rem 1rem;
 	border-radius: 0.5rem;
+	flex-direction: column;
 	border-left: 4px solid;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-
-	// 强制使用高对比度文字颜色
-	// Nord6 (#ECEFF4) 在这些深色背景上对比度均 > 7:1
-	color: @nord6;
-	font-weight: 500;
 
 	p {
 		margin: 0;
-		color: inherit; // 确保 p 标签继承高对比度颜色
+		color: inherit;
+		line-height: 1.6;
 	}
-}
 
-// --- 状态颜色修正 ---
+	.markdown-alert-title {
+		display: flex;
+		font-weight: bold;
+		align-items: center;
+		margin-bottom: 0.25rem;
+	}
 
-// 笔记
-.markdown-alert.markdown-alert-note {
-	background-color: fade(@nord10, 10%);
-	border-left-color: @nord10;
-}
+	blockquote {
+		margin: 0.5rem 0;
+		padding: 0.5rem 0.8rem;
+		border-radius: 0 4px 4px 0;
+		background-color: rgba(255, 255, 255, 0.05);
+		border-left: 2px solid rgba(255, 255, 255, 0.2);
 
-// 重要
-.markdown-alert.markdown-alert-important {
-	background-color: fade(@nord15, 12%);
-	border-left-color: @nord15;
-}
+		p {
+			font-size: 0.95em;
+			opacity: 0.9;
+		}
+	}
 
-// 提示
-.markdown-alert.markdown-alert-tip {
-	background-color: fade(@nord14, 12%);
-	border-left-color: @nord14;
-}
+	// 笔记
+	&.markdown-alert-note {
+		border-left-color: @nord10;
+		background-color: fade(@nord10, 15%);
+	}
 
-// 警告
-.markdown-alert.markdown-alert-warning {
-	background-color: fade(@nord13, 10%);
-	border-left-color: @nord13;
-	color: @nord13;
-}
+	// 重要
+	&.markdown-alert-important {
+		border-left-color: @nord15;
+		background-color: fade(@nord15, 15%);
+	}
 
-.markdown-alert.markdown-alert-danger {
-	background-color: fade(@nord11, 12%);
-	border-left-color: @nord11;
+	// 提示
+	&.markdown-alert-tip {
+		border-left-color: @nord14;
+		background-color: fade(@nord14, 15%);
+	}
+
+	// 警告
+	&.markdown-alert-warning {
+		color: @nord13;
+		border-left-color: @nord13;
+		background-color: fade(@nord13, 10%);
+
+		blockquote p {
+			opacity: 1;
+			color: lighten(@nord13, 10%);
+		}
+	}
+
+	// 危险
+	&.markdown-alert-caution {
+		border-left-color: @nord11;
+		color: lighten(@nord11, 20%);
+		background-color: fade(@nord11, 18%);
+	}
 }

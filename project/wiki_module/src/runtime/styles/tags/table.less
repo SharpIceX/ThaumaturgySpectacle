@@ -1,43 +1,60 @@
 @import (reference) '$/nord/src/lesscss/nord.less';
 
 table:not(.custom) {
-	border-collapse: collapse;
-	margin-bottom: 1em;
-	width: 100%;
+	display: table;
+	margin: 0 auto;
+	overflow: hidden;
+	border-spacing: 0;
+	border-radius: 8px;
+	border: 1px solid @nord3;
+	background-color: @nord0;
+	border-collapse: separate;
 
-	// 表头
 	thead {
 		background-color: @nord3;
-
 		th {
-			font-weight: 600;
 			color: @nord6;
+			font-weight: 600;
+			padding: 10px 16px;
+			white-space: nowrap;
+			border-bottom: 1px solid @nord3;
+			border-right: 1px solid fade(@nord4, 15%);
+
+			&:last-child {
+				border-right: none;
+			}
 		}
 	}
 
-	// 表格行
-	tbody > tr {
-		border-bottom: 1px solid @nord3;
-
+	tbody tr {
 		&:nth-child(even) {
-			background-color: @nord1;
+			background-color: fade(@nord1, 40%);
 		}
 
-		&:last-child {
+		td {
+			color: @nord4;
+			padding: 8px 16px;
+			word-break: break-word;
+			border-bottom: 1px solid @nord3;
+			border-right: 1px solid @nord3;
+
+			&:last-child {
+				border-right: none;
+			}
+		}
+
+		&:last-child td {
 			border-bottom: none;
 		}
 	}
 
-	// 单元格
-	td,
-	th {
-		padding: 8px 12px;
-		text-align: left;
-		border: 1px solid @nord3;
-	}
-
+	// 对齐属性
 	td[align='center'],
 	th[align='center'] {
 		text-align: center;
+	}
+	td[align='right'],
+	th[align='right'] {
+		text-align: right;
 	}
 }

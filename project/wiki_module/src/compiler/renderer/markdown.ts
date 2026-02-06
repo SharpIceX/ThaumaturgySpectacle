@@ -6,6 +6,7 @@ import MarkdownItCJK from 'markdown-it-cjk-friendly';
 import { ins as MarkdownItIns } from '@mdit/plugin-ins';
 import { sub as MarkdownItSub } from '@mdit/plugin-sub';
 import { sup as MarkdownItSup } from '@mdit/plugin-sup';
+import { image as MarkdownItImage } from './plugins/image';
 import { ruby as MarkdownItRuby } from '@mdit/plugin-ruby';
 import { mark as MarkdownItMark } from '@mdit/plugin-mark';
 import type { Renderer, Token } from 'markdown-it/index.js';
@@ -16,7 +17,6 @@ import { tasklist as MarkdownItTasklist } from '@mdit/plugin-tasklist';
 import { footnote as MarkdownItFootnote } from '@mdit/plugin-footnote';
 import { alert as MarkdownItAlert, type MarkdownItAlertOptions } from '@mdit/plugin-alert';
 import { katex as MarkdownItKatex, type MarkdownItKatexOptions } from '@mdit/plugin-katex';
-import { attrs as MarkdownItAttributes, type MarkdownItAttrsOptions } from '@mdit/plugin-attrs';
 
 /**
  * 页面元数据
@@ -93,7 +93,7 @@ async function getRenderer(): Promise<MarkdownIt> {
 	});
 
 	// HTML 处理
-	const markdownItHtml = useLogger('markdown-it-html');
+	const markdownItHtml = useLogger('@ts/wiki_module:markdown-it/html');
 	const handleHtmlToken: Renderer.RenderRule = (tokens: Token[], index: number): string => {
 		const token = tokens[index];
 		const content = token?.content || '';
@@ -110,6 +110,9 @@ async function getRenderer(): Promise<MarkdownIt> {
 
 	// CJK 支持
 	md.use(MarkdownItCJK);
+
+	// 图片
+	md.use(MarkdownItImage);
 
 	// 下划线
 	md.use(MarkdownItUnderline);
@@ -143,13 +146,8 @@ async function getRenderer(): Promise<MarkdownIt> {
 		deep: true,
 	} satisfies MarkdownItAlertOptions);
 
-	// 属性
-	md.use(MarkdownItAttributes, {
-		allowed: ['left', 'right', 'scale'],
-	} satisfies MarkdownItAttrsOptions);
-
 	// 数学公式
-	const markdownItKatexLogger = useLogger('markdown-it-katex');
+	const markdownItKatexLogger = useLogger('@ts/wiki_module:markdown-it/katex');
 	md.use(MarkdownItKatex, {
 		strict: 'warn',
 		output: 'htmlAndMathml',
@@ -206,6 +204,9 @@ async function render(content: string): Promise<WikiRenderResult> {
 		</template>
 	</NuxtLayout>
 </template>
+<script lang="ts" setup>
+import image from "#wiki_module/markdownimage.vue";
+</script>
 `,
 	};
 }

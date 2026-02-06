@@ -1,4 +1,11 @@
 {
-	"extends": "../../tsconfig.json",
-	"include": ["./src/**/*"]
+	"files": [],
+	"references": [
+		{
+			"path": "./tsconfig.general.json"
+		},
+		{
+			"path": "./tsconfig.web.json"
+		}
+	]
 }

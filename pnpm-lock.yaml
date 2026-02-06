@@ -82,6 +82,9 @@ importers:
 
   project/website:
     dependencies:
+      '@fontsource-variable/jetbrains-mono':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@fontsource/noto-color-emoji':
         specifier: ^5.2.10
         version: 5.2.10
@@ -161,9 +164,6 @@ importers:
       '@mdit/plugin-alert':
         specifier: ^0.22.4
         version: 0.22.4(markdown-it@14.1.0)
-      '@mdit/plugin-attrs':
-        specifier: ^0.24.2
-        version: 0.24.2(markdown-it@14.1.0)
       '@mdit/plugin-footnote':
         specifier: ^0.22.4
         version: 0.22.4(markdown-it@14.1.0)
@@ -987,6 +987,9 @@ packages:
   '@fingerprintjs/botd@2.0.0':
     resolution: {integrity: sha512-yhuz23NKEcBDTHmGz/ULrXlGnbHenO+xZmVwuBkuqHUkqvaZ5TAA0kAgcRy4Wyo5dIBdkIf57UXX8/c9UlMLJg==}
 
+  '@fontsource-variable/jetbrains-mono@5.2.8':
+    resolution: {integrity: sha512-WBA9elru6Jdp5df2mES55wuOO0WIrn3kpXnI4+W2ek5u3ZgLS9XS4gmIlcQhiZOWEKl95meYdvK7xI+ETLCq/Q==}
+
   '@fontsource/noto-color-emoji@5.2.10':
     resolution: {integrity: sha512-sHu7Z2zkdmPbcNlNgqyQGJEis6fE3eBY8ZXzaUe5ixci2uCQ3g8cX5hJM+5P45JxTEhdbiU/4k3chQmDxe5puQ==}
 
@@ -1237,15 +1240,6 @@ packages:
 
   '@mdit/plugin-alert@0.22.4':
     resolution: {integrity: sha512-6j7nvq8MkKrT2DxQ5/dlK3vhwU0qd7i3ShP/Ns41ltyjsT/H4PiXrW6itRPLJqKhX5vAy4akK0djSALkawoFNQ==}
-    peerDependencies:
-      markdown-it: ^14.1.0
-    peerDependenciesMeta:
-      markdown-it:
-        optional: true
-
-  '@mdit/plugin-attrs@0.24.2':
-    resolution: {integrity: sha512-2JJDMr8jILBa5c+GRbsyVzRsL7yxuYb60KpUHhR/BjbuM5s9ahPyXPO1Z/C4YXaXLeyHkEddqekXHBCr52rLMw==}
-    engines: {node: '>= 18'}
     peerDependencies:
       markdown-it: ^14.1.0
     peerDependenciesMeta:
@@ -7042,6 +7036,8 @@ snapshots:
 
   '@fingerprintjs/botd@2.0.0': {}
 
+  '@fontsource-variable/jetbrains-mono@5.2.8': {}
+
   '@fontsource/noto-color-emoji@5.2.10': {}
 
   '@harperfast/extended-iterable@1.0.3': {}
@@ -7244,13 +7240,6 @@ snapshots:
 
   '@mdit/plugin-alert@0.22.4(markdown-it@14.1.0)':
     dependencies:
-      '@types/markdown-it': 14.1.2
-    optionalDependencies:
-      markdown-it: 14.1.0
-
-  '@mdit/plugin-attrs@0.24.2(markdown-it@14.1.0)':
-    dependencies:
-      '@mdit/helper': 0.22.2(markdown-it@14.1.0)
       '@types/markdown-it': 14.1.2
     optionalDependencies:
       markdown-it: 14.1.0

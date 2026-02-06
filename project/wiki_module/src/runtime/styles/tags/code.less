@@ -1,0 +1,20 @@
+@import (reference) '$/nord/src/lesscss/nord.less';
+
+code {
+	font-family: 'JetBrains Mono Variable', monospace;
+}
+
+// 代码块
+pre {
+	padding: 1em;
+	border-radius: 6px;
+}
+
+// 行内代码
+code:not(pre code) {
+	color: @nord8;
+	font-size: 85%;
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	background-color: @nord3;
+}

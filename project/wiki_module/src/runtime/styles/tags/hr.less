@@ -1,32 +1,36 @@
 @import (reference) '$/nord/src/lesscss/nord.less';
 
 hr {
-	width: 80%;
 	height: 2em;
 	border: none;
+	display: flex;
 	margin: 1em auto;
-	position: relative;
-	text-align: center;
-	line-height: 2em;
+	align-items: center;
+	justify-content: center;
 
-	background:
-		linear-gradient(to right, fade(@nord4, 20%) 50%, transparent 50%) left,
-		linear-gradient(to left, fade(@nord4, 20%) 50%, transparent 50%) right;
-	background-size: 80% 1px;
-	background-repeat: no-repeat;
+	// 左侧线条
+	&::before {
+		content: '';
+		flex-grow: 1;
+		height: 2px;
+		opacity: 0.6;
+		margin-right: 1.5em;
+		background: linear-gradient(to right, transparent, fade(@nord4, 40%));
+	}
 
+	// 中间文字 + 右侧线条
 	&::after {
 		content: '幻术奇象';
-		position: relative;
-	}
+		display: flex;
+		flex-grow: 1;
+		font-size: 0.9em;
+		align-items: center;
+		white-space: nowrap;
+		letter-spacing: 2px;
+		color: fade(@nord13, 75%);
 
-	// 小屏幕
-	@media (max-width: 640px) {
-		background-size: 60% 1px;
-	}
-
-	// 中屏幕
-	@media (min-width: 641px) and (max-width: 1024px) {
-		background-size: 70% 1px;
+		// ! 不能修改顺序
+		background: linear-gradient(to left, transparent, fade(@nord4, 40%)) no-repeat right center;
+		background-size: calc(100% - 6em) 2px;
 	}
 }

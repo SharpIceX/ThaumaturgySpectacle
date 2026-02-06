@@ -1,15 +1,22 @@
 @import (reference) '$/nord/src/lesscss/nord.less';
 
-ul.contains-task-list {
-	li.task-list-item {
-		// 任务完成
-		.task-status-done {
-			color: saturate(@nord8, 40%);
-		}
-
-		// 任务未完成
-		.task-status-undone {
-			color: saturate(@nord11, 50%);
-		}
+li.task-list-item {
+	.task-list-item-checkbox {
+		top: -1.5px;
+		position: relative;
+		margin-right: 0.4rem;
+		vertical-align: middle;
 	}
+
+	input.task-list-item-checkbox[checked='checked'] ~ .task-list-item-label {
+		color: @nord8;
+	}
+
+	input.task-list-item-checkbox:not([checked='checked']) ~ .task-list-item-label {
+		color: @nord11;
+	}
+}
+
+li.task-list-item:has(input[checked='checked']) {
+	color: fade(@nord8, 60%);
 }

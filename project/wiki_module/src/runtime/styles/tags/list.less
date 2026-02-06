@@ -1,11 +1,42 @@
-// 无序列表
-ul:not(.custom) {
+ul,
+ol {
 	@apply "pl-6 mb-3";
-	list-style-type: disc;
+
+	ul,
+	ol {
+		margin-bottom: 0;
+		margin-top: 0.25em;
+	}
+
+	li {
+		margin-bottom: 0.2em;
+	}
 }
 
-// 有序列表
-ol:not(.custom) {
-	@apply "pl-6 mb-3";
+ul {
+	list-style-type: disc;
+
+	ul {
+		list-style-type: circle;
+
+		ul {
+			list-style-type: square;
+
+			ul {
+				list-style-type: disc;
+			}
+		}
+	}
+}
+
+ol {
 	list-style-type: decimal;
+
+	ol {
+		list-style-type: lower-alpha;
+
+		ol {
+			list-style-type: lower-roman;
+		}
+	}
 }
