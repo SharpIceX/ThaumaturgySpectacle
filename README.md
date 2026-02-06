@@ -1,4 +1,4 @@
-# **幻术奇象 Thaumaturgy Spectacle**项目
+<!-- markdownlint-disable MD033 MD041 -->
 
 > [!NOTE]
 > **构建提示**
@@ -20,8 +20,8 @@
 
 ## 依赖
 
-- Node.js 22.17+
-- pnpm 10.13+
+- Node.js 22.22+
+- pnpm 10.28+
 
 ```bash
 # 拉取仓库
