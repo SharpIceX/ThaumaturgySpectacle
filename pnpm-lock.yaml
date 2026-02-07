@@ -14,6 +14,9 @@ importers:
       '@types/node':
         specifier: ^25.0.3
         version: 25.0.3
+      '@types/thaumaturgy_spectacle':
+        specifier: link:types
+        version: link:types
       eslint:
         specifier: 9.39.2
         version: 9.39.2(jiti@2.6.1)
@@ -23,9 +26,6 @@ importers:
       rimraf:
         specifier: ^6.1.2
         version: 6.1.2
-      type-fest:
-        specifier: ^5.3.1
-        version: 5.3.1
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -59,9 +59,6 @@ importers:
       globals:
         specifier: ^17.0.0
         version: 17.0.0
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
       typescript-eslint:
         specifier: ^8.52.0
         version: 8.52.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
@@ -74,11 +71,7 @@ importers:
 
   project/content: {}
 
-  project/utils:
-    devDependencies:
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
+  project/utils: {}
 
   project/website:
     dependencies:
@@ -225,6 +218,12 @@ importers:
       '@types/markdown-it':
         specifier: ^14.1.2
         version: 14.1.2
+
+  types:
+    dependencies:
+      type-fest:
+        specifier: ^5.4.3
+        version: 5.4.3
 
 packages:
 
@@ -5885,6 +5884,10 @@ packages:
 
   type-fest@5.3.1:
     resolution: {integrity: sha512-VCn+LMHbd4t6sF3wfU/+HKT63C9OoyrSIf4b+vtWHpt2U7/4InZG467YDNMFMR70DdHjAdpPWmw2lzRdg0Xqqg==}
+    engines: {node: '>=20'}
+
+  type-fest@5.4.3:
+    resolution: {integrity: sha512-AXSAQJu79WGc79/3e9/CR77I/KQgeY1AhNvcShIH4PTcGYyC4xv6H4R4AUOwkPS5799KlVDAu8zExeCrkGquiA==}
     engines: {node: '>=20'}
 
   type-level-regexp@0.1.17:
@@ -12634,6 +12637,10 @@ snapshots:
     optional: true
 
   type-fest@5.3.1:
+    dependencies:
+      tagged-tag: 1.0.0
+
+  type-fest@5.4.3:
     dependencies:
       tagged-tag: 1.0.0
 

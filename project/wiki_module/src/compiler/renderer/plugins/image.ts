@@ -72,6 +72,7 @@ function markPureImageParagraph(tokens: Token[], index: number, imgIndex: number
 		}
 	}
 }
+
 /**
  * 校验 scale 属性
  * @param token 目标图片 Token
@@ -88,6 +89,13 @@ function validateScale(token: Token) {
 		logger.error(
 			`图片的”scale“属性必须为数字，但当前获取到的是”${scaleNumber}“，已忽略该属性。图片源: ${imgSource}`,
 		);
+		token.attrs = (token.attrs || []).filter(([k]) => k !== 'scale');
+		return;
+	}
+
+	// 负数校验
+	if (scaleNumber < 0) {
+		logger.error(`图片的”scale“属性不能为负数（当前值: ${scaleNumber}），已忽略该属性。图片源: ${imgSource}`);
 		token.attrs = (token.attrs || []).filter(([k]) => k !== 'scale');
 		return;
 	}
@@ -155,10 +163,22 @@ const image: PluginSimple = (md) => {
 
 		const properties = (token.attrs || [])
 			.filter(([k]) => k !== 'src' && k !== 'alt')
-			.map(([k, v]) => `${k}="${v}"`)
+			.map(([k, v]) => {
+				// 如果值是 "true"，则渲染成 Vue 的布尔开关格式
+				if (v === 'true') {
+					return `:${k}="true"`;
+				}
+
+				// 处理数字
+				if (k === 'scale' || !Number.isNaN(Number(v))) {
+					return `:${k}="${v}"`;
+				}
+
+				return `:${k}="${v}"`;
+			})
 			.join(' ');
 
-		return `<Image src="${source}" title="${title}" ${properties}></Image>`;
+		return `<Image :source="import('${source}')" title="${title}" ${properties} />`;
 	};
 
 	// 段落标签消除

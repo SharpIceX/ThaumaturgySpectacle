@@ -1,7 +1,7 @@
 packages:
+  - types
   - project/**
   - packages/**
-  - .vscode/extensions/**
 
 onlyBuiltDependencies:
   - '@parcel/watcher'

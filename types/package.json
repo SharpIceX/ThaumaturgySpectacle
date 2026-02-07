@@ -1,0 +1,15 @@
+{
+	"name": "@types/thaumaturgy_spectacle",
+	"private": true,
+	"type": "module",
+	"version": "1.0.0",
+	"types": "./main.d.ts",
+	"exports": {
+		".": {
+			"types": "./global.d.ts"
+		}
+	},
+	"dependencies": {
+		"type-fest": "^5.4.3"
+	}
+}

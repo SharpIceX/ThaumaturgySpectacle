@@ -1,0 +1,4 @@
+{
+	"extends": ["./tsconfig.web.shared.json", "../website/tsconfig.json"],
+	"files": []
+}

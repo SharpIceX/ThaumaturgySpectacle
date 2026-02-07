@@ -205,7 +205,7 @@ async function render(content: string): Promise<WikiRenderResult> {
 	</NuxtLayout>
 </template>
 <script lang="ts" setup>
-import image from "#wiki_module/markdownimage.vue";
+import Image from "#wiki_module/markdown/image.vue";
 </script>
 `,
 	};

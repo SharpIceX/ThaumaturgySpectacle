@@ -6,8 +6,13 @@ const MarkdownTransformPlugin = (): Plugin => {
 		name: 'markdown-transform-plugin',
 		enforce: 'pre',
 		async transform(code, id) {
-			// 忽略非 md 文件
-			if (!new URL(id, 'file://').pathname.endsWith('.md')) return;
+			const url = new URL(id, 'file://');
+
+			// 忽略非 md 文件和
+			if (!url.pathname.endsWith('.md')) return;
+
+			// 忽略 Vue AST 处理
+			if (url.searchParams.get('type') === 'script') return;
 
 			// 确保渲染器可用
 			if (!moduleStore.renderer?.render) throw new Error('渲染器未初始化');

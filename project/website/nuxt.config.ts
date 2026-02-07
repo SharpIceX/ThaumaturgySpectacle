@@ -25,8 +25,8 @@ export default defineNuxtConfig({
 	appId: 'thaumaturgy-spectacle',
 	compatibilityDate: '2025-08-28',
 	srcDir: path.resolve(import.meta.dirname, './src'),
-	modules: ['@ts/wiki_module', 'nuxt-svgo', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo'],
 	css: ['@/styles/main.less'],
+	modules: ['@ts/wiki_module', 'nuxt-svgo', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo'],
 	extends: [path.resolve(import.meta.dirname, '../content')],
 	alias: {
 		'@': path.resolve(import.meta.dirname, './src'),
