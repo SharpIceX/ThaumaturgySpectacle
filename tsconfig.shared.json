@@ -5,6 +5,7 @@
 		"allowJs": true,
 		"target": "ESNext",
 		"module": "ESNext",
+		"lib": ["ESNext"],
 
 		/** 只做检查 */
 		"noEmit": true,

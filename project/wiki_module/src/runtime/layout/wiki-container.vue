@@ -8,7 +8,7 @@
 				</p>
 			</header>
 			<slot />
-			<hr v-if="$route.meta['time'] && $route.meta['category']" />
+			<hr v-if="$route.meta['type'] === 'wiki'" />
 			<div class="category" v-if="$route.meta['category']">
 				<p>分类：</p>
 				<ul>
@@ -29,12 +29,6 @@
 	</div>
 </template>
 
-<script lang="ts" setup>
-defineOptions({
-	name: 'WikiContainerLayout',
-});
-</script>
-
 <style lang="less" scoped>
 @import (reference) '$/nord/src/lesscss/nord.less';
 
@@ -53,7 +47,7 @@ defineOptions({
 		border-radius: 0.5rem;
 		background-color: @nord1;
 
-		// 当 body 是容器内唯一的子元素时，就是 aside 没有的时候
+		// 当 body 是容器内唯一的子元素时，就是没有 aside 的时候
 		&:only-child {
 			width: 80%;
 		}

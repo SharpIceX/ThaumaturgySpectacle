@@ -1,4 +1,7 @@
 {
-	"extends": ["./tsconfig.web.shared.json", "../website/tsconfig.json"],
-	"files": []
+	"extends": "../../tsconfig.shared.json",
+	"compilerOptions": {
+		"lib": ["ESNext", "DOM"]
+	},
+	"include": ["./src/runtime/**/*"]
 }

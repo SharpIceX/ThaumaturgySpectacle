@@ -10,7 +10,7 @@
 import wikiListPage from '~/components/utils/wiki-list-page.vue';
 
 definePageMeta({
-	title: '所有页面',
+	title: '分类',
 });
 
 const wikiRoutes = useRouter()
@@ -18,6 +18,6 @@ const wikiRoutes = useRouter()
 	.filter((route) => route.meta?.type === 'wiki')
 	.map((route) => ({
 		url: route.path,
-		name: route.meta.title as string,
+		name: route.meta.title,
 	}));
 </script>

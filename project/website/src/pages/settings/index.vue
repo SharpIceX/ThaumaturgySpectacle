@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import settingSwitch from '@/components/setting-toggle.vue';
+import settingSwitch from '~/components/utils/setting-toggle.vue';
 import InfoIcon from '@material-design-icons/svg/outlined/info.svg';
 
 type settingItemsType = {

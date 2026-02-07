@@ -13,8 +13,9 @@ const tsconfigHook: NuxtHooks['prepare:types'] = (options) => {
 	};
 
 	// 类型
-	options.tsConfig.compilerOptions.typeRoots ||= [];
-	options.tsConfig.compilerOptions.typeRoots.push(resolve('../../runtime/types'));
+	options.references.push({
+		path: resolve('../../runtime/types/index.d.ts'),
+	});
 };
 
 export default tsconfigHook;

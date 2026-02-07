@@ -1,11 +1,4 @@
 <!--
-	NOTE: 停用 eslint 的 vue/html-self-closing 规则备注：
-	会错误的导致 <input> 标签报错，提示需要自闭合。
--->
-
-<!-- eslint-disable vue/html-self-closing -->
-
-<!--
 	TIP: 只能在客户端渲染
 
 	此组件是 Switch 组件的变体，用于在设置页面中显示和存储用户的设置选项。

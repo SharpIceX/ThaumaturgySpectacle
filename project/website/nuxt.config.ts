@@ -25,11 +25,10 @@ export default defineNuxtConfig({
 	appId: 'thaumaturgy-spectacle',
 	compatibilityDate: '2025-08-28',
 	srcDir: path.resolve(import.meta.dirname, './src'),
-	css: ['@/styles/main.less'],
+	css: ['~/styles/main.less'],
 	modules: ['@ts/wiki_module', 'nuxt-svgo', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo'],
 	extends: [path.resolve(import.meta.dirname, '../content')],
 	alias: {
-		'@': path.resolve(import.meta.dirname, './src'),
 		$: path.resolve(import.meta.dirname, './node_modules'),
 	},
 	build: {
@@ -52,6 +51,13 @@ export default defineNuxtConfig({
 				dir: path.resolve(import.meta.dirname, './public'),
 			},
 		],
+		routeRules: {
+			'/_ts/**': {
+				headers: {
+					'cache-control': 'public, max-age=31536000, immutable',
+				},
+			},
+		},
 	},
 	experimental: {
 		headNext: true,
