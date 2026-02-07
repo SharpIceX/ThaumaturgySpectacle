@@ -22,14 +22,21 @@
 		<div v-else-if="status === 'loading'" class="loader" role="status" aria-label="图片加载中"></div>
 
 		<!-- 错误 -->
-		<div v-else-if="status === 'error'" class="error-state" role="alert">
+		<div v-else-if="status === 'error'" role="alert">
+			<!-- TODO：后面要换成图片 -->
 			<p>图片加载失败</p>
 		</div>
 
 		<!-- 超时 -->
-		<div v-else-if="status === 'timeout'" class="timeout-state" role="alert">
-			<p>连接超时，请检查网络</p>
+		<div v-else-if="status === 'timeout'" role="alert">
+			<!-- TODO：后面要换成图片 -->
+			<p>图片加载超时</p>
 		</div>
+
+		<!-- 提示 -->
+		<p>
+			{{ props.title }}
+		</p>
 	</div>
 </template>
 
@@ -42,7 +49,7 @@ defineOptions({
 
 const props = defineProps<{
 	source: Promise<{ default: string }>;
-	title?: string;
+	title: string;
 
 	left?: boolean;
 	right?: boolean;
@@ -60,9 +67,9 @@ const site = computed(() => {
 	return props.scale ? BASE_SIZE * props.scale : BASE_SIZE;
 });
 
+/** 进入视口才加载 */
 const containerReference = ref<HTMLElement>();
 let observer: IntersectionObserver | undefined;
-
 const loadImage = async () => {
 	console.log('进入视口，准备加载:', source);
 	const result = await preloadImage(source);
@@ -114,9 +121,11 @@ onBeforeUnmount(() => {
 @import (reference) '$/nord/src/lesscss/nord.less';
 
 .loader {
-	width: 90%;
-	height: 90%;
+	width: 60%;
+	height: auto;
+	flex-shrink: 0;
 	position: relative;
+	aspect-ratio: 1 / 1;
 
 	&::after {
 		content: '';
@@ -124,7 +133,9 @@ onBeforeUnmount(() => {
 		height: 100%;
 		position: absolute;
 		border-radius: 50%;
+		box-sizing: border-box;
 		animation: image-loader-rotate 1s linear infinite;
+
 		border: calc(v-bind("site + 'px'") / 40) solid @nord9;
 		border-top-color: transparent;
 
@@ -142,7 +153,7 @@ onBeforeUnmount(() => {
 		content: '加载中';
 		position: absolute;
 		transform: translate(-50%, -50%);
-		font-size: calc(v-bind("site + 'px'") / 10);
+		font-size: calc(v-bind("site + 'px'") / 13);
 	}
 }
 
@@ -150,6 +161,7 @@ onBeforeUnmount(() => {
 	display: flex;
 	margin-bottom: 1em;
 	align-items: center;
+	flex-direction: column;
 	justify-content: center;
 	width: v-bind("site + 'px'");
 	height: v-bind("site + 'px'");
