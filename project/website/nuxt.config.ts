@@ -84,6 +84,7 @@ export default defineNuxtConfig({
 				'@vueuse/integrations/useNProgress',
 				'vue3-toastify',
 				'pangu/browser',
+				'@ts/utils/src/web/preload-image',
 			],
 		},
 	},

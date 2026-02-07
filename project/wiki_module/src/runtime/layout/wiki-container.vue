@@ -8,6 +8,19 @@
 				</p>
 			</header>
 			<slot />
+			<hr v-if="$route.meta['time'] && $route.meta['category']" />
+			<div class="category" v-if="$route.meta['category']">
+				<p>分类：</p>
+				<ul>
+					<li v-for="item in $route.meta['category']" :key="item">
+						<NuxtLink :to="`/分类/${item}`">{{ item }}</NuxtLink>
+					</li>
+				</ul>
+			</div>
+			<div class="time" v-if="$route.meta['time']">
+				<p>创建时间（UTC+8）：{{ $route.meta['time'].createdAt }}</p>
+				<p>更新时间（UTC+8）：{{ $route.meta['time'].updatedAt }}</p>
+			</div>
 		</article>
 
 		<aside v-if="$slots['aside']" class="wiki-aside">
@@ -54,6 +67,38 @@ defineOptions({
 
 			p {
 				@apply "text-sm";
+			}
+
+			.time {
+				cursor: default;
+			}
+		}
+
+		.category {
+			display: flex;
+			padding: 0.8rem;
+			cursor: default;
+			font-size: 1.2em;
+			border: 1.5px solid lighten(@nord3, 20%);
+
+			p {
+				text-wrap: nowrap;
+			}
+
+			ul {
+				display: flex;
+				flex-wrap: wrap;
+				column-gap: 1rem;
+
+				a {
+					color: @nord8;
+					transition: color 0.2s ease;
+
+					&:hover {
+						color: @nord13;
+						text-decoration: none;
+					}
+				}
 			}
 		}
 	}

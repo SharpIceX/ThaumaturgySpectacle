@@ -43,4 +43,15 @@ if (import.meta.browser) {
 		},
 	});
 }
+
+// 合入 SEO 信息
+const route = useRoute();
+useHead({
+	meta: [
+		{
+			name: 'keywords',
+			content: () => route.meta.keywords?.join(', '),
+		},
+	],
+});
 </script>

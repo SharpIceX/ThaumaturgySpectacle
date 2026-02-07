@@ -18,8 +18,8 @@ const ProjectPath = path.resolve(import.meta.dirname, '../../');
 
 const config = defineConfig(
 	eslint.configs.recommended,
-	tseslint.configs.strictTypeChecked,
-	tseslint.configs.stylisticTypeChecked,
+	tseslint.configs.strict,
+	tseslint.configs.stylistic,
 	eslintPluginUnicorn.configs.recommended,
 	pluginPromise.configs['flat/recommended'],
 	regexpPlugin.configs['flat/recommended'],

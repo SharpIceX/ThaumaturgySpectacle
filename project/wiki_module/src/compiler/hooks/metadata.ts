@@ -108,6 +108,7 @@ const metadataHook: NuxtHooks['pages:resolved'] = async (pages) => {
 
 				page.meta = {
 					...page.meta,
+					type: 'wiki',
 					...renderResult.data,
 					time: timestamps,
 				};

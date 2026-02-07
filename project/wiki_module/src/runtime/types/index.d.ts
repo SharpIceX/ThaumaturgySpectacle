@@ -2,9 +2,12 @@ import 'vue-router';
 
 declare module 'vue-router' {
 	interface RouteMeta {
-		title?: string;
-		description?: boolean;
-		category?: string | string[];
+		type: 'wiki' | 'novel';
+
+		title: string;
+		description?: string;
+		keywords?: string[];
+		category?: string[];
 
 		time?: {
 			createdAt: string;
@@ -12,5 +15,3 @@ declare module 'vue-router' {
 		};
 	}
 }
-
-export {};

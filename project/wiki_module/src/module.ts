@@ -7,11 +7,13 @@ import metadataHook from './compiler/hooks/metadata';
 import tsconfigHook from './compiler/hooks/tsconfig';
 import viteTransform from './compiler/plugin/transform';
 import { getRenderer } from './compiler/renderer/markdown';
-import { addVitePlugin, defineNuxtModule, createResolver, addLayout } from '@nuxt/kit';
+import { addVitePlugin, defineNuxtModule, createResolver, addLayout, useLogger } from '@nuxt/kit';
 
 const regExpAsciiDocument = /\.md$/;
 const regExpVue = /\.vue$/;
+
 const { resolve } = createResolver(import.meta.url);
+const logger = useLogger('@ts/wiki_module');
 
 export default defineNuxtModule({
 	meta: {
@@ -50,9 +52,12 @@ export default defineNuxtModule({
 			transform.include = [...new Set([...includeArray, regExpAsciiDocument, regExpVue])];
 		}
 
-		// 预热
-		moduleStore.renderer = new Renderer(path.join(nuxt.options.buildDir, '.cache/markdown-render.db')); // 渲染器
-		await getRenderer(); // MarkdownIt
+		if (!nuxt.options._prepare) {
+			// 预热
+			logger.info('正在预热渲染器，稍安勿躁');
+			moduleStore.renderer = new Renderer(path.join(nuxt.options.buildDir, '.cache/markdown-render.db')); // 渲染器
+			await getRenderer(); // MarkdownIt
+		}
 
 		addLayout(
 			{

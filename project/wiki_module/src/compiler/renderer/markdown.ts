@@ -1,7 +1,7 @@
-import TOML from 'smol-toml';
 import MarkdownIt from 'markdown-it';
 import { useLogger } from '@nuxt/kit';
 import shiki from '@shikijs/markdown-it';
+import TOML, { type TomlTable } from 'smol-toml';
 import MarkdownItCJK from 'markdown-it-cjk-friendly';
 import { ins as MarkdownItIns } from '@mdit/plugin-ins';
 import { sub as MarkdownItSub } from '@mdit/plugin-sub';
@@ -177,6 +177,50 @@ async function getRenderer(): Promise<MarkdownIt> {
 }
 
 /**
+ * 校验 Front Matter 元数据合法性
+ * @param data Front Matter 数据
+ */
+function validateFrontMatter(data: TomlTable) {
+	// 校验是否符合 Array<string>
+	const validateStringArray = (field: string) => {
+		const value = data[field];
+		if (value !== undefined) {
+			if (!Array.isArray(value)) {
+				throw new TypeError(`Front Matter 错误：${field} 必须是一个数组！`);
+			}
+			if (!value.every((item) => typeof item === 'string')) {
+				throw new TypeError(`Front Matter 错误：${field} 数组内的每一项都必须是字符串！`);
+			}
+		}
+	};
+
+	if (!data) {
+		throw new Error('Front Matter 不能为空');
+	}
+
+	// 标题
+	if (!data['title']) {
+		throw new Error('Front Matter 标题为空！');
+	}
+	if (typeof data['title'] !== 'string') {
+		throw new TypeError('当前 Front Matter 内的 title 非字符串');
+	}
+
+	// 描述
+	if (data['description'] !== undefined && typeof data['description'] !== 'string') {
+		throw new TypeError('当前 Front Matter 内的 description 字符串');
+	}
+
+	// 类型
+	if (data['type'] !== undefined && !['wiki', 'novel'].includes(String(data['type']))) {
+		throw new TypeError('当前 Front Matter 内的 type 无效');
+	}
+
+	validateStringArray('keywords'); // 关键词
+	validateStringArray('category'); // 分类
+}
+
+/**
  * Markdown 渲染器
  * @param content Markdown 内容
  * @returns 渲染后的 Front Matter 和 HTML 文本
@@ -187,9 +231,9 @@ async function render(content: string): Promise<WikiRenderResult> {
 
 	// 解析 Front Matter(toml)
 	const data = TOML.parse(result.tomlContent);
-	if (!data || typeof data['title'] !== 'string') {
-		throw new Error('Front Matter 丢失标题');
-	}
+
+	// 校验
+	validateFrontMatter(data);
 
 	const md = await getRenderer();
 	const html = md.render(result.bodyContent);
