@@ -52,7 +52,7 @@ interface WikiRenderResult {
  */
 function frontMatterParse(content: string): { tomlContent: string; bodyContent: string } {
 	/// 确保开头符合 Front Matter
-	const firstLineMatch = content.match(/^---[ \t]*\r?\n/);
+	const firstLineMatch = content.match(/^\+\+\+[ \t]*\r?\n/);
 	if (!firstLineMatch) {
 		throw new Error('找不到 Front Matter');
 	}
@@ -61,7 +61,7 @@ function frontMatterParse(content: string): { tomlContent: string; bodyContent: 
 	const startOffset = firstLineMatch[0].length;
 
 	// 查找闭合
-	const closeRegex = /\r?\n---[ \t]*(?:\r?\n|$)/;
+	const closeRegex = /\r?\n\+\+\+[ \t]*(?:\r?\n|$)/;
 	const closeMatch = content.slice(startOffset).match(closeRegex);
 
 	if (!closeMatch || closeMatch.index === undefined) {
@@ -211,5 +211,5 @@ import Image from "#wiki_module/markdown/image.vue";
 	};
 }
 
-export { render };
+export { render, getRenderer };
 export type { WikiFrontMatter, WikiRenderResult };

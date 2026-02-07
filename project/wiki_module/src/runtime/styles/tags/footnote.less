@@ -2,6 +2,9 @@
 
 // 脚注引用
 .footnote-ref a {
+	// 防止被环绕
+	clear: both;
+
 	color: @nord13;
 
 	&:hover {
@@ -11,6 +14,9 @@
 
 // 脚注定义
 .footnotes {
+	// 防止被环绕
+	clear: both;
+
 	.footnote-backref {
 		color: @nord9;
 		padding: 0 2px;

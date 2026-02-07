@@ -6,6 +6,7 @@ import ViteVirtual from './compiler/plugin/virtual';
 import metadataHook from './compiler/hooks/metadata';
 import tsconfigHook from './compiler/hooks/tsconfig';
 import viteTransform from './compiler/plugin/transform';
+import { getRenderer } from './compiler/renderer/markdown';
 import { addVitePlugin, defineNuxtModule, createResolver, addLayout } from '@nuxt/kit';
 
 const regExpAsciiDocument = /\.md$/;
@@ -16,7 +17,7 @@ export default defineNuxtModule({
 	meta: {
 		name: '@ts/wiki_module',
 	},
-	setup(_options, nuxt) {
+	async setup(_options, nuxt) {
 		// 样式
 		nuxt.options.css.push(resolve('./runtime/styles/index.less'), resolve('../node_modules/katex/dist/katex.css'));
 
@@ -49,8 +50,9 @@ export default defineNuxtModule({
 			transform.include = [...new Set([...includeArray, regExpAsciiDocument, regExpVue])];
 		}
 
-		// 初始化 Markdown 渲染器实例
-		moduleStore.renderer = new Renderer(path.join(nuxt.options.buildDir, '.cache/markdown-render.db'));
+		// 预热
+		moduleStore.renderer = new Renderer(path.join(nuxt.options.buildDir, '.cache/markdown-render.db')); // 渲染器
+		await getRenderer(); // MarkdownIt
 
 		addLayout(
 			{

@@ -1,10 +1,28 @@
----
++++
 title = "Wiki Markdown 渲染测试"
 description = "这是一个测试 Wiki Markdown 渲染的页面"
 keywords = ["Wiki Markdown", "wmd", "渲染测试"]
 
-category = "测试"
----
+category = ["测试"]
+
+[infobox]
+type = "自定义"
+
+[[infobox.data]]
+left = "这是第一行左边"
+right = "这是第一行右边"
+
+[[infobox.data]]
+left = "第二行只有一行所以会合并显示"
+
+[[infobox.data]]
+left = "右边是图片"
+right = { type = "image", data = "./test.png" }
+
+[[infobox.data]]
+left = "这是第四行左边"
+right = "这是第四行右边"
++++
 
 <!-- markdownlint-disable MD025 -->
 
