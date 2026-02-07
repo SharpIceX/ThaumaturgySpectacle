@@ -115,16 +115,4 @@ export default defineNuxtConfig({
 		global: false,
 		defaultImport: 'component',
 	},
-	hooks: {
-		'pages:extend'(pages) {
-			// 以下代码用于解决 Nuxt 和 Vue-Router 内部没有统一的编码问题
-			for (const page of pages) {
-				const path = decodeURI(page.path);
-
-				if (path !== page.path) {
-					page.alias = path;
-				}
-			}
-		},
-	},
 });
