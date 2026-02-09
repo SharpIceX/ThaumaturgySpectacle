@@ -9,7 +9,7 @@
 			</header>
 			<slot />
 			<hr v-if="$route.meta['type'] === 'wiki'" />
-			<div class="category" v-if="$route.meta['category']">
+			<div v-if="$route.meta['category']" class="category">
 				<p>分类：</p>
 				<ul>
 					<li v-for="item in $route.meta['category']" :key="item">
@@ -17,7 +17,7 @@
 					</li>
 				</ul>
 			</div>
-			<div class="time" v-if="$route.meta['time']">
+			<div v-if="$route.meta['time']" class="time">
 				<p>创建时间（UTC+8）：{{ $route.meta['time'].createdAt }}</p>
 				<p>更新时间（UTC+8）：{{ $route.meta['time'].updatedAt }}</p>
 			</div>

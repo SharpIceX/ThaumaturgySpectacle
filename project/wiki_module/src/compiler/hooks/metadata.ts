@@ -3,14 +3,14 @@ import path from 'node:path';
 import { DateTime } from 'luxon';
 import git from 'isomorphic-git';
 import fs from 'node:fs/promises';
-import { moduleStore } from '../../store';
+import { storeContext } from '../../context';
 import type { NuxtHooks } from '@nuxt/schema';
 import { useNuxt, useLogger } from '@nuxt/kit';
 import AsyncTaskQueue from '@ts/utils/src/general/async-task-queue';
 
 const gitCache = {};
 const logger = useLogger('@wiki_module/scanning-metadata');
-const projectPath = path.resolve(useNuxt().options.rootDir, '../../');
+const projectPath = path.resolve('../../');
 
 /**
  * 获取文件的创建时间和最后更新时间
@@ -79,14 +79,11 @@ async function getFileTimestamps(filePath: string): Promise<{
 }
 
 const metadataHook: NuxtHooks['pages:resolved'] = async (pages) => {
-	logger.info('正在扫描 Markdown 页面元数据，稍安勿躁');
-
 	// 筛出要处理的 md 文件
 	const mdPages = pages.filter((page) => page.file?.endsWith('.md'));
 	if (mdPages.length === 0) return;
 
-	const renderer = moduleStore.renderer;
-	if (!renderer?.render) throw new Error('渲染器未初始化');
+	const renderer = storeContext.renderer;
 
 	// 获取任务函数
 	let currentIndex = 0;

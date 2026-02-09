@@ -51,13 +51,6 @@ export default defineNuxtConfig({
 				dir: path.resolve(import.meta.dirname, './public'),
 			},
 		],
-		routeRules: {
-			'/_ts/**': {
-				headers: {
-					'cache-control': 'public, max-age=31536000, immutable',
-				},
-			},
-		},
 	},
 	experimental: {
 		headNext: true,
@@ -70,17 +63,21 @@ export default defineNuxtConfig({
 	features: {
 		inlineStyles: true,
 	},
+	future: {
+		typescriptBundlerResolution: true,
+	},
 	devServer: {
 		port: 8190,
 	},
 	vite: {
 		resolve: {
-			// 让 Vite 解析时保留符号链接。
-			// 这个其实是因为在 package.json 使用了 Git 或 URL 依赖所导致的问题。
 			preserveSymlinks: true,
 		},
 		esbuild: {
 			drop: isProduction ? ['console', 'debugger'] : [],
+		},
+		build: {
+			cssMinify: 'lightningcss',
 		},
 		optimizeDeps: {
 			include: [
@@ -99,19 +96,6 @@ export default defineNuxtConfig({
 	},
 	unocss: {
 		nuxtLayers: true,
-	},
-	site: {
-		name: '幻术奇象',
-		currentLocale: appConfig.head.htmlAttrs.lang,
-		// 从 app.config.ts 获取变量
-		description: appConfig.head.meta.find(
-			(meta: { name?: string; content?: string }) => meta.name === 'description',
-		)?.content,
-		url: 'https://ts.sharpice.top',
-	},
-	sitemap: {
-		zeroRuntime: true,
-		discoverImages: false,
 	},
 	eslint: {
 		checker: false,

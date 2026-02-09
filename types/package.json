@@ -8,8 +8,5 @@
 		".": {
 			"types": "./global.d.ts"
 		}
-	},
-	"dependencies": {
-		"type-fest": "^5.4.3"
 	}
 }

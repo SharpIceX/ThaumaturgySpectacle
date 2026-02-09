@@ -80,7 +80,7 @@ class Renderer {
 			}
 
 			if (pruneCount > 0) {
-				logger.log(`清理完成，移除了 ${pruneCount} 条过期缓存`);
+				logger.log(`移除了 ${pruneCount} 条未使用的 Markdown 渲染缓存`);
 			}
 
 			await this.cacheDatabase.flushed;

@@ -1,19 +1,16 @@
 import path from 'node:path';
-import { moduleStore } from './store';
+import { storeContext } from './context';
 import closeHook from './compiler/hooks/close';
 import { Renderer } from './compiler/renderer/main';
-import ViteVirtual from './compiler/plugin/virtual';
 import metadataHook from './compiler/hooks/metadata';
-import tsconfigHook from './compiler/hooks/tsconfig';
-import viteTransform from './compiler/plugin/transform';
+import viteTransform from './compiler/vite/transform';
 import { getRenderer } from './compiler/renderer/markdown';
-import { addVitePlugin, defineNuxtModule, createResolver, addLayout, useLogger } from '@nuxt/kit';
+import { addVitePlugin, defineNuxtModule, createResolver, addLayout, addTypeTemplate } from '@nuxt/kit';
 
-const regExpAsciiDocument = /\.md$/;
+const regExpMarkdown = /\.md$/;
 const regExpVue = /\.vue$/;
 
 const { resolve } = createResolver(import.meta.url);
-const logger = useLogger('@ts/wiki_module');
 
 export default defineNuxtModule({
 	meta: {
@@ -21,22 +18,21 @@ export default defineNuxtModule({
 	},
 	async setup(_options, nuxt) {
 		// 样式
-		nuxt.options.css.push(resolve('./runtime/styles/index.less'), resolve('../node_modules/katex/dist/katex.css'));
+		nuxt.options.css.push(resolve('./runtime/styles/index.less'), 'katex/dist/katex.css');
 
 		// 允许 Nuxt 解析器识别 .md 后缀
 		nuxt.options.extensions.push('.md');
 
 		// Vite Vue 插件支持处理 md 文件
-		nuxt.options.vite ||= {};
 		nuxt.options.vite.vue ||= {};
-		const existingInclude = nuxt.options.vite.vue.include || [regExpVue];
-		const includeArray = Array.isArray(existingInclude) ? existingInclude : [existingInclude]; //转换为数组
-		nuxt.options.vite.vue.include = [...new Set([...includeArray, regExpAsciiDocument])]; // 去重
+		const existingInclude = nuxt.options.vite.vue.include || [/\.vue$/];
+		const includeArray = Array.isArray(existingInclude) ? existingInclude : [existingInclude];
+		nuxt.options.vite.vue.include = [...new Set([...includeArray, regExpMarkdown])];
 
 		// Nuxt 页面元数据扫描支持
 		const transform = (nuxt.options.imports.transform ||= {});
 		const include = (transform.include ||= [regExpVue]);
-		if (!include.includes(regExpAsciiDocument)) include.push(regExpAsciiDocument);
+		if (!include.includes(regExpMarkdown)) include.push(regExpMarkdown);
 
 		// Nuxt 进行组件处理
 		const components = nuxt.options.components;
@@ -49,13 +45,12 @@ export default defineNuxtModule({
 			const includeArray = Array.isArray(existingInclude) ? existingInclude : [existingInclude];
 
 			// 写入 include 并去重
-			transform.include = [...new Set([...includeArray, regExpAsciiDocument, regExpVue])];
+			transform.include = [...new Set([...includeArray, regExpMarkdown, regExpVue])];
 		}
 
+		// 预热
 		if (!nuxt.options._prepare) {
-			// 预热
-			logger.info('正在预热渲染器，稍安勿躁');
-			moduleStore.renderer = new Renderer(path.join(nuxt.options.buildDir, '.cache/markdown-render.db')); // 渲染器
+			storeContext.renderer = new Renderer(path.join(nuxt.options.buildDir, 'cache/markdown-render.db')); // 渲染器
 			await getRenderer(); // MarkdownIt
 		}
 
@@ -67,14 +62,21 @@ export default defineNuxtModule({
 			'wiki-container',
 		);
 
-		addVitePlugin(ViteVirtual);
 		addVitePlugin(viteTransform);
 
 		// 元数据扫描
 		if (!nuxt.options._prepare) {
 			nuxt.hook('pages:resolved', metadataHook);
 		}
-		nuxt.hook('prepare:types', tsconfigHook);
+
+		// 类型
+		addTypeTemplate({
+			src: resolve('./types/index.d.ts'),
+			filename: 'types/nuxt-wiki_module.d.ts',
+		});
+		nuxt.options.alias['#wiki_module'] = resolve('./runtime/components');
+		nuxt.options.alias['#wiki_module/*'] = resolve('./runtime/components/*');
+
 		nuxt.hook('close', closeHook);
 	},
 });

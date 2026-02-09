@@ -1,9 +1,8 @@
-import { moduleStore } from '../../store';
+import { storeContext } from '../../context';
 import type { NuxtHooks } from '@nuxt/schema';
 
 const closeHook: NuxtHooks['close'] = async () => {
-	await moduleStore.renderer?.close();
-	moduleStore.renderer = undefined;
+	await storeContext.renderer?.close();
 };
 
 export default closeHook;

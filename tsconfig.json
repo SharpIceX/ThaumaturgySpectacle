@@ -2,6 +2,9 @@
 	"files": [],
 	"references": [
 		{
+			"path": "./tsconfig.isolated.json"
+		},
+		{
 			"path": "./packages/eslint-config/tsconfig.json"
 		},
 		{

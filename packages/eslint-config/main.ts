@@ -6,6 +6,7 @@ import jsdoc from 'eslint-plugin-jsdoc';
 import tseslint from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 import regexpPlugin from 'eslint-plugin-regexp';
+import eslintPluginVue from 'eslint-plugin-vue';
 import pluginPromise from 'eslint-plugin-promise';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
@@ -20,6 +21,7 @@ const config = defineConfig(
 	eslint.configs.recommended,
 	tseslint.configs.strict,
 	tseslint.configs.stylistic,
+	...eslintPluginVue.configs['flat/recommended'],
 	eslintPluginUnicorn.configs.recommended,
 	pluginPromise.configs['flat/recommended'],
 	regexpPlugin.configs['flat/recommended'],
@@ -32,6 +34,7 @@ const config = defineConfig(
 				projectService: true,
 				ecmaVersion: 'latest',
 				tsconfigRootDir: ProjectPath,
+				extraFileExtensions: ['.vue'],
 			},
 			globals: {
 				...globals['shared-node-browser'],
@@ -39,6 +42,15 @@ const config = defineConfig(
 		},
 		rules: {
 			eqeqeq: 'error',
+		},
+	},
+	// Vue
+	{
+		files: ['**/*.{ts,vue}'],
+		languageOptions: {
+			parserOptions: {
+				parser: tseslint.parser,
+			},
 		},
 	},
 	// Nuxt 项目

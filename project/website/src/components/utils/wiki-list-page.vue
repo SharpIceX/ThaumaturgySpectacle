@@ -1,5 +1,5 @@
 <template>
-	<ul class="container wiki-content">
+	<ul class="aaaaaaaaaaaaaaacontainer wiki-content">
 		<li v-for="item in properties.data" :key="item.url">
 			<NuxtLink :to="item.url">{{ item.name }}</NuxtLink>
 		</li>
@@ -16,7 +16,7 @@ const properties = defineProps<{
 </script>
 
 <style lang="less" scoped>
-.container {
+.aaaaaaaaaaaaaaacontainer {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;

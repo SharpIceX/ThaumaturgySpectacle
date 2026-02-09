@@ -2,12 +2,6 @@
  * SPDX-License-Identifier: Zero-Clause BSD
  */
 
-declare module '*/package.json' {
-	import type { PackageJson } from 'type-fest';
-	const value: PackageJson;
-	export default value;
-}
-
 declare module 'eslint-plugin-promise' {
 	import type { Linter } from 'eslint';
 

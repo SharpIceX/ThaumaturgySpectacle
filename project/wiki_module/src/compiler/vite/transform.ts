@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite';
-import { moduleStore } from '../../store';
+import { storeContext } from '../../context';
 
 const MarkdownTransformPlugin = (): Plugin => {
 	return {
@@ -14,17 +14,17 @@ const MarkdownTransformPlugin = (): Plugin => {
 			// 忽略 Vue AST 处理
 			if (url.searchParams.get('type') === 'script') return;
 
-			// 确保渲染器可用
-			if (!moduleStore.renderer?.render) throw new Error('渲染器未初始化');
-
 			const content = code.trim();
 
 			if (!content || code.length === 0) this.error({ message: `空内容`, id: id });
 
-			const renderResult = await moduleStore.renderer?.render(code);
+			const renderResult = await storeContext.renderer?.render(code);
 
 			return {
 				code: renderResult.html,
+				map: {
+					mappings: '',
+				},
 			};
 		},
 	};
