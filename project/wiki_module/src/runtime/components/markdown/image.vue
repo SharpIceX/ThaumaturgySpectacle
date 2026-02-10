@@ -28,7 +28,7 @@
 
 <script lang="ts" setup>
 import preloadImage from '@ts/utils/src/web/preload-image';
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 defineOptions({
 	name: 'MarkdownImage',
@@ -49,7 +49,6 @@ const properties = withDefaults(
 
 const status = ref<'loading' | 'loaded' | 'error' | 'timeout'>('loading');
 const containerReference = ref<HTMLElement>();
-const site = computed(() => 200 * properties.scale);
 
 let observer: IntersectionObserver | undefined;
 let isUnmounted = false;
@@ -102,51 +101,16 @@ onBeforeUnmount(() => {
 <style lang="less" scoped>
 @import (reference) '$/nord/src/lesscss/nord.less';
 
-.loader {
-	width: 60%;
-	height: auto;
-	flex-shrink: 0;
-	position: relative;
-	aspect-ratio: 1 / 1;
-
-	&::after {
-		content: '';
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		border-radius: 50%;
-		box-sizing: border-box;
-		animation: image-loader-rotate 1s linear infinite;
-
-		border: calc(v-bind("site + 'px'") / 40) solid @nord9;
-		border-top-color: transparent;
-
-		@keyframes image-loader-rotate {
-			to {
-				transform: rotate(360deg);
-			}
-		}
-	}
-
-	&::before {
-		top: 50%;
-		left: 50%;
-		color: @nord9;
-		content: '加载中';
-		position: absolute;
-		transform: translate(-50%, -50%);
-		font-size: calc(v-bind("site + 'px'") / 13);
-	}
-}
-
 .image-container {
 	display: flex;
+	max-width: 100%;
 	margin-bottom: 1em;
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
-	width: v-bind("site + 'px'");
-	min-height: v-bind("site + 'px'");
+	width: clamp(180px, 45vw, 200px);
+	max-height: clamp(180px, 45vw, 200px);
+	min-height: v-bind("properties.scale + 'px'");
 
 	&[data-position='center'] {
 		margin-left: auto;
@@ -170,15 +134,55 @@ onBeforeUnmount(() => {
 	}
 
 	img {
+		width: 100%;
 		height: 100%;
+		display: block;
+		max-width: 100%;
+		max-height: 100%;
 		object-fit: contain;
 	}
 
 	figcaption {
-		margin-top: 0.5em;
-		font-size: 0.875rem;
-		text-align: center;
 		line-height: 1.4;
+		margin-top: 0.5em;
+		text-align: center;
+		font-size: 0.875rem;
+	}
+}
+
+.loader {
+	width: 60%;
+	height: auto;
+	flex-shrink: 0;
+	position: relative;
+	aspect-ratio: 1 / 1;
+
+	&::after {
+		content: '';
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		border-radius: 50%;
+		animation: image-loader-rotate 1s linear infinite;
+
+		border: clamp(2px, calc(v-bind("properties.scale + 'px'") / 24), 6px) solid @nord9;
+		border-top-color: transparent;
+
+		@keyframes image-loader-rotate {
+			to {
+				transform: rotate(360deg);
+			}
+		}
+	}
+
+	&::before {
+		top: 50%;
+		left: 50%;
+		color: @nord9;
+		content: '加载中';
+		position: absolute;
+		transform: translate(-50%, -50%);
+		font-size: clamp(14px, calc(v-bind("properties.scale + 'px'") / 10), 22px);
 	}
 }
 </style>

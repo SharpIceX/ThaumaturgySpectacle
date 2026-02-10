@@ -3,17 +3,17 @@ import { useLogger } from '@nuxt/kit';
 import shiki from '@shikijs/markdown-it';
 import TOML, { type TomlTable } from 'smol-toml';
 import MarkdownItCJK from 'markdown-it-cjk-friendly';
+import { code as MarkdownItCode } from './plugins/code';
 import { html as MarkdownItHtml } from './plugins/html';
 import { ins as MarkdownItIns } from '@mdit/plugin-ins';
 import { sub as MarkdownItSub } from '@mdit/plugin-sub';
 import { sup as MarkdownItSup } from '@mdit/plugin-sup';
 import { ruby as MarkdownItRuby } from '@mdit/plugin-ruby';
 import { mark as MarkdownItMark } from '@mdit/plugin-mark';
-import { anchor as MarkdownItAnchor } from './plugins/anchor';
-import { bundledLanguages, type BuiltinLanguage } from 'shiki';
 import { spoiler as MarkdownItSpoiler } from '@mdit/plugin-spoiler';
 import { underline as MarkdownItUnderline } from './plugins/underline';
 import { image as MarkdownItImage, type ImageEnvironment } from './plugins/image';
+import { anchor as MarkdownItAnchor, type AnchorEnvironment } from './plugins/anchor';
 import { footnote as MarkdownItFootnote, type FootNoteEnv } from '@mdit/plugin-footnote';
 import { tasklist as MarkdownItTasklist, type TaskListEnv } from '@mdit/plugin-tasklist';
 import { alert as MarkdownItAlert, type MarkdownItAlertOptions } from '@mdit/plugin-alert';
@@ -49,7 +49,7 @@ interface WikiRenderResult {
 /**
  * Markdown-it 环境变量
  */
-type MarkdownItEnvironment = TaskListEnv & FootNoteEnv & ImageEnvironment;
+type MarkdownItEnvironment = TaskListEnv & FootNoteEnv & ImageEnvironment & AnchorEnvironment;
 
 /**
  * 分离 Markdown 中的 Front Matter 和 正文
@@ -164,9 +164,11 @@ async function getRenderer(): Promise<MarkdownIt> {
 	md.use(
 		await shiki({
 			theme: 'nord',
-			langs: Object.keys(bundledLanguages) as BuiltinLanguage[],
 		}),
 	);
+
+	// 代码块
+	md.use(MarkdownItCode);
 
 	mdInstance = md;
 	return mdInstance;
@@ -254,7 +256,8 @@ async function render(content: string): Promise<WikiRenderResult> {
 	</NuxtLayout>
 </template>
 <script lang="ts" setup>
-import Image from "#wiki_module/markdown/image.vue";
+import MarkdownCode from "#wiki_module/markdown/code.vue";
+import MarkdownImage from "#wiki_module/markdown/image.vue";
 ${importContent.join('\n')}
 </script>
 `,

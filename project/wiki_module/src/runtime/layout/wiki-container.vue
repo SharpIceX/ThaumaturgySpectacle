@@ -8,7 +8,6 @@
 				</p>
 			</header>
 			<slot />
-			<hr v-if="$route.meta['type'] === 'wiki'" />
 			<div v-if="$route.meta['category']" class="category">
 				<p>分类：</p>
 				<ul>
@@ -49,7 +48,17 @@
 
 		// 当 body 是容器内唯一的子元素时，就是没有 aside 的时候
 		&:only-child {
-			width: 80%;
+			width: 70%;
+		}
+
+		@media (max-width: 768px) {
+			width: 100%;
+			padding: 1rem;
+			border-radius: 0;
+
+			&:only-child {
+				width: 100%;
+			}
 		}
 
 		.title {

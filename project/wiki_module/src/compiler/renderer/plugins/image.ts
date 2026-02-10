@@ -3,7 +3,6 @@ import { createHash } from 'node:crypto';
 import { hasProtocol, parseURL } from 'ufo';
 import type { PluginSimple } from 'markdown-it';
 import type Token from 'markdown-it/lib/token.mjs';
-import type StateCore from 'markdown-it/lib/rules_core/state_core.mjs';
 
 const logger = useLogger('@ts/wiki_module:markdown-it/image');
 
@@ -277,7 +276,7 @@ const image: PluginSimple = (md) => {
 			properties.push(`source="${source}"`);
 		}
 
-		return `<Image ${properties.join(' ')} />`;
+		return `<MarkdownImage ${properties.join(' ')} />`;
 	};
 
 	// 段落标签消除

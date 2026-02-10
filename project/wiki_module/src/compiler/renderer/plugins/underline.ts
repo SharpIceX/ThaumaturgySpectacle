@@ -6,9 +6,7 @@ const underline: PluginSimple = (md) => {
 		const max = state.posMax;
 
 		// 匹配`--`标签
-		if (state.src.codePointAt(start) !== 0x2d || state.src.codePointAt(start + 1) !== 0x2d) {
-			return false;
-		}
+		if (state.src.codePointAt(start) !== 0x2d || state.src.codePointAt(start + 1) !== 0x2d) return false;
 
 		if (silent) return false;
 

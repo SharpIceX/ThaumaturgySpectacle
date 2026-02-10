@@ -6,5 +6,5 @@
 
 # 其他项目
 /project/*/dist
-/project/website/.nuxt
-/project/website/.output
+/project/*/.nuxt
+/project/*/.output

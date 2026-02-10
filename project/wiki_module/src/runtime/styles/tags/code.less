@@ -4,23 +4,54 @@ pre,
 code {
 	// 防止被环绕
 	clear: both;
-}
 
-code {
 	font-family: 'JetBrains Mono Variable', monospace;
-}
-
-// 代码块
-pre {
-	padding: 1em;
-	border-radius: 6px;
 }
 
 // 行内代码
 code:not(pre code) {
 	color: @nord8;
 	font-size: 85%;
+	overflow-x: auto;
 	border-radius: 3px;
 	padding: 0.2em 0.4em;
 	background-color: @nord3;
+}
+// 代码块
+pre.shiki {
+	code {
+		background-image: linear-gradient(
+			to right,
+			transparent calc(3.2em - 2px),
+			fade(@nord13, 50%) 3.2em,
+			transparent 3.2em
+		);
+	}
+}
+pre.shiki {
+	padding: 1em 0;
+	overflow-x: auto;
+	position: relative;
+	counter-reset: step;
+	border-radius: 12px;
+
+	code {
+		display: block;
+
+		.line {
+			position: relative;
+			padding: 0 1em 0 4em;
+
+			&::before {
+				left: 0;
+				width: 3.2em;
+				opacity: 0.5;
+				color: @nord13;
+				position: absolute;
+				text-align: center;
+				content: counter(step);
+				counter-increment: step;
+			}
+		}
+	}
 }

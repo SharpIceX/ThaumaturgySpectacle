@@ -339,8 +339,29 @@ The quick brown fox jumps over the lazy dog.
 
 ### 普通独立代码块
 
-```js
-console.log('Hello World!');
+```ts
+/**
+ * 这是一个 TypeScript 示例类
+ * -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ * 很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长
+ * -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
+interface Greeter {
+  message: string;
+  sayHello(): void;
+}
+
+class HelloWorld implements Greeter {
+  constructor(public message: string = 'Hello World!') {}
+
+  sayHello(): void {
+    console.log(this.message);
+  }
+}
+
+const greeter = new HelloWorld();
+greeter.sayHello();
 ```
 
 ## 数学公式

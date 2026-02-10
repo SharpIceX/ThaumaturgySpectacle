@@ -8,7 +8,7 @@ interface HeadingItem {
 	level: number;
 }
 
-interface MarkdownItEnvironment {
+interface AnchorEnvironment {
 	headings?: HeadingItem[];
 	headingIdCounts?: Map<string, number>;
 	toc?: string;
@@ -89,10 +89,10 @@ function buildTocHtml(headings: HeadingItem[]): string {
 function anchor(md: MarkdownIt): void {
 	const defaultRender: RenderRule =
 		md.renderer.rules['heading_open'] ||
-		((tokens, index, options, _environment: MarkdownItEnvironment, self): string =>
+		((tokens, index, options, _environment: AnchorEnvironment, self): string =>
 			self.renderToken(tokens, index, options));
 
-	md.renderer.rules['heading_open'] = (tokens, index, options, environment: MarkdownItEnvironment, self): string => {
+	md.renderer.rules['heading_open'] = (tokens, index, options, environment: AnchorEnvironment, self): string => {
 		const token = tokens[index];
 		if (!token) {
 			return defaultRender(tokens, index, options, environment, self);
@@ -136,7 +136,7 @@ function anchor(md: MarkdownIt): void {
 
 	// 渲染完成后写入 env.toc
 	const originalRender = md.render.bind(md);
-	md.render = (source: string, environment: MarkdownItEnvironment = {}): string => {
+	md.render = (source: string, environment: AnchorEnvironment = {}): string => {
 		const html = originalRender(source, environment);
 		environment.toc = environment.headings ? buildTocHtml(environment.headings) : '';
 		return html;
@@ -144,4 +144,4 @@ function anchor(md: MarkdownIt): void {
 }
 
 export { anchor };
-export type { HeadingItem, MarkdownItEnvironment };
+export type { HeadingItem, AnchorEnvironment };
