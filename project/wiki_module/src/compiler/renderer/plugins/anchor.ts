@@ -1,46 +1,39 @@
 import MarkdownIt from 'markdown-it';
-import Token from 'markdown-it/lib/token.mjs';
-import type { Options } from 'markdown-it';
-import Renderer, { type RenderRule } from 'markdown-it/lib/renderer.mjs';
+import { type RenderRule } from 'markdown-it/lib/renderer.mjs';
 
-/**
- * 标题数据结构
- */
-export interface HeadingItem {
+/** 标题数据结构 */
+interface HeadingItem {
 	name: string;
 	id: string;
 	level: number;
 }
 
-/**
- * 扩展 markdown-it 的 env 类型
- */
-export interface MarkdownItEnvironment {
+interface MarkdownItEnvironment {
 	headings?: HeadingItem[];
 	headingIdCounts?: Map<string, number>;
 	toc?: string;
 }
 
 /**
- * 独立的 ID 生成/清理函数
- * 逻辑：去除左右空格 -> 中间空格转下划线 -> URI 编码
- * @param rawText - 原始标题文本
- * @returns 格式化后的 ID 字符串
+ * 生成 ID
+ * @param text 原始标题文本
+ * @returns ID
  */
-export function generateHeadingId(rawText: string): string {
-	const trimmed = rawText.trim();
-	if (!trimmed) {
-		return 'heading';
-	}
-
-	const processedText = trimmed.replaceAll(/\s+/g, '_');
-	return encodeURIComponent(processedText);
+function generateHeadingId(text: string): string {
+	const baseId = text
+		.trim() // 去除首尾空格
+		.toLowerCase() // 转换为小写
+		.replaceAll(/\s+/g, '-') // 将连续的空白字符替换为单个连字符
+		.replaceAll(/[^\w\u4E00-\u9FA5-]/g, '') // 移除非单词字符（A-Z, 0-9, _）、非中文、非连字符的特殊符号
+		.replaceAll(/-+/g, '-') // 将多个连续连字符合并为一个
+		.replaceAll(/^-+|-+$/g, ''); // 移除字符串开头和结尾的所有连字符
+	return encodeURIComponent(baseId) || 'section';
 }
 
 /**
  * 生成唯一 ID（基于计数器）
- * @param baseId - 基础 ID
- * @param counts - 计数器映射
+ * @param baseId ID
+ * @param counts 记数器映射
  * @returns 唯一 ID
  */
 function ensureUniqueId(baseId: string, counts: Map<string, number>): string {
@@ -48,90 +41,78 @@ function ensureUniqueId(baseId: string, counts: Map<string, number>): string {
 	const next = current + 1;
 	counts.set(baseId, next);
 
-	return current === 0 ? baseId : `${baseId}_${current}`;
+	return current === 0 ? baseId : `${baseId}-${current}`;
 }
 
 /**
  * 根据 headings 生成 TOC HTML
- * @param headings - 标题数组
+ * @param headings 标题数组
  * @returns TOC HTML 字符串
  */
 function buildTocHtml(headings: HeadingItem[]): string {
-	if (headings.length === 0) {
-		return '';
-	}
+	if (headings.length === 0) return '';
 
-	let result = '<ol>';
-	let currentLevel = headings[0]?.level ?? 1;
+	const htmlParts: string[] = ['<nav role="navigation" aria-label="Table of Contents">', '<ol>'];
+
+	const listStack: number[] = [1];
 
 	for (const heading of headings) {
-		const level = heading.level || 1;
+		const level = heading.level;
 
-		while (level > currentLevel) {
-			result += '<ol>';
-			currentLevel++;
+		while (level > listStack.length) {
+			htmlParts.push('<li aria-hidden="true"><ol>');
+			listStack.push(listStack.length + 1);
 		}
 
-		while (level < currentLevel) {
-			result += '</ol></li>';
-			currentLevel--;
+		while (level < listStack.length) {
+			htmlParts.push('</ol></li>');
+			listStack.pop();
 		}
 
-		result += `<li><a href="#${heading.id}">${heading.name}</a>`;
+		htmlParts.push(`<li><a href="#${heading.id}">${heading.name}</a></li>`);
 	}
 
-	while (currentLevel > (headings[0]?.level ?? 1)) {
-		result += '</ol></li>';
-		currentLevel--;
+	while (listStack.length > 1) {
+		htmlParts.push('</ol></li>');
+		listStack.pop();
 	}
 
-	result += '</li></ol>';
-	return result.replace('<ol></li>', '<ol>');
+	htmlParts.push('</ol>', '</nav>');
+	return htmlParts.join('');
 }
 
 /**
  * Markdown-it 插件：自动为标题添加 ID 锚点并记录到环境对象中
  * 渲染完成后自动写入 env.toc
- * @param md - MarkdownIt 实例
+ * @param md MarkdownIt 实例
  */
-export default function headingIdPlugin(md: MarkdownIt): void {
+function anchor(md: MarkdownIt): void {
 	const defaultRender: RenderRule =
 		md.renderer.rules['heading_open'] ||
-		((
-			tokens: Token[],
-			index: number,
-			options: Options,
-			_environment: MarkdownItEnvironment,
-			self: Renderer,
-		): string => self.renderToken(tokens, index, options));
+		((tokens, index, options, _environment: MarkdownItEnvironment, self): string =>
+			self.renderToken(tokens, index, options));
 
-	md.renderer.rules['heading_open'] = (
-		tokens: Token[],
-		index: number,
-		options: Options,
-		environment: MarkdownItEnvironment,
-		self: Renderer,
-	): string => {
+	md.renderer.rules['heading_open'] = (tokens, index, options, environment: MarkdownItEnvironment, self): string => {
 		const token = tokens[index];
 		if (!token) {
 			return defaultRender(tokens, index, options, environment, self);
 		}
 
-		// 1. 获取标题文本 (heading_open 的下一个 token 通常是 inline)
+		// 获取标题文本
 		const inlineToken = tokens[index + 1];
 		const titleName = inlineToken?.type === 'inline' ? inlineToken.content : '';
 
-		// 2. 生成基础 ID
+		// 生成ID
 		const baseId = generateHeadingId(titleName);
 
-		// 3. 初始化 env 容器
+		// 初始化 env 容器
 		environment.headings ??= [];
 		environment.headingIdCounts ??= new Map<string, number>();
 
-		// 4. 生成唯一 ID
+		// 生成唯一 ID
 		const titleId = ensureUniqueId(baseId, environment.headingIdCounts);
 
-		// 5. 将 ID 注入 Token 属性
+		// 将 ID 注入 Token 属性
 		const idIndex = token.attrIndex('id');
 		if (idIndex < 0) {
 			token.attrPush(['id', titleId]);
@@ -142,8 +123,8 @@ export default function headingIdPlugin(md: MarkdownIt): void {
 			}
 		}
 
-		// 6. 记录到 env 对象
-		const level = Number.parseInt(token.tag.slice(1), 10) || 0;
+		// 记录到 env 对象
+		const level = Number.parseInt(token.tag.slice(1), 10) - 1 || 1;
 		environment.headings.push({
 			name: titleName,
 			id: titleId,
@@ -161,3 +142,6 @@ export default function headingIdPlugin(md: MarkdownIt): void {
 		return html;
 	};
 }
+
+export { anchor };
+export type { HeadingItem, MarkdownItEnvironment };

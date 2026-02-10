@@ -1,117 +1,99 @@
 <template>
-	<div
+	<figure
 		ref="containerReference"
 		class="image-container"
-		:class="{
-			'image-left': left,
-			'image-right': right,
-			'image-center': !left && !right,
-		}"
-		,
-		:style="
-			status === 'loaded'
-				? {
-						'shape-outside': `url(${source})`,
-					}
-				: {}
-		">
+		:data-position="left ? 'left' : right ? 'right' : 'center'"
+		:style="status === 'loaded' ? { 'shape-outside': `url(${source})` } : {}">
 		<!-- 加载完成 -->
-		<img v-if="status === 'loaded'" :src="source" :title="title" :alt="title" class="h-auto w-full object-cover" />
+		<img v-if="status === 'loaded'" :src="source" :title="title" />
 
 		<!-- 加载中 -->
-		<div v-else-if="status === 'loading'" class="loader" role="status" aria-label="图片加载中"></div>
+		<div v-else-if="status === 'loading'" class="loader" role="status" aria-busy="true" aria-label="加载中"></div>
 
-		<!-- 错误 -->
+		<!-- 加载错误 -->
 		<div v-else-if="status === 'error'" role="alert">
-			<!-- TODO：后面要换成图片 -->
 			<p>图片加载失败</p>
 		</div>
 
-		<!-- 超时 -->
+		<!-- 加载超时 -->
 		<div v-else-if="status === 'timeout'" role="alert">
-			<!-- TODO：后面要换成图片 -->
 			<p>图片加载超时</p>
 		</div>
 
-		<!-- 提示 -->
-		<p>
-			{{ props.title }}
-		</p>
-	</div>
+		<figcaption v-if="title">
+			{{ properties.title }}
+		</figcaption>
+	</figure>
 </template>
 
 <script lang="ts" setup>
 import preloadImage from '@ts/utils/src/web/preload-image';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 
 defineOptions({
-	name: 'Image',
+	name: 'MarkdownImage',
 });
 
-const props = defineProps<{
-	source: Promise<{ default: string }>;
-	title: string;
-
-	left?: boolean;
-	right?: boolean;
-	scale?: number;
-}>();
+const properties = withDefaults(
+	defineProps<{
+		title: string;
+		source: string;
+		left?: boolean;
+		right?: boolean;
+		scale?: number;
+	}>(),
+	{
+		scale: 1,
+	},
+);
 
 const status = ref<'loading' | 'loaded' | 'error' | 'timeout'>('loading');
-
-/** 图片地址 */
-const source = (await props.source).default;
-
-/** 图片容器大小 */
-const BASE_SIZE = 200;
-const site = computed(() => {
-	return props.scale ? BASE_SIZE * props.scale : BASE_SIZE;
-});
-
-/** 进入视口才加载 */
 const containerReference = ref<HTMLElement>();
+const site = computed(() => 200 * properties.scale);
+
 let observer: IntersectionObserver | undefined;
+let isUnmounted = false;
+
 const loadImage = async () => {
-	console.log('进入视口，准备加载:', source);
-	const result = await preloadImage(source);
+	// 判断两次 isUnmounted 防止内存泄露
+	if (isUnmounted) return;
+	const result = await preloadImage(properties.source);
+	if (isUnmounted) return;
 
 	if (result === true) {
 		status.value = 'loaded';
-		console.log('图片加载完成:', source);
 	} else if (result === false) {
 		status.value = 'error';
-		console.log('图片加载错误:', source);
-	} else if (typeof result === 'undefined') {
+	} else {
 		status.value = 'timeout';
-		console.log('图片加载超时:', source);
 	}
 };
 
 onMounted(() => {
 	if (!containerReference.value) return;
-	requestIdleCallback?.(() => {
-		observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						loadImage();
-						if (containerReference.value) observer?.unobserve(containerReference.value);
-					}
+
+	observer = new IntersectionObserver(
+		([entry]) => {
+			if (entry?.isIntersecting) {
+				loadImage();
+				if (containerReference.value) {
+					observer?.unobserve(containerReference.value);
 				}
-			},
-			{
-				threshold: 0.1,
-				rootMargin: '200px 0px',
-			},
-		);
-		observer!.observe(containerReference.value as HTMLElement);
-		console.log('开始监听懒加载图片:', source);
-	});
+			}
+		},
+		{
+			threshold: 0.01,
+			rootMargin: '200px 0px',
+		},
+	);
+
+	observer.observe(containerReference.value);
 });
 
 onBeforeUnmount(() => {
+	isUnmounted = true;
 	if (observer) {
 		observer.disconnect();
-		console.log('取消监听:', source);
 		observer = undefined;
 	}
 });
@@ -164,33 +146,39 @@ onBeforeUnmount(() => {
 	flex-direction: column;
 	justify-content: center;
 	width: v-bind("site + 'px'");
-	height: v-bind("site + 'px'");
+	min-height: v-bind("site + 'px'");
+
+	&[data-position='center'] {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	&[data-position='left'],
+	&[data-position='right'] {
+		shape-margin: 12px;
+		shape-image-threshold: 0.3;
+	}
+
+	&[data-position='left'] {
+		float: left;
+		margin-right: 1em;
+	}
+
+	&[data-position='right'] {
+		float: right;
+		margin-left: 1em;
+	}
 
 	img {
-		width: 100%;
 		height: 100%;
 		object-fit: contain;
 	}
-}
 
-/** 默认无环绕 */
-.image-center {
-	margin: 0 auto;
-}
-
-.image-left,
-.image-right {
-	shape-margin: 12px;
-	shape-image-threshold: 0.5;
-}
-
-/** 左环绕 */
-.image-left {
-	float: left;
-}
-
-/** 右环绕 */
-.image-right {
-	float: right;
+	figcaption {
+		margin-top: 0.5em;
+		font-size: 0.875rem;
+		text-align: center;
+		line-height: 1.4;
+	}
 }
 </style>

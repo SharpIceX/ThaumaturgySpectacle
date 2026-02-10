@@ -1,8 +1,7 @@
 import type { PluginSimple } from 'markdown-it';
-import type StateInline from 'markdown-it/lib/rules_inline/state_inline.mjs';
 
 const underline: PluginSimple = (md) => {
-	md.inline.ruler.before('emphasis', 'underline', (state: StateInline, silent: boolean): boolean => {
+	md.inline.ruler.before('emphasis', 'underline', (state, silent): boolean => {
 		const start = state.pos;
 		const max = state.posMax;
 
@@ -36,7 +35,7 @@ const underline: PluginSimple = (md) => {
 
 		const contentEnd = state.pos;
 
-		// 创建 Token 流
+		// oken 流
 		state.push('u_open', 'u', 1);
 		state.pos = start + 2;
 		state.posMax = contentEnd;

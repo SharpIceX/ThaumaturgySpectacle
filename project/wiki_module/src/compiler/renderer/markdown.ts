@@ -3,18 +3,19 @@ import { useLogger } from '@nuxt/kit';
 import shiki from '@shikijs/markdown-it';
 import TOML, { type TomlTable } from 'smol-toml';
 import MarkdownItCJK from 'markdown-it-cjk-friendly';
+import { html as MarkdownItHtml } from './plugins/html';
 import { ins as MarkdownItIns } from '@mdit/plugin-ins';
 import { sub as MarkdownItSub } from '@mdit/plugin-sub';
 import { sup as MarkdownItSup } from '@mdit/plugin-sup';
-import { image as MarkdownItImage } from './plugins/image';
 import { ruby as MarkdownItRuby } from '@mdit/plugin-ruby';
 import { mark as MarkdownItMark } from '@mdit/plugin-mark';
-import type { Renderer, Token } from 'markdown-it/index.js';
+import { anchor as MarkdownItAnchor } from './plugins/anchor';
 import { bundledLanguages, type BuiltinLanguage } from 'shiki';
 import { spoiler as MarkdownItSpoiler } from '@mdit/plugin-spoiler';
 import { underline as MarkdownItUnderline } from './plugins/underline';
-import { tasklist as MarkdownItTasklist } from '@mdit/plugin-tasklist';
-import { footnote as MarkdownItFootnote } from '@mdit/plugin-footnote';
+import { image as MarkdownItImage, type ImageEnvironment } from './plugins/image';
+import { footnote as MarkdownItFootnote, type FootNoteEnv } from '@mdit/plugin-footnote';
+import { tasklist as MarkdownItTasklist, type TaskListEnv } from '@mdit/plugin-tasklist';
 import { alert as MarkdownItAlert, type MarkdownItAlertOptions } from '@mdit/plugin-alert';
 import { katex as MarkdownItKatex, type MarkdownItKatexOptions } from '@mdit/plugin-katex';
 
@@ -44,6 +45,11 @@ interface WikiRenderResult {
 	data: WikiFrontMatter;
 	html: string;
 }
+
+/**
+ * Markdown-it 环境变量
+ */
+type MarkdownItEnvironment = TaskListEnv & FootNoteEnv & ImageEnvironment;
 
 /**
  * 分离 Markdown 中的 Front Matter 和 正文
@@ -93,23 +99,13 @@ async function getRenderer(): Promise<MarkdownIt> {
 	});
 
 	// HTML 处理
-	const markdownItHtml = useLogger('@ts/wiki_module:markdown-it/html');
-	const handleHtmlToken: Renderer.RenderRule = (tokens: Token[], index: number): string => {
-		const token = tokens[index];
-		const content = token?.content || '';
-		const trimmedContent = content.trim();
-
-		if (!trimmedContent.startsWith('<!--')) {
-			markdownItHtml.error(`检测到 Markdown 中包含禁止使用的 HTML 标签: ${trimmedContent}`);
-		}
-
-		return '';
-	};
-	md.renderer.rules.html_block = handleHtmlToken;
-	md.renderer.rules.html_inline = handleHtmlToken;
+	md.use(MarkdownItHtml);
 
 	// CJK 支持
 	md.use(MarkdownItCJK);
+
+	// 锚点
+	md.use(MarkdownItAnchor);
 
 	// 图片
 	md.use(MarkdownItImage);
@@ -235,8 +231,17 @@ async function render(content: string): Promise<WikiRenderResult> {
 	// 校验
 	validateFrontMatter(data);
 
+	const environment: Partial<MarkdownItEnvironment> = {};
+
 	const md = await getRenderer();
-	const html = md.render(result.bodyContent);
+	const html = md.render(result.bodyContent, environment);
+
+	const importContent: string[] = [];
+	if (environment.image?.size) {
+		for (const [key, value] of environment.image.entries()) {
+			importContent.push(`import ${key} from "${value}";`);
+		}
+	}
 
 	return {
 		data,
@@ -250,6 +255,7 @@ async function render(content: string): Promise<WikiRenderResult> {
 </template>
 <script lang="ts" setup>
 import Image from "#wiki_module/markdown/image.vue";
+${importContent.join('\n')}
 </script>
 `,
 	};
