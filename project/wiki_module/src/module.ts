@@ -1,10 +1,9 @@
 import path from 'node:path';
 import { storeContext } from './context';
 import closeHook from './compiler/hooks/close';
-import { Renderer } from './compiler/renderer/main';
 import metadataHook from './compiler/hooks/metadata';
 import viteTransform from './compiler/vite/transform';
-import { getRenderer } from './compiler/renderer/markdown';
+import { createRender } from './compiler/renderer/main';
 import { addVitePlugin, defineNuxtModule, createResolver, addLayout, addTypeTemplate } from '@nuxt/kit';
 
 const regExpMarkdown = /\.md$/;
@@ -52,12 +51,6 @@ export default defineNuxtModule({
 			transform.include = [...new Set([...includeArray, regExpMarkdown, regExpVue])];
 		}
 
-		// 预热
-		if (!nuxt.options._prepare) {
-			storeContext.renderer = new Renderer(path.join(nuxt.options.buildDir, 'cache/markdown-render.db')); // 渲染器
-			await getRenderer(); // MarkdownIt
-		}
-
 		addLayout(
 			{
 				src: resolve('./runtime/layout/wiki-container.vue'),
@@ -65,13 +58,6 @@ export default defineNuxtModule({
 			},
 			'wiki-container',
 		);
-
-		addVitePlugin(viteTransform);
-
-		// 元数据扫描
-		if (!nuxt.options._prepare) {
-			nuxt.hook('pages:resolved', metadataHook);
-		}
 
 		// 类型
 		addTypeTemplate({
@@ -81,6 +67,15 @@ export default defineNuxtModule({
 		nuxt.options.alias['#wiki_module'] = resolve('./runtime/components');
 		nuxt.options.alias['#wiki_module/*'] = resolve('./runtime/components/*');
 
+		addVitePlugin(viteTransform);
+
+		if (!nuxt.options._prepare) nuxt.hook('pages:resolved', metadataHook);
 		nuxt.hook('close', closeHook);
+
+		// 预热
+		if (!nuxt.options._prepare) {
+			// 初始化 storeContext
+			storeContext.renderer = await createRender(path.join(nuxt.options.buildDir, 'cache/markdown-render.db'));
+		}
 	},
 });

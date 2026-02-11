@@ -42,6 +42,21 @@ const config = defineConfig(
 		},
 		rules: {
 			eqeqeq: 'error',
+			'unicorn/prevent-abbreviations': [
+				'error',
+				{
+					allowList: {
+						utils: true,
+					},
+				},
+			],
+			'jsdoc/multiline-blocks': [
+				'error',
+				{
+					noEmptyLines: false,
+					minimumLengthForMultiline: 1,
+				},
+			],
 		},
 	},
 	// Vue
