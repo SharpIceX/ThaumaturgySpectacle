@@ -1,14 +1,9 @@
 <template>
-	<footer role="contentinfo" class="mt-4 py-3 text-center border-t border-t-nord4 border-t-op-30">
+	<footer role="contentinfo" class="footer-container">
 		<p>
-			Copyright © 2023-2025
-			<a
-				href="https://github.com/SharpIceX"
-				aria-label="访问锐冰 (SharpIce) 的 GitHub 页面"
-				class="text-nord8 ml-1 mr-1 underline hover:no-underline">
-				锐冰 (SharpIce)
-			</a>
-			保留所有权利。
+			<span>Copyright © 2023-2025</span>
+			<NuxtLink href="https://github.com/SharpIceX" target="_blank" class="mx-1">锐冰 (SharpIce)</NuxtLink>
+			<span>保留所有权利。</span>
 		</p>
 	</footer>
 </template>
@@ -16,3 +11,13 @@
 <script setup>
 defineOptions({ name: 'AppFooter' });
 </script>
+
+<style lang="less" scoped>
+@import (reference) '$/nord/src/lesscss/nord.less';
+
+.footer-container {
+	text-align: center;
+	padding-block: 0.8rem;
+	border-top: 1px solid @nord3;
+}
+</style>

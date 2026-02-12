@@ -22,7 +22,7 @@
 			</div>
 		</article>
 
-		<aside v-if="$slots['aside']" class="wiki-aside">
+		<aside v-if="$slots['aside']" class="aside">
 			<slot name="aside" />
 		</aside>
 	</div>
@@ -32,18 +32,18 @@
 @import (reference) '$/nord/src/lesscss/nord.less';
 
 .wiki-container {
+	gap: 1rem;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 
 	.body {
-		@apply 'gap-y-2';
-
 		width: 60%;
+		row-gap: 4px;
 		padding: 2rem;
 		display: flex;
-		flex-direction: column;
 		border-radius: 0.5rem;
+		flex-direction: column;
 		background-color: @nord1;
 
 		// 当 body 是容器内唯一的子元素时，就是没有 aside 的时候
@@ -107,7 +107,13 @@
 	}
 
 	.aside {
-		// aside 存在时的样式
+		width: 15%;
+		position: relative;
+		align-self: flex-start;
+
+		@media (max-width: 768px) {
+			display: none;
+		}
 	}
 }
 </style>

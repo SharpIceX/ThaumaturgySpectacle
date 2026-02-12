@@ -26,8 +26,8 @@ import { alert as MarkdownItAlert, type MarkdownItAlertOptions } from '@mdit/plu
 import { katex as MarkdownItKatex, type MarkdownItKatexOptions } from '@mdit/plugin-katex';
 
 interface WikiRenderResult {
-	data: RouteMeta;
 	html: string;
+	data: RouteMeta;
 }
 
 type MarkdownItEnvironment = TaskListEnv & FootNoteEnv & ImageEnvironment & AnchorEnvironment;
@@ -106,6 +106,13 @@ async function renderMarkdown(content: string): Promise<WikiRenderResult> {
 		}
 	}
 
+	// 侧栏
+	const asideTemplate = environment.toc
+		? `<template #aside>
+            <WikiToc>${environment.toc}</WikiToc>
+        </template>`
+		: '';
+
 	return {
 		data: data as RouteMeta,
 		html: `
@@ -114,9 +121,11 @@ async function renderMarkdown(content: string): Promise<WikiRenderResult> {
 		<template #default>
 			<div class="wiki-content">${html}</div>
 		</template>
+		${asideTemplate}
 	</NuxtLayout>
 </template>
 <script lang="ts" setup>
+import WikiToc from "#wiki_module/wiki/toc.vue"
 import MarkdownCode from "#wiki_module/markdown/code.vue";
 import MarkdownImage from "#wiki_module/markdown/image.vue";
 ${importContent.join('\n')}

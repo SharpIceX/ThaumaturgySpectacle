@@ -52,8 +52,7 @@ function ensureUniqueId(baseId: string, counts: Map<string, number>): string {
 function buildTocHtml(headings: HeadingItem[]): string {
 	if (headings.length === 0) return '';
 
-	const htmlParts: string[] = ['<nav role="navigation" aria-label="Table of Contents">', '<ol>'];
-
+	const htmlParts: string[] = ['<ol class="toc-content">'];
 	const listStack: number[] = [1];
 
 	for (const heading of headings) {
@@ -77,7 +76,7 @@ function buildTocHtml(headings: HeadingItem[]): string {
 		listStack.pop();
 	}
 
-	htmlParts.push('</ol>', '</nav>');
+	htmlParts.push('</ol>');
 	return htmlParts.join('');
 }
 
@@ -100,7 +99,10 @@ function anchor(md: MarkdownIt): void {
 
 		// 获取标题文本
 		const inlineToken = tokens[index + 1];
-		const titleName = inlineToken?.type === 'inline' ? inlineToken.content : '';
+		const titleName =
+			inlineToken?.type === 'inline' && inlineToken.children
+				? md.renderer.renderInlineAsText(inlineToken.children, options, environment)
+				: '';
 
 		// 生成ID
 		const baseId = generateHeadingId(titleName);

@@ -1,22 +1,24 @@
-import { watchEffect } from 'vue';
 import { defineNuxtPlugin, useRouter, useHead } from '#app';
 
 export default defineNuxtPlugin(() => {
 	const router = useRouter();
 
-	watchEffect(() => {
-		const route = router.currentRoute.value;
-		const keywords = route.meta.keywords;
+	useHead(
+		{
+			meta: [
+				{
+					name: 'keywords',
+					content: () => {
+						const routeKeywords = (router.currentRoute.value.meta.keywords as string[]) || [];
+						if (routeKeywords.length === 0) return undefined;
 
-		if (keywords) {
-			useHead({
-				meta: [
-					{
-						name: 'keywords',
-						content: Array.isArray(keywords) ? keywords.join(', ') : (keywords as string),
+						return routeKeywords.join(', ');
 					},
-				],
-			});
-		}
-	});
+				},
+			],
+		},
+		{
+			tagPriority: 'low',
+		},
+	);
 });

@@ -4,15 +4,8 @@ export default {
 	buildAssetsDir: '/_ts/',
 	rootId: `ts_app`,
 	head: {
-		/*
-		// 编码
-		// NOTE: 停用`unicorn/text-encoding-identifier-case`备注：根据 MDN 文档，charset 必须是 `utf-8` 而不是 `utf8`
-		// eslint-disable-next-line unicorn/text-encoding-identifier-case
-		charset: 'utf-8',
-		*/
-
 		// 屏幕适配
-		viewport: 'width=device-width, initial-scale=1.0, viewport-fit=cover',
+		viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
 
 		// 标题模板
 		titleTemplate: '%s | 幻术奇象',
@@ -75,7 +68,7 @@ export default {
 			// 许可证
 			{
 				name: 'license',
-				content: 'https://github.com/SharpIceX/ThaumaturgySpectacle/blob/init/README.md',
+				content: 'https://github.com/SharpIceX/ThaumaturgySpectacle/blob/main/README.md',
 			},
 
 			// 禁用浏览器扩展 Dark Reader

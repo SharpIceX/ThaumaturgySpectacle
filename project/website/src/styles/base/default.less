@@ -1,0 +1,18 @@
+@import (reference) '$/nord/src/lesscss/nord.less';
+
+a {
+	color: @nord8;
+
+	&:hover {
+		color: @nord10;
+		transition: color 0.3s;
+	}
+}
+
+svg {
+	fill: currentColor;
+
+	// 修复 svg 因为没有设置宽高而导致的显示问题
+	width: 24px;
+	height: 24px;
+}

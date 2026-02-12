@@ -1,22 +1,25 @@
+@import (reference) '$/nord/src/lesscss/nord.less';
+
 @import './base/fonts.less';
 @import './base/nprogress.less';
 @import './components/main.less';
 @import './base/vue3-toastify.less';
-@import './base/animation/main.less';
 @import './base/overlayscrollbars.less';
 
-body {
-	@apply grid;
-	@apply 'h-screen w-screen';
-	@apply 'bg-nord0 text-nord4';
+html {
+	body {
+		@import './base/default.less';
 
-	font-family: 'Lxgw Bright', 'Noto Color Emoji', sans-serif;
-}
+		width: 100%;
+		display: grid;
+		color: @nord4;
+		height: 100vh;
+		height: 100dvh;
+		background: @nord0;
+		font-family: 'Lxgw Bright', 'Noto Color Emoji', sans-serif;
 
-svg {
-	fill: currentColor;
-
-	// 修复 svg 因为没有设置宽高而导致的显示问题
-	width: 24px;
-	height: 24px;
+		text-rendering: optimizeLegibility;
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-font-smoothing: antialiased;
+	}
 }

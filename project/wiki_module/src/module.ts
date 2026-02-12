@@ -4,7 +4,7 @@ import closeHook from './compiler/hooks/close';
 import metadataHook from './compiler/hooks/metadata';
 import viteTransform from './compiler/vite/transform';
 import { createRender } from './compiler/renderer/main';
-import { addVitePlugin, defineNuxtModule, createResolver, addLayout, addTypeTemplate } from '@nuxt/kit';
+import { addVitePlugin, defineNuxtModule, createResolver, addLayout, addTypeTemplate, addPlugin } from '@nuxt/kit';
 
 const regExpMarkdown = /\.md$/;
 const regExpVue = /\.vue$/;
@@ -68,6 +68,8 @@ export default defineNuxtModule({
 		nuxt.options.alias['#wiki_module/*'] = resolve('./runtime/components/*');
 
 		addVitePlugin(viteTransform);
+
+		addPlugin(resolve('./runtime/plugins/head.ts'));
 
 		if (!nuxt.options._prepare) nuxt.hook('pages:resolved', metadataHook);
 		nuxt.hook('close', closeHook);

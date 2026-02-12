@@ -1,7 +1,6 @@
 import path from 'node:path';
 import globals from 'globals';
 import eslint from '@eslint/js';
-import type { Linter } from 'eslint';
 import jsdoc from 'eslint-plugin-jsdoc';
 import tseslint from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
@@ -16,6 +15,8 @@ import nuxtConfig from '../../project/website/.nuxt/eslint.config.mjs';
  * @description 项目根目录路径
  */
 const ProjectPath = path.resolve(import.meta.dirname, '../../');
+
+const nuxtConfigsArray = await nuxtConfig().toConfigs();
 
 const config = defineConfig(
 	eslint.configs.recommended,
@@ -69,10 +70,10 @@ const config = defineConfig(
 		},
 	},
 	// Nuxt 项目
-	{
-		basePath: path.join(ProjectPath, '/project/website'),
-		extends: [...(await (nuxtConfig() as PromiseLike<Linter.Config[]>))],
-	},
+	...nuxtConfigsArray.map((conf) => ({
+		...conf,
+		files: conf.files ?? ['project/website/**/*.{ts,vue}'],
+	})),
 	{
 		ignores: [
 			// TypeScript 类型
