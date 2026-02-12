@@ -7,7 +7,7 @@
 					{{ $route.meta['description'] }}
 				</p>
 			</header>
-			<slot />
+			<slot :contentRef="contentRef" />
 			<div v-if="$route.meta['category']" class="category">
 				<p>分类：</p>
 				<ul>
@@ -28,11 +28,19 @@
 	</div>
 </template>
 
+<script setup lang="ts">
+import { ref, provide } from 'vue';
+
+// 传递内容区域给子组件
+const contentRef = ref<HTMLElement | null>(null);
+provide('wiki-content-ref', contentRef);
+</script>
+
 <style lang="less" scoped>
 @import (reference) '$/nord/src/lesscss/nord.less';
 
 .wiki-container {
-	gap: 1rem;
+	gap: 2rem;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -107,9 +115,9 @@
 	}
 
 	.aside {
-		width: 15%;
+		width: 17%;
 		position: relative;
-		align-self: flex-start;
+		align-self: stretch;
 
 		@media (max-width: 768px) {
 			display: none;

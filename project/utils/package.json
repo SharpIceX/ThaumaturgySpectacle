@@ -2,9 +2,5 @@
 	"name": "@ts/utils",
 	"private": true,
 	"type": "module",
-	"description": "幻术奇库",
-	"devDependencies": {
-		"@eslint/js": "^9.39.2",
-		"eslint": "^9.39.2"
-	}
+	"description": "幻术奇库"
 }

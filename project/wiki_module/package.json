@@ -7,7 +7,6 @@
 		"postinstall": "nuxt-module-build prepare"
 	},
 	"dependencies": {
-		"@fontsource-variable/jetbrains-mono": "^5.2.8",
 		"@mdit/plugin-alert": "^0.22.4",
 		"@mdit/plugin-footnote": "^0.22.4",
 		"@mdit/plugin-ins": "^0.22.2",
@@ -31,10 +30,8 @@
 		"ufo": "^1.6.3"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.39.2",
 		"@nuxt/module-builder": "^1.0.2",
 		"@types/luxon": "^3.7.1",
-		"@types/markdown-it": "^14.1.2",
-		"eslint": "^9.39.2"
+		"@types/markdown-it": "^14.1.2"
 	}
 }

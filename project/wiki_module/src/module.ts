@@ -17,11 +17,7 @@ export default defineNuxtModule({
 	},
 	async setup(_options, nuxt) {
 		// 样式
-		nuxt.options.css.push(
-			resolve('./runtime/styles/index.less'),
-			'katex/dist/katex.css',
-			'@fontsource-variable/jetbrains-mono',
-		);
+		nuxt.options.css.push(resolve('./runtime/styles/index.less'), 'katex/dist/katex.css');
 
 		// 允许 Nuxt 解析器识别 .md 后缀
 		nuxt.options.extensions.push('.md');

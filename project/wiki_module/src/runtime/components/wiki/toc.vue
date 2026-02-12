@@ -1,86 +1,114 @@
 <template>
 	<div class="toc-container">
 		<h1>目录</h1>
-		<slot />
+		<nav ref="tocContent" role="navigation" class="toc-content">
+			<slot />
+		</nav>
 	</div>
 </template>
 
 <script lang="ts" setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+import { OverlayScrollbars } from 'overlayscrollbars';
+
 defineOptions({ name: 'WikiToc' });
+
+const tocContent = ref<HTMLElement>();
+let osInstance: OverlayScrollbars | undefined;
+
+onMounted(() => {
+	if (tocContent.value) {
+		osInstance = OverlayScrollbars(tocContent.value, {
+			scrollbars: {
+				autoHideDelay: 300,
+				autoHide: 'scroll',
+				autoHideSuspend: true,
+				theme: 'os-theme-nord',
+			},
+		});
+	}
+});
+
+onUnmounted(() => {
+	if (osInstance) {
+		osInstance.destroy();
+	}
+});
 </script>
 
 <style lang="less" scoped>
 @import (reference) '$/nord/src/lesscss/nord.less';
 
 .toc-container {
-	top: 1.5rem;
-	width: 100%;
-	padding: 1rem;
-	overflow: auto;
-	max-height: 60vh;
+	top: 1rem;
+	gap: 0.75rem;
+	color: @nord4;
+	display: flex;
 	position: sticky;
+	padding: 1.25rem;
+	max-height: 40vh;
+	border-radius: 12px;
+	flex-direction: column;
 	background-color: @nord1;
 
-	@media (max-width: 768px) {
-		width: 100%;
-	}
-
 	h1 {
-		margin-bottom: 1rem;
-		font-size: 1.25rem;
 		color: @nord6;
+		font-weight: 700;
+		font-size: 1.35rem;
+		letter-spacing: 0.02em;
 	}
 
 	:deep(.toc-content) {
-		list-style: none;
-		counter-reset: item;
-		padding-left: 1.2rem;
-		margin: 0;
+		overflow-y: auto;
+		padding-right: 6px;
 
-		/* 横向不换行，超出可左右滚动 */
-		white-space: nowrap;
-		min-width: max-content;
+		/* 顶层计数器 */
+		ol {
+			counter-reset: toc-section;
+		}
 
 		li {
-			counter-increment: item;
-			margin: 0.4rem 0;
-			line-height: 1.5;
+			display: grid;
+			column-gap: 0.6rem;
+			align-items: start;
+			margin-block: 0.35rem;
+			counter-increment: toc-section;
+			grid-template-columns: 2.2rem 1fr;
 
 			&::before {
-				content: counters(item, '.') ' ';
-				color: @nord4;
-				font-family: monospace;
-				font-size: 0.85em;
-				margin-right: 0.5em;
-				opacity: 0.6;
+				color: @nord9;
+				font-size: 1.2rem;
+				font-weight: 600;
+				line-height: 1.6;
+				text-align: right;
+				min-width: 2.2rem;
+				padding-top: 0.05rem;
+				content: counters(toc-section, '.');
 			}
 
 			a {
 				color: @nord4;
-				text-decoration: none;
-				transition: all 0.2s;
-				white-space: nowrap;
+				line-height: 1.6;
+				font-size: 0.95rem;
+				transition:
+					color 0.2s ease,
+					opacity 0.2s ease;
 
 				&:hover {
 					color: @nord8;
 				}
-
-				&.select-toc {
-					background-color: @nord8;
-					color: @nord0;
-					font-weight: 600;
-					padding: 2px 8px;
-					border-radius: 4px;
-					display: inline-block;
-				}
 			}
 
+			/* 子列表 */
 			ol {
-				margin-top: 0.2rem;
-				padding-left: 1rem;
-				list-style: none;
-				counter-reset: item;
-				white-space: nowrap;
+				grid-column: 2 / -1;
+				padding-left: 0.9rem;
+				margin: 0.25rem 0 0.35rem;
+				border-left: 1px solid @nord3;
+
+				li {
+					margin: 0.25rem 0;
+				}
 			}
 		}
 	}

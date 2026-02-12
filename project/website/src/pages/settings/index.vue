@@ -32,12 +32,6 @@ definePageMeta({
 
 const settingItems: settingItemsType = [
 	{
-		name: '启用 Pangu',
-		description: '自动为中英文之间添加空格（如果没有）',
-		settingID: 'pangu.enable',
-		defaultState: false,
-	},
-	{
 		name: '可视化目录',
 		description: '滚动页面时，自动高亮当前章节，并将 URL 更新为当前章节的锚点',
 		settingID: 'toc.scroll_toc_visible.enable',

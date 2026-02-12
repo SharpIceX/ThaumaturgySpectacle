@@ -118,8 +118,8 @@ async function renderMarkdown(content: string): Promise<WikiRenderResult> {
 		html: `
 <template>
 	<NuxtLayout name="wiki-container">
-		<template #default>
-			<div class="wiki-content">${html}</div>
+		<template #default="{ contentRef }">
+			<div class="wiki-content" :ref="contentRef">${html}</div>
 		</template>
 		${asideTemplate}
 	</NuxtLayout>

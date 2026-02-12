@@ -31,7 +31,7 @@ function generateHeadingId(text: string): string {
 }
 
 /**
- * 生成唯一 ID（基于计数器）
+ * 生成唯一 ID
  * @param baseId ID
  * @param counts 记数器映射
  * @returns 唯一 ID
@@ -45,38 +45,52 @@ function ensureUniqueId(baseId: string, counts: Map<string, number>): string {
 }
 
 /**
- * 根据 headings 生成 TOC HTML
+ * 生成 TOC HTML
  * @param headings 标题数组
  * @returns TOC HTML 字符串
  */
-function buildTocHtml(headings: HeadingItem[]): string {
-	if (headings.length === 0) return '';
+function buildTocHtml(headings?: HeadingItem[] | null): string {
+	if (!headings?.length) return '';
 
-	const htmlParts: string[] = ['<ol class="toc-content">'];
-	const listStack: number[] = [1];
+	const htmlParts: string[] = ['<ol>'];
 
-	for (const heading of headings) {
-		const level = heading.level;
+	const first = headings[0];
+	if (!first) return '';
 
-		while (level > listStack.length) {
-			htmlParts.push('<li aria-hidden="true"><ol>');
-			listStack.push(listStack.length + 1);
+	const stack: number[] = [first.level];
+
+	const openSubList = () => htmlParts.push('<li><ol>');
+	const closeSubList = () => htmlParts.push('</ol></li>');
+
+	for (let i = 0; i < headings.length; i++) {
+		const h = headings[i];
+		if (!h) continue;
+
+		const currentLevel = stack[stack.length - 1] ?? first.level;
+
+		if (h.level > currentLevel) {
+			// 层级加深
+			for (let lvl = currentLevel + 1; lvl <= h.level; lvl++) {
+				openSubList();
+				stack.push(lvl);
+			}
+		} else if (h.level < currentLevel) {
+			// 层级回退
+			while (stack.length > 1 && h.level < (stack[stack.length - 1] ?? h.level)) {
+				closeSubList();
+				stack.pop();
+			}
 		}
 
-		while (level < listStack.length) {
-			htmlParts.push('</ol></li>');
-			listStack.pop();
-		}
-
-		htmlParts.push(`<li><a href="#${heading.id}">${heading.name}</a></li>`);
+		htmlParts.push(`<li><a href="#${h.id}">${h.name}</a></li>`);
 	}
 
-	while (listStack.length > 1) {
-		htmlParts.push('</ol></li>');
-		listStack.pop();
+	while (stack.length > 0) {
+		htmlParts.push('</ol>');
+		if (stack.length > 1) htmlParts.push('</li>');
+		stack.pop();
 	}
 
-	htmlParts.push('</ol>');
 	return htmlParts.join('');
 }
 
