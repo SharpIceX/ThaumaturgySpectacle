@@ -3,19 +3,19 @@ import path from 'node:path';
 import { storeContext } from './context';
 import { createRender } from '@ts/wiki_render';
 import closeHook from './compiler/hooks/close';
-import metadataHook from './compiler/hooks/metadata';
 import viteTransform from './compiler/vite/transform';
+import metadataHook from './compiler/hooks/scan-metadata/main';
 import { addVitePlugin, defineNuxtModule, createResolver, addLayout, addTypeTemplate, useLogger } from '@nuxt/kit';
 
 const regExpMarkdown = /\.md$/;
 const regExpVue = /\.vue$/;
 
 const resolver = createResolver(import.meta.url);
-const logger = useLogger('wiki-module');
+const logger = useLogger('@ts/wiki-module');
 
 export default defineNuxtModule({
 	meta: {
-		name: '@ts/wiki_module',
+		name: '@ts/wiki-module',
 	},
 	async setup(_options, nuxt) {
 		// 样式
@@ -64,14 +64,14 @@ export default defineNuxtModule({
 		// 类型
 		addTypeTemplate({
 			src: resolver.resolve('./types/index.d.ts'),
-			filename: 'types/nuxt-wiki_module.d.ts',
+			filename: 'types/nuxt-wiki-module.d.ts',
 		});
-		nuxt.options.alias['#wiki_module'] = resolver.resolve('./runtime/components');
-		nuxt.options.alias['#wiki_module/*'] = resolver.resolve('./runtime/components/*');
+		nuxt.options.alias['#wiki-module'] = resolver.resolve('./runtime/components');
+		nuxt.options.alias['#wiki-module/*'] = resolver.resolve('./runtime/components/*');
 
 		addVitePlugin(viteTransform);
 
-		if (!nuxt.options._prepare) nuxt.hook('pages:resolved', metadataHook);
+		if (!nuxt.options._prepare) nuxt.hook('pages:resolved', await metadataHook(nuxt.options.rootDir));
 		nuxt.hook('close', closeHook);
 
 		// 预热

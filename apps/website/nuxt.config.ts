@@ -28,7 +28,7 @@ export default defineNuxtConfig({
 	srcDir: path.resolve(import.meta.dirname, './src'),
 	extends: [path.resolve(import.meta.dirname, '../content')],
 	css: ['$/@unocss/reset/tailwind-v4.css', '~/styles/main.less'],
-	modules: ['@ts/wiki_module', 'nuxt-svgo', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo'],
+	modules: ['@ts/wiki-module', 'nuxt-svgo', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo'],
 	plugins: [
 		{ src: './plugins/nprogress.ts', mode: 'client' },
 		{ src: './plugins/scrollbars.ts', mode: 'client' },

@@ -48,16 +48,10 @@ const config = antfu(
 			'vue/html-indent': ['error', 'tab'],
 		},
 	},
-)
-	.override('antfu/jsdoc/rules', {
-		rules: {
-			'jsdoc/multiline-blocks': ['error', { minimumLengthForMultiline: 1 }],
-		},
-	})
-	.append(
-		websiteNuxtConfig({
-			files: ['apps/website/**/*.{ts,vue}'],
-		}),
-	);
+).append(
+	websiteNuxtConfig({
+		files: ['apps/website/**/*.{ts,vue}'],
+	}),
+);
 
 export default config;

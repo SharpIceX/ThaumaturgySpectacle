@@ -8,17 +8,17 @@ const MarkdownTransformPlugin = (): Plugin => {
 		async transform(code, id) {
 			const url = new URL(id, 'file://');
 
-			// 忽略非 md 文件和
-			if (!url.pathname.endsWith('.md')) return;
-
-			// 忽略 Vue AST 处理
-			if (url.searchParams.get('type') === 'script') return;
+			/**
+			 * 忽略非 md 文件
+			 * 忽略 Vue AST 处理
+			 */
+			if (!url.pathname.endsWith('.md') || url.searchParams.get('type') === 'script') return;
 
 			const content = code.trim();
 
 			if (!content || code.length === 0) this.error({ message: `空内容`, id });
 
-			const renderResult = await storeContext.renderer?.render(code);
+			const renderResult = await storeContext.renderer.render(code);
 
 			return {
 				code: renderResult.html,

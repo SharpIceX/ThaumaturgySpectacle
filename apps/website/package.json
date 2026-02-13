@@ -16,7 +16,7 @@
 		"@lxgw/LxgwBright": "github:lxgw/LxgwBright#v5.527",
 		"@material-design-icons/svg": "^0.14.15",
 		"@ts/shared": "workspace:*",
-		"@ts/wiki_module": "workspace:*",
+		"@ts/wiki-module": "workspace:*",
 		"@unocss/reset": "^66.6.0",
 		"@vueuse/integrations": "^14.2.1",
 		"nord": "^0.2.1",

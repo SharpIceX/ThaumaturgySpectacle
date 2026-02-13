@@ -122,9 +122,9 @@ async function renderMarkdown(markdownRender: MarkdownIt, content: string): Prom
 	</NuxtLayout>
 </template>
 <script lang="ts" setup>
-import WikiToc from "#wiki_module/wiki/toc.vue"
-import MarkdownCode from "#wiki_module/markdown/code.vue";
-import MarkdownImage from "#wiki_module/markdown/image.vue";
+import WikiToc from "#wiki-module/wiki/toc.vue"
+import MarkdownCode from "#wiki-module/markdown/code.vue";
+import MarkdownImage from "#wiki-module/markdown/image.vue";
 ${importContent.join('\n')}
 </script>
 `,
