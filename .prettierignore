@@ -4,7 +4,9 @@
 # pnpm
 /pnpm-lock.yaml
 
-# 其他项目
-/project/*/dist
-/project/*/.nuxt
-/project/*/.output
+# typescript
+*.tsbuildinfo
+
+**/dist
+**/.nuxt
+**/.output

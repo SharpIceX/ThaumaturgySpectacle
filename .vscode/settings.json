@@ -16,8 +16,15 @@
 	"css.customData": [".vscode/customData/css/unocss.json"],
 
 	// ESLint 验证的文件类型
-	"eslint.validate": ["javascript", "typescript", "vue"],
+	"eslint.validate": ["javascript", "typescript", "vue", "json", "yaml", "github-actions-workflow"],
 
 	// UnoCSS 支持的语言类型
-	"unocss.languageIds": ["javascript", "typescript", "less", "vue"]
+	"unocss.languageIds": ["javascript", "typescript", "less", "vue"],
+
+	"json.schemas": [
+		{
+			"fileMatch": ["pnpm-workspace.yaml"],
+			"url": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/pnpm-workspace.json"
+		}
+	]
 }

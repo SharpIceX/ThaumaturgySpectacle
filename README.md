@@ -21,7 +21,7 @@
 ## 依赖
 
 - Node.js 22.22+
-- pnpm 10.28+
+- pnpm 10.29+
 
 ```bash
 # 拉取仓库
@@ -37,5 +37,5 @@ pnpm install --frozen-lockfile
 
 ```bash
 # 构建网站
-pnpm --dir ./project/website run generate
+pnpm --dir ./apps/website run generate
 ```

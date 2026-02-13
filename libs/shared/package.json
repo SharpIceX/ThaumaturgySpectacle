@@ -1,0 +1,6 @@
+{
+	"name": "@ts/shared",
+	"private": true,
+	"type": "module",
+	"description": "幻术奇库"
+}

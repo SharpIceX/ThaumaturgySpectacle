@@ -1,12 +1,13 @@
+shellEmulator: true
+shamefullyHoist: true
+disallowWorkspaceCycles: true
+
 packages:
-  - types
-  - project/**
-  - packages/**
+  - apps/**
+  - libs/**
 
 onlyBuiltDependencies:
   - '@parcel/watcher'
-  - better-sqlite3
-  - dprint
   - esbuild
   - less
   - lmdb

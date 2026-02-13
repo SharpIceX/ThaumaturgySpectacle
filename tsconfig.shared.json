@@ -12,10 +12,10 @@
 
 		/* 构建 */
 		"sourceMap": true,
-		"declaration": true,
+		"declaration": false,
 		"noEmitOnError": true,
 		"inlineSources": true,
-		"declarationMap": true,
+		"declarationMap": false,
 		"isolatedModules": true,
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
@@ -35,10 +35,12 @@
 		"strictNullChecks": true,
 		"noImplicitReturns": true,
 		"noUnusedParameters": true,
+		"allowUnusedLabels": false,
 		"noImplicitOverride": true,
 		"strictFunctionTypes": true,
 		"strictBindCallApply": true,
 		"noImplicitUseStrict": false,
+		"allowUnreachableCode": false,
 		"noUncheckedIndexedAccess": true,
 		"exactOptionalPropertyTypes": true,
 		"useUnknownInCatchVariables": true,
@@ -47,5 +49,15 @@
 		"forceConsistentCasingInFileNames": true,
 		"noPropertyAccessFromIndexSignature": true
 	},
-	"exclude": ["**/node_modules", "**/dist"]
+	"vueCompilerOptions": {
+		"strictVModel": true,
+		"strictTemplates": true,
+		"strictCssModules": true,
+		"checkUnknownProps": true,
+		"checkUnknownEvents": true,
+		"checkUnknownDirectives": true,
+		"checkUnknownComponents": true,
+		"inferTemplateDollarSlots": true
+	},
+	"exclude": ["**/node_modules", "**/dist", "**/.cache", "**/output"]
 }

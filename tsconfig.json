@@ -5,22 +5,22 @@
 			"path": "./tsconfig.isolated.json"
 		},
 		{
-			"path": "./packages/eslint-config/tsconfig.json"
+			"path": "./apps/content/tsconfig.json"
 		},
 		{
-			"path": "./packages/unocss-preset-nord/tsconfig.json"
+			"path": "./apps/website/tsconfig.json"
 		},
 		{
-			"path": "./project/content/tsconfig.json"
+			"path": "./libs/shared/tsconfig.json"
 		},
 		{
-			"path": "./project/utils/tsconfig.json"
+			"path": "./libs/unocss-preset-nord/tsconfig.json"
 		},
 		{
-			"path": "./project/website/tsconfig.json"
+			"path": "./libs/wiki-render/tsconfig.json"
 		},
 		{
-			"path": "./project/wiki_module/tsconfig.json"
+			"path": "./libs/wiki-module/tsconfig.json"
 		}
 	]
 }

@@ -1,4 +1,4 @@
 {
 	"extends": "./tsconfig.shared.json",
-	"include": ["./eslint.config.ts", "./project/website/uno.config.ts", "./project/wiki_module/uno.config.ts"]
+	"include": ["./eslint.config.ts", "./apps/website/uno.config.ts"]
 }
