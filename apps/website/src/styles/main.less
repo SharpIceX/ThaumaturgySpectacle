@@ -1,25 +1,4 @@
-@import (reference) '$/nord/src/lesscss/nord.less';
-
-@import './base/fonts.less';
-@import './base/nprogress.less';
-@import './components/main.less';
-@import './base/vue3-toastify.less';
-@import './base/overlayscrollbars.less';
-
-html {
-	body {
-		@import './base/default.less';
-
-		width: 100%;
-		display: grid;
-		color: @nord4;
-		height: 100vh;
-		height: 100dvh;
-		background: @nord0;
-		font-family: 'Lxgw Bright', 'Noto Color Emoji', sans-serif;
-
-		text-rendering: optimizeLegibility;
-		-moz-osx-font-smoothing: grayscale;
-		-webkit-font-smoothing: antialiased;
-	}
-}
+@import './fonts.less';
+@import './default.less';
+@import './lib/nprogress.less';
+@import './lib/overlayscrollbars.less';

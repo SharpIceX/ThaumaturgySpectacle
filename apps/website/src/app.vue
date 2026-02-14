@@ -1,18 +1,26 @@
 <template>
-	<div class="h-screen w-screen flex flex-col">
-		<AppHeader />
-		<main class="flex-1">
-			<NuxtLayout>
-				<NuxtPage />
-			</NuxtLayout>
-		</main>
-		<AppFooter />
-	</div>
+	<AppHeader />
+	<main>
+		<NuxtPage />
+	</main>
+	<AppFooter />
 </template>
 
 <script lang="ts" setup>
-import AppHeader from './app/header.vue';
 import AppFooter from './app/footer.vue';
+import AppHeader from './app/header/header.vue';
 
 defineOptions({ name: 'App' });
 </script>
+
+<style lang="less">
+#ts_app {
+	display: flex;
+	min-height: 100dvh;
+	flex-direction: column;
+
+	main {
+		flex: 1;
+	}
+}
+</style>

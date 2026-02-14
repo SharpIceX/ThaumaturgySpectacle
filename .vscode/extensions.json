@@ -3,14 +3,8 @@
 		// Vue
 		"vue.volar",
 
-		// UnoCSS
-		"antfu.unocss",
-
 		// ESLint
 		"dbaeumer.vscode-eslint",
-
-		// Axe Accessibility Linter
-		"deque-systems.vscode-axe-linter",
 
 		// Prettier
 		"esbenp.prettier-vscode",

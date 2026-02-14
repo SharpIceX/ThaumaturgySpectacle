@@ -17,7 +17,6 @@ defineOptions({ name: 'AppFooter' });
 
 .footer-container {
 	text-align: center;
-	padding-block: 0.8rem;
 	border-top: 1px solid @nord3;
 }
 </style>

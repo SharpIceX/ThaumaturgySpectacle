@@ -18,6 +18,15 @@ export default defineNuxtModule({
 		name: '@ts/wiki-module',
 	},
 	async setup(_options, nuxt) {
+		// 预热
+		if (!nuxt.options._prepare) {
+			// 初始化 storeContext
+			storeContext.renderer = await createRender(
+				path.join(nuxt.options.buildDir, 'cache/markdown-render.db'),
+				logger,
+			);
+		}
+
 		// 样式
 		nuxt.options.css.push(
 			resolver.resolve('./runtime/styles/index.less'),
@@ -73,14 +82,5 @@ export default defineNuxtModule({
 
 		if (!nuxt.options._prepare) nuxt.hook('pages:resolved', await metadataHook(nuxt.options.rootDir));
 		nuxt.hook('close', closeHook);
-
-		// 预热
-		if (!nuxt.options._prepare) {
-			// 初始化 storeContext
-			storeContext.renderer = await createRender(
-				path.join(nuxt.options.buildDir, 'cache/markdown-render.db'),
-				logger,
-			);
-		}
 	},
 });

@@ -12,20 +12,26 @@ interface AnchorEnvironment {
 	tocHtml?: string;
 }
 
+type InternalEnv = AnchorEnvironment & {
+	headings?: HeadingItem[];
+	headingIdCounts?: Map<string, number>;
+};
+
 /**
  * 生成 ID
  * @param text 原始标题文本
  * @returns ID
  */
 function generateHeadingId(text: string): string {
-	const baseId = text
-		.trim() // 去除首尾空格
-		.toLowerCase() // 转换为小写
-		.replaceAll(/\s+/g, '-') // 将连续的空白字符替换为单个连字符
-		.replaceAll(/[^\w\u4E00-\u9FA5-]/g, '') // 移除非单词字符（A-Z, 0-9, _）、非中文、非连字符的特殊符号
-		.replaceAll(/-+/g, '-') // 将多个连续连字符合并为一个
-		.replaceAll(/^-+|-+$/g, ''); // 移除字符串开头和结尾的所有连字符
-	return encodeURIComponent(baseId) || 'section';
+	const normalized = text
+		.trim()
+		.toLowerCase()
+		.replace(/\s+/g, '-')
+		.replace(/[^\w\u4E00-\u9FA5-]/g, '')
+		.replace(/-+/g, '-')
+		.replace(/^-+|-+$/g, '');
+
+	return encodeURIComponent(normalized) || 'section';
 }
 
 /**
@@ -36,9 +42,7 @@ function generateHeadingId(text: string): string {
  */
 function ensureUniqueId(baseId: string, counts: Map<string, number>): string {
 	const current = counts.get(baseId) ?? 0;
-	const next = current + 1;
-	counts.set(baseId, next);
-
+	counts.set(baseId, current + 1);
 	return current === 0 ? baseId : `${baseId}-${current}`;
 }
 
@@ -50,46 +54,42 @@ function ensureUniqueId(baseId: string, counts: Map<string, number>): string {
 function buildTocHtml(headings?: HeadingItem[] | null): string {
 	if (!headings?.length) return '';
 
-	const htmlParts: string[] = ['<ol>'];
+	const html: string[] = [];
+	const stack: number[] = [];
 
-	const first = headings[0];
-	if (!first) return '';
+	const openList = (level: number): void => {
+		html.push('<ol>');
+		stack.push(level);
+	};
 
-	const stack: number[] = [first.level];
+	const closeList = (): void => {
+		html.push('</li></ol>');
+		stack.pop();
+	};
 
-	const openSubList = () => htmlParts.push('<li><ol>');
-	const closeSubList = () => htmlParts.push('</ol></li>');
+	for (const h of headings) {
+		const level = h.level;
+		const current = stack[stack.length - 1];
 
-	for (let i = 0; i < headings.length; i++) {
-		const h = headings[i];
-		if (!h) continue;
-
-		const currentLevel = stack[stack.length - 1] ?? first.level;
-
-		if (h.level > currentLevel) {
-			// 层级加深
-			for (let lvl = currentLevel + 1; lvl <= h.level; lvl++) {
-				openSubList();
-				stack.push(lvl);
+		if (stack.length === 0) {
+			openList(level);
+		} else if (level > current!) {
+			openList(level);
+		} else if (level < current!) {
+			while (stack.length > 0 && level < stack[stack.length - 1]!) {
+				closeList();
 			}
-		} else if (h.level < currentLevel) {
-			// 层级回退
-			while (stack.length > 1 && h.level < (stack[stack.length - 1] ?? h.level)) {
-				closeSubList();
-				stack.pop();
-			}
+			html.push('</li>');
+		} else {
+			html.push('</li>');
 		}
 
-		htmlParts.push(`<li><a href="#${h.id}">${h.name}</a></li>`);
+		html.push(`<li><a href="#${h.id}">${h.name}</a>`);
 	}
 
-	while (stack.length > 0) {
-		htmlParts.push('</ol>');
-		if (stack.length > 1) htmlParts.push('</li>');
-		stack.pop();
-	}
+	while (stack.length > 0) closeList();
 
-	return htmlParts.join('');
+	return html.join('');
 }
 
 /**
@@ -97,59 +97,50 @@ function buildTocHtml(headings?: HeadingItem[] | null): string {
  * @param md MarkdownIt 实例
  */
 function anchor(md: MarkdownIt): void {
-	type InternalEnv = AnchorEnvironment & {
-		headings?: HeadingItem[];
-		headingIdCounts?: Map<string, number>;
-	};
-
 	const defaultRender: RenderRule =
 		md.renderer.rules['heading_open'] ||
-		((tokens, index, options, _environment: InternalEnv, self): string => self.renderToken(tokens, index, options));
+		((tokens, index, options, _env: InternalEnv, self): string => self.renderToken(tokens, index, options));
 
-	md.renderer.rules['heading_open'] = (tokens, index, options, environment: InternalEnv, self): string => {
+	md.renderer.rules['heading_open'] = (tokens, index, options, env: InternalEnv, self): string => {
 		const token = tokens[index];
-		if (!token) {
-			return defaultRender(tokens, index, options, environment, self);
+		if (!token) return defaultRender(tokens, index, options, env, self);
+
+		if (token.tag === 'h1') {
+			throw new Error('不应该出现的一级标题');
 		}
 
-		// 获取标题文本（不含 Markdwon 格式）
 		const inlineToken = tokens[index + 1];
 		const titleName =
 			inlineToken?.type === 'inline' && inlineToken.children
-				? md.renderer.renderInlineAsText(inlineToken.children, options, environment)
+				? md.renderer.renderInlineAsText(inlineToken.children, options, env)
 				: '';
 
+		env.headings ??= [];
+		env.headingIdCounts ??= new Map<string, number>();
+
 		const baseId = generateHeadingId(titleName);
-
-		environment.headings ??= [];
-		environment.headingIdCounts ??= new Map<string, number>();
-
-		const titleId = ensureUniqueId(baseId, environment.headingIdCounts);
+		const titleId = ensureUniqueId(baseId, env.headingIdCounts);
 
 		const idIndex = token.attrIndex('id');
 		if (idIndex < 0) {
 			token.attrPush(['id', titleId]);
-		} else {
-			const attributes = token.attrs;
-			if (attributes && attributes[idIndex]) {
-				attributes[idIndex][1] = titleId;
-			}
+		} else if (token.attrs?.[idIndex]) {
+			token.attrs[idIndex][1] = titleId;
 		}
 
-		const level = Number.parseInt(token.tag.slice(1), 10) - 1 || 1;
-		environment.headings.push({
+		env.headings.push({
 			name: titleName,
 			id: titleId,
-			level,
+			level: Number.parseInt(token.tag.slice(1), 10),
 		});
 
-		return defaultRender(tokens, index, options, environment, self);
+		return defaultRender(tokens, index, options, env, self);
 	};
 
 	const originalRender = md.render.bind(md);
-	md.render = (source: string, environment: InternalEnv = {}): string => {
-		const html = originalRender(source, environment);
-		environment.tocHtml = environment.headings ? buildTocHtml(environment.headings) : '';
+	md.render = (source: string, env: InternalEnv = {}): string => {
+		const html = originalRender(source, env);
+		env.tocHtml = buildTocHtml(env.headings);
 		return html;
 	};
 }

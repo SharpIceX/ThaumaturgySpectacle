@@ -3,8 +3,12 @@
 		/* 基础配置 */
 		"pretty": true,
 		"allowJs": true,
+		"jsx": "preserve",
+		"jsxFactory": "h",
 		"target": "ESNext",
 		"module": "ESNext",
+		"jsxFragmentFactory": "Fragment",
+		"jsxImportSource": "vue",
 		"lib": ["ESNext"],
 
 		/** 只做检查 */

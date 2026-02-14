@@ -1,0 +1,42 @@
+@import (reference) '$/nord/src/lesscss/nord.less';
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+}
+body {
+	margin: 0;
+	width: 100%;
+	display: grid;
+	color: @nord4;
+	min-height: 100dvh;
+	background: @nord0;
+	font-family: 'Lxgw Bright', 'Noto Color Emoji', system-ui, sans-serif;
+
+	text-rendering: optimizeLegibility;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+}
+
+a {
+	color: @nord8;
+	text-decoration: none;
+	transition: color 0.3s ease;
+
+	&:hover {
+		color: @nord10;
+	}
+}
+
+svg {
+	width: 1.5rem;
+	height: 1.5rem;
+	display: block;
+	fill: currentColor;
+	display: inline-block;
+}

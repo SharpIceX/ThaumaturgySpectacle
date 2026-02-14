@@ -27,8 +27,8 @@ export default defineNuxtConfig({
 	compatibilityDate: '2025-08-28',
 	srcDir: path.resolve(import.meta.dirname, './src'),
 	extends: [path.resolve(import.meta.dirname, '../content')],
-	css: ['$/@unocss/reset/tailwind-v4.css', '~/styles/main.less'],
-	modules: ['@ts/wiki-module', 'nuxt-svgo', '@unocss/nuxt', '@nuxt/eslint', '@nuxtjs/seo'],
+	css: ['~/styles/main.less'],
+	modules: ['@ts/wiki-module', 'nuxt-svgo', '@nuxt/eslint', '@nuxtjs/seo'],
 	plugins: [
 		{ src: './plugins/nprogress.ts', mode: 'client' },
 		{ src: './plugins/scrollbars.ts', mode: 'client' },
@@ -36,6 +36,13 @@ export default defineNuxtConfig({
 	alias: {
 		$: path.resolve(import.meta.dirname, './node_modules'),
 	},
+	components: [
+		{
+			prefix: 'TS',
+			path: '~/components',
+			pathPrefix: false,
+		},
+	],
 	build: {
 		analyze: {
 			analyzerMode: 'static',
@@ -90,16 +97,12 @@ export default defineNuxtConfig({
 				'@vue/devtools-kit',
 				'overlayscrollbars',
 				'@vueuse/integrations/useNProgress',
-				'vue3-toastify',
 				'@ts/shared/src/web/preload-image',
 			],
 		},
 	},
 	devtools: {
 		enabled: !isProduction,
-	},
-	unocss: {
-		nuxtLayers: true,
 	},
 	eslint: {
 		checker: false,

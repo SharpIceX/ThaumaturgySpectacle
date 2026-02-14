@@ -14,7 +14,6 @@
 		"@ts/wiki_render": "workspace:*",
 		"isomorphic-git": "^1.37.1",
 		"luxon": "^3.7.2",
-		"pkg-types": "^2.3.0",
 		"ufo": "^1.6.3"
 	},
 	"devDependencies": {

@@ -1,8 +1,8 @@
 import os from 'node:os';
 import path from 'node:path';
+import { findUp } from 'find-up';
 import fs from 'node:fs/promises';
 import { useLogger } from '@nuxt/kit';
-import { findNearestFile } from 'pkg-types';
 import type { NuxtHooks } from '@nuxt/schema';
 import { GitStatsService } from './utils/vcs';
 import { storeContext } from '../../../context';
@@ -12,11 +12,13 @@ const logger = useLogger('@wiki-module').withTag('scan-metadata');
 
 const metadataHook = async (rootDir: string): Promise<NuxtHooks['pages:resolved']> => {
 	// 找到带有`.git`的目录
-	const gitEntry = await findNearestFile('.git', { startingFrom: rootDir });
+	const gitEntry = await findUp('.git', { type: 'directory', cwd: rootDir });
 	if (!gitEntry) throw new Error('找不到 Git 存储库');
 
+	const gitEntryDir = path.dirname(gitEntry);
+
 	const renderer = storeContext.renderer;
-	const git = new GitStatsService(path.dirname(gitEntry), logger);
+	const git = new GitStatsService(gitEntryDir, logger);
 
 	const hook: NuxtHooks['pages:resolved'] = async (pages) => {
 		// 筛出要处理的 md 文件
@@ -37,7 +39,7 @@ const metadataHook = async (rootDir: string): Promise<NuxtHooks['pages:resolved'
 
 					const [renderResult, timestamps] = await Promise.all([
 						renderer.render(content),
-						git.getTimestamps(filepath),
+						git.getTimestamps(path.relative(gitEntryDir, filepath)),
 					]);
 
 					// 验证元数据
