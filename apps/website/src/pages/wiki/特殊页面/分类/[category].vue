@@ -25,7 +25,10 @@ const wikiList = await (async () => {
 		}));
 
 	if (list.length === 0) {
-		router.replace('/404');
+		throw showError({
+			fatal: true,
+			status: 404,
+		});
 	}
 
 	return list;

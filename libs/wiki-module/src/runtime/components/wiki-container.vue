@@ -11,8 +11,8 @@
 			<div v-if="$route.meta['category']" class="category">
 				<p>分类：</p>
 				<ul>
-					<li v-for="item in $route.meta['category']" :key="item">
-						<NuxtLink :to="`/分类/${item}`">{{ item }}</NuxtLink>
+					<li v-for="category in $route.meta['category']" :key="category">
+						<NuxtLink :to="`/wiki/特殊页面/分类/${category}`">{{ category }}</NuxtLink>
 					</li>
 				</ul>
 			</div>

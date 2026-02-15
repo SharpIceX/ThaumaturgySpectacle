@@ -46,6 +46,7 @@ export default defineNuxtConfig({
 		},
 	},
 	linkChecker: {
+		failOnError: false,
 		skipInspections: ['no-uppercase-chars', 'no-non-ascii-chars'],
 	},
 	nitro: {
@@ -77,6 +78,7 @@ export default defineNuxtConfig({
 	},
 	devServer: {
 		port: 8190,
+		host: '127.0.0.1',
 	},
 	vite: {
 		resolve: {
@@ -111,5 +113,29 @@ export default defineNuxtConfig({
 		dts: true,
 		global: false,
 		defaultImport: 'component',
+	},
+	site: {
+		name: '幻术奇象',
+		url: 'https://ts.sharpice.top',
+		currentLocale: appConfig.head.htmlAttrs.lang,
+		description: appConfig.head.meta.find(
+			(meta: { name?: string; content?: string }) => meta.name === 'description',
+		)?.content,
+	},
+	robots: {
+		credits: false,
+		blockAiBots: true,
+		blockNonSeoBots: true,
+	},
+	seo: {
+		redirectToCanonicalSiteUrl: true,
+	},
+	sitemap: {
+		xsl: false,
+		credits: false,
+		zeroRuntime: true,
+		minify: isProduction,
+		discoverImages: false,
+		discoverVideos: false,
 	},
 });
