@@ -236,7 +236,8 @@ onBeforeUnmount(() => {
 
 	.dropdown-content {
 		border-radius: 12px;
-		background-color: @nord1;
+		backdrop-filter: blur(12px);
+		background-color: fade(@nord3, 50%);
 		box-shadow: 2px 6px 14px fade(@nord10, 20%);
 	}
 }

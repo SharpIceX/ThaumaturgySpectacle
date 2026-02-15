@@ -16,7 +16,7 @@ defineOptions({ name: 'App' });
 <style lang="less">
 #ts_app {
 	display: flex;
-	min-height: 100dvh;
+	height: 100dvh;
 	flex-direction: column;
 
 	main {
