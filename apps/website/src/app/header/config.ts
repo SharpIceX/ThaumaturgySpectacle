@@ -94,4 +94,4 @@ const header: HeaderType = {
 };
 
 export default header;
-export type { HeaderItemType, HeaderLinkItem };
+export type { HeaderItemType, HeaderLinkItem, HeaderDropdownItem };

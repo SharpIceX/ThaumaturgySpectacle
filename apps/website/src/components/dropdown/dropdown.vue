@@ -1,7 +1,6 @@
 <template>
 	<div ref="rootRef" class="dropdown" @keydown.esc.stop.prevent="close" @focusout="onFocusOut">
 		<div
-			ref="triggerRef"
 			class="dropdown-trigger"
 			role="button"
 			:aria-expanded="isOpen"
@@ -27,8 +26,8 @@
 				role="menu"
 				@mouseenter="onMouseEnter"
 				@mouseleave="onMouseLeave">
-				<ul
-					class="dropdown-list"
+				<div
+					class="dropdown-content"
 					role="none"
 					@click="onContentClick"
 					@keydown.arrow-down.prevent="focusNextItem"
@@ -36,7 +35,7 @@
 					@keydown.home.prevent="focusFirstItem"
 					@keydown.end.prevent="focusLastItem">
 					<slot name="content" />
-				</ul>
+				</div>
 			</div>
 		</transition>
 	</div>
@@ -47,16 +46,23 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 const props = withDefaults(
 	defineProps<{
+		/** 受控模式下的打开状态；未传则为非受控 */
 		modelValue?: boolean;
+		/** 是否禁用 */
 		disabled?: boolean;
+		/** 是否悬停打开 */
 		openOnHover?: boolean;
+		/** 悬停关闭延迟（ms） */
 		hoverCloseDelay?: number;
+		/** 点击内容区域是否自动关闭 */
+		closeOnContentClick?: boolean;
 	}>(),
 	{
 		modelValue: undefined,
 		disabled: false,
 		openOnHover: false,
-		hoverCloseDelay: 200,
+		hoverCloseDelay: 100,
+		closeOnContentClick: true,
 	},
 );
 
@@ -72,7 +78,6 @@ const innerOpen = ref(false);
 const isOpen = computed(() => (isControlled.value ? !!props.modelValue : innerOpen.value));
 
 const rootRef = ref<HTMLElement | null>(null);
-const triggerRef = ref<HTMLElement | null>(null);
 const menuRef = ref<HTMLElement | null>(null);
 const menuId = `dropdown-menu-${Math.random().toString(36).slice(2)}`;
 
@@ -124,7 +129,9 @@ const onFocusOut = (event: FocusEvent) => {
 	if (rootRef.value && (!next || !rootRef.value.contains(next))) close();
 };
 
-const onContentClick = () => close();
+const onContentClick = () => {
+	if (props.closeOnContentClick) close();
+};
 
 const getMenuItems = () => {
 	if (!menuRef.value) return [];
@@ -205,39 +212,26 @@ onBeforeUnmount(() => {
 	display: inline-flex;
 
 	.dropdown-trigger {
-		display: inline-flex;
-		align-items: center;
 		gap: 0.25rem;
 		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
 		user-select: none;
 	}
 
 	.dropdown-menu {
 		top: 100%;
-		left: 50%;
+		left: 100%;
+		outline: none;
 		min-width: 100%;
 		position: absolute;
-		padding-top: 0.5rem;
 		transform: translateX(-50%);
-		outline: none;
 	}
 
-	.dropdown-list {
-		margin: 0;
-		display: flex;
-		padding: 0.5rem;
-		min-width: 8rem;
-		list-style: none;
-		width: max-content;
-		border-radius: 0.5rem;
-		flex-direction: column;
+	.dropdown-content {
+		border-radius: 12px;
 		background-color: @nord1;
-		border: 1px solid fade(@nord3, 30%);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-
-		> * + * {
-			margin-top: 0.25rem;
-		}
+		box-shadow: 2px 6px 14px fade(@nord10, 20%);
 	}
 }
 

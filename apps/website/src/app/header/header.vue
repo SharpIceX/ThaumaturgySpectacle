@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import headerConfig from './config';
-import AppHeaderListItem from './header.-list-item.vue';
+import AppHeaderListItem from './components/header.-list-item.vue';
 
 defineOptions({ name: 'AppHeader' });
 </script>
@@ -20,13 +20,13 @@ defineOptions({ name: 'AppHeader' });
 
 .navbar {
 	display: flex;
-	font-size: 1.1em;
 	column-gap: 0.5rem;
 	align-items: center;
 	justify-content: center;
 
 	.logo {
-		font-size: 1.1em;
+		font-size: 1.2em;
+		padding-inline: 0.5rem;
 	}
 }
 </style>
