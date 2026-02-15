@@ -1,139 +1,153 @@
 <template>
 	<div class="toc-container">
-		<h1>目录</h1>
-		<nav ref="tocContent" role="navigation" class="toc-content">
+		<h1 id="toc-title">目录</h1>
+		<nav ref="tocNavRef" role="navigation" class="toc-content" aria-labelledby="toc-title" @click="handleTocClick">
 			<slot />
 		</nav>
 	</div>
 </template>
 
 <script lang="ts" setup>
-import { ref, shallowRef, inject, onMounted, onUnmounted, type Ref } from 'vue';
-import { OverlayScrollbars } from 'overlayscrollbars';
+import { inject, type Ref, onMounted, onUnmounted, ref, nextTick } from 'vue';
 
-defineOptions({ name: 'WikiToc' });
+const wikiContentRef = inject<Ref<HTMLElement | null>>('wikiContentRef');
+const tocNavRef = ref<HTMLElement | null>(null);
+const activeId = ref<string>('');
 
-const tocContent = ref<HTMLElement>();
-const osInstance = shallowRef<OverlayScrollbars>();
-const contentRef = inject<Ref<HTMLElement | null>>('wiki-content-ref');
+let observer: IntersectionObserver | null = null;
+let isClickScrolling = false;
+let tocLinks: HTMLAnchorElement[] = [];
 
-let cleanupScrollListener: (() => void) | undefined;
+let fastDebounceTimer: ReturnType<typeof setTimeout> | null = null;
 
-/**
- * 获取当前视口正在阅读的标题
- * @param contentCache - 内容区域的 HTMLElement 数组
- * @param scrollPosition - 当前滚动位置
- * @returns 最近的标题 id
- */
-const getActiveHeadingId = (contentCache: HTMLElement[], scrollPosition: number): string | undefined => {
-	const offset = 100;
-	const adjustedScroll = scrollPosition + offset;
+const isClient = () => typeof window !== 'undefined';
 
-	for (let index = contentCache.length - 1; index >= 0; index--) {
-		const heading = contentCache[index];
-		if (heading && heading.offsetTop <= adjustedScroll) {
-			return heading.id;
-		}
-	}
-	return contentCache[0]?.id;
+const clearTimers = () => {
+	if (fastDebounceTimer) clearTimeout(fastDebounceTimer);
+	fastDebounceTimer = null;
 };
 
-/**
- * 合并滚动监听逻辑，并执行初始高亮
- * @param contentCache - 内容区域的 HTMLElement 数组
- * @param tocLinksCache - 目录链接的 HTMLElement 数组
- * @returns 清理函数
- */
-const initScrollObserver = (contentCache: HTMLElement[], tocLinksCache: HTMLElement[]): (() => void) => {
-	let ticking = false;
-	let lastId: string | undefined;
+const getHeaders = () =>
+	Array.from(
+		wikiContentRef?.value?.querySelectorAll('h2[id], h3[id], h4[id], h5[id], h6[id]') || [],
+	) as HTMLElement[];
 
-	const updateStatus = () => {
-		const scrollPosition = window.scrollY || document.documentElement.scrollTop;
-		const activeId = getActiveHeadingId(contentCache, scrollPosition);
+const highlightTocLink = (id: string): HTMLAnchorElement | null => {
+	let activeLink: HTMLAnchorElement | null = null;
 
-		if (activeId && activeId !== lastId) {
-			lastId = activeId;
+	tocLinks.forEach((link) => {
+		const href = link.getAttribute('href');
+		const isMatch = href === `#${id}` || href === `#${encodeURIComponent(id)}`;
 
-			if (globalThis.location.hash !== `#${activeId}`) {
-				history.replaceState(undefined, '', `#${activeId}`);
-			}
-
-			for (const link of tocLinksCache) {
-				const isTarget = link.getAttribute('href') === `#${activeId}`;
-				link.classList.toggle('select-toc', isTarget);
-
-				if (isTarget) {
-					link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-				}
-			}
+		if (isMatch) {
+			link.classList.add('select');
+			activeLink = link;
+		} else {
+			link.classList.remove('select');
 		}
-	};
-
-	const onScroll = () => {
-		if (!ticking) {
-			globalThis.requestAnimationFrame(() => {
-				updateStatus();
-				ticking = false;
-			});
-			ticking = true;
-		}
-	};
-
-	window.addEventListener('scroll', onScroll, { passive: true });
-	updateStatus();
-
-	return () => window.removeEventListener('scroll', onScroll);
-};
-
-/**
- * 初始化目录功能
- * @param content - 正文容器
- * @param tocContainer - 目录容器
- */
-const initTableOfContents = (content: HTMLElement, tocContainer: HTMLElement): void => {
-	const headings = Array.from(content.querySelectorAll('h2, h3, h4, h5, h6')) as HTMLElement[];
-	const links = Array.from(tocContainer.querySelectorAll('a[href^="#"]')) as HTMLElement[];
-
-	if (headings.length === 0 || links.length === 0) return;
-
-	cleanupScrollListener = initScrollObserver(headings, links);
-};
-
-const initScrollbars = () => {
-	if (!tocContent.value) return;
-
-	osInstance.value = OverlayScrollbars(tocContent.value, {
-		scrollbars: {
-			autoHideDelay: 300,
-			autoHide: 'scroll',
-			autoHideSuspend: true,
-			theme: 'os-theme-nord',
-		},
 	});
+
+	return activeLink;
 };
 
-const destroyScrollbars = () => {
-	osInstance.value?.destroy();
-	osInstance.value = undefined;
-};
+/**
+ * Toc 高亮和 URL 锚点更新
+ */
+const updateState = (id: string, immediate: boolean = false) => {
+	if (!isClient() || !id) return;
 
-onMounted(() => {
-	initScrollbars();
+	clearTimers();
 
-	const contentEl = contentRef?.value ?? null;
-	const tocEl = tocContent.value ?? null;
+	const performUpdate = () => {
+		if (activeId.value === id) return;
 
-	if (contentEl && tocEl) {
-		initTableOfContents(contentEl, tocEl);
+		activeId.value = id;
+
+		requestAnimationFrame(() => {
+			const activeLink = highlightTocLink(id);
+
+			if (activeLink && !isClickScrolling) {
+				(activeLink as HTMLElement).scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+			}
+
+			if (window.location.hash !== `#${id}`) {
+				history.replaceState(null, '', `#${id}`);
+			}
+		});
+	};
+
+	if (immediate) {
+		performUpdate();
+	} else {
+		fastDebounceTimer = setTimeout(performUpdate, 120);
 	}
+};
+
+const initObserver = () => {
+	if (!wikiContentRef?.value || typeof IntersectionObserver === 'undefined') return;
+
+	const headers = getHeaders();
+
+	observer = new IntersectionObserver(
+		(entries) => {
+			if (isClickScrolling) return;
+			const visibleEntry = entries.find((entry) => entry.isIntersecting);
+			if (visibleEntry) {
+				updateState(visibleEntry.target.id, false);
+			}
+		},
+		{
+			rootMargin: '-15% 0px -80% 0px',
+			threshold: 0,
+		},
+	);
+
+	headers.forEach((h) => observer?.observe(h));
+};
+
+onMounted(async () => {
+	await nextTick();
+	if (!isClient()) return;
+
+	if (tocNavRef.value) {
+		tocLinks = Array.from(tocNavRef.value.querySelectorAll('a'));
+	}
+
+	const hash = decodeURIComponent(window.location.hash.slice(1));
+	const headers = getHeaders();
+
+	if (hash && headers.some((h) => h.id === hash)) {
+		updateState(hash, true);
+	} else if (headers.length > 0) {
+		const firstId = headers[0]?.id;
+		if (firstId) {
+			updateState(firstId, true);
+		}
+	}
+
+	initObserver();
 });
 
 onUnmounted(() => {
-	cleanupScrollListener?.();
-	cleanupScrollListener = undefined;
-	destroyScrollbars();
+	observer?.disconnect();
+	clearTimers();
 });
+
+const handleTocClick = (e: Event) => {
+	const link = (e.target as HTMLElement).closest('a');
+	if (!link) return;
+
+	const href = link.getAttribute('href');
+	if (!href) return;
+
+	const id = decodeURIComponent(href.replace('#', ''));
+	isClickScrolling = true;
+	updateState(id, true);
+
+	setTimeout(() => {
+		isClickScrolling = false;
+	}, 1000);
+};
 </script>
 
 <style lang="less" scoped>
@@ -141,72 +155,73 @@ onUnmounted(() => {
 
 .toc-container {
 	top: 1rem;
-	gap: 0.75rem;
-	color: @nord4;
 	display: flex;
-	position: sticky;
 	padding: 1.25rem;
-	max-height: 50vh;
-	border-radius: 12px;
+	position: sticky;
+	max-height: 50dvh;
+	background: @nord1;
+	border-radius: 10px;
 	flex-direction: column;
-	background-color: @nord1;
-}
 
-.toc-container > h1 {
-	color: @nord6;
-	font-weight: 700;
-	font-size: 1.35rem;
-	letter-spacing: 0.02em;
-}
-
-.toc-container :deep(.toc-content) {
-	ol {
-		padding-left: 0;
-		margin: 0;
-		counter-reset: toc-section;
+	h1 {
+		color: @nord6;
+		font-weight: 700;
+		font-size: 1.1rem;
+		margin-bottom: 0.4rem;
+		padding-bottom: 0.6rem;
+		letter-spacing: 0.02em;
+		border-bottom: 1px solid fade(@nord3, 60%);
 	}
 
-	li {
-		display: grid;
-		column-gap: 0.6rem;
-		align-items: baseline;
-		margin-block: 0.35rem;
-		counter-increment: toc-section;
-		grid-template-columns: max-content 1fr;
+	:deep(.toc-content) {
+		flex: 1;
+		overflow-y: auto;
 
-		&::before {
-			color: @nord9;
-			font-size: 1.1rem;
-			line-height: 1.6;
-			padding-top: 0;
-			content: counters(toc-section, '.');
-		}
-
-		a {
-			display: block;
-			color: @nord4;
-			line-height: 1.6;
-			font-size: 0.95rem;
-			overflow-wrap: anywhere;
-			word-break: break-word;
-			transition:
-				color 0.2s ease,
-				opacity 0.2s ease;
-
-			&:hover {
-				color: @nord8;
-			}
-		}
-
-		/* 子列表缩进收敛，避免 h6 被挤爆 */
 		ol {
-			grid-column: 2 / -1;
-			padding-left: 0.5rem;
-			margin: 0.25rem 0 0.35rem;
-			border-left: 1px solid @nord3;
+			margin: 0;
+			padding-left: 1rem;
+			list-style-type: none;
+			counter-reset: toc-counter;
+		}
+
+		& > ol {
+			padding-left: 0;
+			padding-right: 1.2rem;
 
 			li {
-				margin: 0.25rem 0;
+				line-height: 1.5;
+				margin: 0.45rem 0;
+				font-size: 0.95rem;
+				counter-increment: toc-counter;
+
+				a {
+					display: block;
+					border-radius: 6px;
+					padding: 0.35rem 0.55rem;
+					color: fade(@nord4, 85%);
+					transition: all 0.2s ease;
+					box-decoration-break: clone;
+
+					&::before {
+						font-size: 0.9em;
+						margin-right: 0.5rem;
+						color: fade(@nord13, 75%);
+						font-family: ui-monospace, monospace;
+						content: counters(toc-counter, '.');
+					}
+
+					&.select {
+						color: @nord8;
+						font-weight: 600;
+						box-shadow: inset 2px 0 0 0 fade(@nord8, 80%);
+						background: linear-gradient(90deg, fade(@nord8, 20%), fade(@nord8, 6%));
+					}
+
+					&:hover {
+						color: @nord8;
+						background-color: fade(@nord8, 10%);
+					}
+				}
 			}
 		}
 	}

@@ -37,6 +37,9 @@ importers:
       '@fontsource/noto-color-emoji':
         specifier: ^5.2.10
         version: 5.2.10
+      '@fontsource/pretendard':
+        specifier: ^5.2.5
+        version: 5.2.5
       '@lxgw/LxgwBright':
         specifier: github:lxgw/LxgwBright#v5.527
         version: https://codeload.github.com/lxgw/LxgwBright/tar.gz/519f16ce370219b6753ea8ca52e09a477ea4bf59
@@ -64,9 +67,6 @@ importers:
       nuxt:
         specifier: ^4.3.1
         version: 4.3.1(@parcel/watcher@2.5.6)(@types/node@25.2.3)(@vue/compiler-sfc@3.5.28)(cac@6.7.14)(db0@0.3.4)(eslint@9.39.2(jiti@2.6.1))(ioredis@5.9.3)(less@4.5.1)(lightningcss@1.31.1)(magicast@0.5.2)(optionator@0.9.4)(rollup@4.57.1)(terser@5.46.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.2.3)(jiti@2.6.1)(less@4.5.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.2))(yaml@2.8.2)
-      overlayscrollbars:
-        specifier: ^2.14.0
-        version: 2.14.0
       vue:
         specifier: ^3.5.28
         version: 3.5.28(typescript@5.9.3)
@@ -872,6 +872,9 @@ packages:
 
   '@fontsource/noto-color-emoji@5.2.10':
     resolution: {integrity: sha512-sHu7Z2zkdmPbcNlNgqyQGJEis6fE3eBY8ZXzaUe5ixci2uCQ3g8cX5hJM+5P45JxTEhdbiU/4k3chQmDxe5puQ==}
+
+  '@fontsource/pretendard@5.2.5':
+    resolution: {integrity: sha512-UAj3l+Exfx6Sq5hySbhTQhNzkZnhzBxQdHySmjo2lifXyXpMAHv7GD7hAQTLgZfBd1WixJJkmynfJbOp+TAckg==}
 
   '@harperfast/extended-iterable@1.0.3':
     resolution: {integrity: sha512-sSAYhQca3rDWtQUHSAPeO7axFIUJOI6hn1gjRC5APVE1a90tuyT8f5WIgRsFhhWA7htNkju2veB9eWL6YHi/Lw==}
@@ -4898,9 +4901,6 @@ packages:
   ordered-binary@1.6.1:
     resolution: {integrity: sha512-QkCdPooczexPLiXIrbVOPYkR3VO3T6v2OyKRkR1Xbhpy7/LAVXwahnRCgRp78Oe/Ehf0C/HATAxfSr6eA1oX+w==}
 
-  overlayscrollbars@2.14.0:
-    resolution: {integrity: sha512-RjV0pqc79kYhQLC3vTcLRb5GLpI1n6qh0Oua3g+bGH4EgNOJHVBGP7u0zZtxoAa0dkHlAqTTSYRb9MMmxNLjig==}
-
   oxc-minify@0.112.0:
     resolution: {integrity: sha512-rkVSeeIRSt+RYI9uX6xonBpLUpvZyegxIg0UL87ev7YAfUqp7IIZlRjkgQN5Us1lyXD//TOo0Dcuuro/TYOWoQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -6863,6 +6863,8 @@ snapshots:
   '@fontsource-variable/jetbrains-mono@5.2.8': {}
 
   '@fontsource/noto-color-emoji@5.2.10': {}
+
+  '@fontsource/pretendard@5.2.5': {}
 
   '@harperfast/extended-iterable@1.0.3': {}
 
@@ -11399,8 +11401,6 @@ snapshots:
       word-wrap: 1.2.5
 
   ordered-binary@1.6.1: {}
-
-  overlayscrollbars@2.14.0: {}
 
   oxc-minify@0.112.0:
     optionalDependencies:

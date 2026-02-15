@@ -79,7 +79,7 @@ const isOpen = computed(() => (isControlled.value ? !!props.modelValue : innerOp
 
 const rootRef = ref<HTMLElement | null>(null);
 const menuRef = ref<HTMLElement | null>(null);
-const menuId = `dropdown-menu-${Math.random().toString(36).slice(2)}`;
+const menuId = `dropdown-menu-${useId()}`;
 
 let closeTimer: number | null = null;
 
@@ -119,12 +119,14 @@ const onMouseEnter = () => {
 const onMouseLeave = () => {
 	if (!props.openOnHover) return;
 	clearCloseTimer();
-	closeTimer = window.setTimeout(() => {
+	closeTimer = setTimeout(() => {
 		close();
-	}, props.hoverCloseDelay);
+	}, props.hoverCloseDelay) as unknown as number;
 };
 
 const onFocusOut = (event: FocusEvent) => {
+	if (!import.meta.client) return;
+
 	const next = event.relatedTarget as Node | null;
 	if (rootRef.value && (!next || !rootRef.value.contains(next))) close();
 };
@@ -156,6 +158,8 @@ const focusLastItem = () => {
 };
 
 const focusNextItem = () => {
+	if (!import.meta.client) return;
+
 	const items = getMenuItems();
 	const active = document.activeElement;
 	const index = items.findIndex((el) => el === active);
@@ -163,6 +167,8 @@ const focusNextItem = () => {
 };
 
 const focusPrevItem = () => {
+	if (!import.meta.client) return;
+
 	const items = getMenuItems();
 	const active = document.activeElement;
 	const index = items.findIndex((el) => el === active);

@@ -6,21 +6,20 @@
 	box-sizing: border-box;
 }
 
+@import (reference) '$/nord/src/lesscss/nord.less';
+
 html {
-	height: 100%;
+	scrollbar-width: auto;
+	scroll-behavior: smooth;
+	scrollbar-gutter: stable;
+	scrollbar-color: @nord13 transparent;
 }
+
 body {
 	margin: 0;
 	width: 100%;
-	display: grid;
 	color: @nord4;
-	min-height: 100dvh;
 	background: @nord0;
-	font-family: 'Lxgw Bright', 'Noto Color Emoji', system-ui, sans-serif;
-
-	text-rendering: optimizeLegibility;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
 }
 
 a {

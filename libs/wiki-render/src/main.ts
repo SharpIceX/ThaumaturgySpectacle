@@ -105,27 +105,33 @@ async function renderMarkdown(markdownRender: MarkdownIt, content: string): Prom
 
 	// 侧栏
 	const asideTemplate = environment.tocHtml
-		? `<template #aside>
-            <WikiToc>${environment.tocHtml}</WikiToc>
-        </template>`
+		? `
+<template #aside>
+    <WikiToc>${environment.tocHtml}</WikiToc>
+</template>`
 		: '';
 
 	return {
 		data,
 		html: `
 <template>
-	<NuxtLayout name="wiki-container">
-		<template #default="{ contentRef }">
-			<div class="wiki-content" :ref="contentRef">${html}</div>
-		</template>
-		${asideTemplate}
-	</NuxtLayout>
+    <WikiContainer>
+        <template #default>
+            <div ref="contentBody" class="wiki-content">${html}</div>
+        </template>
+        ${asideTemplate}
+    </WikiContainer>
 </template>
 <script lang="ts" setup>
+import { ref, provide } from 'vue';
 import WikiToc from "#wiki-module/wiki/toc.vue"
 import MarkdownCode from "#wiki-module/markdown/code.vue";
+import WikiContainer from "#wiki-module/wiki-container.vue"
 import MarkdownImage from "#wiki-module/markdown/image.vue";
 ${importContent.join('\n')}
+
+const contentBody = ref<HTMLElement>();
+provide('wikiContentRef', contentBody);
 </script>
 `,
 	};

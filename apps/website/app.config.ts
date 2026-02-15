@@ -13,11 +13,6 @@ export default {
 		htmlAttrs: {
 			lang: 'zh-Hans',
 			dir: 'ltr',
-			'data-overlayscrollbars-initialize': '',
-		},
-
-		bodyAttrs: {
-			'data-overlayscrollbars-initialize': '',
 		},
 
 		meta: [

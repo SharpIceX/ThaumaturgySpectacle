@@ -5,7 +5,7 @@ import { createRender } from '@ts/wiki_render';
 import closeHook from './compiler/hooks/close';
 import viteTransform from './compiler/vite/transform';
 import metadataHook from './compiler/hooks/scan-metadata/main';
-import { addVitePlugin, defineNuxtModule, createResolver, addLayout, addTypeTemplate, useLogger } from '@nuxt/kit';
+import { addVitePlugin, defineNuxtModule, createResolver, addTypeTemplate, useLogger } from '@nuxt/kit';
 
 const regExpMarkdown = /\.md$/;
 const regExpVue = /\.vue$/;
@@ -61,14 +61,6 @@ export default defineNuxtModule({
 			// 写入 include 并去重
 			transform.include = [...new Set([...includeArray, regExpMarkdown, regExpVue])];
 		}
-
-		addLayout(
-			{
-				src: resolver.resolve('./runtime/layout/wiki-container.vue'),
-				filename: 'layouts/wiki-container.vue',
-			},
-			'wiki-container',
-		);
 
 		// 类型
 		addTypeTemplate({

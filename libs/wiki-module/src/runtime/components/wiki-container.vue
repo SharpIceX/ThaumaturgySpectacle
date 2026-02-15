@@ -7,7 +7,7 @@
 					{{ $route.meta['description'] }}
 				</p>
 			</header>
-			<slot :content-ref="contentRef" />
+			<slot />
 			<div v-if="$route.meta['category']" class="category">
 				<p>分类：</p>
 				<ul>
@@ -29,11 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide } from 'vue';
-
-// 传递内容区域给子组件
-const contentRef = ref<HTMLElement | null>(null);
-provide('wiki-content-ref', contentRef);
+defineOptions({ name: 'WikiContainer' });
 </script>
 
 <style lang="less" scoped>
@@ -70,14 +66,18 @@ provide('wiki-content-ref', contentRef);
 		}
 
 		.title {
-			@apply "border-b-1 border-b-nord4 border-b-op-20 pb-2";
+			padding-bottom: 8px;
+			border-bottom: 1px solid fade(@nord4, 20%);
 
 			h1 {
-				@apply "text-3xl font-bold mb-1";
+				margin: 0;
+				font-size: 2em;
+				font-weight: 700;
 			}
 
 			p {
-				@apply "text-sm";
+				font-size: 1.1em;
+				margin-block: 0.5rem;
 			}
 
 			.time {
@@ -93,13 +93,17 @@ provide('wiki-content-ref', contentRef);
 			border: 1.5px solid lighten(@nord3, 20%);
 
 			p {
+				margin: 0;
 				text-wrap: nowrap;
 			}
 
 			ul {
+				margin: 0;
+				padding: 0;
 				display: flex;
 				flex-wrap: wrap;
 				column-gap: 1rem;
+				list-style: none;
 
 				a {
 					color: @nord8;

@@ -29,10 +29,7 @@ export default defineNuxtConfig({
 	extends: [path.resolve(import.meta.dirname, '../content')],
 	css: ['~/styles/main.less'],
 	modules: ['@ts/wiki-module', 'nuxt-svgo', '@nuxt/eslint', '@nuxtjs/seo'],
-	plugins: [
-		{ src: './plugins/nprogress.ts', mode: 'client' },
-		{ src: './plugins/scrollbars.ts', mode: 'client' },
-	],
+	plugins: [{ src: './plugins/nprogress.ts', mode: 'client' }],
 	alias: {
 		$: path.resolve(import.meta.dirname, './node_modules'),
 	},
@@ -95,7 +92,6 @@ export default defineNuxtConfig({
 			include: [
 				'@vue/devtools-core',
 				'@vue/devtools-kit',
-				'overlayscrollbars',
 				'@vueuse/integrations/useNProgress',
 				'@ts/shared/src/web/preload-image',
 			],
