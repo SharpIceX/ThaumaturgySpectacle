@@ -51,7 +51,6 @@ export default defineNuxtConfig({
 		},
 	},
 	linkChecker: {
-		failOnError: false,
 		skipInspections: ['no-uppercase-chars', 'no-non-ascii-chars'],
 	},
 	nitro: {
