@@ -4,7 +4,6 @@ declare module 'vue-router' {
 	interface RouteMeta {
 		title: string;
 		description?: string;
-		tags?: string[];
 		category?: string[];
 		type?: 'wiki' | 'novel';
 

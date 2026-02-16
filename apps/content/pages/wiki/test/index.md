@@ -1,7 +1,6 @@
 +++
 title = "Wiki Markdown 渲染测试"
 description = "这是一个测试 Wiki Markdown 渲染的页面"
-tags = ["Wiki Markdown", "wmd", "渲染测试"]
 
 category = ["测试"]
 

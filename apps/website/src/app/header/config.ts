@@ -74,8 +74,8 @@ const header: HeaderType = {
 					icon: AutoStoriesIcon,
 				},
 				{
-					label: '标签',
-					link: '/novel/特殊页面/标签',
+					label: '分类',
+					link: '/novel/特殊页面/分类',
 					icon: StyleIcon,
 				},
 				{
