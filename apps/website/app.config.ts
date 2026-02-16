@@ -1,3 +1,8 @@
+/**
+ * SPDX-FileCopyrightText: 2026 锐冰(SharpIce)
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import type { NuxtConfig } from 'nuxt/config';
 
 export default {
@@ -47,19 +52,13 @@ export default {
 			// 版权信息
 			{
 				name: 'copyright',
-				content: '© 2020-2025 锐冰 版权所有 All rights reserved.',
+				content: '© 2020-2026 锐冰 (SharpIce). 保留所有权利。All rights reserved.',
 			},
 
 			// 作者
 			{
 				name: 'author',
 				content: '锐冰',
-			},
-
-			// 网站生成器
-			{
-				name: 'generator',
-				content: 'Nuxt 4',
 			},
 
 			// 许可证

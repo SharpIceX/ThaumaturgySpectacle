@@ -1,3 +1,8 @@
+/**
+ * SPDX-FileCopyrightText: 2026 锐冰(SharpIce)
+ * SPDX-License-Identifier: 0BSD
+ */
+
 import antfu from '@antfu/eslint-config';
 import websiteNuxtConfig from './apps/website/.nuxt/eslint.config.mjs';
 

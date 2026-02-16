@@ -1,3 +1,8 @@
+/**
+ * SPDX-FileCopyrightText: 2026 锐冰(SharpIce)
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
 import fs from 'node:fs';
 import path from 'node:path';
 import git from 'isomorphic-git';
@@ -22,9 +27,9 @@ export default defineNuxtConfig({
 	pages: true,
 	app: appConfig,
 	telemetry: false,
+	compatibilityDate: 'latest',
 	buildId: await GetBuildID(),
 	appId: 'thaumaturgy-spectacle',
-	compatibilityDate: '2025-08-28',
 	srcDir: path.resolve(import.meta.dirname, './src'),
 	extends: [path.resolve(import.meta.dirname, '../content')],
 	css: ['~/styles/main.less'],
@@ -121,6 +126,8 @@ export default defineNuxtConfig({
 		description: appConfig.head.meta.find(
 			(meta: { name?: string; content?: string }) => meta.name === 'description',
 		)?.content,
+		author: '锐冰',
+		sameAs: ['https://github.com/SharpIceX'],
 	},
 	robots: {
 		credits: false,
@@ -137,5 +144,9 @@ export default defineNuxtConfig({
 		minify: isProduction,
 		discoverImages: false,
 		discoverVideos: false,
+	},
+	schemaOrg: {
+		identity: 'Person',
+		minify: isProduction,
 	},
 });
