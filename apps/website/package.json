@@ -24,12 +24,12 @@
 		"nord": "^0.2.1",
 		"nprogress": "^0.2.0",
 		"nuxt": "^4.3.1",
-		"vue": "^3.5.28"
+		"vue": "^3.5.29"
 	},
 	"devDependencies": {
-		"@nuxt/eslint": "^1.15.1",
+		"@nuxt/eslint": "^1.15.2",
 		"@nuxtjs/seo": "^3.4.0",
-		"isomorphic-git": "^1.37.1",
+		"isomorphic-git": "^1.37.2",
 		"less": "^4.5.1",
 		"lightningcss": "^1.31.1",
 		"nuxt-svgo": "^4.2.6",

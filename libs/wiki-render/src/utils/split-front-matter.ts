@@ -5,24 +5,27 @@
  */
 function splitFrontMatter(content: string): { tomlContent?: string; bodyContent: string } {
 	/// 确保开头符合 Front Matter
-	const firstLineMatch = content.match(/^\+\+\+[ \t]*\r?\n/);
-	if (!firstLineMatch) return { bodyContent: content };
-
-	/** 起始偏移量 */
-	const startOffset = firstLineMatch[0].length;
+	if (!content.startsWith('+++')) {
+		return { bodyContent: content };
+	}
 
 	// 查找闭合
-	const closeRegex = /\r?\n\+\+\+[ \t]*(?:\r?\n|$)/;
-	const closeMatch = content.slice(startOffset).match(closeRegex);
+	const endDelimiter = '\n+++';
+	const startIndex = content.indexOf('\n', 3);
+	if (startIndex === -1) return { bodyContent: content };
 
-	if (!closeMatch || closeMatch.index === undefined) return { bodyContent: content };
+	const endIndex = content.indexOf(endDelimiter, startIndex);
 
-	/** 闭合偏移量 */
-	const closeIndexInside = closeMatch.index;
+	if (endIndex === -1) {
+		return { bodyContent: content };
+	}
 
-	// 提取内容
-	const tomlContent = content.slice(startOffset, startOffset + closeIndexInside).trim();
-	const bodyContent = content.slice(startOffset + closeIndexInside + closeMatch[0].length).trim();
+	// toml 内容
+	const tomlContent = content.slice(startIndex, endIndex).trim();
+
+	// 正文内容
+	const remainingContent = content.slice(endIndex + endDelimiter.length);
+	const bodyContent = remainingContent.replace(/^[ \t]*\r?\n/, '');
 
 	return { tomlContent, bodyContent };
 }

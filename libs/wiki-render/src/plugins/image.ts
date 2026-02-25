@@ -173,7 +173,7 @@ function logMissingImageInfo(logger: ConsolaInstance, hasTitle: boolean, hasSour
 }
 
 const image: PluginWithOptions<imagePluginOptions> = (md, options) => {
-	const logger = options?.logger?.withTag('html') ?? consola.create({ level: 0 }).withTag('image');
+	const logger = options?.logger?.withTag('image') ?? consola.create({ level: 0 });
 
 	// 词法解析规则
 	md.core.ruler.after('inline', 'wiki_image_clean_token', (state) => {

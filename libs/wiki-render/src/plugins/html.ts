@@ -7,7 +7,7 @@ interface HtmlPluginOptions {
 }
 
 const html: PluginWithOptions<HtmlPluginOptions> = (md, options) => {
-	const logger = options?.logger?.withTag('html') ?? consola.create({ level: 0 }).withTag('html');
+	const logger = options?.logger?.withTag('html') ?? consola.create({ level: 0 });
 
 	const handleHtmlToken: RenderRule = (tokens, index): string => {
 		const token = tokens[index];

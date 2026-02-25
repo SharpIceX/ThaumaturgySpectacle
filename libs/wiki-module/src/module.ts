@@ -5,7 +5,7 @@ import { createRender } from '@ts/wiki_render';
 import closeHook from './compiler/hooks/close';
 import viteTransform from './compiler/vite/transform';
 import metadataHook from './compiler/hooks/scan-metadata/main';
-import { addVitePlugin, defineNuxtModule, createResolver, addTypeTemplate, useLogger } from '@nuxt/kit';
+import { addVitePlugin, addPlugin, defineNuxtModule, createResolver, addTypeTemplate, useLogger } from '@nuxt/kit';
 
 const regExpMarkdown = /\.md$/;
 const regExpVue = /\.vue$/;
@@ -71,6 +71,11 @@ export default defineNuxtModule({
 		nuxt.options.alias['#wiki-module/*'] = resolver.resolve('./runtime/components/*');
 
 		addVitePlugin(viteTransform);
+
+		addPlugin({
+			mode: 'all',
+			src: resolver.resolve('./plugins/merge-keywords.ts'),
+		});
 
 		if (!nuxt.options._prepare) nuxt.hook('pages:resolved', await metadataHook(nuxt.options.rootDir));
 		nuxt.hook('close', closeHook);

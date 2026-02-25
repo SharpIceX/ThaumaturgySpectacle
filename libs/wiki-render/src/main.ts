@@ -1,149 +1,19 @@
 import v8 from 'node:v8';
 import crypto from 'node:crypto';
 import process from 'node:process';
-import MarkdownIt from 'markdown-it';
 import { Buffer } from 'node:buffer';
 import { open as lmdbOpen } from 'lmdb';
-import shiki from '@shikijs/markdown-it';
-import TOML, { type TomlTable } from 'smol-toml';
-import MarkdownItCJK from 'markdown-it-cjk-friendly';
-import { consola, type ConsolaInstance } from 'consola';
-import { code as MarkdownItCode } from './plugins/code';
-import { ins as MarkdownItIns } from '@mdit/plugin-ins';
-import { sub as MarkdownItSub } from '@mdit/plugin-sub';
-import { sup as MarkdownItSup } from '@mdit/plugin-sup';
-import { link as MarkdownItLink } from './plugins/link';
-import splitFrontMatter from './utils/split-front-matter';
-import { ruby as MarkdownItRuby } from '@mdit/plugin-ruby';
-import { mark as MarkdownItMark } from '@mdit/plugin-mark';
-import { spoiler as MarkdownItSpoiler } from '@mdit/plugin-spoiler';
-import { underline as MarkdownItUnderline } from './plugins/underline';
-import { html as MarkdownItHtml, type HtmlPluginOptions } from './plugins/html';
-import { anchor as MarkdownItAnchor, type AnchorEnvironment } from './plugins/anchor';
-import { footnote as MarkdownItFootnote, type FootNoteEnv } from '@mdit/plugin-footnote';
-import { tasklist as MarkdownItTasklist, type TaskListEnv } from '@mdit/plugin-tasklist';
-import { alert as MarkdownItAlert, type MarkdownItAlertOptions } from '@mdit/plugin-alert';
-import { katex as MarkdownItKatex, type MarkdownItKatexOptions } from '@mdit/plugin-katex';
-import { image as MarkdownItImage, type ImageEnvironment, type imagePluginOptions } from './plugins/image';
-
-interface RenderResultType {
-	html: string;
-	data?: TomlTable | undefined;
-}
-
-type MarkdownItEnvironment = TaskListEnv & FootNoteEnv & ImageEnvironment & AnchorEnvironment;
-
-/**
- * 预热 Markdown 渲染器
- * @returns 已初始化的类
- */
-async function getRenderer(logger: ConsolaInstance): Promise<MarkdownIt> {
-	const md = new MarkdownIt({ html: true });
-	md.use(MarkdownItCJK); // CJK 支持
-	md.use(MarkdownItIns); // 插入文本
-	md.use(MarkdownItSup); // 上标
-	md.use(MarkdownItSub); // 下标
-	md.use(MarkdownItMark); //  高亮文本
-	md.use(MarkdownItCode); // 代码块
-	md.use(MarkdownItRuby); // Ruby 字符支持
-	md.use(MarkdownItLink); // 链接处理
-	md.use(MarkdownItAnchor); // 锚点
-	md.use(MarkdownItSpoiler); // 隐藏文本
-	md.use(MarkdownItTasklist); // 任务列表
-	md.use(MarkdownItFootnote); // 脚注
-	md.use(MarkdownItUnderline); // 下划线
-	md.use(await shiki({ theme: 'nord' })); // 语法高亮
-	md.use(MarkdownItImage, { logger } satisfies imagePluginOptions); // 图片
-	md.use(MarkdownItHtml, { logger } satisfies HtmlPluginOptions); // HTML 处理
-	md.use(MarkdownItAlert, { deep: true } satisfies MarkdownItAlertOptions); // 警报块
-
-	// 数学公式
-	const markdownItKatexLogger = logger.withTag('katex');
-	md.use(MarkdownItKatex, {
-		strict: 'warn',
-		output: 'htmlAndMathml',
-		logger: (errorCode, errorMessage, token) => {
-			const context = token?.text ? ` (at "${token.text}")` : '';
-			const message = `${errorCode}: ${errorMessage}${context}`;
-			const isCritical = ['unknownSymbol', 'newLineInDisplayMode'].includes(errorCode);
-
-			if (isCritical) {
-				markdownItKatexLogger.error(message);
-			} else {
-				markdownItKatexLogger.warn(message);
-			}
-			return false;
-		},
-	} satisfies MarkdownItKatexOptions);
-
-	return md;
-}
-
-/**
- * Markdown 渲染器
- * @param markdownRender 已初始化的 MarkdownIt 实例
- * @param content Markdown 内容
- * @returns 渲染后的 Front Matter 和 HTML 文本
- */
-async function renderMarkdown(markdownRender: MarkdownIt, content: string): Promise<RenderResultType> {
-	// 拆分和解析 Front Matter 和内容
-	const split = splitFrontMatter(content);
-
-	// Toml
-	const data = split.tomlContent ? TOML.parse(split.tomlContent) : undefined;
-
-	// Markdown
-	const environment: Partial<MarkdownItEnvironment> = {};
-	const html = markdownRender.render(split.bodyContent, environment);
-
-	const importContent: string[] = [];
-	if (environment.image?.size) {
-		for (const [key, value] of environment.image.entries()) {
-			importContent.push(`import ${key} from "${value}";`);
-		}
-	}
-
-	// 侧栏
-	const asideTemplate = environment.tocHtml
-		? `
-<template #aside>
-    <WikiToc>${environment.tocHtml}</WikiToc>
-</template>`
-		: '';
-
-	return {
-		data,
-		html: `
-<template>
-    <WikiContainer>
-        <template #default>
-            <div ref="contentBody" class="wiki-content">${html}</div>
-        </template>
-        ${asideTemplate}
-    </WikiContainer>
-</template>
-<script lang="ts" setup>
-import { ref, provide } from 'vue';
-import WikiToc from "#wiki-module/wiki/toc.vue"
-import MarkdownCode from "#wiki-module/markdown/code.vue";
-import WikiContainer from "#wiki-module/wiki-container.vue"
-import MarkdownImage from "#wiki-module/markdown/image.vue";
-${importContent.join('\n')}
-
-const contentBody = ref<HTMLElement>();
-provide('wikiContentRef', contentBody);
-</script>
-`,
-	};
-}
+import { getRenderer } from './utils/get-renderer';
+import { type ConsolaInstance } from 'consola';
+import { renderMarkdown, type RenderResultType } from './render-markdown';
 
 /**
  * 创建一个 Markdown 渲染器实例
  *
  * @param cachePath 缓存文件保存位置
  */
-async function createRender(cachePath: string, logger?: ConsolaInstance) {
-	const renderLogger = logger?.withTag('html') ?? consola.create({ level: 0 }).withTag('html');
+async function createRender(cachePath: string, logger: ConsolaInstance) {
+	const renderLogger = logger.withTag('wiki-render');
 	const loggerCache = renderLogger.withTag('cache');
 
 	const MarkdwonItContext = await getRenderer(renderLogger);

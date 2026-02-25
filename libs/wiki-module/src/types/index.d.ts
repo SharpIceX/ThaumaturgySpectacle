@@ -5,11 +5,20 @@ declare module 'vue-router' {
 		title: string;
 		description?: string;
 		category?: string[];
+
+		/** 页面类型，为空则为普通 Vue 页面 */
 		type?: 'wiki' | 'novel';
 
 		time?: {
 			createdAt: string;
 			updatedAt: string;
 		};
+	}
+}
+
+declare module 'nuxt/schema' {
+	interface AppConfig {
+		/** 全局站点默认关键词 */
+		defaultKeywords?: string[];
 	}
 }

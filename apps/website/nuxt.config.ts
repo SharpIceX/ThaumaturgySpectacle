@@ -7,7 +7,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import git from 'isomorphic-git';
 import process from 'node:process';
-import appConfig from './app.config';
 import packageJson from './package.json';
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -25,7 +24,6 @@ const GetBuildID = async (): Promise<string> => {
 export default defineNuxtConfig({
 	ssr: true,
 	pages: true,
-	app: appConfig,
 	telemetry: false,
 	compatibilityDate: 'latest',
 	buildId: await GetBuildID(),
@@ -121,10 +119,8 @@ export default defineNuxtConfig({
 	site: {
 		name: '幻术奇象',
 		url: 'https://ts.sharpice.top',
-		currentLocale: appConfig.head.htmlAttrs.lang,
-		description: appConfig.head.meta.find(
-			(meta: { name?: string; content?: string }) => meta.name === 'description',
-		)?.content,
+		currentLocale: 'zh-Hans',
+		description: '幻术与奇象 Project',
 		author: '锐冰',
 		sameAs: ['https://github.com/SharpIceX'],
 	},
@@ -147,5 +143,132 @@ export default defineNuxtConfig({
 	schemaOrg: {
 		identity: 'Person',
 		minify: isProduction,
+	},
+	appConfig: {
+		defaultKeywords: ['幻术奇象', 'Thaumaturgy Spectacle', 'ThaumaturgySpectacle', '架空世界观'],
+	},
+	app: {
+		buildAssetsDir: '/_ts/',
+		rootId: `ts_app`,
+		head: {
+			viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
+			titleTemplate: '%s | 幻术奇象',
+
+			htmlAttrs: {
+				lang: 'zh-Hans',
+				dir: 'ltr',
+			},
+
+			meta: [
+				// 描述
+				{
+					name: 'description',
+					content: '幻术与奇象 Project',
+				},
+
+				//	Windows 磁贴图标
+				{
+					name: 'msapplication-TileColor',
+					content: '#88C0D0',
+				},
+				{
+					name: 'msapplication-TileImage',
+					content: '/siteicon/144.png',
+				},
+
+				// 网站主题颜色
+				{
+					name: 'theme-color',
+					content: '#88C0D0',
+				},
+
+				// 版权信息
+				{
+					name: 'copyright',
+					content: '© 2020-2026 锐冰 (SharpIce). 保留所有权利。All rights reserved.',
+				},
+
+				// 作者
+				{
+					name: 'author',
+					content: '锐冰',
+				},
+
+				// 许可证
+				{
+					name: 'license',
+					content: 'https://github.com/SharpIceX/ThaumaturgySpectacle/blob/main/README.md',
+				},
+
+				// 禁用浏览器扩展 Dark Reader
+				{
+					name: 'darkreader-lock',
+				},
+
+				// 仅提供深色模式
+				{
+					name: 'color-scheme',
+					content: 'dark',
+				},
+
+				// SEO 相关
+				{
+					name: 'robots',
+					content: 'noimageindex',
+				},
+			],
+
+			link: [
+				// 图标
+				{
+					rel: 'icon',
+					type: 'image/x-icon',
+					sizes: '256x256',
+					href: '/favicon.ico',
+				},
+				{
+					rel: 'icon',
+					type: 'image/png',
+					sizes: '1024x1024',
+					href: '/favicon.png',
+				},
+				{
+					rel: 'apple-touch-icon',
+					type: 'image/png',
+					sizes: '180x180',
+					href: '/siteicon/180.png',
+				},
+
+				// PWA
+				{
+					rel: 'manifest',
+					href: '/manifest.webmanifest',
+				},
+
+				// RSS
+				{
+					rel: 'alternate',
+					type: 'application/rss+xml',
+					title: 'RSS',
+					href: '/rss.xml',
+				},
+
+				// Atom
+				{
+					rel: 'alternate',
+					type: 'application/atom+xml',
+					title: 'Atom',
+					href: '/atom.xml',
+				},
+
+				// Json Feed
+				{
+					rel: 'alternate',
+					type: 'application/feed+json',
+					title: 'JSON Feed',
+					href: '/feed.json',
+				},
+			],
+		},
 	},
 });

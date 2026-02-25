@@ -28,10 +28,24 @@ defineOptions({ name: 'AppFooter' });
 
 	a {
 		color: @nord8;
-		margin-left: 0.4em;
+		padding-inline: 0.2rem;
 
 		&:hover {
 			text-decoration: underline;
+		}
+	}
+
+	// 大屏幕
+	@media (min-width: 768px) {
+		p {
+			column-gap: 0.25rem;
+			flex-direction: row;
+			display: inline-flex;
+			justify-content: center;
+		}
+
+		br {
+			display: none;
 		}
 	}
 }

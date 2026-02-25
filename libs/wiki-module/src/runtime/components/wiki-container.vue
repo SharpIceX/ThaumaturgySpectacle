@@ -43,11 +43,8 @@ defineOptions({ name: 'WikiContainer' });
 
 	.body {
 		width: 60%;
-		row-gap: 4px;
 		padding: 2rem;
-		display: flex;
 		border-radius: 0.5rem;
-		flex-direction: column;
 		background-color: @nord1;
 
 		// 当 body 是容器内唯一的子元素时，就是没有 aside 的时候
@@ -66,7 +63,7 @@ defineOptions({ name: 'WikiContainer' });
 		}
 
 		.title {
-			padding-bottom: 8px;
+			margin-bottom: 8px;
 			border-bottom: 1px solid fade(@nord4, 20%);
 
 			h1 {
@@ -79,9 +76,14 @@ defineOptions({ name: 'WikiContainer' });
 				font-size: 1.1em;
 				margin-block: 0.5rem;
 			}
+		}
 
-			.time {
-				cursor: default;
+		.time {
+			cursor: default;
+			margin-block: 1rem;
+
+			p {
+				margin: 0;
 			}
 		}
 

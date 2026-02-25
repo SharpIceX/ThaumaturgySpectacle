@@ -42,19 +42,14 @@ const metadataHook = async (rootDir: string): Promise<NuxtHooks['pages:resolved'
 						git.getTimestamps(path.relative(gitEntryDir, filepath)),
 					]);
 
-					// 验证元数据
-					if (!renderResult.data?.['title']) {
-						throw new Error('缺少标题');
-					}
-
 					page.meta = {
 						...page.meta,
-						type: 'wiki',
 						...renderResult.data,
 						time: timestamps,
+						type: 'wiki',
 					};
 				} catch (error) {
-					logger.error(`无法处理文件: ${filepath}`, error);
+					logger.error(`无法处理文件: ${filepath}\n`, error);
 				}
 			};
 		};

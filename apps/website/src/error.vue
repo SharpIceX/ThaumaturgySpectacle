@@ -1,9 +1,7 @@
 <template>
 	<div class="error">
-		<p class="code">{{ props.error?.status || 404 }}</p>
-		<p class="message">
-			{{ props.error?.status === 404 ? '您所访问的页面不存在' : props.error?.message || '发生了意外错误' }}
-		</p>
+		<p class="code">{{ props.error?.status || `未知错误` }}</p>
+		<p class="message">{{ props.error?.message || '发生了意外错误' }}</p>
 		<button class="link" @click="handleError">返回首页</button>
 	</div>
 </template>

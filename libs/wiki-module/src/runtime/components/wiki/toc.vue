@@ -10,6 +10,10 @@
 <script lang="ts" setup>
 import { inject, type Ref, onMounted, onUnmounted, ref, nextTick } from 'vue';
 
+defineOptions({
+	name: 'WikiToc',
+});
+
 const wikiContentRef = inject<Ref<HTMLElement | null>>('wikiContentRef');
 const tocNavRef = ref<HTMLElement | null>(null);
 const activeId = ref<string>('');

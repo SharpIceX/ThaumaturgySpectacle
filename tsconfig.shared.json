@@ -53,15 +53,5 @@
 		"forceConsistentCasingInFileNames": true,
 		"noPropertyAccessFromIndexSignature": true
 	},
-	"vueCompilerOptions": {
-		"strictVModel": true,
-		"strictTemplates": true,
-		"strictCssModules": true,
-		"checkUnknownProps": true,
-		"checkUnknownEvents": true,
-		"checkUnknownDirectives": true,
-		"checkUnknownComponents": true,
-		"inferTemplateDollarSlots": true
-	},
 	"exclude": ["**/node_modules", "**/dist", "**/.cache", "**/output"]
 }
