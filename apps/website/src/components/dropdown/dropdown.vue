@@ -228,6 +228,7 @@ onBeforeUnmount(() => {
 	.dropdown-menu {
 		top: 100%;
 		left: 100%;
+		z-index: 1;
 		outline: none;
 		min-width: 100%;
 		position: absolute;
@@ -237,8 +238,8 @@ onBeforeUnmount(() => {
 	.dropdown-content {
 		border-radius: 12px;
 		backdrop-filter: blur(12px);
-		background-color: fade(@nord3, 50%);
-		box-shadow: 2px 6px 14px fade(@nord10, 20%);
+		background-color: fade(@nord3, 30%);
+		box-shadow: 2px 8px 14px fade(@nord13, 15%);
 	}
 }
 

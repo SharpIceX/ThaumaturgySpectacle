@@ -1,12 +1,8 @@
+@import 'modern-normalize';
 @import (reference) '$/nord/src/lesscss/nord.less';
 
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
-
 html {
+	line-height: 1.5;
 	scrollbar-width: auto;
 	scroll-behavior: smooth;
 	scrollbar-gutter: stable;
@@ -14,7 +10,6 @@ html {
 }
 
 body {
-	margin: 0;
 	width: 100%;
 	color: @nord4;
 	background: @nord0;
@@ -28,10 +23,6 @@ a {
 	&:hover {
 		color: @nord10;
 	}
-}
-
-button {
-	font-family: inherit;
 }
 
 svg {

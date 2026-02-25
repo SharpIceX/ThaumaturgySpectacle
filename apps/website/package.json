@@ -21,6 +21,7 @@
 		"@ts/wiki-module": "workspace:*",
 		"@vueuse/integrations": "^14.2.1",
 		"find-up": "^8.0.0",
+		"modern-normalize": "^3.0.1",
 		"nord": "^0.2.1",
 		"nprogress": "^0.2.0",
 		"nuxt": "^4.3.1",
