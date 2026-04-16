@@ -35,9 +35,11 @@ jobs:
         run: pnpm install --frozen-lockfile
         shell: bash
 
-      - name: 构建网站
+      - name: 构建
         working-directory: ./apps/website
-        run: NODE_ENV=production pnpm run generate
+        run: pnpm run generate
+        env:
+          NODE_ENV: production
 
       - name: 部署到 Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

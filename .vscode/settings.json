@@ -6,8 +6,8 @@
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 
 	// TypeScript
-	"typescript.tsdk": "node_modules/typescript/lib",
-	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"js/ts.tsdk.promptToUseWorkspaceVersion": true,
+	"js/ts.tsdk.path": "node_modules/typescript/lib",
 
 	// ESLint 验证的文件类型
 	"eslint.validate": ["javascript", "typescript", "vue", "json", "yaml", "github-actions-workflow"],

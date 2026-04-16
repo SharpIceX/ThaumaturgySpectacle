@@ -9,17 +9,19 @@
 *.lnk
 Thumbs.db
 Desktop.ini
-ehthumbs.db
-ehthumbs_vista.db
+ehthumbs*.db
+$RECYCLE.BIN
 
 # Linux
 *~
 *.swp
+.directory
+.fuse_hidden*
 
-# 日志
+# Log
 *.log
 
-# Node模块
+# Node
 node_modules
 
 # typescript
